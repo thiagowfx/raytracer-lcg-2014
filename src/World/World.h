@@ -11,7 +11,7 @@
 //	 	the Tracer base class contains a pointer to the world. If we wrote a correct copy constructor for the 
 // 	  	Tracer class, the World copy construtor would call itself recursively until we ran out of memory. 
 
-
+#include <cstdio>
 #include <vector>
 
 #include "ViewPlane.h"
@@ -45,7 +45,7 @@ class World {
 		build(void);
 
 		void 												
-		render_scene(void) const;
+		render_scene(FILE *fp) const;
 						
 		RGBColor
 		max_to_one(const RGBColor& c) const;
@@ -54,7 +54,7 @@ class World {
 		clamp_to_color(const RGBColor& c) const;
 		
 		void
-		display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
+		  display_pixel(const int row, const int column, const RGBColor& pixel_color, FILE *fp) const;
 
 		ShadeRec									
 		hit_bare_bones_objects(const Ray& ray);

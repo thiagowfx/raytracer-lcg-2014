@@ -1,7 +1,5 @@
 // this file contains the definition of the World class
 
-#include <cstdio>
-
 #include "World.h"
 #include "Constants.h"
 
@@ -25,10 +23,9 @@
 
 // build functions
 
-#include "BuildSingleSphere.cpp"
+//#include "BuildSingleSphere.cpp"
 //#include "BuildMultipleObjects.cpp"
 //#include "BuildBBCoverPic.cpp"
-
 
 // -------------------------------------------------------------------- default constructor
 
@@ -56,10 +53,7 @@ World::~World(void) {
 
 // This uses orthographic viewing along the zw axis
 
-void 												
-World::render_scene(void) const {
-  
-  FILE *fp;
+void World::render_scene(FILE *fp) const {
   RGBColor	pixel_color;	 	
   Ray			ray;					
   int 		hres 	= vp.hres;
@@ -68,8 +62,7 @@ World::render_scene(void) const {
   float		zw		= 100.0;			// hardwired in
 
   ray.d = Vector3D(0, 0, -1);
-  fp = fopen("world_output.txt", "w");
-  fprintf("%d %d %d\n", vp.hres, vp.vres, vp.s);
+  fprintf(fp, "%d %d %lf\n", vp.hres, vp.vres, vp.s);
     
   for (int r = 0; r < vres; r++)			// up
     for (int c = 0; c <= hres; c++) {	// across 					
@@ -77,8 +70,6 @@ World::render_scene(void) const {
       pixel_color = tracer_ptr->trace_ray(ray);
       display_pixel(r, c, pixel_color, fp);
     }
-
-  fclose(fp);
 }  
 
 
@@ -122,8 +113,7 @@ World::clamp_to_color(const RGBColor& raw_color) const {
 // the function SetCPixel is a Mac OS function
 
 
-void
-World::display_pixel(const int row, const int column, const RGBColor& raw_color, File *fp) const {
+void World::display_pixel(const int row, const int column, const RGBColor& raw_color, FILE *fp) const {
   RGBColor mapped_color;
 
   if (vp.show_out_of_gamut)
@@ -180,19 +170,15 @@ World::delete_objects(void) {
   objects.erase (objects.begin(), objects.end());
 }
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// int main() {
-//   w = new World();
-//   png::image< png::rgb_pixel > image(w->vp.hres, w->vp.vres);
-
-  
-//   w->build();
-
-//   // w->vp.hres
-//   // w->vp.vres
-
-//   image.write("output.png");
-  
-//   return 0;
-// }
+void World::build(void) {
+  vp.set_hres(200);
+  vp.set_vres(200);
+  vp.set_pixel_size(1.0);
+  vp.set_gamma(1.0);
+	
+  background_color = white;
+  tracer_ptr = new SingleSphere(this); 
+	
+  sphere.set_center(0.0);
+  sphere.set_radius(85);
+}
