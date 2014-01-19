@@ -1,3 +1,4 @@
+// -*- c++ -*-
 #include "build.h"
 #include "MultipleObjects.h"
 

@@ -1,3 +1,4 @@
+// -*- c++ -*-
 #include "build.h"
 #include "SingleSphere.h"
 
@@ -9,11 +10,12 @@ void World::build(void) {
   vp.set_vres(size);
   vp.set_gamma(1.0);
 	
-  background_color = white;
+  background_color = red;
   tracer_ptr = new SingleSphere(this); 
 	
-  sphere.set_center(0.0);
-  sphere.set_radius(85);
+  sphere.set_center(Point3D(40.0, 20.0, 0.0) );
+  sphere.set_radius(10);
+  sphere.set_color(blue);
 }
 
 /* Original */
@@ -29,4 +31,3 @@ void World::build(void) {
 //   sphere.set_center(0.0);
 //   sphere.set_radius(85);
 // }
-

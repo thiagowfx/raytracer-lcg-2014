@@ -1,5 +1,7 @@
+// -*- c++ -*-
 #include "build.h"
 #include "MultipleObjects.h"
+#include "Plane.h"
 
 void 												
 World::build(void) {
@@ -28,4 +30,8 @@ World::build(void) {
 	Plane* plane_ptr = new Plane(Point3D(0), Normal(0, 1, 1));
 	plane_ptr->set_color(0.0, 0.3, 0.0);	// dark green
 	add_object(plane_ptr);
+
+	sphere_ptr = new Sphere(Point3D(15, -15, 80), 50);
+	sphere_ptr->set_color(white);
+	add_object(sphere_ptr);
 }

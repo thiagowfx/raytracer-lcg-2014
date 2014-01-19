@@ -11,6 +11,14 @@ int main() {
   if (fp != NULL) {
     World w;
     w.build();
+
+    /* Check if tracer from the build function is not null */
+    if (w->tracer_ptr == NULL) {
+      printf("You forgot to set a world tracer!\n");
+      return 1;
+    }
+      
+    
     w.render_scene(fp);
     fclose(fp);
   }
