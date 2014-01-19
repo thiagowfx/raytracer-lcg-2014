@@ -62,7 +62,7 @@ void World::render_scene(FILE *fp) const {
   float		zw		= 100.0;			// hardwired in
 
   ray.d = Vector3D(0, 0, -1);
-  fprintf(fp, "%d %d %lf\n", vp.hres, vp.vres, vp.s);
+  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
   for (int r = 0; r < vres; r++)			// up
     for (int c = 0; c <= hres; c++) {	// across 					
@@ -171,9 +171,9 @@ World::delete_objects(void) {
 }
 
 void World::build(void) {
-  vp.set_hres(200);
-  vp.set_vres(200);
-  vp.set_pixel_size(1.0);
+  vp.set_hres(800);
+  vp.set_vres(800);
+  vp.set_pixel_size(0.25);
   vp.set_gamma(1.0);
 	
   background_color = white;

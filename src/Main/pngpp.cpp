@@ -6,27 +6,26 @@
 
 #include "pngpp.h"
 
-void generate_sample_image(size_t width, size_t height) {
-  png::image< png::rgb_pixel > image(width, height);
+// void generate_sample_image(size_t width, size_t height) {
+//   png::image< png::rgb_pixel > image(width, height);
 
-  // de baixo para cima, da esquerda para a direita
-  for (size_t y = 0; y < image.get_height(); ++y) {
-    for (size_t x = 0; x < image.get_width(); ++x) {
-      if (x < image.get_width() / 2)
-	image[y][x] = png::rgb_pixel(255, 0, 0);
-      else
-	image[y][x] = png::rgb_pixel(0, 0, 255);
-    }
-  }
-  image.write("sample.png");
-}
+//   // de baixo para cima, da esquerda para a direita
+//   for (size_t y = 0; y < image.get_height(); ++y) {
+//     for (size_t x = 0; x < image.get_width(); ++x) {
+//       if (x < image.get_width() / 2)
+// 	image[y][x] = png::rgb_pixel(255, 0, 0);
+//       else
+// 	image[y][x] = png::rgb_pixel(0, 0, 255);
+//     }
+//   }
+//   image.write("sample.png");
+// }
 
-void file_to_png(FILE *fp) {
+void file_to_png(FILE *fp, char *imageFile) {
   int width, height, r, g, b, x, y;
-  double size;
 
   /* Read size parameters */
-  fscanf(fp, "%d %d %lf\n", &width, &height, &size);
+  fscanf(fp, "%d %d\n", &width, &height);
   ++width, ++height;		// to avoid buffer overflows
 
   png::image< png::rgb_pixel > image(width, height);
@@ -36,5 +35,5 @@ void file_to_png(FILE *fp) {
     image[y][x] = png::rgb_pixel(r, g, b);
   }
   
-  image.write("output.png");
+  image.write(imageFile);
 }
