@@ -22,7 +22,7 @@
 // }
 
 void file_to_png(FILE *fp, char *imageFile) {
-  int width, height, r, g, b, x, y;
+  unsigned width, height, r, g, b, x, y;
 
   /* Read size parameters */
   fscanf(fp, "%d %d\n", &width, &height);
@@ -31,7 +31,7 @@ void file_to_png(FILE *fp, char *imageFile) {
   png::image< png::rgb_pixel > image(width, height);
 
   /* Render the image */
-  while ( fscanf(fp, "%d %d %d %d %d\n", &x, &y, &r, &g, &b) == 5 ) { // != EOF
+  while ( fscanf(fp, "%u %u %u %u %u\n", &x, &y, &r, &g, &b) == 5 ) { // != EOF
     image[y][x] = png::rgb_pixel(r, g, b);
   }
   

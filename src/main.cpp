@@ -3,15 +3,19 @@
 #include "World.h"
 
 int main() {
-  FILE *fp = fopen("world_output.txt", "w");
+  FILE *fp;
 
   /* World processing */
-  World w;
-  w.build();
-  w.render_scene(fp);
-  fclose(fp);
+  fp = fopen("world_output.txt", "w");
 
-  /* Render the image */
+  if (fp != NULL) {
+    World w;
+    w.build();
+    w.render_scene(fp);
+    fclose(fp);
+  }
+
+  /* Image rendering */
   fp = fopen("world_output.txt","r");
 
   if (fp != NULL) {

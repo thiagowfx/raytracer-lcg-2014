@@ -21,12 +21,6 @@
 #include "ShadeRec.h"
 #include "Maths.h"
 
-// build functions
-
-//#include "BuildSingleSphere.cpp"
-//#include "BuildMultipleObjects.cpp"
-//#include "BuildBBCoverPic.cpp"
-
 // -------------------------------------------------------------------- default constructor
 
 World::World(void)
@@ -168,18 +162,4 @@ World::delete_objects(void) {
   }	
 	
   objects.erase (objects.begin(), objects.end());
-}
-
-void World::build(void) {
-  vp.set_hres(400);
-  vp.set_vres(400);
-  vp.set_pixel_size(1.0);
-  vp.set_gamma(1.0);
-	
-  background_color = red;
-  tracer_ptr = new SingleSphere(this); 
-	
-  sphere.set_center(0.0);
-  sphere.set_radius(85);
-  sphere.set_color(green);
 }

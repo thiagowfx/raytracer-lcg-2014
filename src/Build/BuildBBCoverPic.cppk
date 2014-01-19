@@ -1,3 +1,6 @@
+#include "build.h"
+#include "MultipleObjects.h"
+
 // This builds the cover image for Chapter 3: Bare Bones Ray Tracing
 
 void 												

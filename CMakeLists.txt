@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 2.6)
 
-# Name of the project. It is used to reference it like ${PROJECT_SOURCE_DIR} and ${PROJECT_BINARY_DIR}
+# Name of the project, used to reference it like ${PROJECT_SOURCE_DIR} and ${PROJECT_BINARY_DIR}
 project(RAYTRACER)
+
 set(CMAKE_CXX_FLAGS "-O2 -Wall")
 
 # Automatically resolve / include some libraries
 find_package(PNG REQUIRED)
 
+# Manually include subdirs
 # set(SUBDIRS Build GeometricObjects Main Tracers UserInterface Utilities World)
 # FOREACH(subdir ${SUBDIRS})
 #   ADD_SUBDIRECTORY(${subdir})

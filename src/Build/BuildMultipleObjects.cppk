@@ -1,3 +1,6 @@
+#include "build.h"
+#include "MultipleObjects.h"
+
 void 												
 World::build(void) {
 	vp.set_hres(200);
