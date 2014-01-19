@@ -47,15 +47,3 @@ ViewPlane::operator= (const ViewPlane& rhs) {
 // -------------------------------------------------------------- destructor
 
 ViewPlane::~ViewPlane(void) {}
-
-
-
-
-
-
-	
-
-
-
-
-

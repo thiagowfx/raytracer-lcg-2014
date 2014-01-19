@@ -29,9 +29,9 @@ SingleSphere::trace_ray(const Ray& ray) const {
 	double    	t;  				// not used
 	
 	if (world_ptr->sphere.hit(ray, t, sr))		
-		return (red);  
+	  return (world_ptr->sphere.get_color());  
 	else
-		return (black);   
+	  return (world_ptr->background_color);   
 }
 
 
