@@ -13,7 +13,7 @@ int main() {
     w.build();
 
     /* Check if tracer from the build function is not null */
-    if (w->tracer_ptr == NULL) {
+    if (w.tracer_ptr == NULL) {
       printf("You forgot to set a world tracer!\n");
       return 1;
     }

@@ -10,7 +10,8 @@ ViewPlane::ViewPlane(void)
 		s(1.0),
 		gamma(1.0),
 		inv_gamma(1.0),
-		show_out_of_gamut(false)
+		show_out_of_gamut(false),
+		num_samples(1)
 {}
 
 
@@ -22,7 +23,8 @@ ViewPlane::ViewPlane(const ViewPlane& vp)
 		s(vp.s),
 		gamma(vp.gamma),
 		inv_gamma(vp.inv_gamma),
-		show_out_of_gamut(vp.show_out_of_gamut)
+		show_out_of_gamut(vp.show_out_of_gamut),
+		num_samples(vp.num_samples)
 {}
 
 
@@ -39,6 +41,7 @@ ViewPlane::operator= (const ViewPlane& rhs) {
 	gamma				= rhs.gamma;
 	inv_gamma			= rhs.inv_gamma;
 	show_out_of_gamut	= rhs.show_out_of_gamut;
+	num_samples		= rhs.num_samples;
 	
 	return (*this);
 }
