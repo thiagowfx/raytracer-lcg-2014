@@ -15,15 +15,14 @@
 
 // utilities
 
-#include "Vector3D.h"
 #include <Eigen/Dense>
-#include "Point3D.h"
 #include "Normal.h"
 #include "ShadeRec.h"
 #include "Maths.h"
 #include <cmath>
 
 using Eigen::Vector2d;
+using Eigen::Vector3d;
 
 // -------------------------------------------------------------------- default constructor
 
@@ -69,7 +68,7 @@ void World::render_scene(FILE *fp) const {
 	for (int q = 0; q < n; ++q) { // accross pixel
 	  pp(0) = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n );
 	  pp(1) = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n );
-	  ray.o = Point3D(pp(0), pp(1), zw);
+	  ray.o = Vector3d(pp(0), pp(1), zw);
 	  pixel_color += tracer_ptr->trace_ray(ray);
 	}
       }
