@@ -13,7 +13,7 @@ class Sphere: public GeometricObject {
 		
 		Sphere(void);   									// Default constructor
 				
-		Sphere(Point3D center, double r);					// Constructor 
+		Sphere(Vector3d center, double r);					// Constructor 
 					
 		Sphere(const Sphere& sphere); 						// Copy constructor
 		
@@ -27,7 +27,7 @@ class Sphere: public GeometricObject {
 		operator= (const Sphere& sphere);				
 																					
 		void
-		set_center(const Point3D& c);
+		set_center(const Vector3d& c);
 		
 		void
 		set_center(const double x, const double y, const double z);
@@ -40,7 +40,7 @@ class Sphere: public GeometricObject {
 		
 	private:
 	
-		Point3D 	center;   			// center coordinates as a point  
+		Vector3d 	center;   			// center coordinates as a point  
 		double 		radius;				// the radius 
 		
 		static const double kEpsilon;   // for shadows and secondary rays
@@ -49,15 +49,15 @@ class Sphere: public GeometricObject {
 
 
 inline void
-Sphere::set_center(const Point3D& c) {
+Sphere::set_center(const Vector3d& c) {
 	center = c;
 }
 		
 inline void
 Sphere::set_center(const double x, const double y, const double z) {
-	center.x = x;
-	center.y = y;
-	center.z = z;
+  center(0) = x;
+  center(1) = y;
+  center(2) = z;
 }
 		
 inline void

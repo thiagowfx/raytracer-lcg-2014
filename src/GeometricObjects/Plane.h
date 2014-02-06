@@ -11,7 +11,7 @@ class Plane: public GeometricObject {
 	
 		Plane(void);   												// default constructor
 		
-		Plane(const Point3D& point, const Normal& normal);			// constructor	
+		Plane(const Vector3d& point, const Vector3d& normal);			// constructor	
 	
 		Plane(const Plane& plane); 									// copy constructor
 		
@@ -29,8 +29,8 @@ class Plane: public GeometricObject {
 		
 	private:
 	
-		Point3D 	a;   				// point through which plane passes 
-		Normal 		n;					// normal to the plane
+		Vector3d 	a;   				// point through which plane passes 
+		Vector3d	n;					// normal to the plane
 				
 		static const double kEpsilon;   // for shadows and secondary rays
 };

@@ -16,7 +16,6 @@
 // utilities
 
 #include <Eigen/Dense>
-#include "Normal.h"
 #include "ShadeRec.h"
 #include "Maths.h"
 #include <cmath>
@@ -57,7 +56,7 @@ void World::render_scene(FILE *fp) const {
   int n = (int) sqrt( (float)vp.num_samples );
   Vector2d pp;
 
-  ray.d = Vector3D(0, 0, -1);
+  ray.d = Vector3d(0, 0, -1);
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
   for (int r = 0; r < vp.vres; r++) {			// up

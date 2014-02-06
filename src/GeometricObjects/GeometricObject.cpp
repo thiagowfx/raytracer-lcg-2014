@@ -7,14 +7,14 @@
 // ---------------------------------------------------------------------- default constructor
 
 GeometricObject::GeometricObject(void)
-	: 	color(black)
+  : 	color(black)
 {}
 
 
 // ---------------------------------------------------------------------- copy constructor
 
 GeometricObject::GeometricObject (const GeometricObject& object)
-	: 	color(object.color)
+  : 	color(object.color)
 {}	
 
 
@@ -23,12 +23,12 @@ GeometricObject::GeometricObject (const GeometricObject& object)
 GeometricObject&														
 GeometricObject::operator= (const GeometricObject& rhs) {
 	
-	if (this == &rhs)
-		return (*this);
+  if (this == &rhs)
+    return (*this);
 		
-	color = rhs.color;
+  color = rhs.color;
 
-	return (*this);
+  return (*this);
 }
 
 

@@ -3,8 +3,7 @@
 #include "MultipleObjects.h"
 #include "Plane.h"
 
-void 												
-World::build(void) {
+void World::build(void) {
 	vp.set_hres(200);
 	vp.set_vres(200);
 	vp.set_pixel_size(1.0);
@@ -24,15 +23,15 @@ World::build(void) {
 
 	// use constructor to set centre and radius 
 	
-	sphere_ptr = new Sphere(Point3D(0, 30, 0), 60);
+	sphere_ptr = new Sphere(Vector3d(0, 30, 0), 60);
 	sphere_ptr->set_color(1, 1, 0);	// yellow
 	add_object(sphere_ptr);
 	
-	Plane* plane_ptr = new Plane(Point3D(0), Normal(0, 1, 1));
+	Plane* plane_ptr = new Plane(Vector3d(0,0,0), Vector3d(0, 1, 1));
 	plane_ptr->set_color(0.0, 0.3, 0.0);	// dark green
 	add_object(plane_ptr);
 
-	sphere_ptr = new Sphere(Point3D(15, -15, 80), 50);
+	sphere_ptr = new Sphere(Vector3d(15, -15, 80), 50);
 	sphere_ptr->set_color(white);
 	add_object(sphere_ptr);
 }

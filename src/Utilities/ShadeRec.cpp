@@ -15,21 +15,21 @@ using Eigen::Vector3d;
 // ------------------------------------------------------------------ constructor
 
 ShadeRec::ShadeRec(World& wr)
-	: 	hit_an_object(false),
-		local_hit_point(Vector3d::Zero()),
-		normal(),
-		color(black),
-		w(wr)
+  : 	hit_an_object(false),
+	local_hit_point(Vector3d::Zero()),
+	normal(Vector3d::Zero()),
+	color(black),
+	w(wr)
 {}
 
 
 // ------------------------------------------------------------------ copy constructor
 
 ShadeRec::ShadeRec(const ShadeRec& sr)
-	: 	hit_an_object(sr.hit_an_object),
-		local_hit_point(sr.local_hit_point),
-		color(sr.color),
-		w(sr.w)
+  : 	hit_an_object(sr.hit_an_object),
+	local_hit_point(sr.local_hit_point),
+	color(sr.color),
+	w(sr.w)
 {}
 
 

@@ -4,13 +4,12 @@
 // this file contains the declaration of the class GeometricObject
 
 #include "RGBColor.h"
-#include "Point3D.h"
-#include "Normal.h"
+#include <Eigen/Dense>
 #include "Ray.h"
 #include "ShadeRec.h"
-
 #include "Constants.h"
-					
+
+using Eigen::Vector3d;					
 
 class GeometricObject {	
 	
