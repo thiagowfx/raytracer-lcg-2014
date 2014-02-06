@@ -5,8 +5,7 @@ project(RAYTRACER)
 
 set(CMAKE_CXX_FLAGS "-O2 -Wall")
 
-# Automatically resolve / include some libraries
-# to PNGPP/libPNG
+# Automatically resolve / include some libraries to PNGPP/libPNG
 find_package(PNG REQUIRED)
 
 # Manually include subdirs
