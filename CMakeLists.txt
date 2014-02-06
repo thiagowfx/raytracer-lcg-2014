@@ -1,12 +1,16 @@
 cmake_minimum_required(VERSION 2.6)
 
-# Name of the project, used to reference it like ${PROJECT_SOURCE_DIR} and ${PROJECT_BINARY_DIR}
+# Project name: reference it like ${PROJECT_SOURCE_DIR} and ${PROJECT_BINARY_DIR}
 project(RAYTRACER)
 
+# set CPPFLAGS
 set(CMAKE_CXX_FLAGS "-O2 -Wall")
 
-# Automatically resolve / include some libraries to PNGPP/libPNG
-find_package(PNG REQUIRED)
+# include directories
+include_directories(/usr/include/eigen3)
+
+# include libraries
+find_package(PNG REQUIRED)	# PNGPP/libPNG
 
 # Manually include subdirs
 # set(SUBDIRS Build GeometricObjects Main Tracers UserInterface Utilities World)
@@ -27,7 +31,7 @@ endforeach()
 list(REMOVE_DUPLICATES RAYTRACER_INCLUDE_DIRS)
 include_directories(${RAYTRACER_INCLUDE_DIRS})
 
-# define the executable and its file dependencies
+# executable and file dependencies
 add_executable (raytracerBin ${RAYTRACER_SOURCES})
 
 # library dependencies
