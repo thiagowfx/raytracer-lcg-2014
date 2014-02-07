@@ -22,13 +22,13 @@ void generate_sample_image(size_t width, size_t height) {
 }
 
 
-void file_to_png(FILE *fp, char *imageFile) {
+void file_to_png(FILE *fp, const char *imageFile) {
   unsigned width, height, r, g, b, x, y;
 
   
   /* Read size parameters */
   fscanf(fp, "%d %d\n", &width, &height);
-  // ++width, ++height;		// to avoid buffer overflows
+  ++width, ++height;		// to avoid buffer overflows
 
   
   /* Render the image */

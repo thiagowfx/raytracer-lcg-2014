@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 
 # Project name: reference it like ${PROJECT_SOURCE_DIR} and ${PROJECT_BINARY_DIR}
 project(RAYTRACER)
-
-# set CPPFLAGS
 set(CMAKE_CXX_FLAGS "-O2 -Wall")
 
 # include directories
