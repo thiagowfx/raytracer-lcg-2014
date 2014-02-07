@@ -27,7 +27,6 @@ class World {
   ViewPlane	vp;
   RGBColor	background_color;
   Tracer*	tracer_ptr;
-  Sphere	sphere;		// for chapter 3 only
   vector<GeometricObject*>	objects;		
 		
  public:
