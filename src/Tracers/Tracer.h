@@ -7,8 +7,8 @@
 #define __TRACER__
 
 #include "Constants.h"
-#include "Ray.h"
 #include "RGBColor.h"
+#include "Ray.h"
 
 class World;
 

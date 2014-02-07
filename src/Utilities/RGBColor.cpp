@@ -1,44 +1,34 @@
-#include <math.h>
 #include "RGBColor.h"
+#include <math.h>
 
-// -------------------------------------------------------- default constructor
-
-RGBColor::RGBColor(void)
+// default constructor
+RGBColor::RGBColor(void) 
   : r(0.0), g(0.0), b(0.0) 							
 {}
 
 
-// -------------------------------------------------------- constructor
-
+// constructor
 RGBColor::RGBColor(float c)
   : r(c), g(c), b(c) 							
 {}
 								
 
-// -------------------------------------------------------- constructor
-
+// constructor
 RGBColor::RGBColor(float _r, float _g, float _b)	
   : r(_r), g(_g), b(_b)
 {}
 
 
-// -------------------------------------------------------- copy constructor
-
+// copy constructor
 RGBColor::RGBColor(const RGBColor& c)
   : r(c.r), g(c.g), b(c.b)
 {} 				 
 		
 
-// -------------------------------------------------------- destructor
-
-RGBColor::~RGBColor(void)		
-{}
+RGBColor::~RGBColor(void) {}
 
 
-// --------------------------------------------------------assignment operator
-
-RGBColor& 											
-RGBColor::operator= (const RGBColor& rhs) {
+RGBColor& RGBColor::operator= (const RGBColor& rhs) {
   if (this == &rhs)
     return (*this);
 
@@ -48,11 +38,8 @@ RGBColor::operator= (const RGBColor& rhs) {
 }
  
 
-// -------------------------------------------------------- powc
 // raise each component to the specified power
 // used for color filtering in Chapter 28
-
-RGBColor
-RGBColor::powc(float p) const {
+RGBColor RGBColor::powc(float p) const {
   return (RGBColor(pow(r, p), pow(g, p), pow(b, p)));
 }

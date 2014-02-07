@@ -1,20 +1,14 @@
-// This file contains the definition of the class sphere
-
 #include "Sphere.h"
 #include "math.h"
 
 const double Sphere::kEpsilon = 0.001;
 					
-// ---------------------------------------------------------------- default constructor
-
 Sphere::Sphere(void)	
   : 	GeometricObject(),
 	center(Vector3d::Zero()),
 	radius(1.0)
 {}
 
-
-// ---------------------------------------------------------------- constructor
 
 Sphere::Sphere(Vector3d c, double r)
   : 	GeometricObject(),
@@ -23,15 +17,10 @@ Sphere::Sphere(Vector3d c, double r)
 {}
 
 
-// ---------------------------------------------------------------- clone
-
-Sphere* 
-Sphere::clone(void) const {
+Sphere* Sphere::clone(void) const {
   return (new Sphere(*this));
 }
 
-
-// ---------------------------------------------------------------- copy constructor
 
 Sphere::Sphere (const Sphere& sphere)
   : 	GeometricObject(sphere),
@@ -39,9 +28,6 @@ Sphere::Sphere (const Sphere& sphere)
 	radius(sphere.radius)
 {}
 
-
-
-// ---------------------------------------------------------------- assignment operator
 
 Sphere& 
 Sphere::operator= (const Sphere& rhs)		
@@ -58,21 +44,16 @@ Sphere::operator= (const Sphere& rhs)
 }
 
 
-// ---------------------------------------------------------------- destructor
-
 Sphere::~Sphere(void) {}
 
 
-//---------------------------------------------------------------- hit
-
-bool
-Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-  double 		t;
-  Vector3d	temp 	= ray.o - center;
-  double 		a 		= ray.d.dot(ray.d);
-  double 		b 		= 2.0 * temp.dot(ray.d);
-  double 		c 		= temp.dot(temp) - radius * radius;
-  double 		disc	= b * b - 4.0 * a * c;
+bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+  double 	t;
+  Vector3d	temp = ray.o - center;
+  double 	a    = ray.d.dot(ray.d);
+  double 	b    = 2.0 * temp.dot(ray.d);
+  double 	c    = temp.dot(temp) - radius * radius;
+  double 	disc = b * b - 4.0 * a * c;
 	
   if (disc < 0.0)
     return(false);

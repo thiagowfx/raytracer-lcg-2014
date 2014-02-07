@@ -3,8 +3,8 @@
 
 class World;	// only need a forward class declaration as the World data member is a reference
 
-#include <Eigen/Dense>
 #include "RGBColor.h"
+#include <Eigen/Dense>
 
 using Eigen::Vector3d;
 

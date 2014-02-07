@@ -1,38 +1,21 @@
-// this file contains the definition of the World class
-
-#include "World.h"
 #include "Constants.h"
-
-// geometric objects
-
-#include "Plane.h"
-#include "Sphere.h"
-
-// tracers
-
-#include "SingleSphere.h"
-#include "MultipleObjects.h"
-
-// utilities
-
-#include <Eigen/Dense>
-#include "ShadeRec.h"
 #include "Maths.h"
+#include "MultipleObjects.h"
+#include "Plane.h"
+#include "ShadeRec.h"
+#include "SingleSphere.h"
+#include "Sphere.h"
+#include "World.h"
+#include <Eigen/Dense>
 #include <cmath>
 
 using Eigen::Vector2d;
 using Eigen::Vector3d;
 
-// -------------------------------------------------------------------- default constructor
-
 World::World(void)
   :  	background_color(black),
 	tracer_ptr(NULL)
 {}
-
-
-
-//------------------------------------------------------------------ destructor
 
 World::~World(void) {	
 	
@@ -44,23 +27,19 @@ World::~World(void) {
   delete_objects();	
 }
 
-
-//------------------------------------------------------------------ render_scene
-
 // This uses orthographic viewing along the zw axis
-
 void World::render_scene(FILE *fp) const {
   RGBColor	pixel_color;	 	
-  Ray			ray;					
-  float		zw		= 100.0;			// hardwired in
+  Ray		ray;					
+  float		zw = 100.0;	// hardwired in
   int n = (int) sqrt( (float)vp.num_samples );
   Vector2d pp;
 
   ray.d = Vector3d(0, 0, -1);
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
-  for (int r = 0; r < vp.vres; r++) {			// up
-    for (int c = 0; c <= vp.hres; c++) {	// across
+  for (int r = 0; r < vp.vres; r++) {	 // up
+    for (int c = 0; c <= vp.hres; c++) { // across
       pixel_color = black;
 
       for (int p = 0; p < n; ++p) {   //up pixel
@@ -77,12 +56,10 @@ void World::render_scene(FILE *fp) const {
     }
   }
 }  
-	  
-	  
-// ------------------------------------------------------------------ clamp
 
-RGBColor
-World::max_to_one(const RGBColor& c) const  {
+
+// clamp
+RGBColor World::max_to_one(const RGBColor& c) const  {
   float max_value = max(c.r, max(c.g, c.b));
 	
   if (max_value > 1.0)
@@ -91,12 +68,9 @@ World::max_to_one(const RGBColor& c) const  {
     return (c);
 }
 
+// clamp to color - set color to red if any component is greater than one
 
-// ------------------------------------------------------------------ clamp_to_color
-// Set color to red if any component is greater than one
-
-RGBColor
-World::clamp_to_color(const RGBColor& raw_color) const {
+RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
   RGBColor c(raw_color);
 	
   if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
@@ -106,9 +80,6 @@ World::clamp_to_color(const RGBColor& raw_color) const {
   return (c);
 }
 
-
-// ---------------------------------------------------------------------------display_pixel
-
 // raw_color is the pixel color computed by the ray tracer
 // its RGB floating point components can be arbitrarily large
 // mapped_color has all components in the range [0, 1], but still floating point
@@ -117,7 +88,6 @@ World::clamp_to_color(const RGBColor& raw_color) const {
 // a PC's components will probably be in the range [0, 255]
 // the system-dependent code is in the function convert_to_display_color
 // the function SetCPixel is a Mac OS function
-
 
 void World::display_pixel(const int row, const int column, const RGBColor& raw_color, FILE *fp) const {
   RGBColor mapped_color;
@@ -137,35 +107,27 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
   fprintf(fp, "%d %d %d %d %d\n", x, y, (int)(mapped_color.r * 255), (int)(mapped_color.g * 255), (int)(mapped_color.b * 255));
 }
 
-
-
-// ----------------------------------------------------------------------------- hit_bare_bones_objects
-
-ShadeRec									
-World::hit_bare_bones_objects(const Ray& ray) {
+ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
   ShadeRec	sr(*this); 
-  double		t; 			
-  float		tmin 			= kHugeValue;
-  int 		num_objects 	= objects.size();
+  double	t; 			
+  float		tmin 	    = kHugeValue;
+  int 		num_objects = objects.size();
 	
   for (int j = 0; j < num_objects; j++)
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
       sr.hit_an_object	= true;
-      tmin 				= t; 
-      sr.color			= objects[j]->get_color(); 
+      tmin     = t; 
+      sr.color = objects[j]->get_color(); 
     }
 		
   return (sr);   
 }
 
 
-//------------------------------------------------------------------ delete_objects
-
 // Deletes the objects in the objects array, and erases the array.
 // The objects array still exists, because it's an automatic variable, but it's empty 
 
-void
-World::delete_objects(void) {
+void World::delete_objects(void) {
   int num_objects = objects.size();
 	
   for (int j = 0; j < num_objects; j++) {
