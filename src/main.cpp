@@ -18,7 +18,8 @@ int main() {
       return 1;
     }     
    
-    w.render_scene(fp);
+    //    w.render_scene(fp);
+    w.render_perspective(fp);
     fclose(fp);
   }
 

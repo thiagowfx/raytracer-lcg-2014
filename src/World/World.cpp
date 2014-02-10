@@ -34,7 +34,7 @@ void World::render_scene(FILE *fp) const {
   int n = (int) sqrt( (double) vp.num_samples );
   Vector2d pp;
 
-  ray.d = Vector3d(0, 0, -1);
+  ray.d = Vector3d(0.0, 0.0, -1.0);
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
   for (int r = 0; r < vp.vres; r++) {	 // up
@@ -60,6 +60,30 @@ void World::render_scene(FILE *fp) const {
   }
 }  
 
+
+// This uses a perspective viewing
+void World::render_perspective(FILE *fp) const {
+  RGBColor pixel_color;
+  Ray ray;
+
+  // TEMP. Idealmente isso poderia (deveria?) ser guardado em algum tracer
+  float eye = 300;
+  float d = 200;
+
+  // open_window(vp.hres, vp.vres);
+  ray.o = Vector3d(0.0, 0.0, eye);
+  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
+
+  for (int r = 0; r < vp.vres; ++r) { // up
+    for (int c = 0; c < vp.hres; ++c) { // across
+      ray.d = Vector3d( vp.s * ( c - 0.5 * (vp.hres - 1.0)), vp.s * (r - 0.5 * (vp.vres - 1.0)), -d);
+      ray.d.normalize();
+      
+      pixel_color = tracer_ptr->trace_ray(ray);
+      display_pixel(r, c, pixel_color, fp);
+    }
+  }
+}
 
 // clamp
 RGBColor World::max_to_one(const RGBColor& c) const  {
