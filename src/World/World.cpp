@@ -3,7 +3,6 @@
 #include "MultipleObjects.h"
 #include "Plane.h"
 #include "ShadeRec.h"
-#include "SingleSphere.h"
 #include "Sphere.h"
 #include "World.h"
 #include <Eigen/Dense>
@@ -32,7 +31,7 @@ void World::render_scene(FILE *fp) const {
   RGBColor	pixel_color;	 	
   Ray		ray;					
   float		zw = 100.0;	// hardwired in
-  int n = (int) sqrt( (float)vp.num_samples );
+  int n = (int) sqrt( (double) vp.num_samples );
   Vector2d pp;
 
   ray.d = Vector3d(0, 0, -1);
@@ -44,6 +43,10 @@ void World::render_scene(FILE *fp) const {
 
       for (int p = 0; p < n; ++p) {   //up pixel
 	for (int q = 0; q < n; ++q) { // accross pixel
+          /*
+            - 0.5 = regular sampling
+            - rand_float() = jittered sampling
+          */
 	  pp(0) = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n );
 	  pp(1) = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n );
 	  ray.o = Vector3d(pp(0), pp(1), zw);

@@ -1,0 +1,1 @@
+- PNGPP está com 1 pixel a mais na largura e na altura (exemplo: 401 x 401 pixels em vez de 400 x 400). Sem esse comportamento, ocorre overflow.
