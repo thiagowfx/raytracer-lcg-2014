@@ -6,7 +6,6 @@
 
 #include "Constants.h"
 #include "ShadeRec.h"
-#include <Eigen/Dense>
 
 using Eigen::Vector3d;
 
