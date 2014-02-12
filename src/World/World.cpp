@@ -38,7 +38,7 @@ void World::render_scene(FILE *fp) const {
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
   for (int r = 0; r < vp.vres; r++) {	 // up
-    for (int c = 0; c <= vp.hres; c++) { // across
+    for (int c = 0; c < vp.hres; c++) { // across
       pixel_color = black;
 
       for (int p = 0; p < n; ++p) {   //up pixel

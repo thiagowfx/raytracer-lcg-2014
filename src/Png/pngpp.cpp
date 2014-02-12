@@ -28,8 +28,6 @@ void file_to_png(FILE *fp, const char *imageFile) {
   
   /* Read size parameters */
   fscanf(fp, "%d %d\n", &width, &height); // == 2
-  ++width, ++height;		// to avoid buffer overflows
-
   
   /* Render the image */
   png::image< png::rgb_pixel > image(width, height);
