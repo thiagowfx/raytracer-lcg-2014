@@ -4,12 +4,7 @@
 // the ray tracer is written so that new ShadeRec objects are always constructed
 // using the first constructor or the copy constructor
 
-#include "Constants.h"
 #include "ShadeRec.h"
-
-using Eigen::Vector3d;
-
-// ------------------------------------------------------------------ constructor
 
 ShadeRec::ShadeRec(World& wr)
   : 	hit_an_object(false),
@@ -19,8 +14,6 @@ ShadeRec::ShadeRec(World& wr)
 	w(wr)
 {}
 
-
-// ------------------------------------------------------------------ copy constructor
 
 ShadeRec::ShadeRec(const ShadeRec& sr)
   : 	hit_an_object(sr.hit_an_object),

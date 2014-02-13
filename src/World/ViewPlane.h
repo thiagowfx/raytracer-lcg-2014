@@ -2,14 +2,15 @@
 #define __VIEW_PLANE__
 
 class ViewPlane {
+  
  public:
-  int 	hres;   		// horizontal image resolution 
-  int 	vres;   		// vertical image resolution
-  float	s;			// pixel size
-  float	gamma;			// gamma correction factor
-  float	inv_gamma;		// the inverse of the gamma correction factor
-  bool	show_out_of_gamut;	// display red if RGBColor out of gamut
-  int 	num_samples;		// number of samples of the antialiasing
+  int    hres;   		// horizontal image resolution 
+  int    vres;   		// vertical image resolution
+  double s;			// pixel size
+  double gamma;			// gamma correction factor
+  double inv_gamma;		// the inverse of the gamma correction factor
+  bool   show_out_of_gamut;	// display red if RGBColor out of gamut
+  int    num_samples;		// number of samples of the antialiasing
 									
  public:	
   ViewPlane();	  // default Constructor				

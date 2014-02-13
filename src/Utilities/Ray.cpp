@@ -17,11 +17,10 @@ Ray::Ray (const Ray& ray)
 
 Ray& Ray::operator= (const Ray& rhs) {
 	
-  if (this == &rhs)
-    return (*this);
-		
-  o = rhs.o; 
-  d = rhs.d; 
+  if (this != &rhs) {
+    o = rhs.o; 
+    d = rhs.d;
+  }
 
   return (*this);	
 }

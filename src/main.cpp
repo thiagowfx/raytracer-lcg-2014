@@ -1,20 +1,16 @@
 #include "World.h"
-#include "pngpp.h"
 #include <cstdio>
 
 int main() {
   FILE *fp;
+  World w;
 
   /* World processing */
-  fp = fopen("world_output.txt", "w");
-
-  if (fp != NULL) {
-    World w;
+  if ( (fp = fopen("world_output.txt", "w")) != NULL) {
     w.build();
 
-    /* Check if tracer from the build function is not null */
     if (w.tracer_ptr == NULL) {
-      printf("You forgot to set a world tracer!\n");
+      printf("ERROR: You forgot to set a world tracer!\n");
       return 1;
     }     
    
@@ -24,10 +20,8 @@ int main() {
   }
 
   /* Image rendering */
-  fp = fopen("world_output.txt","r");
-
-  if (fp != NULL) {
-    file_to_png(fp, "output.png");  
+  if ( (fp = fopen("world_output.txt","r")) != NULL) {
+    w.file_to_png(fp, "output.png");  
     fclose(fp);
   }
 

@@ -10,6 +10,7 @@ ViewPlane::ViewPlane(void)
 	num_samples(1)
 {}
 
+
 ViewPlane::ViewPlane(const ViewPlane& vp)   
   :  	hres(vp.hres),  
 	vres(vp.vres), 
@@ -20,19 +21,20 @@ ViewPlane::ViewPlane(const ViewPlane& vp)
 	num_samples(vp.num_samples)
 {}
 
+
 ViewPlane& ViewPlane::operator= (const ViewPlane& rhs) {
-  if (this == &rhs)
-    return (*this);
-		
-  hres 		    = rhs.hres;
-  vres 		    = rhs.vres;
-  s		    = rhs.s;
-  gamma		    = rhs.gamma;
-  inv_gamma	    = rhs.inv_gamma;
-  show_out_of_gamut = rhs.show_out_of_gamut;
-  num_samples	    = rhs.num_samples;
+  if (this != &rhs) {		
+    hres 		    = rhs.hres;
+    vres 		    = rhs.vres;
+    s		    = rhs.s;
+    gamma		    = rhs.gamma;
+    inv_gamma	    = rhs.inv_gamma;
+    show_out_of_gamut = rhs.show_out_of_gamut;
+    num_samples	    = rhs.num_samples;
+  }
 	
   return (*this);
 }
+
 
 ViewPlane::~ViewPlane(void) {}

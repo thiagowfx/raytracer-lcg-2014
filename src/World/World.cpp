@@ -1,15 +1,4 @@
-#include "Constants.h"
-#include "Maths.h"
-#include "MultipleObjects.h"
-#include "Plane.h"
-#include "ShadeRec.h"
-#include "Sphere.h"
 #include "World.h"
-#include <Eigen/Dense>
-#include <cmath>
-
-using Eigen::Vector2d;
-using Eigen::Vector3d;
 
 World::World(void)
   :  	background_color(black),
@@ -17,7 +6,6 @@ World::World(void)
 {}
 
 World::~World(void) {	
-	
   if(tracer_ptr) {
     delete tracer_ptr;
     tracer_ptr = NULL;
@@ -147,7 +135,7 @@ ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
       sr.color = objects[j]->get_color(); 
     }
 		
-  return (sr);   
+  return sr;   
 }
 
 
@@ -163,4 +151,20 @@ void World::delete_objects(void) {
   }	
 	
   objects.erase (objects.begin(), objects.end());
+}
+
+
+void World::file_to_png(FILE *fp, const char *imageFile) {
+  unsigned width, height, r, g, b, x, y;
+
+  /* Read size parameters */
+  fscanf(fp, "%d %d\n", &width, &height); // == 2
+  
+  /* Render the image */
+  png::image< png::rgb_pixel > image(width, height);
+  while ( fscanf(fp, "%u %u %u %u %u\n", &x, &y, &r, &g, &b) == 5 ) {
+    image[y][x] = png::rgb_pixel(r, g, b);
+  }
+
+  image.write(imageFile);
 }

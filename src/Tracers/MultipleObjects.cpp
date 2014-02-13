@@ -1,5 +1,4 @@
 #include "MultipleObjects.h"
-#include "World.h"
 
 MultipleObjects::MultipleObjects(void)
   : Tracer()
