@@ -3,4 +3,5 @@
 
 * ToDo List (software engineering like)
 - [ ] Documentation. LyX? Markdown?
+- [ ] Graphviz / DOT like to better visualize the relationship between the classes...
 - [ ] Log. Saber o progresso do programa. Escrever para um arquivo? Para a saída?

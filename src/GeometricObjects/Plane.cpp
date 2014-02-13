@@ -1,7 +1,5 @@
 #include "Plane.h"
 
-const double Plane::kEpsilon = 0.001;
-
 Plane::Plane(void)	
   : 	GeometricObject(),
 	a(Vector3d::Zero()),
@@ -29,15 +27,13 @@ Plane* Plane::clone(void) const {
   return (new Plane(*this));
 }
 
-Plane& Plane::operator= (const Plane& rhs)	{
-	
-  if (this == &rhs)
-    return (*this);
 
-  GeometricObject::operator= (rhs);
-
-  a = rhs.a;
-  n = rhs.n;
+Plane& Plane::operator= (const Plane& rhs) {
+  if (this != &rhs) {
+    GeometricObject::operator= (rhs);
+    a = rhs.a;
+    n = rhs.n;
+  }
 
   return (*this);
 }
@@ -54,8 +50,8 @@ bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     sr.normal = n;
     sr.local_hit_point = ray.o + t * ray.d;
     
-    return (true);	
+    return true;
   }
   
-  return(false);
+  return false;
 }

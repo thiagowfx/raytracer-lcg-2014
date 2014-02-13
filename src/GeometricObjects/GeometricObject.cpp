@@ -11,13 +11,11 @@ GeometricObject::GeometricObject (const GeometricObject& object)
 {}	
 
 
-GeometricObject&														
-GeometricObject::operator= (const GeometricObject& rhs) {
+GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
 	
-  if (this == &rhs)
-    return (*this);
-		
-  color = rhs.color;
+  if (this != &rhs) {
+    color = rhs.color;
+  }
 
   return (*this);
 }

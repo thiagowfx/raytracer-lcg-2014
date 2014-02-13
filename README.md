@@ -1,4 +1,4 @@
-To build the project, cd into its top level then:
+This project is managed entirely by **cmake**. To build it, cd into its top level then:
 
 ```
 mkdir build && cd $_

@@ -1,7 +1,6 @@
 #ifndef __CAMERA__
 #define __CAMERA__
 
-// This file contains the declaration of the base class Camera
 // There is no view plane distance because the fisheye and panoramic cameras don't use it
 
 #include <Eigen/Dense>
@@ -11,8 +10,8 @@ using Eigen::Vector3d;
 class World;  // can't #include "World" here because World contains a camera pointer
 
 class Camera {
+  
  public:
-	
   Camera();                              // default constructor
   Camera(const Camera& camera);          // ncopy constructor
   virtual Camera* clone(void) const = 0; // virtual copy constructor
@@ -29,7 +28,6 @@ class Camera {
   void compute_uvw(void);
 		
  protected:		
-	
   Vector3d eye;			// eye point
   Vector3d lookat; 		// lookat point
   float	   ra;			// roll angle

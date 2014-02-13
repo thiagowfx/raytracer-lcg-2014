@@ -1,8 +1,5 @@
 #include "Sphere.h"
-#include "math.h"
 
-const double Sphere::kEpsilon = 0.001;
-					
 Sphere::Sphere(void)	
   : 	GeometricObject(),
 	center(Vector3d::Zero()),
@@ -30,15 +27,12 @@ Sphere::Sphere (const Sphere& sphere)
 
 
 Sphere& 
-Sphere::operator= (const Sphere& rhs)		
-{
-  if (this == &rhs)
-    return (*this);
-
-  GeometricObject::operator= (rhs);
-
-  center 	= rhs.center;
-  radius	= rhs.radius;
+Sphere::operator= (const Sphere& rhs) {
+  if (this != &rhs) {
+    GeometricObject::operator= (rhs);
+    center = rhs.center;
+    radius = rhs.radius;
+  }
 
   return (*this);
 }
@@ -55,8 +49,10 @@ bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   double 	c    = temp.dot(temp) - radius * radius;
   double 	disc = b * b - 4.0 * a * c;
 	
-  if (disc < 0.0)
-    return(false);
+  if (disc < 0.0) {
+    return false;
+  }
+  
   else {	
     double e = sqrt(disc);
     double denom = 2.0 * a;

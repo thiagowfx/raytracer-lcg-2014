@@ -34,14 +34,14 @@ Camera& Camera::operator= (const Camera& rhs) {
   if (this == &rhs)
     return (*this);
 	
-  eye				= rhs.eye;
-  lookat			= rhs.lookat;
-  ra				= rhs.ra;
-  up				= rhs.up;
-  u				= rhs.u;
-  v				= rhs.v;
-  w				= rhs.w;
-  exposure_time 	= rhs.exposure_time;
+  eye		= rhs.eye;
+  lookat	= rhs.lookat;
+  ra		= rhs.ra;
+  up		= rhs.up;
+  u		= rhs.u;
+  v		= rhs.v;
+  w		= rhs.w;
+  exposure_time = rhs.exposure_time;
 
   return (*this);
 }
@@ -51,31 +51,26 @@ Camera::~Camera(void) {}
 
 
 
-//-------------------------------------------------------------- compute_uvw
-
 // This computes an orthornormal basis given the view point, lookat point, and up vector
 
-void
-Camera::compute_uvw(void) {
+void Camera::compute_uvw(void) {
   w = eye - lookat;
   w.normalize();
-  u = up ^ w; 
+  u = up.cross(w);
   u.normalize();
-  v = w ^ u;
+  v = w.cross(u);
 
   // take care of the singularity by hardwiring in specific camera orientations
 	
-  if (eye.x == lookat.x && eye.z == lookat.z && eye.y > lookat.y) { // camera looking vertically down
+  if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) > lookat(1)) { // camera looking vertically down
     u = Vector3d(0, 0, 1);
     v = Vector3d(1, 0, 0);
     w = Vector3d(0, 1, 0);	
   }
 	
-  if (eye.x == lookat.x && eye.z == lookat.z && eye.y < lookat.y) { // camera looking vertically up
+  if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) < lookat(1)) { // camera looking vertically up
     u = Vector3d(1, 0, 0);
     v = Vector3d(0, 0, 1);
     w = Vector3d(0, -1, 0);
   }
 }
-
-

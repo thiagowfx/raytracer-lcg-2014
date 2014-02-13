@@ -33,4 +33,5 @@ void World::build(void) {
   sphere_ptr = new Sphere(Vector3d(15, -15, 80), 50);
   sphere_ptr->set_color(white);
   add_object(sphere_ptr);
+
 }
