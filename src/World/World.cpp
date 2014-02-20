@@ -5,6 +5,7 @@ World::World(void)
 	tracer_ptr(NULL)
 {}
 
+
 World::~World(void) {	
   if(tracer_ptr) {
     delete tracer_ptr;
@@ -14,7 +15,8 @@ World::~World(void) {
   delete_objects();	
 }
 
-// This uses orthographic viewing along the zw axis
+
+/* This uses orthographic viewing along the zw axis */
 void World::render_scene(FILE *fp) const {
   RGBColor	pixel_color;	 	
   Ray		ray;					
@@ -49,7 +51,7 @@ void World::render_scene(FILE *fp) const {
 }  
 
 
-// This uses a perspective viewing
+/* This uses a perspective viewing */
 void World::render_perspective(FILE *fp) const {
   RGBColor pixel_color;
   Ray ray;
@@ -73,18 +75,19 @@ void World::render_perspective(FILE *fp) const {
   }
 }
 
-// clamp
+
+/* clamp the components of the color */
 RGBColor World::max_to_one(const RGBColor& c) const  {
   float max_value = max(c.r, max(c.g, c.b));
 	
   if (max_value > 1.0)
-    return (c / max_value);
+    return c / max_value;
   else
-    return (c);
+    return c;
 }
 
-// clamp to color - set color to red if any component is greater than one
 
+/* clamp to color - set color to red if any component is greater than one */
 RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
   RGBColor c(raw_color);
 	
@@ -92,11 +95,11 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
     c.r = 1.0; c.g = 0.0; c.b = 0.0;
   }
 		
-  return (c);
+  return c;
 }
 
-// raw_color is the pixel color computed by the ray tracer
-// its RGB floating point components can be arbitrarily large
+
+// raw_color is the pixel color computed by the ray tracer -- can be arbitrarily large
 // mapped_color has all components in the range [0, 1], but still floating point
 // display color has integer components for computer display
 // the Mac's components are in the range [0, 65535]
@@ -122,11 +125,12 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
   fprintf(fp, "%d %d %d %d %d\n", x, y, (int)(mapped_color.r * 255), (int)(mapped_color.g * 255), (int)(mapped_color.b * 255));
 }
 
+
 ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
-  ShadeRec	sr(*this); 
-  double	t; 			
-  float		tmin 	    = kHugeValue;
-  int 		num_objects = objects.size();
+  ShadeRec sr(*this); 
+  double   t; 			
+  float	   tmin        = kHugeValue;
+  int 	   num_objects = objects.size();
 	
   for (int j = 0; j < num_objects; j++)
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
@@ -139,9 +143,7 @@ ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 }
 
 
-// Deletes the objects in the objects array, and erases the array.
-// The objects array still exists, because it's an automatic variable, but it's empty 
-
+/* Deletes the objects in the objects array, and erases the array. */
 void World::delete_objects(void) {
   int num_objects = objects.size();
 	
@@ -150,7 +152,7 @@ void World::delete_objects(void) {
     objects[j] = NULL;
   }	
 	
-  objects.erase (objects.begin(), objects.end());
+  objects.erase(objects.begin(), objects.end());
 }
 
 

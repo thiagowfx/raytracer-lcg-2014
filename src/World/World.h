@@ -1,9 +1,7 @@
 #ifndef __WORLD__
 #define __WORLD__
 
-// This file contains the declaration of the class World
 // The World class does not have a copy constructor or an assignment operator, for the followign reasons:
-
 // 1 	There's no need to copy construct or assign the World
 // 2 	We wouldn't want to do this anyway, because the world can contain an arbitray amount of data
 // 3 	These operations wouldn't work because the world is self-referencing:
@@ -27,19 +25,17 @@
 #include <cstring>
 #include <png++/png.hpp>
 #include <vector>
-
 using Eigen::Vector2d;
 using Eigen::Vector3d;
-
 using namespace std;
 
 class World {
   
  public:	
-  ViewPlane	vp;
-  RGBColor	background_color;
-  Tracer*	tracer_ptr;
-  vector<GeometricObject*>	objects;		
+  ViewPlane                vp;
+  RGBColor                 background_color;
+  Tracer*                  tracer_ptr;
+  vector<GeometricObject*> objects;		
 		
   World(void); 
   ~World();
@@ -58,8 +54,10 @@ class World {
   
 };
 
+
 inline void World::add_object(GeometricObject* object_ptr) {  
   objects.push_back(object_ptr);	
 }
+
 
 #endif

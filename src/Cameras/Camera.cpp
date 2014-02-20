@@ -1,8 +1,5 @@
-// This file contains the definition of the Camera class
-
 #include "Camera.h"
 #include <Eigen/Dense>
-
 using Eigen::Vector3d;
 
 
@@ -31,28 +28,25 @@ Camera::Camera(const Camera& c)
 
 
 Camera& Camera::operator= (const Camera& rhs) {
-  if (this == &rhs)
-    return (*this);
-	
-  eye		= rhs.eye;
-  lookat	= rhs.lookat;
-  ra		= rhs.ra;
-  up		= rhs.up;
-  u		= rhs.u;
-  v		= rhs.v;
-  w		= rhs.w;
-  exposure_time = rhs.exposure_time;
+  if (this != &rhs) {
+    eye		= rhs.eye;
+    lookat	= rhs.lookat;
+    ra		= rhs.ra;
+    up		= rhs.up;
+    u		= rhs.u;
+    v		= rhs.v;
+    w		= rhs.w;
+    exposure_time = rhs.exposure_time;
+  }
 
-  return (*this);
+  return *this;
 }
 
 
 Camera::~Camera(void) {}
 
 
-
 // This computes an orthornormal basis given the view point, lookat point, and up vector
-
 void Camera::compute_uvw(void) {
   w = eye - lookat;
   w.normalize();

@@ -1,6 +1,6 @@
 #include "ViewPlane.h"
 	
-ViewPlane::ViewPlane(void)							
+ViewPlane::ViewPlane()							
   : 	hres(400), 
 	vres(400),
 	s(1.0),
@@ -24,17 +24,17 @@ ViewPlane::ViewPlane(const ViewPlane& vp)
 
 ViewPlane& ViewPlane::operator= (const ViewPlane& rhs) {
   if (this != &rhs) {		
-    hres 		    = rhs.hres;
-    vres 		    = rhs.vres;
-    s		    = rhs.s;
-    gamma		    = rhs.gamma;
-    inv_gamma	    = rhs.inv_gamma;
+    hres 	      = rhs.hres;
+    vres 	      = rhs.vres;
+    s                 = rhs.s;
+    gamma	      = rhs.gamma;
+    inv_gamma         = rhs.inv_gamma;
     show_out_of_gamut = rhs.show_out_of_gamut;
-    num_samples	    = rhs.num_samples;
+    num_samples       = rhs.num_samples;
   }
 	
-  return (*this);
+  return *this;
 }
 
 
-ViewPlane::~ViewPlane(void) {}
+ViewPlane::~ViewPlane() {}
