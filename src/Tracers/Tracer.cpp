@@ -1,25 +1,26 @@
 #include "Tracer.h"
 
-Tracer::Tracer(void)
+Tracer::Tracer()
   : world_ptr(NULL)
 {}
+
 
 Tracer::Tracer(World* _worldPtr)
   : world_ptr(_worldPtr)
 {}
 
-Tracer::~Tracer(void) {
+
+Tracer::~Tracer() {
   if (world_ptr)
     world_ptr = NULL;
 }
 
+
 RGBColor Tracer::trace_ray(const Ray& ray) const {
-  return (black);
+  return black;
 }
+
 
 RGBColor Tracer::trace_ray(const Ray ray, const int depth) const {
-  return (black);
+  return black;
 }
-
-
-
