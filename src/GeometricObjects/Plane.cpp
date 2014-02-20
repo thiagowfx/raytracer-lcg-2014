@@ -1,25 +1,25 @@
 #include "Plane.h"
 
-Plane::Plane(void)	
+Plane::Plane()	
   : 	GeometricObject(),
-	a(Vector3d::Zero()),
-	n(0, 1, 0)						
+	point(Vector3d::Zero()),
+	normal(0, 1, 0)						
 {}
 
 
-Plane::Plane(const Vector3d& point, const Vector3d& normal)
+Plane::Plane(const Vector3d& _point, const Vector3d& _normal)
   :	GeometricObject(),
-	a(point),
-	n(normal)
+	point(_point),
+	normal(_normal)
 {
-  n.normalize();
+  normal.normalize();
 }
 
 
 Plane::Plane(const Plane& plane) 
   :	GeometricObject(plane),
-	a(plane.a),
-	n(plane.n) 				
+	point(plane.point),
+	normal(plane.normal) 
 {}
 
 
@@ -31,23 +31,23 @@ Plane* Plane::clone(void) const {
 Plane& Plane::operator= (const Plane& rhs) {
   if (this != &rhs) {
     GeometricObject::operator= (rhs);
-    a = rhs.a;
-    n = rhs.n;
+    point = rhs.point;
+    normal = rhs.normal;
   }
 
-  return (*this);
+  return *this;
 }
 
 
-Plane::~Plane(void) {}
+Plane::~Plane() {}
 
 
 bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
-  float t = (a - ray.o).dot(n) / ray.d.dot(n); 
+  float t = (point - ray.o).dot(normal) / ray.d.dot(normal); 
   
   if (t > kEpsilon) {
     tmin = t;
-    sr.normal = n;
+    sr.normal = normal;
     sr.local_hit_point = ray.o + t * ray.d;
     
     return true;

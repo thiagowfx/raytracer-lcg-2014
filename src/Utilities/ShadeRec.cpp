@@ -10,7 +10,6 @@ ShadeRec::ShadeRec(World& wr)
   : 	hit_an_object(false),
 	local_hit_point(Vector3d::Zero()),
 	normal(Vector3d::Zero()),
-	color(black),
 	w(wr)
 {}
 
@@ -18,13 +17,9 @@ ShadeRec::ShadeRec(World& wr)
 ShadeRec::ShadeRec(const ShadeRec& sr)
   : 	hit_an_object(sr.hit_an_object),
 	local_hit_point(sr.local_hit_point),
-	color(sr.color),
+        normal(sr.normal),
 	w(sr.w)
 {}
 
 
-
-		
-		
-						
-		
+ShadeRec::~ShadeRec() {}

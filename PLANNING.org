@@ -1,7 +1,9 @@
 * Buglist
 - [X] PNGPP está com 1 pixel a mais na largura e na altura (exemplo: 401 x 401 pixels em vez de 400 x 400). Sem esse comportamento, ocorre overflow.
-
+  
+  
 * ToDo List (software engineering like)
 - [ ] Documentation. LyX? Markdown?
-- [ ] Graphviz / DOT like to better visualize the relationship between the classes...
-- [ ] Log. Saber o progresso do programa. Escrever para um arquivo? Para a saída?
+- [ ] Graphviz / DOT like to better visualize the relationship between the classes..
+- [ ] Log. Saber o progresso do programa. Escrever para um arquivo? Para a saída
+    
