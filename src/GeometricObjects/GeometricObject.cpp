@@ -1,24 +1,43 @@
-#include "Constants.h"
 #include "GeometricObject.h"
 
-GeometricObject::GeometricObject(void)
-  : 	color(black)
+GeometricObject::GeometricObject()
+  : 	material_ptr(NULL)
 {}
 
 
-GeometricObject::GeometricObject (const GeometricObject& object)
-  : 	color(object.color)
-{}	
+GeometricObject::GeometricObject (const GeometricObject& object) {
+  if (object.material_ptr)
+    material_ptr = object.material_ptr->clone();
+  else
+    material_ptr = NULL;
+}	
 
 
 GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
-	
+  
   if (this != &rhs) {
-    color = rhs.color;
+    
+    if (material_ptr) {
+      delete material_ptr;
+      material_ptr = NULL;
+    }
+
+    if (rhs.material_ptr)
+      material_ptr = rhs.material_ptr->clone();
   }
 
-  return (*this);
+  return *this;
 }
 
 
-GeometricObject::~GeometricObject (void) {}
+GeometricObject::~GeometricObject () {
+  if (material_ptr) {
+    delete material_ptr;
+    material_ptr = NULL;
+  }
+}
+
+
+void GeometricObject::set_material(Material* mPtr) {
+  material_ptr = mPtr;
+}

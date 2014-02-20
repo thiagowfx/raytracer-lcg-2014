@@ -37,10 +37,10 @@ class World {
   Tracer*                  tracer_ptr;
   vector<GeometricObject*> objects;		
 		
-  World(void); 
+  World(); 
   ~World();
   void add_object(GeometricObject* object_ptr);
-  void build(void);
+  void build();
   void render_scene(FILE *fp) const;
   void render_perspective(FILE *fp) const;
   RGBColor max_to_one(const RGBColor& c) const;
@@ -50,7 +50,7 @@ class World {
   void file_to_png(FILE *fp, const char *imageFile);
 						
  private:
-  void delete_objects(void);
+  void delete_objects();
   
 };
 

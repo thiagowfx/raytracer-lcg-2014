@@ -2,8 +2,7 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-
-Camera::Camera(void)		
+Camera::Camera()		
   :	eye(0, 0, 500),
         lookat(Vector3d::Zero()),
         ra(0),
@@ -29,13 +28,13 @@ Camera::Camera(const Camera& c)
 
 Camera& Camera::operator= (const Camera& rhs) {
   if (this != &rhs) {
-    eye		= rhs.eye;
-    lookat	= rhs.lookat;
-    ra		= rhs.ra;
-    up		= rhs.up;
-    u		= rhs.u;
-    v		= rhs.v;
-    w		= rhs.w;
+    eye           = rhs.eye;
+    lookat        = rhs.lookat;
+    ra            = rhs.ra;
+    up            = rhs.up;
+    u             = rhs.u;
+    v             = rhs.v;
+    w             = rhs.w;
     exposure_time = rhs.exposure_time;
   }
 
@@ -43,11 +42,11 @@ Camera& Camera::operator= (const Camera& rhs) {
 }
 
 
-Camera::~Camera(void) {}
+Camera::~Camera() {}
 
 
 // This computes an orthornormal basis given the view point, lookat point, and up vector
-void Camera::compute_uvw(void) {
+void Camera::compute_uvw() {
   w = eye - lookat;
   w.normalize();
   u = up.cross(w);

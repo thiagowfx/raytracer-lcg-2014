@@ -1,79 +1,80 @@
 #include "World.h"
 
-World::World(void)
+World::World()
   :  	background_color(black),
-	tracer_ptr(NULL)
+	tracer_ptr(NULL),
+        ambient_ptr(new Ambient()),
+        camera_ptr(NULL)
 {}
 
 
-World::~World(void) {	
-  if(tracer_ptr) {
+World::~World() {	
+  if (tracer_ptr) {
     delete tracer_ptr;
     tracer_ptr = NULL;
-  }	
+  }
+
+  if (ambient_ptr) {
+    delete ambient_ptr;
+    ambient_ptr = NULL;
+  }
+
+  if (camera_ptr) {
+    delete camera_ptr;
+    camera_ptr = NULL;
+  }
 	
-  delete_objects();	
+  delete_objects();
+  delete_lights();
 }
 
 
 /* This uses orthographic viewing along the zw axis */
 void World::render_scene(FILE *fp) const {
+  
   RGBColor	pixel_color;	 	
   Ray		ray;					
   float		zw = 100.0;	// hardwired in
-  int n = (int) sqrt( (double) vp.num_samples );
+  ray.d = Vector3d(0.0, 0.0, -1.0);
   Vector2d pp;
 
-  ray.d = Vector3d(0.0, 0.0, -1.0);
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
     
-  for (int r = 0; r < vp.vres; r++) {	 // up
+  for (int r = 0; r < vp.vres; r++) {   // up
     for (int c = 0; c < vp.hres; c++) { // across
-      pixel_color = black;
-
-      for (int p = 0; p < n; ++p) {   //up pixel
-	for (int q = 0; q < n; ++q) { // accross pixel
-          /*
-            - 0.5 = regular sampling
-            - rand_float() = jittered sampling
-          */
-	  pp(0) = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n );
-	  pp(1) = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n );
-	  ray.o = Vector3d(pp(0), pp(1), zw);
-	  pixel_color += tracer_ptr->trace_ray(ray);
-	}
-      }
-      
-      pixel_color /= vp.num_samples; // average the colors
+      pp(0) = s * (c - hres / 2.0 + 0.5);
+      pp(1) = s * (r - vres / 2.0 + 0.5);
+      ray.o = Vector3d( pp(0), pp(1), zw);
+      pixel_color = tracer_ptr->trace_ray(ray);
       display_pixel(r, c, pixel_color, fp);
     }
   }
 }  
 
 
-/* This uses a perspective viewing */
-void World::render_perspective(FILE *fp) const {
-  RGBColor pixel_color;
-  Ray ray;
+// /* This uses a perspective viewing */
+// void World::render_perspective(FILE *fp) const {
+//   RGBColor pixel_color;
+//   Ray ray;
 
-  // TEMP. Idealmente isso poderia (deveria?) ser guardado em algum tracer
-  float eye = 300;
-  float d = 200;
+//   // TEMP. Idealmente isso poderia (deveria?) ser guardado em algum tracer
+//   float eye = 300;
+//   float d = 200;
 
-  // open_window(vp.hres, vp.vres);
-  ray.o = Vector3d(0.0, 0.0, eye);
-  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
+//   // open_window(vp.hres, vp.vres);
+//   ray.o = Vector3d(0.0, 0.0, eye);
+//   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
 
-  for (int r = 0; r < vp.vres; ++r) { // up
-    for (int c = 0; c < vp.hres; ++c) { // across
-      ray.d = Vector3d( vp.s * ( c - 0.5 * (vp.hres - 1.0)), vp.s * (r - 0.5 * (vp.vres - 1.0)), -d);
-      ray.d.normalize();
+//   for (int r = 0; r < vp.vres; ++r) { // up
+//     for (int c = 0; c < vp.hres; ++c) { // across
+//       ray.d = Vector3d( vp.s * ( c - 0.5 * (vp.hres - 1.0)), vp.s * (r - 0.5 * (vp.vres - 1.0)), -d);
+//       ray.d.normalize();
       
-      pixel_color = tracer_ptr->trace_ray(ray);
-      display_pixel(r, c, pixel_color, fp);
-    }
-  }
-}
+//       pixel_color = tracer_ptr->trace_ray(ray);
+//       display_pixel(r, c, pixel_color, fp);
+//     }
+//   }
+// }
 
 
 /* clamp the components of the color */
@@ -126,25 +127,38 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 }
 
 
-ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
+ShadeRec World::hit_objects(const Ray& ray) {
+
   ShadeRec sr(*this); 
-  double   t; 			
-  float	   tmin        = kHugeValue;
-  int 	   num_objects = objects.size();
+  double   t;
+  Normal   normal;
+  Point3D  local_hit_point;
+  float    tmin        = kHugeValue;
+  int      num_objects = objects.size();
 	
-  for (int j = 0; j < num_objects; j++)
+  for (int j = 0; j < num_objects; j++) {
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
-      sr.hit_an_object	= true;
-      tmin     = t; 
-      sr.color = objects[j]->get_color(); 
+      sr.hit_an_object = true;
+      tmin 	       = t;
+      sr.material_ptr  = objects[j]->get_material();
+      sr.hit_point     = ray.o + t * ray.d;
+      normal 	       = sr.normal;
+      local_hit_point  = sr.local_hit_point;
     }
+  }
+  
+  if (sr.hit_an_object) {
+    sr.t = tmin;
+    sr.normal = normal;
+    sr.local_hit_point = local_hit_point;
+  }
 		
-  return sr;   
+  return sr;
 }
 
 
 /* Deletes the objects in the objects array, and erases the array. */
-void World::delete_objects(void) {
+void World::delete_objects() {
   int num_objects = objects.size();
 	
   for (int j = 0; j < num_objects; j++) {
@@ -152,10 +166,23 @@ void World::delete_objects(void) {
     objects[j] = NULL;
   }	
 	
-  objects.erase(objects.begin(), objects.end());
+  objects.erase (objects.begin(), objects.end());
 }
 
 
+void World::delete_lights() {
+  int num_lights = lights.size();
+	
+  for (int j = 0; j < num_lights; j++) {
+    delete lights[j];
+    lights[j] = NULL;
+  }	
+	
+  lights.erase (lights.begin(), lights.end());
+}
+
+
+/* Creates a PNG file from a world output file. */
 void World::file_to_png(FILE *fp, const char *imageFile) {
   unsigned width, height, r, g, b, x, y;
 

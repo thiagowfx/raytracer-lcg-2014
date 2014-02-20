@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "World.h"    // we can #include "World.h" here
 #include <Eigen/Dense>
-
 using Eigen::Vector2d;
 using Eigen::Vector3d;
 

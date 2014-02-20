@@ -2,19 +2,17 @@
 #define __CAMERA__
 
 // There is no view plane distance because the fisheye and panoramic cameras don't use it
-
 #include <Eigen/Dense>
-
 using Eigen::Vector3d;
 
-class World;  // can't #include "World" here because World contains a camera pointer
+class World;  // can't #include "World" here because it contains a camera pointer
 
 class Camera {
   
  public:
-  Camera();                              // default constructor
-  Camera(const Camera& camera);          // ncopy constructor
-  virtual Camera* clone(void) const = 0; // virtual copy constructor
+  Camera(); 
+  Camera(const Camera& camera);
+  virtual Camera* clone() const = 0;
   virtual ~Camera();   							
   virtual void render_scene(const World& w) = 0;
   void set_eye(const Vector3d& p);
@@ -25,7 +23,7 @@ class Camera {
   void set_up_vector(const float x, const float y, const float z);
   void set_roll(const float ra);
   void set_exposure_time(const float exposure);
-  void compute_uvw(void);
+  void compute_uvw();
 		
  protected:		
   Vector3d eye;			// eye point

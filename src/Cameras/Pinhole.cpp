@@ -2,12 +2,11 @@
 #include "Pinhole.h"
 #include <math.h>
 #include <Eigen/Dense>
-
 using Eigen::Vector2d;
 using Eigen::Vector3d;
 
 
-Pinhole::Pinhole(void)		
+Pinhole::Pinhole()		
   :	Camera(),
         d(500),
         zoom(1.0)
@@ -21,24 +20,23 @@ Pinhole::Pinhole(const Pinhole& c)
 {}
 
 
-Pinhole& Pinhole::operator= (const Pinhole& rhs) { 	
-  if (this == &rhs)
-    return (*this);
-		
-  Camera::operator= (rhs);
+Pinhole& Pinhole::operator= (const Pinhole& rhs) {
+  
+  if (this != &rhs) {
+    Camera::operator= (rhs);
+    d    = rhs.d;
+    zoom = rhs.zoom;
+  }
 
-  d = rhs.d;
-  zoom	= rhs.zoom;
-
-  return (*this);
+  return *this;
 }
 
-Pinhole::~Pinhole(void) {}	
+
+Pinhole::~Pinhole() {}
+
 
 Vector3d Pinhole::get_direction(const Vector2d& p) const {
-  Vector3d dir = p(0) * u +
-    p(1) * v -
-    d * w;
+  Vector3d dir = p(0) * u + p(1) * v - d * w;
   dir.normalize();
 	
   return dir;
@@ -46,12 +44,12 @@ Vector3d Pinhole::get_direction(const Vector2d& p) const {
 
 
 void Pinhole::render_scene(const World& w, FILE *fp) {
-  RGBColor	L;
-  ViewPlane	vp(w.vp);	 								
-  Ray			ray;
-  int 		depth = 0;  
-  Vector2d 	pp;		// sample point on a pixel
-  int n = (int)sqrt((float)vp.num_samples);
+  RGBColor  L;
+  ViewPlane vp(w.vp);
+  Ray	    ray;
+  int 	    depth = 0;  
+  Vector2d  pp;                 // sample point on a pixel
+  int       n     = (int)sqrt((float)vp.num_samples);
 		
   vp.s /= zoom;
   ray.o = eye;

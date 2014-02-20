@@ -23,8 +23,8 @@ Plane::Plane(const Plane& plane)
 {}
 
 
-Plane* Plane::clone(void) const {
-  return (new Plane(*this));
+Plane* Plane::clone() const {
+  return new Plane(*this);
 }
 
 

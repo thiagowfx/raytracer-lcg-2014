@@ -36,7 +36,6 @@ RGBColor& RGBColor::operator= (const RGBColor& rhs) {
 
 
 /* Raise each component to the specified power */
-// used for color filtering in Chapter 28
 RGBColor RGBColor::powc(float p) const {
   return RGBColor(pow(r, p), pow(g, p), pow(b, p));
 }

@@ -3,16 +3,15 @@
 
 #include "Constants.h"
 #include "GeometricObject.h"
-#include "math.h"
 
 class Sphere: public GeometricObject {	
 								  	
  public:
-  Sphere(void);
+  Sphere();
   Sphere(Vector3d center, double r);
   Sphere(const Sphere& sphere);
-  virtual Sphere* clone(void) const;
-  virtual ~Sphere(void);
+  virtual ~Sphere();
+  virtual Sphere* clone() const;
   Sphere& operator= (const Sphere& sphere);				
   void set_center(const Vector3d& c);
   void set_center(const double x, const double y, const double z);
