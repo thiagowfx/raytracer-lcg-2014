@@ -34,7 +34,7 @@ Ambient& Ambient::operator= (const Ambient& rhs) {
 Ambient::~Ambient () {}
 
 
-Vector3D Ambient::get_direction(ShadeRec& s) {
+Vector3d Ambient::get_direction(ShadeRec& s) {
   return Vector3d(Vector3d::Zero());
 }
 

@@ -65,9 +65,9 @@ inline void Directional::set_direction(Vector3d d) {
 
 
 inline void Directional::set_direction(float dx, float dy, float dz) {
-  dir.x = dx;
-  dir.y = dy;
-  dir.z = dz;
+  dir(0) = dx;
+  dir(1) = dy;
+  dir(2) = dz;
   
   dir.normalize();
 }

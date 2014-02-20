@@ -3,6 +3,8 @@
 
 #include "BRDF.h"
 #include "Constants.h"
+#include <Eigen/Dense>
+using Eigen::Vector3d;
 
 class Lambertian: public BRDF {
   
@@ -12,8 +14,8 @@ class Lambertian: public BRDF {
   virtual Lambertian* clone() const;
   ~Lambertian();
   Lambertian& operator= (const Lambertian& rhs);
-  virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const;
-  virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo) const;
+  virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
+  virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
   void set_ka(const float ka);	
   void set_kd(const float kd);
   void set_cd(const RGBColor& c);

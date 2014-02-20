@@ -3,7 +3,7 @@
 World::World()
   :  	background_color(black),
 	tracer_ptr(NULL),
-        ambient_ptr(new Ambient()),
+        ambient_ptr(NULL),
         camera_ptr(NULL)
 {}
 
@@ -42,8 +42,8 @@ void World::render_scene(FILE *fp) const {
     
   for (int r = 0; r < vp.vres; r++) {   // up
     for (int c = 0; c < vp.hres; c++) { // across
-      pp(0) = s * (c - hres / 2.0 + 0.5);
-      pp(1) = s * (r - vres / 2.0 + 0.5);
+      pp(0) = s * (c - vp.hres / 2.0 + 0.5);
+      pp(1) = s * (r - vp.vres / 2.0 + 0.5);
       ray.o = Vector3d( pp(0), pp(1), zw);
       pixel_color = tracer_ptr->trace_ray(ray);
       display_pixel(r, c, pixel_color, fp);
