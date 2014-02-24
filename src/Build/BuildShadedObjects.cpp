@@ -7,16 +7,7 @@
    These are in the Chapter 5 download file.
    The spheres are the same as those in the Chapter 14 page one image. */
 
-#include "World.h"
-#include "Sphere.h"
-#include "Plane.h"
-#include "Matte.h"
-#include "Directional.h"
-#include "Pinhole.h"
-#include "RayCast.h"
-#include "MultipleObjects.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
+#include "Build.h"
 
 void World::build(void) {
   int num_samples = 1; 
