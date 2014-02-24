@@ -15,7 +15,9 @@ class Pinhole: public Camera {
   Pinhole();   							
   Pinhole(const Pinhole& ph);	
   Pinhole& operator= (const Pinhole& rhs);	
-  virtual ~Pinhole();   						
+  virtual ~Pinhole();
+  virtual Pinhole* clone() const;
+  
   void set_view_distance(const float vpd);
   void set_zoom(const float zoom_factor);
   Vector3d get_direction(const Vector2d& p) const;

@@ -15,7 +15,7 @@ Lambertian::Lambertian(const Lambertian& lamb) :
 
 
 Lambertian* Lambertian::clone() const {
-  return (new Lambertian(*this));
+  return new Lambertian(*this);
 }	
 
 

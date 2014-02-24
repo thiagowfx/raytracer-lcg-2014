@@ -36,6 +36,11 @@ Vector3d Pinhole::get_direction(const Vector2d& p) const {
 }
 
 
+Pinhole* Pinhole::clone() const {
+  return new Pinhole(*this);
+}
+
+
 void Pinhole::render_scene(const World& w, FILE *fp) {
   RGBColor  L;
   ViewPlane vp(w.vp);
