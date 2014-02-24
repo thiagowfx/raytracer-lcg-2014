@@ -10,9 +10,9 @@ include_directories(${RAYTRACER_INCLUDE_DIRS})
 
 ##################################################
 # Executables
-add_executable (RAYTRACER_BIN ${RAYTRACER_SOURCES})
+add_executable (runRaytracer ${RAYTRACER_SOURCES})
 
 
 ##################################################
 # -l flag (library dependencies)
-target_link_libraries (RAYTRACER_BIN ${PNG_LIBRARY})
+target_link_libraries (runRaytracer ${PNG_LIBRARY})

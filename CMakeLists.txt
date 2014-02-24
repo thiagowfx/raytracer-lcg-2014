@@ -39,7 +39,6 @@ add_subdirectory(src)
 ##################################################
 # Tests - use cmake .. -DTEST=ON to enable tests.
 if(TEST)
-  # set(CMAKE_INCLUDE_CURRENT_DIR ON)
   enable_testing()
   add_subdirectory(tests)
 endif()
