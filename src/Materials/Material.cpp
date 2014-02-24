@@ -1,38 +1,21 @@
 #include "Material.h"
 
-// ---------------------------------------------------------------- default constructor
+Material::Material() {}
 
-Material::Material(void) {}
-
-
-// ---------------------------------------------------------------- copy constructor
 
 Material::Material(const Material& m) {}
 
 
-
-// ---------------------------------------------------------------- assignment operator
-
-Material& 
-Material::operator= (const Material& rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	return (*this);
+Material& Material::operator= (const Material& rhs) {
+  return *this;
 }
 
 
-// ---------------------------------------------------------------- destructor
-
-Material::~Material(void)
-{}
+Material::~Material() {}
 
 
-// ---------------------------------------------------------------- shade
-
-RGBColor
-Material::shade(ShadeRec& sr) {
-	return (black);
+RGBColor Material::shade(ShadeRec& sr) {
+  return black;
 }
 
 

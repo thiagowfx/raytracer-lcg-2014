@@ -4,20 +4,15 @@
 #include "Tracer.h"
 
 class RayCast: public Tracer {
-	public:
-		
-		RayCast(void);
-		
-		RayCast(World* _worldPtr);
-				
-		virtual											
-		~RayCast(void);		
-
-		virtual RGBColor	
-		trace_ray(const Ray& ray) const;
-
-		virtual RGBColor	
-		trace_ray(const Ray ray, const int depth) const;
+  
+ public:
+  RayCast();
+  RayCast(World* _worldPtr);
+  virtual ~RayCast();		
+  virtual RGBColor trace_ray(const Ray& ray) const;
+  virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+  
 };
+
 
 #endif
