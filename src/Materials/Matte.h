@@ -3,6 +3,7 @@
 
 #include "Material.h"
 #include "Lambertian.h"
+#include "World.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
