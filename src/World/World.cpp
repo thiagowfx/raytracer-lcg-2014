@@ -33,7 +33,6 @@
 #include "Point3D.h"
 #include "Normal.h"
 #include "ShadeRec.h"
-#include "Maths.h"
 
 // build functions
 
