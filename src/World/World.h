@@ -15,9 +15,7 @@
 #include "Camera.h"
 #include "Constants.h"
 #include "Directional.h"
-#include "GeometricObject.h"
 #include "Light.h"
-#include "Matte.h"
 #include "MultipleObjects.h"
 #include "Pinhole.h"
 #include "RGBColor.h"
@@ -29,6 +27,7 @@
 #include <cstring>              // for png++ streerror
 #include <png++/png.hpp>
 #include <vector>
+class GeometricObject;
 
 using namespace std;
 
