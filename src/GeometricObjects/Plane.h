@@ -1,38 +1,24 @@
 #ifndef __PLANE__
 #define __PLANE__
 
+#include "Constants.h"
 #include "GeometricObject.h"
 
-//-------------------------------------------------------------------- class Plane
-
-class Plane: public GeometricObject {
+class Plane : public GeometricObject {
 	
-	public:
-	
-		Plane(void);   												// default constructor
+ public:
+  Plane();
+  virtual ~Plane();
+  Plane(const Vector3d& point, const Vector3d& normal);
+  Plane(const Plane& plane);
+  virtual Plane* clone() const;
+  Plane& operator= (const Plane& rhs);	
+  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 		
-		Plane(const Point3D& point, const Normal& normal);			// constructor	
-	
-		Plane(const Plane& plane); 									// copy constructor
-		
-		virtual Plane* 												// virtual copy constructor
-		clone(void) const;
-
-		Plane& 														// assignment operator
-		operator= (const Plane& rhs);	
-		
-		virtual														// destructor
-		~Plane(void);   											
-					
-		virtual bool 																								 
-		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-		
-	private:
-	
-		Point3D 	a;   				// point through which plane passes 
-		Normal 		n;					// normal to the plane
-				
-		static const double kEpsilon;   // for shadows and secondary rays
+ private:
+  Vector3d point;   		// point through which plane passes 
+  Vector3d normal;
+  
 };
 
 #endif

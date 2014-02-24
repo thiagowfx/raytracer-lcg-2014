@@ -1,81 +1,57 @@
 #include "Plane.h"
 
-const double Plane::kEpsilon = 0.001;
-
-// ----------------------------------------------------------------------  default constructor
-
-Plane::Plane(void)	
-	: 	GeometricObject(),
-		a(0.0),
-		n(0, 1, 0)						
+Plane::Plane() :
+  GeometricObject(),
+  point(Vector3d::Zero()),
+  normal(0, 1, 0)						
 {}
 
 
-// ----------------------------------------------------------------------  constructor
-
-Plane::Plane(const Point3D& point, const Normal& normal)
-	:	GeometricObject(),
-		a(point),
-		n(normal)
+Plane::Plane(const Vector3d& _point, const Vector3d& _normal) :
+  GeometricObject(),
+  point(_point),
+  normal(_normal)
 {
-		n.normalize();
+  normal.normalize();
 }
 
 
-// ---------------------------------------------------------------- copy constructor
-
-Plane::Plane(const Plane& plane) 
-	:	GeometricObject(plane),
-		a(plane.a),
-		n(plane.n) 				
+Plane::Plane(const Plane& plane) :
+  GeometricObject(plane),
+  point(plane.point),
+  normal(plane.normal) 
 {}
 
 
-// ---------------------------------------------------------------- clone
-
-Plane* 
-Plane::clone(void) const {
-	return (new Plane(*this));
+Plane* Plane::clone() const {
+  return new Plane(*this);
 }
 
 
-// ---------------------------------------------------------------- assignment operator
+Plane& Plane::operator= (const Plane& rhs) {
+  if (this != &rhs) {
+    GeometricObject::operator= (rhs);
+    point = rhs.point;
+    normal = rhs.normal;
+  }
 
-Plane& 
-Plane::operator= (const Plane& rhs)	{
-	
-	if (this == &rhs)
-		return (*this);
-
-	GeometricObject::operator= (rhs);
-
-	a = rhs.a;
-	n = rhs.n;
-
-	return (*this);
+  return *this;
 }
 
 
-// ---------------------------------------------------------------- destructor
-
-Plane::~Plane(void)				
-{}
+Plane::~Plane() {}
 
 
-// ----------------------------------------------------------------- hit
-
-bool 															 
-Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
-	float t = (a - ray.o) * n / (ray.d * n); 
-														
-	if (t > kEpsilon) {
-		tmin = t;
-		sr.normal = n;
-		sr.local_hit_point = ray.o + t * ray.d;
-		
-		return (true);	
-	}
-
-	return(false);
+bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
+  float t = (point - ray.o).dot(normal) / ray.d.dot(normal); 
+  
+  if (t > kEpsilon) {
+    tmin = t;
+    sr.normal = normal;
+    sr.local_hit_point = ray.o + t * ray.d;
+    
+    return true;
+  }
+  
+  return false;
 }
-
