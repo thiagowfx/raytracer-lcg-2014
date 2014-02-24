@@ -28,6 +28,7 @@
 #include <vector>
 #include "GeometricObject.h"
 using namespace std;
+// class GeometricObject;
 
 class World {
  

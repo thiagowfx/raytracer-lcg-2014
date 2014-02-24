@@ -6,7 +6,7 @@
 #include "ShadeRec.h"
 #include "Material.h"
 #include <Eigen/Dense>
-using Eigen::Vector3d;					
+using Eigen::Vector3d;
 
 class GeometricObject {	
 	
