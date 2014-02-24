@@ -1,68 +1,44 @@
-
 #include "Ambient.h"
 
-// ---------------------------------------------------------------------- default constructor
-
-Ambient::Ambient (void)
-	: 	Light(),
-		ls(1.0),
-		color(1.0)			
+Ambient::Ambient () :
+  Light(),
+  ls(1.0),
+  color(1.0)			
 {}
 
 
-// ---------------------------------------------------------------------- copy constructor
-
-Ambient::Ambient (const Ambient& a)
-	: 	Light(a),
-		ls(a.ls),
-		color(a.color) 		
+Ambient::Ambient (const Ambient& a) :
+  Light(a),
+  ls(a.ls),
+  color(a.color) 		
 {}
 
 
-// ---------------------------------------------------------------------- clone
-
-Light* 
-Ambient::clone(void) const {
-	return (new Ambient(*this));
+Light* Ambient::clone() const {
+  return new Ambient(*this);
 }	
 
 
-// ---------------------------------------------------------------------- assignment operator
-
-Ambient& 
-Ambient::operator= (const Ambient& rhs) {
-	if (this == &rhs)
-		return (*this);
-			
-	Light::operator= (rhs);
+Ambient& Ambient::operator= (const Ambient& rhs) {
+  if (this != &rhs) {
+    Light::operator= (rhs);
+    
+    ls 	  = rhs.ls;
+    color = rhs.color;
+  }
 	
-	ls 		= rhs.ls;
-	color 	= rhs.color;
-	
-	return (*this);
+  return *this;
 }
 
 
-// ---------------------------------------------------------------------- destructor																			
-
-Ambient::~Ambient (void) {}
+Ambient::~Ambient () {}
 
 
-// ---------------------------------------------------------------------- get_direction	
-
-Vector3D								
-Ambient::get_direction(ShadeRec& s) {
-	return (Vector3D(0.0));
+Vector3d Ambient::get_direction(ShadeRec& s) {
+  return Vector3d(Vector3d::Zero());
 }
 
 
-// ---------------------------------------------------------------------- L
-
-RGBColor
-Ambient::L(ShadeRec& sr) {	
-	return (ls * color);
+RGBColor Ambient::L(ShadeRec& sr) {	
+  return ls * color;
 }
-
-
-
-
