@@ -1,39 +1,21 @@
 #include "Light.h"
 
-#include "Constants.h"
+Light::Light() {}
 
-// ---------------------------------------------------------------------- default constructor
-
-Light::Light(void) {}
-
-// ---------------------------------------------------------------------- dopy constructor
 
 Light::Light(const Light& ls) {}
 
 
-// ---------------------------------------------------------------------- assignment operator
-
-Light& 
-Light::operator= (const Light& rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	return (*this);
+Light& Light::operator= (const Light& rhs) {
+  return *this;
 }
 
 
-// ---------------------------------------------------------------------- destructor
-
-Light::~Light(void) {} 
+Light::~Light() {} 
 
 
-
-// ---------------------------------------------------------------------- L
-// returns the radiance
-
-RGBColor								
-Light::L(ShadeRec& s) {
-	return (black);
+RGBColor Light::L(ShadeRec& s) {
+  return black;
 }
 
 
