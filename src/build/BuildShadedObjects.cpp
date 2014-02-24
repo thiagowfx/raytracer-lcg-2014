@@ -14,6 +14,7 @@
 #include "Directional.h"
 #include "Pinhole.h"
 #include "RayCast.h"
+#include "MultipleObjects.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
@@ -35,7 +36,8 @@ void World::build(void) {
 
   background_color = black;    // default color - this can be left out
 	
-  tracer_ptr = new RayCast(this); 
+  tracer_ptr = new RayCast(this);
+  // tracer_ptr = new MultipleObjects(this); 
 
   /* Camera */
   Pinhole* pinhole_ptr = new Pinhole;
