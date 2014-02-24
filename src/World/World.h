@@ -11,45 +11,24 @@
    Tracer class, the World copy construtor would call itself recursively until we ran out of memory. */
 
 
-#include <vector>
+#include "Ambient.h"
+#include "Camera.h"
+#include "Constants.h"
+#include "Directional.h"
+#include "GeometricObject.h"
+#include "Light.h"
+#include "Matte.h"
+#include "MultipleObjects.h"
+#include "Pinhole.h"
+#include "RGBColor.h"
+#include "Ray.h"
+#include "RayCast.h"
+#include "ShadeRec.h"
+#include "ViewPlane.h"
 #include <cstdio>
 #include <cstring>              // for png++ streerror
 #include <png++/png.hpp>
-
-#include "ViewPlane.h"
-#include "RGBColor.h"
-#include "Tracer.h"
-#include "GeometricObject.h"
-// #include "Sphere.h"
-#include "Ray.h"
-
-#include "Camera.h"
-#include "Light.h"
-#include "Ambient.h"
-
-#include "Constants.h"
-
-// geometric objects
-#include "Plane.h"
-#include "Sphere.h"
-
-// tracers
-#include "MultipleObjects.h"
-#include "RayCast.h"
-
-// cameras
-#include "Pinhole.h"
-
-// lights
-#include "Directional.h"
-
-// materials
-#include "Matte.h"
-
-// utilities
-#include "ShadeRec.h"
-
-
+#include <vector>
 
 using namespace std;
 
