@@ -1,11 +1,14 @@
 #include "GeometricObject.h"
 
 GeometricObject::GeometricObject() :
-  material_ptr(NULL)
+  material_ptr(NULL),
+  color(black)
 {}
 
 
-GeometricObject::GeometricObject (const GeometricObject& object) {
+GeometricObject::GeometricObject (const GeometricObject& object) :
+  color(object.color)
+{
   if (object.material_ptr)
     material_ptr = object.material_ptr->clone();
   else
