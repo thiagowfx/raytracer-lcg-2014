@@ -34,11 +34,11 @@ Lambertian& Lambertian::operator= (const Lambertian& rhs) {
 }
 
 
-RGBColor Lambertian::f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const {
+RGBColor Lambertian::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
   return kd * cd * invPI;
 }
 
 
-RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3D& wo) const {
+RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3d& wo) const {
   return kd * cd;
 }
