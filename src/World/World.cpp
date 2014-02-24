@@ -2,41 +2,6 @@
 
 
 #include "World.h"
-#include "Constants.h"
-
-// geometric objects
-
-#include "Plane.h"
-#include "Sphere.h"
-
-// tracers
-
-#include "SingleSphere.h"
-#include "MultipleObjects.h"
-#include "RayCast.h"
-
-// cameras
-
-#include "Pinhole.h"
-
-// lights
-
-#include "Directional.h"
-
-// materials
-
-#include "Matte.h"
-
-// utilities
-
-#include "Vector3D.h"
-#include "Point3D.h"
-#include "Normal.h"
-#include "ShadeRec.h"
-
-// build functions
-
-// #include "BuildShadedObjects.cpp"
 
 
 // -------------------------------------------------------------------- default constructor

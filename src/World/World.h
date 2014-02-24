@@ -1,33 +1,54 @@
 #ifndef __WORLD__
 #define __WORLD__
 
-
-// This file contains the declaration of the class World
-// The World class does not have a copy constructor or an assignment operator, for the followign reasons:
-
-// 1 	There's no need to copy construct or assign the World
-// 2 	We wouldn't want to do this anyway, because the world can contain an arbitray amount of data
-// 3 	These operations wouldn't work because the world is self-referencing:
-//	 	the Tracer base class contains a pointer to the world. If we wrote a correct copy constructor for the 
-// 	  	Tracer class, the World copy construtor would call itself recursively until we ran out of memory. 
+/* This file contains the declaration of the class World
+   The World class does not have a copy constructor or an assignment operator, for the followign reasons:
+   
+   1 	There's no need to copy construct or assign the World
+   2 	We wouldn't want to do this anyway, because the world can contain an arbitray amount of data
+   3 	These operations wouldn't work because the world is self-referencing:
+   the Tracer base class contains a pointer to the world. If we wrote a correct copy constructor for the 
+   Tracer class, the World copy construtor would call itself recursively until we ran out of memory. */
 
 
 #include <vector>
 #include <cstdio>
-#include <cstring> // for png++ streerror
+#include <cstring>              // for png++ streerror
 #include <png++/png.hpp>
 
 #include "ViewPlane.h"
 #include "RGBColor.h"
 #include "Tracer.h"
 #include "GeometricObject.h"
-#include "Sphere.h"
+// #include "Sphere.h"
 #include "Ray.h"
-#include "SingleSphere.h"
 
 #include "Camera.h"
 #include "Light.h"
 #include "Ambient.h"
+
+#include "Constants.h"
+
+// geometric objects
+#include "Plane.h"
+#include "Sphere.h"
+
+// tracers
+#include "MultipleObjects.h"
+#include "RayCast.h"
+
+// cameras
+#include "Pinhole.h"
+
+// lights
+#include "Directional.h"
+
+// materials
+#include "Matte.h"
+
+// utilities
+#include "ShadeRec.h"
+
 
 
 using namespace std;
@@ -41,7 +62,6 @@ class World {
 		Tracer*						tracer_ptr;
 		Light*   					ambient_ptr;
 		Camera*						camera_ptr;		
-		Sphere 						sphere;		// for Chapter 3 only
 		vector<GeometricObject*>	objects;		
 		vector<Light*> 				lights;
 		
