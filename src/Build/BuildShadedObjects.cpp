@@ -27,8 +27,8 @@ void World::build(void) {
 
   background_color = black;    // default color - this can be left out
 	
-  tracer_ptr = new RayCast(this);
-  // tracer_ptr = new MultipleObjects(this); 
+  // tracer_ptr = new RayCast(this);
+  tracer_ptr = new MultipleObjects(this); 
 
   /* Camera */
   Pinhole* pinhole_ptr = new Pinhole;
@@ -62,7 +62,7 @@ void World::build(void) {
   /* Matte material reflection coefficients - common to all materials */	
   float ka = 0.25;
   float kd = 0.75;
-	
+  
 
   /* Spheres */
   Matte* matte_ptr1 = new Matte;   
@@ -71,6 +71,7 @@ void World::build(void) {
   matte_ptr1->set_cd(yellow);				
   Sphere*	sphere_ptr1 = new Sphere(Vector3d(5, 3, 0), 30); 
   sphere_ptr1->set_material(matte_ptr1); // yellow
+  sphere_ptr1->set_color(yellow);
   add_object(sphere_ptr1);
 	
   Matte* matte_ptr2 = new Matte;
