@@ -80,9 +80,9 @@ void Sampler::shuffle_x_coordinates() {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i <  num_samples - 1; i++) {
       int target = rand_int() % num_samples + p * num_samples;
-      float temp = samples[i + p * num_samples + 1].x;
-      samples[i + p * num_samples + 1].x = samples[target].x;
-      samples[target].x = temp;
+      float temp = samples[i + p * num_samples + 1](0);
+      samples[i + p * num_samples + 1](0) = samples[target](0);
+      samples[target](0) = temp;
     }
 }
 
@@ -91,9 +91,9 @@ void Sampler::shuffle_y_coordinates() {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i <  num_samples - 1; i++) {
       int target = rand_int() % num_samples + p * num_samples;
-      float temp = samples[i + p * num_samples + 1].y;
-      samples[i + p * num_samples + 1].y = samples[target].y;
-      samples[target].y = temp;
+      float temp = samples[i + p * num_samples + 1](1);
+      samples[i + p * num_samples + 1](1) = samples[target](1);
+      samples[target](1) = temp;
     }	
 }
 
@@ -124,28 +124,28 @@ void Sampler::map_samples_to_unit_disk() {
   for (int j = 0; j < size; j++) {
     /* map sample point to [-1, 1] X [-1,1] */
 		 	
-    sp.x = 2.0 * samples[j].x - 1.0;	
-    sp.y = 2.0 * samples[j].y - 1.0;
+    sp(0) = 2.0 * samples[j](0) - 1.0;	
+    sp(1) = 2.0 * samples[j](1) - 1.0;
 			
-    if (sp.x > -sp.y) {         // sectors 1 and 2
-      if (sp.x > sp.y) {        // sector 1
-        r = sp.x;
-        phi = sp.y / sp.x;
+    if (sp(0) > -sp(1)) {         // sectors 1 and 2
+      if (sp(0) > sp(1)) {        // sector 1
+        r = sp(0);
+        phi = sp(1) / sp(0);
       }
       else {                    // sector 2
-        r = sp.y;
-        phi = 2 - sp.x / sp.y;
+        r = sp(1);
+        phi = 2 - sp(0) / sp(1);
       }
     }
     else {                      // sectors 3 and 4
-      if (sp.x < sp.y) {        // sector 3
-        r = -sp.x;
-        phi = 4 + sp.y / sp.x;
+      if (sp(0) < sp(1)) {        // sector 3
+        r = -sp(0);
+        phi = 4 + sp(1) / sp(0);
       }
       else {                    // sector 4
-        r = -sp.y;
-        if (sp.y != 0.0)	// avoid division by zero at origin
-          phi = 6 - sp.x / sp.y;
+        r = -sp(1);
+        if (sp(1) != 0.0)	// avoid division by zero at origin
+          phi = 6 - sp(0) / sp(1);
         else
           phi  = 0.0;
       }
@@ -153,8 +153,8 @@ void Sampler::map_samples_to_unit_disk() {
 		
     phi *= PI / 4.0;
 				
-    disk_samples[j].x = r * cos(phi);
-    disk_samples[j].y = r * sin(phi);
+    disk_samples[j](0) = r * cos(phi);
+    disk_samples[j](1) = r * sin(phi);
   }
 	
   samples.erase(samples.begin(), samples.end());
@@ -166,9 +166,9 @@ void Sampler::map_samples_to_hemisphere(const float exp) {
   hemisphere_samples.reserve(num_samples * num_sets);
 		
   for (int j = 0; j < size; j++) {
-    float cos_phi = cos(2.0 * PI * samples[j].x);
-    float sin_phi = sin(2.0 * PI * samples[j].x);	
-    float cos_theta = pow((1.0 - samples[j].y), 1.0 / (exp + 1.0));
+    float cos_phi = cos(2.0 * PI * samples[j](0));
+    float sin_phi = sin(2.0 * PI * samples[j](0));	
+    float cos_theta = pow((1.0 - samples[j](1)), 1.0 / (exp + 1.0));
     float sin_theta = sqrt (1.0 - cos_theta * cos_theta);
     float pu = sin_theta * cos_phi;
     float pv = sin_theta * sin_phi;
@@ -186,8 +186,8 @@ void Sampler::map_samples_to_sphere() {
   sphere_samples.reserve(num_samples * num_sets);   
 		
   for (int j = 0; j < num_samples * num_sets; j++) {
-    r1 	= samples[j].x;
-    r2 	= samples[j].y;
+    r1 	= samples[j](0);
+    r2 	= samples[j](1);
     z 	= 1.0 - 2.0 * r1;
     r 	= sqrt(1.0 - z * z);
     phi = TWO_PI * r2;

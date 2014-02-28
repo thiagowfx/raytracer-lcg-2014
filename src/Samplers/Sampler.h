@@ -2,6 +2,7 @@
 #define __SAMPLER__
 
 #include "Constants.h"
+#include "Randomness.h"
 #include <Eigen/Dense>
 #include <algorithm> // for random_shuffle in Sampler::setup_shuffled_indices
 #include <cmath>
@@ -36,7 +37,7 @@ class Sampler {
   Vector3d sample_hemisphere();  // get next sample on unit hemisphere
   Vector3d sample_sphere();      // get next sample on unit sphere
   Vector2d sample_one_set(); // only used to set up a vector noise table -- this is not discussed in the book, but see the file LatticeNoise.cpp in Chapter 31
-		
+  
  protected:
   int              num_samples; // the number of sample points in a set
   int              num_sets;    // the number of sample sets
