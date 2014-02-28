@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <math.h>
+#include "RGBColor.h"
 
 double squareRoot(const double a) {
   double b = sqrt(a);
@@ -20,6 +21,13 @@ TEST(SquareRootTest, PositiveNos) {
 TEST(SquareRootTest, NegativeNos) {
   ASSERT_EQ(-1.0, squareRoot(-15.0));
   ASSERT_EQ(-1.0, squareRoot(-0.2));
+}
+
+TEST(RGBColorTest, operatorPlus) {
+  RGBColor c1(0.1, 0.1, 0.1), c2(0.2, 0.2, 0.2);
+  RGBColor c3 = c1 + c2;
+  
+  EXPECT_EQ(c3, RGBColor(0.3, 0.3, 0.3));
 }
 
 int main(int argc, char **argv) {

@@ -6,5 +6,10 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 ##################################################
 # Executable
-add_executable(runTests hello.cpp)
-target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
+add_executable(runTests hello.cpp ${RAYTRACER_SOURCES})
+target_link_libraries(runTests ${GTEST_LIBRARIES} pthread ${PNG_LIBRARY})
+
+
+##################################################
+# CTest integration
+add_test(runTests runTests)
