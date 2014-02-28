@@ -8,7 +8,6 @@ class RGBColor {
 				
  public:
   RGBColor();
-  RGBColor(float c);
   RGBColor(float _r, float _g, float _b);
   RGBColor(const RGBColor& c);
   ~RGBColor();

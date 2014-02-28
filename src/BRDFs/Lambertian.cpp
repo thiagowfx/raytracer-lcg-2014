@@ -3,7 +3,7 @@
 Lambertian::Lambertian() :
   BRDF(),
   kd(0.0), 
-  cd(0.0)
+  cd(0.0, 0.0, 0.0)
 {}
 
 

@@ -18,7 +18,7 @@ class GeometricObject {
   virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
   Material* get_material() const;
   virtual void set_material(Material* mPtr);
-  void set_color(RGBColor& color);
+  void set_color(const RGBColor& color);
   RGBColor get_color() const;
 	
  protected:
@@ -33,7 +33,7 @@ inline Material* GeometricObject::get_material() const {
   return material_ptr;
 }
 
-inline void GeometricObject::set_color(RGBColor &color) {
+inline void GeometricObject::set_color(const RGBColor& color) {
   this->color = color;
 }
 

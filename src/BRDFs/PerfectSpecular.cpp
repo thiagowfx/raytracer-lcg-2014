@@ -4,7 +4,7 @@
 PerfectSpecular::PerfectSpecular() :
   BRDF(),
   kr(0.0), 
-  cr(1.0)
+  cr(1.0, 1.0, 1.0)
 {}
 
 

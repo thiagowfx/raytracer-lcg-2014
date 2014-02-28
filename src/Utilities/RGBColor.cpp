@@ -2,22 +2,23 @@
 #include <math.h>
 
 RGBColor::RGBColor() :
-  r(0.0), g(0.0), b(0.0) 
+  r(0.0),
+  g(0.0),
+  b(0.0) 
 {}
 
-
-RGBColor::RGBColor(float c) :
-  r(c), g(c), b(c) 							
-{}
-								
 
 RGBColor::RGBColor(float _r, float _g, float _b) :
-  r(_r), g(_g), b(_b)
+  r(_r),
+  g(_g),
+  b(_b)
 {}
 
 
 RGBColor::RGBColor(const RGBColor& c) :
-  r(c.r), g(c.g), b(c.b)
+  r(c.r),
+  g(c.g),
+  b(c.b)
 {} 				 
 		
 

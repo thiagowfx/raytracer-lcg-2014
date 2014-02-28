@@ -14,8 +14,8 @@ int main() {
       return 1;
     }     
    
-    w.render_scene(fp);
-    // w.render_perspective(fp);
+    // w.render_scene(fp);
+    w.camera_ptr->render_scene(w, fp);
     fclose(fp);
   }
 

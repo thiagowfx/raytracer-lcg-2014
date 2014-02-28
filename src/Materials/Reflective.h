@@ -15,8 +15,6 @@ class Reflective: public Phong {
   ~Reflective(); 
   void set_kr(const float k);
   void set_cr(const RGBColor& c);
-  void set_cr(const float r, const float g, const float b);
-  void set_cr(const float c);
   virtual RGBColor shade(ShadeRec& s);
 		
  private:
@@ -34,16 +32,5 @@ inline void Reflective::set_cr(const RGBColor& c) {
   reflective_brdf->set_cr(c);
 	
 }
-
-
-inline void Reflective::set_cr(const float r, const float g, const float b) {
-  reflective_brdf->set_cr(r, g, b);
-}
-
-
-inline void Reflective::set_cr(const float c) {
-  reflective_brdf->set_cr(c);
-}
-
 
 #endif
