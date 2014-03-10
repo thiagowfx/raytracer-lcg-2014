@@ -24,8 +24,7 @@ Lambertian::~Lambertian() {}
 
 Lambertian& Lambertian::operator= (const Lambertian& rhs) {
   if (this != &rhs) {
-    BRDF::operator= (rhs);
-	
+    BRDF::operator= (rhs);	
     kd = rhs.kd; 
     cd = rhs.cd;
   }

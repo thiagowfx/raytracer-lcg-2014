@@ -10,6 +10,16 @@ int rand_int() {
 }
 
 
+int rand_int(int begin, int end) {
+  return begin + ( rand_int() % (end - begin + 1) );
+}
+
+
 float rand_float() {
-  return float(rand()) / float(RAND_MAX) ;
+  return float(rand()) / float(RAND_MAX);
+}
+
+
+float rand_float(float begin, float end) {
+  return begin + ( rand_float() * (end - begin) );
 }

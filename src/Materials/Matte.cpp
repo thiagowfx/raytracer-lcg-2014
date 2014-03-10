@@ -12,22 +12,23 @@ Matte::Matte(const Matte& m) :
 {
   if(m.ambient_brdf)
     ambient_brdf = m.ambient_brdf->clone(); 
-  else  ambient_brdf = NULL;
+  else
+    ambient_brdf = NULL;
   
   if(m.diffuse_brdf)
     diffuse_brdf = m.diffuse_brdf->clone(); 
-  else  diffuse_brdf = NULL;
+  else
+    diffuse_brdf = NULL;
 }
 
 
 Material* Matte::clone(void) const {
-  return (new Matte(*this));
+  return new Matte(*this);
 }	
 
 
 Matte& Matte::operator= (const Matte& rhs) {
-  if (this != &rhs) {
-		
+  if (this != &rhs) {		
     Material::operator=(rhs);
 	
     if (ambient_brdf) {

@@ -21,8 +21,7 @@ Light* Ambient::clone() const {
 
 Ambient& Ambient::operator= (const Ambient& rhs) {
   if (this != &rhs) {
-    Light::operator= (rhs);
-    
+    Light::operator= (rhs);    
     ls 	  = rhs.ls;
     color = rhs.color;
   }

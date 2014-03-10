@@ -1,6 +1,5 @@
 #include "PerfectSpecular.h"
 
-
 PerfectSpecular::PerfectSpecular() :
   BRDF(),
   kr(0.0), 
@@ -17,7 +16,7 @@ PerfectSpecular* PerfectSpecular::clone() const {
 
 
 RGBColor PerfectSpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
-  return black;
+  return RGBColor();
 }
 
 
@@ -42,5 +41,5 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vecto
 
 
 RGBColor PerfectSpecular::rho(const ShadeRec& sr, const Vector3d& wo) const {
-  return black;
+  return RGBColor();
 }

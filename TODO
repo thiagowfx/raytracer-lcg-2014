@@ -1,5 +1,24 @@
 # -*- org -*-
 
-* Sampler. Tirar num_samples do view plane
-* Quando (se) implementar depth, mudar nos tracers.
-* 
+* General
+** TODO Camera Roll Angle
+** Adicionar Sampler. Tirar num_samples do ViewPlane
+** Quando (se) implementar depth, mudar nos tracers.
+** Phong reflective model...specular!
+** Testes?
+** Documentação (externa)?
+** Integração com o projeto do Daniel
+** World and PNG simplifying
+* Classes
+** DONE PerfectSpecular.cpp
+** TODO Reflective.cpp
+** TODO Samplers
+* Chapters
+** DONE 1
+** DONE 2
+** DONE 3
+** DONE 4
+** TODO 5
+** TODO 14 Lights and Materials
+** TODO 15 Specular Reflection
+** TODO 16 Shadows

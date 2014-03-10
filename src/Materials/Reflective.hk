@@ -7,11 +7,10 @@
 class Reflective: public Phong {
   
  public:
-  Reflective();										
-  Reflective(const Reflective& rm);						
-  Reflective& 
-    operator= (const Reflective& rhs);						
-  virtual Reflective* clone() const;				
+  Reflective(); 
+  Reflective(const Reflective& rm); 
+  Reflective& operator= (const Reflective& rhs);
+  virtual Reflective* clone() const; 
   ~Reflective(); 
   void set_kr(const float k);
   void set_cr(const RGBColor& c);

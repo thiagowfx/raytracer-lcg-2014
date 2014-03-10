@@ -8,12 +8,12 @@ using Eigen::Vector2d;
 class Jittered: public Sampler {
   
  public:		
-  Jittered();								
-  Jittered(const int num_samples);					
-  Jittered(const int num_samples, const int m);	
-  Jittered(const Jittered& u);					
-  Jittered& operator= (const Jittered& rhs);				
-  virtual Jittered* clone() const;			
+  Jittered(); 
+  Jittered(const int num_samples); 
+  Jittered(const int num_samples, const int m); 
+  Jittered(const Jittered& u); 
+  Jittered& operator= (const Jittered& rhs); 
+  virtual Jittered* clone() const; 
   virtual ~Jittered();
 		
  private:
