@@ -9,6 +9,7 @@
 #include "MultipleObjects.h"
 #include "Pinhole.h"
 #include "Plane.h"
+#include "Phong.h"
 #include "RayCast.h"
 // #include "Reflective.h"
 #include "Randomness.h"

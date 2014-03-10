@@ -45,7 +45,7 @@ void World::build() {
   /* Camera */
   Pinhole* pinhole_ptr = new Pinhole();
   pinhole_ptr->set_eye(0, 0, 500); 
-  // pinhole_ptr->set_lookat(Vector3d::Zero());
+  pinhole_ptr->set_lookat(Vector3d::Zero());
   pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
   pinhole_ptr->compute_uvw();     
   set_camera(pinhole_ptr);
@@ -56,14 +56,16 @@ void World::build() {
   /* Directional Light */
   Directional* light_ptr1 = new Directional();
   light_ptr1->set_direction(100, 100, 200);
-  light_ptr1->scale_radiance(3.0); 	
+  light_ptr1->scale_radiance(3.0);
+  light_ptr1->set_color(green);
   add_light(light_ptr1);
   //////////////////////////////////////////////////
  
 
   //////////////////////////////////////////////////
   /* Matte material reflection coefficients - common to all materials */	
-  float ka = 0.25;
+  // float ka = 0.25;
+  float ka = 0.40;
   float kd = 0.75;
   
 
