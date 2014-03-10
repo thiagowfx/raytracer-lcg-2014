@@ -13,7 +13,7 @@ class Light {
   
  public:
   Light();
-  Light(const Light& ls);			
+  Light(const Light& ls); 
   Light& operator= (const Light& rhs); 
   virtual Light* clone() const = 0;
   virtual ~Light();

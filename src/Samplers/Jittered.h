@@ -2,8 +2,6 @@
 #define __JITTERED__
 
 #include "Sampler.h"
-#include <Eigen/Dense>
-using Eigen::Vector2d;
 
 class Jittered: public Sampler {
   
