@@ -1,6 +1,6 @@
 #include "Matte.h"
 
-Matte::Matte (void) :
+Matte::Matte () :
   Material(),
   ambient_brdf(new Lambertian),
   diffuse_brdf(new Lambertian)
@@ -22,7 +22,7 @@ Matte::Matte(const Matte& m) :
 }
 
 
-Material* Matte::clone(void) const {
+Material* Matte::clone() const {
   return new Matte(*this);
 }	
 
@@ -53,7 +53,7 @@ Matte& Matte::operator= (const Matte& rhs) {
 }
 
 
-Matte::~Matte(void) {
+Matte::~Matte() {
 
   if (ambient_brdf) {
     delete ambient_brdf;
@@ -68,9 +68,9 @@ Matte::~Matte(void) {
 
 
 RGBColor Matte::shade(ShadeRec& sr) {
-  Vector3d wo 	      = -sr.ray.d;
-  RGBColor L 	      = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-  int 	   num_lights = sr.w.lights.size();
+  Vector3d wo = -sr.ray.d;
+  RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
+  int num_lights = sr.w.lights.size();
 
   for (int j = 0; j < num_lights; j++) {
     Vector3d wi = sr.w.lights[j]->get_direction(sr);    
