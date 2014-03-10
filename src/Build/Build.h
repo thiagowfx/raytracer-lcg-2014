@@ -1,3 +1,4 @@
+#include "Constants.h"
 #include "Directional.h"
 #include "Matte.h"
 #include "MultipleObjects.h"

@@ -45,7 +45,7 @@ void World::render_scene(FILE *fp) const {
   ray.d = Vector3d(0.0, 0.0, -1.0);
   Vector2d pp;
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
-	
+
   for (int r = 0; r < vp.vres; r++) // up
     for (int c = 0; c < vp.hres; c++) { // across
       pp(0) = vp.s * (c - vp.hres / 2.0 + 0.5);
@@ -96,7 +96,7 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
     mapped_color = max_to_one(raw_color);
 	
   if (vp.gamma != 1.0)
-    mapped_color = mapped_color.powc(vp.inv_gamma);
+    mapped_color = mapped_color.powc(1.0 / vp.gamma);
 	
   //have to start from max y coordinate to convert to screen coordinates
   int x = column;

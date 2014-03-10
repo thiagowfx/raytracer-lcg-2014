@@ -41,7 +41,7 @@ class World {
   vector<GeometricObject*> objects;		
   vector<Light*> 	   lights;
 		
-  World();												
+  World();
   ~World();
   void add_object(GeometricObject* object_ptr);
   void add_light(Light* light_ptr); 

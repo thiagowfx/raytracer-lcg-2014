@@ -1,54 +1,67 @@
-/* This builds a scene that consists of 35 shaded spheres and a plane.
-   The objects are illuminated by a directional light and rendered with
-   ambient and diffuse shading.
-   Perspective viewing is used with a pinhole camera.
-   Jittered sampling for antialiasing is hardwired into the PinHole::render_scene function.
-   There are no sampler classes in this project.
-   These are in the Chapter 5 download file.
-   The spheres are the same as those in the Chapter 14 page one image. */
-
 #include "Build.h"
 
-void World::build(void) {
-	
+
+void World::build() {
+
+  //////////////////////////////////////////////////
+  /* World */
+  // vp (ViewPlane)
+  background_color = yellow;
+  // tracer_ptr (Tracer)
+  //////////////////////////////////////////////////
+  
+
+  //////////////////////////////////////////////////
   /* View Plane */
   vp.set_hres(400);
   vp.set_vres(400);
   vp.set_pixel_size(0.5);
-  vp.set_num_samples(1);
+  vp.set_num_samples(5);
   // vp.set_gamma(1.0);
-  // vp.set_gamut_display(false);
-	
-
-  /* Ambient Light */
-  Ambient* ambient_ptr = new Ambient;
-  // ambient_ptr->scale_radiance(1.0);
-  // ambient_ptr->set_color(black);
-  set_ambient_light(ambient_ptr);
+  // vp.set_show_of_gamut(false);
+  //////////////////////////////////////////////////
   
-
-  background_color = black;    // default color - this can be left out
-	
+  
+  //////////////////////////////////////////////////
+  /* Tracer */
+  // You may choose between RayCast, MultipleObjects and the dummy Tracer
+  // tracer_ptr = new Tracer(this);
   tracer_ptr = new RayCast(this);
-  // tracer_ptr = new MultipleObjects(this); 
+  // tracer_ptr = new MultipleObjects(this);
+  //////////////////////////////////////////////////
+
+
+  //////////////////////////////////////////////////
+  /* Ambient Light */
+  Ambient* ambient_ptr = new Ambient();
+  // ambient_ptr->scale_radiance(1.0);
+  // ambient_ptr->set_color(red); // default: white
+  set_ambient_light(ambient_ptr);
+  //////////////////////////////////////////////////
+
 
   
+  //////////////////////////////////////////////////
   /* Camera */
-  Pinhole* pinhole_ptr = new Pinhole;
+  Pinhole* pinhole_ptr = new Pinhole();
   pinhole_ptr->set_eye(0, 0, 500); 
-  pinhole_ptr->set_lookat(Vector3d::Zero());
-  pinhole_ptr->set_view_distance(600.0);
+  // pinhole_ptr->set_lookat(Vector3d::Zero());
+  pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
   pinhole_ptr->compute_uvw();     
   set_camera(pinhole_ptr);
+  //////////////////////////////////////////////////
 
-	
-  /* Light */
-  Directional* light_ptr1 = new Directional;
+
+  //////////////////////////////////////////////////
+  /* Directional Light */
+  Directional* light_ptr1 = new Directional();
   light_ptr1->set_direction(100, 100, 200);
   light_ptr1->scale_radiance(3.0); 	
   add_light(light_ptr1);
-	
+  //////////////////////////////////////////////////
+ 
 
+  //////////////////////////////////////////////////
   /* Matte material reflection coefficients - common to all materials */	
   float ka = 0.25;
   float kd = 0.75;
@@ -60,7 +73,7 @@ void World::build(void) {
   matte_ptr1->set_kd(kd);
   matte_ptr1->set_cd(yellow);				
   Sphere* sphere_ptr1 = new Sphere(Vector3d(5, 3, 0), 30); 
-  sphere_ptr1->set_material(matte_ptr1); // yellow
+  sphere_ptr1->set_material(matte_ptr1); 
   sphere_ptr1->set_color(yellow);
   add_object(sphere_ptr1);
 	
@@ -68,17 +81,16 @@ void World::build(void) {
   matte_ptr2->set_ka(ka);	
   matte_ptr2->set_kd(kd);
   matte_ptr2->set_cd(brown);
-  Sphere*	sphere_ptr2 = new Sphere(Vector3d(45, -7, -60), 20); // 
-  sphere_ptr2->set_material(matte_ptr2);								// brown
+  Sphere*	sphere_ptr2 = new Sphere(Vector3d(45, -7, -60), 20);
+  sphere_ptr2->set_material(matte_ptr2); 
   add_object(sphere_ptr2);
 	
-
   Matte* matte_ptr3 = new Matte;
   matte_ptr3->set_ka(ka);	
   matte_ptr3->set_kd(kd);
   matte_ptr3->set_cd(dark_green);	
   Sphere*	sphere_ptr3 = new Sphere(Vector3d(40, 43, -100), 17); 
-  sphere_ptr3->set_material(matte_ptr3);								// dark green
+  sphere_ptr3->set_material(matte_ptr3); 
   add_object(sphere_ptr3);
 	
   Matte* matte_ptr4 = new Matte;
@@ -86,7 +98,7 @@ void World::build(void) {
   matte_ptr4->set_kd(kd);
   matte_ptr4->set_cd(orange);
   Sphere*	sphere_ptr4 = new Sphere(Vector3d(-20, 28, -15), 20); 
-  sphere_ptr4->set_material(matte_ptr4);								// orange
+  sphere_ptr4->set_material(matte_ptr4); 
   add_object(sphere_ptr4);
 	
   Matte* matte_ptr5 = new Matte;
@@ -94,7 +106,7 @@ void World::build(void) {
   matte_ptr5->set_kd(kd);
   matte_ptr5->set_cd(green);
   Sphere*	sphere_ptr5 = new Sphere(Vector3d(-25, -7, -35), 27); 			
-  sphere_ptr5->set_material(matte_ptr5);								// green
+  sphere_ptr5->set_material(matte_ptr5); 
   add_object(sphere_ptr5);
 	
   Matte* matte_ptr6 = new Matte;
@@ -102,7 +114,7 @@ void World::build(void) {
   matte_ptr6->set_kd(kd);
   matte_ptr6->set_cd(light_green);
   Sphere*	sphere_ptr6 = new Sphere(Vector3d(20, -27, -35), 25); 
-  sphere_ptr6->set_material(matte_ptr6);								// light green
+  sphere_ptr6->set_material(matte_ptr6); 
   add_object(sphere_ptr6);
 	
   Matte* matte_ptr7 = new Matte;
@@ -110,7 +122,7 @@ void World::build(void) {
   matte_ptr7->set_kd(kd);
   matte_ptr7->set_cd(green);
   Sphere*	sphere_ptr7 = new Sphere(Vector3d(35, 18, -35), 22); 
-  sphere_ptr7->set_material(matte_ptr7);   							// green
+  sphere_ptr7->set_material(matte_ptr7); 
   add_object(sphere_ptr7);
 	
   Matte* matte_ptr8 = new Matte;
@@ -118,7 +130,7 @@ void World::build(void) {
   matte_ptr8->set_kd(kd);
   matte_ptr8->set_cd(brown);
   Sphere*	sphere_ptr8 = new Sphere(Vector3d(-57, -17, -50), 15);  
-  sphere_ptr8->set_material(matte_ptr8);								// brown
+  sphere_ptr8->set_material(matte_ptr8); 
   add_object(sphere_ptr8);
 	
   Matte* matte_ptr9 = new Matte;
@@ -126,7 +138,7 @@ void World::build(void) {
   matte_ptr9->set_kd(kd);
   matte_ptr9->set_cd(light_green);
   Sphere*	sphere_ptr9 = new Sphere(Vector3d(-47, 16, -80), 23); 
-  sphere_ptr9->set_material(matte_ptr9);								// light green
+  sphere_ptr9->set_material(matte_ptr9); 
   add_object(sphere_ptr9);
 		
   Matte* matte_ptr10 = new Matte;
@@ -134,7 +146,7 @@ void World::build(void) {
   matte_ptr10->set_kd(kd);
   matte_ptr10->set_cd(dark_green);	
   Sphere*	sphere_ptr10 = new Sphere(Vector3d(-15, -32, -60), 22); 
-  sphere_ptr10->set_material(matte_ptr10);     						// dark green
+  sphere_ptr10->set_material(matte_ptr10); 
   add_object(sphere_ptr10);
 	
   Matte* matte_ptr11 = new Matte;
@@ -142,7 +154,7 @@ void World::build(void) {
   matte_ptr11->set_kd(kd);
   matte_ptr11->set_cd(dark_yellow);
   Sphere*	sphere_ptr11 = new Sphere(Vector3d(-35, -37, -80), 22); 
-  sphere_ptr11->set_material(matte_ptr11);							// dark yellow
+  sphere_ptr11->set_material(matte_ptr11); 
   add_object(sphere_ptr11);
 	
   Matte* matte_ptr12 = new Matte;
@@ -150,7 +162,7 @@ void World::build(void) {
   matte_ptr12->set_kd(kd);
   matte_ptr12->set_cd(dark_yellow);
   Sphere*	sphere_ptr12 = new Sphere(Vector3d(10, 43, -80), 22); 
-  sphere_ptr12->set_material(matte_ptr12);							// dark yellow
+  sphere_ptr12->set_material(matte_ptr12); 
   add_object(sphere_ptr12);
 	
   Matte* matte_ptr13 = new Matte;
@@ -159,14 +171,14 @@ void World::build(void) {
   matte_ptr13->set_cd(dark_yellow);		
   Sphere*	sphere_ptr13 = new Sphere(Vector3d(30, -7, -80), 10); 
   sphere_ptr13->set_material(matte_ptr13);
-  add_object(sphere_ptr13);											// dark yellow (hidden)
+  add_object(sphere_ptr13); 
 	
   Matte* matte_ptr14 = new Matte;
   matte_ptr14->set_ka(ka);	
   matte_ptr14->set_kd(kd);
   matte_ptr14->set_cd(dark_green);	
   Sphere*	sphere_ptr14 = new Sphere(Vector3d(-40, 48, -110), 18); 
-  sphere_ptr14->set_material(matte_ptr14); 							// dark green
+  sphere_ptr14->set_material(matte_ptr14); 
   add_object(sphere_ptr14);
 	
   Matte* matte_ptr15 = new Matte;
@@ -174,7 +186,7 @@ void World::build(void) {
   matte_ptr15->set_kd(kd);
   matte_ptr15->set_cd(brown);	
   Sphere*	sphere_ptr15 = new Sphere(Vector3d(-10, 53, -120), 18); 
-  sphere_ptr15->set_material(matte_ptr15); 							// brown
+  sphere_ptr15->set_material(matte_ptr15); 
   add_object(sphere_ptr15);
 	
   Matte* matte_ptr16 = new Matte;
@@ -182,7 +194,7 @@ void World::build(void) {
   matte_ptr16->set_kd(kd);
   matte_ptr16->set_cd(light_purple);
   Sphere*	sphere_ptr16 = new Sphere(Vector3d(-55, -52, -100), 10); 
-  sphere_ptr16->set_material(matte_ptr16);							// light purple
+  sphere_ptr16->set_material(matte_ptr16); 
   add_object(sphere_ptr16);
 	
   Matte* matte_ptr17 = new Matte;
@@ -190,7 +202,7 @@ void World::build(void) {
   matte_ptr17->set_kd(kd);
   matte_ptr17->set_cd(brown);
   Sphere*	sphere_ptr17 = new Sphere(Vector3d(5, -52, -100), 15); 		
-  sphere_ptr17->set_material(matte_ptr17);							// browm
+  sphere_ptr17->set_material(matte_ptr17); 
   add_object(sphere_ptr17);
 	
   Matte* matte_ptr18 = new Matte;
@@ -198,7 +210,7 @@ void World::build(void) {
   matte_ptr18->set_kd(kd);
   matte_ptr18->set_cd(dark_purple);
   Sphere*	sphere_ptr18 = new Sphere(Vector3d(-20, -57, -120), 15); 
-  sphere_ptr18->set_material(matte_ptr18);							// dark purple
+  sphere_ptr18->set_material(matte_ptr18); 
   add_object(sphere_ptr18);
 	
   Matte* matte_ptr19 = new Matte;
@@ -206,7 +218,7 @@ void World::build(void) {
   matte_ptr19->set_kd(kd);
   matte_ptr19->set_cd(dark_green);
   Sphere*	sphere_ptr19 = new Sphere(Vector3d(55, -27, -100), 17); 
-  sphere_ptr19->set_material(matte_ptr19);							// dark green
+  sphere_ptr19->set_material(matte_ptr19); 
   add_object(sphere_ptr19);
 
   Matte* matte_ptr20 = new Matte;
@@ -214,7 +226,7 @@ void World::build(void) {
   matte_ptr20->set_kd(kd);
   matte_ptr20->set_cd(brown);
   Sphere*	sphere_ptr20 = new Sphere(Vector3d(50, -47, -120), 15); 
-  sphere_ptr20->set_material(matte_ptr20);							// browm
+  sphere_ptr20->set_material(matte_ptr20); 
   add_object(sphere_ptr20);
 	 
   Matte* matte_ptr21 = new Matte;
@@ -222,7 +234,7 @@ void World::build(void) {
   matte_ptr21->set_kd(kd);
   matte_ptr21->set_cd(light_purple); 	
   Sphere*	sphere_ptr21 = new Sphere(Vector3d(70, -42, -150), 10); 
-  sphere_ptr21->set_material(matte_ptr21);							// light purple
+  sphere_ptr21->set_material(matte_ptr21); 
   add_object(sphere_ptr21);
 	
   Matte* matte_ptr22 = new Matte;
@@ -230,7 +242,7 @@ void World::build(void) {
   matte_ptr22->set_kd(kd);
   matte_ptr22->set_cd(light_purple);
   Sphere*	sphere_ptr22 = new Sphere(Vector3d(5, 73, -130), 12); 
-  sphere_ptr22->set_material(matte_ptr22);							// light purple
+  sphere_ptr22->set_material(matte_ptr22); 
   add_object(sphere_ptr22);
 	
   Matte* matte_ptr23 = new Matte;
@@ -238,7 +250,7 @@ void World::build(void) {
   matte_ptr23->set_kd(kd);
   matte_ptr23->set_cd(dark_purple);
   Sphere*	sphere_ptr23 = new Sphere(Vector3d(66, 21, -130), 13); 			
-  sphere_ptr23->set_material(matte_ptr23);							// dark purple
+  sphere_ptr23->set_material(matte_ptr23); 
   add_object(sphere_ptr23);	
 	
   Matte* matte_ptr24 = new Matte;
@@ -246,7 +258,7 @@ void World::build(void) {
   matte_ptr24->set_kd(kd);
   matte_ptr24->set_cd(light_purple);  
   Sphere*	sphere_ptr24 = new Sphere(Vector3d(72, -12, -140), 12); 
-  sphere_ptr24->set_material(matte_ptr24);							// light purple
+  sphere_ptr24->set_material(matte_ptr24); 
   add_object(sphere_ptr24);
 	
   Matte* matte_ptr25 = new Matte;
@@ -254,7 +266,7 @@ void World::build(void) {
   matte_ptr25->set_kd(kd);
   matte_ptr25->set_cd(green);
   Sphere*	sphere_ptr25 = new Sphere(Vector3d(64, 5, -160), 11); 			
-  sphere_ptr25->set_material(matte_ptr25);					 		// green
+  sphere_ptr25->set_material(matte_ptr25); 
   add_object(sphere_ptr25);
 	  
   Matte* matte_ptr26 = new Matte;
@@ -262,7 +274,7 @@ void World::build(void) {
   matte_ptr26->set_kd(kd);
   matte_ptr26->set_cd(light_purple);
   Sphere*	sphere_ptr26 = new Sphere(Vector3d(55, 38, -160), 12); 		
-  sphere_ptr26->set_material(matte_ptr26);							// light purple
+  sphere_ptr26->set_material(matte_ptr26); 
   add_object(sphere_ptr26);
 	
   Matte* matte_ptr27 = new Matte;
@@ -270,7 +282,7 @@ void World::build(void) {
   matte_ptr27->set_kd(kd);
   matte_ptr27->set_cd(light_purple);
   Sphere*	sphere_ptr27 = new Sphere(Vector3d(-73, -2, -160), 12); 		
-  sphere_ptr27->set_material(matte_ptr27);							// light purple
+  sphere_ptr27->set_material(matte_ptr27); 
   add_object(sphere_ptr27);
 	 
   Matte* matte_ptr28 = new Matte;
@@ -278,7 +290,7 @@ void World::build(void) {
   matte_ptr28->set_kd(kd);
   matte_ptr28->set_cd(dark_purple);
   Sphere*	sphere_ptr28 = new Sphere(Vector3d(30, -62, -140), 15); 
-  sphere_ptr28->set_material(matte_ptr28); 							// dark purple
+  sphere_ptr28->set_material(matte_ptr28); 
   add_object(sphere_ptr28);
 	
   Matte* matte_ptr29 = new Matte;
@@ -286,7 +298,7 @@ void World::build(void) {
   matte_ptr29->set_kd(kd);
   matte_ptr29->set_cd(dark_purple);
   Sphere*	sphere_ptr29 = new Sphere(Vector3d(25, 63, -140), 15); 
-  sphere_ptr29->set_material(matte_ptr29);							// dark purple
+  sphere_ptr29->set_material(matte_ptr29); 
   add_object(sphere_ptr29);
 	
   Matte* matte_ptr30 = new Matte;
@@ -294,7 +306,7 @@ void World::build(void) {
   matte_ptr30->set_kd(kd);
   matte_ptr30->set_cd(dark_purple);
   Sphere*	sphere_ptr30 = new Sphere(Vector3d(-60, 46, -140), 15);  
-  sphere_ptr30->set_material(matte_ptr30); 							// dark purple
+  sphere_ptr30->set_material(matte_ptr30); 
   add_object(sphere_ptr30);
 	
   Matte* matte_ptr31 = new Matte;
@@ -302,7 +314,7 @@ void World::build(void) {
   matte_ptr31->set_kd(kd);
   matte_ptr31->set_cd(light_purple);
   Sphere*	sphere_ptr31 = new Sphere(Vector3d(-30, 68, -130), 12); 
-  sphere_ptr31->set_material(matte_ptr31); 							// light purple
+  sphere_ptr31->set_material(matte_ptr31); 
   add_object(sphere_ptr31);
 	
   Matte* matte_ptr32 = new Matte;
@@ -310,7 +322,7 @@ void World::build(void) {
   matte_ptr32->set_kd(kd);
   matte_ptr32->set_cd(green);
   Sphere*	sphere_ptr32 = new Sphere(Vector3d(58, 56, -180), 11);   
-  sphere_ptr32->set_material(matte_ptr32);							//  green
+  sphere_ptr32->set_material(matte_ptr32); 
   add_object(sphere_ptr32);
 	
   Matte* matte_ptr33 = new Matte;
@@ -318,7 +330,7 @@ void World::build(void) {
   matte_ptr33->set_kd(kd);
   matte_ptr33->set_cd(green);
   Sphere*	sphere_ptr33 = new Sphere(Vector3d(-63, -39, -180), 11); 
-  sphere_ptr33->set_material(matte_ptr33);							// green 
+  sphere_ptr33->set_material(matte_ptr33); 
   add_object(sphere_ptr33);
 	
   Matte* matte_ptr34 = new Matte;
@@ -326,7 +338,7 @@ void World::build(void) {
   matte_ptr34->set_kd(kd);
   matte_ptr34->set_cd(light_purple);
   Sphere*	sphere_ptr34 = new Sphere(Vector3d(46, 68, -200), 10); 	
-  sphere_ptr34->set_material(matte_ptr34);							// light purple
+  sphere_ptr34->set_material(matte_ptr34); 
   add_object(sphere_ptr34);
 	
   Matte* matte_ptr35 = new Matte;
@@ -334,17 +346,18 @@ void World::build(void) {
   matte_ptr35->set_kd(kd);
   matte_ptr35->set_cd(light_purple);
   Sphere*	sphere_ptr35 = new Sphere(Vector3d(-3, -72, -130), 12); 
-  sphere_ptr35->set_material(matte_ptr35);							// light purple
+  sphere_ptr35->set_material(matte_ptr35); 
   add_object(sphere_ptr35);
-	
 	
   /* Vertical plane */
   Matte* matte_ptr36 = new Matte;
   matte_ptr36->set_ka(ka);	
   matte_ptr36->set_kd(kd);
   matte_ptr36->set_cd(grey);
+  
   Plane* plane_ptr = new Plane(Vector3d(0, 0, -150), Vector3d(0, 0, 1));
   plane_ptr->set_material(matte_ptr36);
+  plane_ptr->set_color(blue);
   add_object (plane_ptr);
 }
 

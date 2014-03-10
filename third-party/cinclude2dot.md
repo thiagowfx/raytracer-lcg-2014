@@ -1,7 +1,9 @@
+Use this script to find include circular dependencies on a C/C++ project.
+
 ## References (HOWTO)
 - https://stackoverflow.com/questions/9885656/how-can-i-find-circular-dependencies
 - http://www.flourish.org/cinclude2dot/
-- You can use either neato or dot.
+- You can use either `neato` or `dot`.
 
 ## Command Line (from the root src folder...)
 ./cinclude2dot | neato -Tsvg > a.svg

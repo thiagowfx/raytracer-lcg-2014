@@ -17,10 +17,10 @@ Tracer::~Tracer() {
 
 
 RGBColor Tracer::trace_ray(const Ray& ray) const {
-  return black;
+  return RGBColor();
 }
 
 
 RGBColor Tracer::trace_ray(const Ray ray, const int depth) const {
-  return black;
+  return RGBColor();
 }

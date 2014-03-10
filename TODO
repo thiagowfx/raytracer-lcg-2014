@@ -1,0 +1,5 @@
+# -*- org -*-
+
+* Sampler. Tirar num_samples do view plane
+* Quando (se) implementar depth, mudar nos tracers.
+* 

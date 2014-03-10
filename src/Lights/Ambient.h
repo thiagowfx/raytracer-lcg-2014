@@ -18,7 +18,7 @@ class Ambient: public Light {
 	
  private:
   float	   ls;
-  RGBColor color;
+  RGBColor color;               // light color
   
 };
 
