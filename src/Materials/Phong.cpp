@@ -33,7 +33,7 @@ RGBColor Phong::shade (ShadeRec& sr) {
       // }
       //if (in_shadow) OutputDebugString ("Hit\n");
       // if (!in_shadow)
-      L+= (diffuse_brdf->f (sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[i]->L(sr) * ndotwi;
+      L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[i]->L(sr) * ndotwi;
     }
   }
   

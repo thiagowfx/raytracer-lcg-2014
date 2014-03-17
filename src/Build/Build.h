@@ -11,7 +11,7 @@
 #include "Plane.h"
 #include "Phong.h"
 #include "RayCast.h"
-// #include "Reflective.h"
+#include "Reflective.h"
 #include "Randomness.h"
 #include "RGBColor.h"
 #include "Ray.h"

@@ -1,24 +1,30 @@
 # -*- org -*-
 
+* Top-level
+** continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
+** ver o que falta colocar do livro (tweaks?)
+** incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori
+** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
+** implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
 * General
-** TODO Camera Roll Angle
-** Adicionar Sampler. Tirar num_samples do ViewPlane
+** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature
 ** Quando (se) implementar depth, mudar nos tracers.
-** Phong reflective model...specular!
-** Testes?
+** DONE Phong reflective model...básico
+** TODO Phong reflective model...specular!
+** DONE Testes -- não são realmente necessários a priori, mas já temos suporte inicial, se for necessário
 ** Documentação (externa)?
-** Integração com o projeto do Daniel
-** World and PNG simplifying
+** TODO Integração com o projeto do Daniel -- esperando o Daniel terminar a parte dele
+** World and PNG simplifying -- ?? realmente necessário ??
 * Classes
 ** DONE PerfectSpecular.cpp
-** TODO Reflective.cpp
-** TODO Samplers
+** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
+** TODO Samplers -- realmente necessário? ao menos, retirar de onde não for preciso
 * Chapters
 ** DONE 1
 ** DONE 2
 ** DONE 3
 ** DONE 4
-** TODO 5
+** TODO 5 terminar samplers?
 ** TODO 14 Lights and Materials
 ** TODO 15 Specular Reflection
 ** TODO 16 Shadows

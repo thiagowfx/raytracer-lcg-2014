@@ -42,7 +42,7 @@ add_subdirectory(src)
 
 
 ##################################################
-# Tests - use cmake .. -DTEST=ON to enable tests.
+# Tests - use `cmake .. -DTEST=ON` to enable tests.
 if(TEST)
   enable_testing()
   add_subdirectory(tests)
