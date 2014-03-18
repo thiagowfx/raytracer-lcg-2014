@@ -2,12 +2,7 @@
 #define __PINHOLE__
 
 #include "Camera.h"
-#include "Constants.h"
-#include "World.h"    // we can #include "World.h" here
-#include <Eigen/Dense>
-#include <cmath>
-using Eigen::Vector2d;
-using Eigen::Vector3d;
+#include "World.h"
 
 class Pinhole: public Camera {
   

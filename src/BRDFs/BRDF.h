@@ -1,11 +1,9 @@
 #ifndef __BRDF__
 #define __BRDF__
 
-#include "Constants.h"
 #include "RGBColor.h"
 #include "ShadeRec.h"
 #include <Eigen/Dense>
-#include <math.h>
 using Eigen::Vector3d;
 
 class BRDF {

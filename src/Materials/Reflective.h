@@ -3,8 +3,6 @@
 
 #include "Phong.h"
 #include "PerfectSpecular.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class Reflective: public Phong {
   

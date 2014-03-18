@@ -4,8 +4,6 @@
 #include "Material.h"
 #include "Lambertian.h"
 #include "World.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class Matte: public Material {
   
@@ -21,8 +19,8 @@ class Matte: public Material {
   virtual RGBColor shade(ShadeRec& sr);
 		
  private:
-  Lambertian*		ambient_brdf;
-  Lambertian*		diffuse_brdf;
+  Lambertian* ambient_brdf;
+  Lambertian* diffuse_brdf;
   
 };
 

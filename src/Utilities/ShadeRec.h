@@ -1,7 +1,6 @@
 #ifndef __SHADE_REC__
 #define __SHADE_REC__
 
-#include "Constants.h"
 #include "Ray.h"
 #include "RGBColor.h"
 #include <Eigen/Dense>

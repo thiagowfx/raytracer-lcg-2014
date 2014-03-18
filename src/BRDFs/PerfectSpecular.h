@@ -3,8 +3,6 @@
 
 /* this implements perfect specular reflection for indirect illumination with reflective materials */
 #include "BRDF.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class PerfectSpecular: public BRDF {
   

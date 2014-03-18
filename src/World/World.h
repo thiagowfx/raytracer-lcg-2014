@@ -13,22 +13,19 @@
 #include "Ambient.h"
 #include "Camera.h"
 #include "Constants.h"
-#include "Directional.h"
+#include "GeometricObject.h"
 #include "Light.h"
-#include "MultipleObjects.h"
-#include "Pinhole.h"
 #include "RGBColor.h"
 #include "Ray.h"
-#include "RayCast.h"
 #include "ShadeRec.h"
+#include "Tracer.h"
 #include "ViewPlane.h"
 #include <cstdio>
 #include <cstring>              // for png++ streerror
 #include <png++/png.hpp>
+#include <exception>
 #include <vector>
-#include "GeometricObject.h"
 using namespace std;
-// class GeometricObject;
 
 class World {
  

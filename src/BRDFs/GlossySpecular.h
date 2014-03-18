@@ -4,9 +4,6 @@
 /* This implements glossy specular reflection for direct and indirect illumination */
 #include "BRDF.h"
 #include "MultiJittered.h"
-#include "Sampler.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class GlossySpecular: public BRDF {
   

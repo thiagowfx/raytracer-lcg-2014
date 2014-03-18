@@ -4,6 +4,8 @@
 // #include "World.h" // required for the shade function in all derived classes
 #include "RGBColor.h"
 #include "ShadeRec.h"
+#include <Eigen/Dense>
+using Eigen::Vector3d;
 
 class Material {
   

@@ -5,8 +5,6 @@
 #include "RGBColor.h"
 #include "World.h"          // you will need this later on for shadows
 #include "ShadeRec.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class Directional: public Light {
   

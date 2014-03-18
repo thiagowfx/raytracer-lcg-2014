@@ -3,7 +3,7 @@
 Plane::Plane() :
   GeometricObject(),
   point(Vector3d::Zero()),
-  normal(0, 1, 0)						
+  normal(0.0, 1.0, 0.0)						
 {}
 
 

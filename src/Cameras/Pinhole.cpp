@@ -56,7 +56,7 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
 		
   for (int r = 0; r < vp.vres; r++) // up
     for (int c = 0; c < vp.hres; c++) { // across 					
-      L = black; 
+      L = RGBColor(0.0, 0.0, 0.0); 
 			
       for (int p = 0; p < n; p++)     // up pixel
         for (int q = 0; q < n; q++) { // across pixel

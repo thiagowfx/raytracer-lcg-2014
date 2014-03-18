@@ -1,7 +1,6 @@
 #ifndef __SPHERE__
 #define __SPHERE__
 
-#include "Constants.h"
 #include "GeometricObject.h"
 
 class Sphere: public GeometricObject {	

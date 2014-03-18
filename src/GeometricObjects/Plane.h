@@ -1,7 +1,6 @@
 #ifndef __PLANE__
 #define __PLANE__
 
-#include "Constants.h"
 #include "GeometricObject.h"
 
 class Plane : public GeometricObject {

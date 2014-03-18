@@ -1,9 +1,7 @@
 #ifndef __LIGHT__
 #define __LIGHT__
 
-#include "Constants.h"
 #include "RGBColor.h"
-#include "Ray.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 

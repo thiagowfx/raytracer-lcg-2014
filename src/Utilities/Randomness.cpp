@@ -10,7 +10,7 @@ int rand_int() {
 }
 
 
-int rand_int(int begin, int end) {
+int rand_int(const int begin, const int end) {
   return begin + ( rand_int() % (end - begin + 1) );
 }
 
@@ -20,6 +20,6 @@ float rand_float() {
 }
 
 
-float rand_float(float begin, float end) {
+float rand_float(const float begin, const float end) {
   return begin + ( rand_float() * (end - begin) );
 }

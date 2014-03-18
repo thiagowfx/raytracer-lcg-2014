@@ -2,13 +2,8 @@
 #define __THINLENS__
 
 #include "Camera.h"
-#include "Constants.h"
 #include "Sampler.h"
 #include "World.h"
-#include <Eigen/Dense>
-#include <cmath>
-using Eigen::Vector2d;
-using Eigen::Vector3d;
 
 class ThinLens : public Camera {
 

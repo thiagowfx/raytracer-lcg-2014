@@ -6,6 +6,9 @@
 ** incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori
 ** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
 ** implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
+** TODO incluir vp.num_samples em cima do World render_scene;
+** TODO implementar render_perspective no World (pegar código do livro)
+** TODO melhor interface de build
 * General
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature
 ** Quando (se) implementar depth, mudar nos tracers.

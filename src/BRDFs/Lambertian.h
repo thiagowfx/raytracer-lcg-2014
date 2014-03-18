@@ -3,8 +3,6 @@
 
 #include "BRDF.h"
 #include "Constants.h"
-#include <Eigen/Dense>
-using Eigen::Vector3d;
 
 class Lambertian: public BRDF {
   

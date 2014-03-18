@@ -2,7 +2,7 @@
 
 GeometricObject::GeometricObject() :
   material_ptr(NULL),
-  color(black)
+  color()
 {}
 
 

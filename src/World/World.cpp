@@ -6,7 +6,7 @@
    and set its parameters */
 
 World::World(void) :
-  background_color(black),
+  background_color(),
   tracer_ptr(NULL),
   ambient_ptr(new Ambient),
   camera_ptr(NULL)
@@ -166,8 +166,9 @@ void World::file_to_png(FILE *fp, const char *imageFile) {
   unsigned width, height, r, g, b, x, y;
 
   /* Read size parameters */
-  fscanf(fp, "%d %d\n", &width, &height); // == 2
-  
+  if ( fscanf(fp, "%d %d\n", &width, &height) != 2 )
+    throw std::exception(); // "ERROR: input file couldn't be correctly parsed"
+      
   /* Render the image */
   png::image< png::rgb_pixel > image(width, height);
   while ( fscanf(fp, "%u %u %u %u %u\n", &x, &y, &r, &g, &b) == 5 ) {

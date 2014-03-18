@@ -3,6 +3,7 @@
 
 /* There is no view plane distance because the fisheye and panoramic cameras don't use it */
 #include <Eigen/Dense>
+using Eigen::Vector2d;
 using Eigen::Vector3d;
 class World;  // can't #include "World" here because it contains a camera pointer
 

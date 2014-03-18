@@ -5,7 +5,6 @@
 #ifndef __TRACER__
 #define __TRACER__
 
-#include "Constants.h"
 #include "RGBColor.h"
 #include "Ray.h"
 
