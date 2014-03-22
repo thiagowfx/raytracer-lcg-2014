@@ -15,6 +15,7 @@
 #include "Randomness.h"
 #include "RGBColor.h"
 #include "Ray.h"
+#include "RayCast.h"
 #include "Tracer.h"
 #include "ShadeRec.h"
 #include "Sphere.h"
