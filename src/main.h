@@ -1,3 +1,6 @@
+#ifndef __MAIN__
+#define __MAIN__
+
 #include "Ambient.h"
 #include "Camera.h"
 #include "Constants.h"
@@ -23,3 +26,6 @@
 #include "World.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
+
+
+#endif
