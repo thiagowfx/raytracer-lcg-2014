@@ -13,7 +13,6 @@ class Sphere: public GeometricObject {
   virtual Sphere* clone() const;
   Sphere& operator= (const Sphere& sphere);				
   void set_center(const Vector3d& c);
-  void set_center(const double x, const double y, const double z);
   void set_radius(const double r);
   virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const;	
 		
@@ -29,12 +28,6 @@ inline void Sphere::set_center(const Vector3d& c) {
 }
 
 
-inline void Sphere::set_center(const double x, const double y, const double z) {
-  center(0) = x;
-  center(1) = y;
-  center(2) = z;
-}
-		
 inline void Sphere::set_radius(const double r) {
   radius = r;
 }
