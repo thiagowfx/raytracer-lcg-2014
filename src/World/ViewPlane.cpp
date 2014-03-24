@@ -7,7 +7,9 @@ ViewPlane::ViewPlane() :
   gamma(1.0),
   show_out_of_gamut(false),
   sampler_ptr(NULL)
-{}
+{
+  set_samples(1);
+}
 
 
 ViewPlane::ViewPlane(const ViewPlane& vp) :
