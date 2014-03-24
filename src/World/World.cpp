@@ -48,8 +48,8 @@ void World::render_scene(FILE *fp) const {
 
   for (int r = 0; r < vp.vres; r++) // up
     for (int c = 0; c < vp.hres; c++) { // across
-      pp(0) = vp.s * (c - vp.hres / 2.0 + 0.5);
-      pp(1) = vp.s * (r - vp.vres / 2.0 + 0.5);
+      pp(0) = vp.px_size * (c - vp.hres / 2.0 + 0.5);
+      pp(1) = vp.px_size * (r - vp.vres / 2.0 + 0.5);
       ray.o = Vector3d( pp(0), pp(1), zw);
       pixel_color = tracer_ptr->trace_ray(ray);
       display_pixel(r, c, pixel_color, fp);

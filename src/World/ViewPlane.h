@@ -4,10 +4,10 @@
 class ViewPlane {
   
  public:
-  int    hres;   		// horizontal image resolution 
-  int    vres;   		// vertical image resolution
-  double s;			// pixel size --> decrease to zoom into the image
-  double gamma;			// gamma correction factor
+  int    hres;       // horizontal image resolution 
+  int    vres;       // vertical image resolution
+  double px_size;    // pixel size --> decrease to zoom into the image
+  double gamma;      // gamma correction factor
   bool   show_out_of_gamut;	// display red if RGBColor out of gamut
   int    num_samples;		// number of samples of the antialiasing
 									
@@ -36,7 +36,7 @@ inline void ViewPlane::set_vres(const int v_res) {
 
 
 inline void ViewPlane::set_pixel_size(const float size) {
-  s = size;
+  px_size = size;
 }
 
 

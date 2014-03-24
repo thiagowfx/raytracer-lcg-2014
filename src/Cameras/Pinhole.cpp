@@ -49,7 +49,7 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
   Vector2d  pp;                 // sample point on a pixel
   int       n     = (int)sqrt((float)vp.num_samples); // 
 		
-  vp.s /= zoom;
+  vp.px_size /= zoom;
   ray.o = eye;
 
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
@@ -60,8 +60,8 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
 			
       for (int p = 0; p < n; p++)     // up pixel
         for (int q = 0; q < n; q++) { // across pixel
-          pp(0) = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n); 
-          pp(1) = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
+          pp(0) = vp.px_size * (c - 0.5 * vp.hres + (q + 0.5) / n); 
+          pp(1) = vp.px_size * (r - 0.5 * vp.vres + (p + 0.5) / n);
           ray.d = get_direction(pp);
           L += w.tracer_ptr->trace_ray(ray, depth);
         }	
