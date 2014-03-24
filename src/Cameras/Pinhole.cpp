@@ -47,7 +47,7 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
   Ray	    ray;
   int 	    depth = 0;  
   Vector2d  pp;                 // sample point on a pixel
-  int       n     = (int)sqrt((float)vp.num_samples);
+  int       n     = (int)sqrt((float)vp.num_samples); // 
 		
   vp.s /= zoom;
   ray.o = eye;

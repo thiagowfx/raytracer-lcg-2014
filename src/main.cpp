@@ -87,7 +87,7 @@ void World::build() {
   //////////////////////////////////////////////////
   /* Camera */
   Pinhole* pinhole_ptr = new Pinhole();
-  pinhole_ptr->set_eye(0, 0, 500); 
+  pinhole_ptr->set_eye(Vector3d(0, 0, 500)); 
   pinhole_ptr->set_lookat(Vector3d::Zero());
   pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
   pinhole_ptr->compute_uvw();     
