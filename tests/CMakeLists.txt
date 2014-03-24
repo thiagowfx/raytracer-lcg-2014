@@ -12,5 +12,5 @@ target_link_libraries(runTests ${GTEST_LIBRARIES} pthread ${PNG_LIBRARY})
 
 
 ##################################################
-# CTest integration (optional, to run it with `ctest`
+# CTest integration (optional, to run it with `ctest`)
 add_test(runTests runTests)

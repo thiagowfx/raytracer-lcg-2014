@@ -45,29 +45,31 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
   RGBColor  L;
   ViewPlane vp(w.vp);
   Ray	    ray;
-  int 	    depth = 0;  
+  int 	    depth = 0;
+  Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel
-  int       n     = (int)sqrt((float)vp.num_samples); // 
+  const int n = vp.sampler_ptr->get_num_samples();
 		
   vp.px_size /= zoom;
   ray.o = eye;
 
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
 		
-  for (int r = 0; r < vp.vres; r++) // up
+  for (int r = 0; r < vp.vres; r++) { // up
     for (int c = 0; c < vp.hres; c++) { // across 					
-      L = RGBColor(0.0, 0.0, 0.0); 
+      L = RGBColor(0.0, 0.0, 0.0);
+
+      for (int j = 0; j < n; ++j) {
+        sp = vp.sampler_ptr->sample_unit_square();
+        pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
+        pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
+        ray.d = get_direction(pp);
+        L += w.tracer_ptr->trace_ray(ray, depth);
+      }
 			
-      for (int p = 0; p < n; p++)     // up pixel
-        for (int q = 0; q < n; q++) { // across pixel
-          pp(0) = vp.px_size * (c - 0.5 * vp.hres + (q + 0.5) / n); 
-          pp(1) = vp.px_size * (r - 0.5 * vp.vres + (p + 0.5) / n);
-          ray.d = get_direction(pp);
-          L += w.tracer_ptr->trace_ray(ray, depth);
-        }	
-											
-      L /= vp.num_samples;
+      L /= n;
       L *= exposure_time;
       w.display_pixel(r, c, L, fp);
-    } 
+    }
+  }
 }

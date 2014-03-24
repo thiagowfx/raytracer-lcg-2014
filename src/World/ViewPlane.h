@@ -1,6 +1,9 @@
 #ifndef __VIEW_PLANE__
 #define __VIEW_PLANE__
 
+#include "MultiJittered.h"
+#include "Regular.h"
+
 class ViewPlane {
   
  public:
@@ -9,7 +12,7 @@ class ViewPlane {
   double px_size;    // pixel size --> decrease to zoom into the image
   double gamma;      // gamma correction factor
   bool   show_out_of_gamut;	// display red if RGBColor out of gamut
-  int    num_samples;		// number of samples of the antialiasing
+  Sampler* sampler_ptr;
 									
   ViewPlane(); 
   ~ViewPlane(); 
@@ -21,7 +24,8 @@ class ViewPlane {
   void set_pixel_size(const float size);		
   void set_gamma(const float g);		
   void set_show_of_gamut(const bool show);
-  void set_num_samples(const int num_samples);
+  void set_sampler(Sampler* sp);
+  void set_samples(const int n);
 };
 
 
@@ -50,8 +54,25 @@ inline void ViewPlane::set_show_of_gamut(const bool show) {
 }
 
 
-inline void ViewPlane::set_num_samples(const int num_samples) {
-  this->num_samples = num_samples;
+inline void ViewPlane::set_sampler(Sampler* sp) {
+  if (this->sampler_ptr) {
+    delete this->sampler_ptr;
+    this->sampler_ptr = NULL;
+  }
+
+  this->sampler_ptr = sp;
+}
+
+inline void ViewPlane::set_samples(const int n) {
+  if (sampler_ptr) {
+    delete sampler_ptr;
+    sampler_ptr = NULL;
+  }
+
+  if (n > 1)
+    sampler_ptr = new MultiJittered(n);
+  else
+    sampler_ptr = new Regular(1);
 }
 
 

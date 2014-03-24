@@ -6,7 +6,7 @@ ViewPlane::ViewPlane() :
   px_size(1.0),
   gamma(1.0),
   show_out_of_gamut(false),
-  num_samples(1)
+  sampler_ptr(NULL)
 {}
 
 
@@ -15,9 +15,13 @@ ViewPlane::ViewPlane(const ViewPlane& vp) :
   vres(vp.vres), 
   px_size(vp.px_size),
   gamma(vp.gamma),
-  show_out_of_gamut(vp.show_out_of_gamut),
-  num_samples(vp.num_samples)
-{}
+  show_out_of_gamut(vp.show_out_of_gamut)
+{
+  if (vp.sampler_ptr)
+    sampler_ptr = vp.sampler_ptr->clone();
+  else
+    sampler_ptr = NULL;
+}
 
 
 ViewPlane& ViewPlane::operator= (const ViewPlane& rhs) {
@@ -27,10 +31,22 @@ ViewPlane& ViewPlane::operator= (const ViewPlane& rhs) {
     px_size       = rhs.px_size;
     gamma	      = rhs.gamma;
     show_out_of_gamut = rhs.show_out_of_gamut;
-    num_samples       = rhs.num_samples;
+
+    if (sampler_ptr) {
+      delete sampler_ptr;
+      sampler_ptr = NULL;
+    }
+
+    if (rhs.sampler_ptr)
+      sampler_ptr = rhs.sampler_ptr->clone();
   }
 	
   return *this;
 }
 
-ViewPlane::~ViewPlane() {}
+ViewPlane::~ViewPlane() {
+  if (sampler_ptr) {
+    delete sampler_ptr;
+    sampler_ptr = NULL;
+  }
+}

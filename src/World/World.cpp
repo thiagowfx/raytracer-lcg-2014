@@ -41,29 +41,35 @@ void World::render_scene(FILE *fp) const {
 
   RGBColor pixel_color;	 	
   Ray	   ray;					
-  float	   zw	= 100.0;	// hardwired in
-  ray.d = Vector3d(0.0, 0.0, -1.0);
+  float	   zw	= 100.0;        // hardwired in
+  Vector2d sp;                  // sample point in [0,1] x [0,1]
   Vector2d pp;
+  const int n = vp.sampler_ptr->get_num_samples();
+  
+  ray.d = Vector3d(0.0, 0.0, -1.0);
   fprintf(fp, "%d %d\n", vp.hres, vp.vres);
 
-  for (int r = 0; r < vp.vres; r++) // up
+  for (int r = 0; r < vp.vres; r++)     // up
     for (int c = 0; c < vp.hres; c++) { // across
-      pp(0) = vp.px_size * (c - vp.hres / 2.0 + 0.5);
-      pp(1) = vp.px_size * (r - vp.vres / 2.0 + 0.5);
-      ray.o = Vector3d( pp(0), pp(1), zw);
-      pixel_color = tracer_ptr->trace_ray(ray);
+      pixel_color = RGBColor(0.0, 0.0, 0.0);
+
+      for (int j = 0; j < n; ++j) {
+        sp = vp.sampler_ptr->sample_unit_square();
+        pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
+        pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
+        ray.o = Vector3d(pp(0), pp(1), zw);
+        pixel_color += tracer_ptr->trace_ray(ray);
+      }
+
+      pixel_color /= n;         // average the colors
       display_pixel(r, c, pixel_color, fp);
     }
 }
 
 
-RGBColor World::max_to_one(const RGBColor& c) const  {
+RGBColor World::max_to_one(const RGBColor& c) const {
   float max_value = max(c.r, max(c.g, c.b));
-	
-  if (max_value > 1.0)
-    return (c / max_value);
-  else
-    return c;
+  return (max_value > 1.0) ? (c / max_value) : c;
 }
 
 
@@ -72,7 +78,9 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
   RGBColor c(raw_color);
 	
   if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
-    c.r = 1.0; c.g = 0.0; c.b = 0.0;
+    c.r = 1.0;
+    c.g = 0.0;
+    c.b = 0.0;
   }
 		
   return c;

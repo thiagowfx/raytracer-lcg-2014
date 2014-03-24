@@ -59,7 +59,9 @@ void World::build() {
   vp.set_hres(400);
   vp.set_vres(400);
   vp.set_pixel_size(0.5);
-  vp.set_num_samples(5);
+  vp.set_samples(5);
+  // FIXME
+  // vp.set_num_samples(5);
   // vp.set_gamma(1.0);
   // vp.set_show_of_gamut(false);
   //////////////////////////////////////////////////
