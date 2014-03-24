@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Constants.h"
 #include "Directional.h"
+#include "FishEye.h"
 #include "GeometricObject.h"
 #include "Light.h"
 #include "Material.h"
