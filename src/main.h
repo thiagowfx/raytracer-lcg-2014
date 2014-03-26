@@ -14,6 +14,7 @@
 #include "Pinhole.h"
 #include "Plane.h"
 #include "Phong.h"
+#include "PrimitivaDaniel.h"
 #include "RayCast.h"
 #include "Reflective.h"
 #include "Randomness.h"
@@ -27,6 +28,9 @@
 #include "World.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
+
+
+/* extern */
 
 
 #endif
