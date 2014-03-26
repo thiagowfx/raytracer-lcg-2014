@@ -10,7 +10,7 @@ class MultipleObjects: public Tracer {
   MultipleObjects(World* _world_ptr);				
   virtual ~MultipleObjects();
   virtual RGBColor trace_ray(const Ray& ray) const;
-  /* This is not used. Included only for compatibility purposes. */
+  /* This is not used for now. Included only for compatibility purposes. */
   virtual RGBColor trace_ray(const Ray ray, const int depth) const;
 };
 

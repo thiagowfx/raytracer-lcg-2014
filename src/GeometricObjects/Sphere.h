@@ -23,13 +23,13 @@ class Sphere: public GeometricObject {
 };
 
 
-inline void Sphere::set_center(const Vector3d& c) {
-  center = c;
+inline void Sphere::set_center(const Vector3d& center) {
+  this->center = center;
 }
 
 
-inline void Sphere::set_radius(const double r) {
-  radius = r;
+inline void Sphere::set_radius(const double radius) {
+  this->radius = radius;
 }
 
 #endif
