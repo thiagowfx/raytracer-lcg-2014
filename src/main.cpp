@@ -54,9 +54,14 @@ void build_primitives();
 // }
 
 
+#include "qwqw.h"
+
 /* Main */
 int main() {
-  build_world();
+  puts("before");
+  justmessage();
+  puts("after");
+  // build_world();
 
   return 0;
 }
