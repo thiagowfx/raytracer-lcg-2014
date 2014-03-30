@@ -58,8 +58,6 @@ void build_shaded_spheres(World& w);
 // }
 
 
-#include "qwqw.h"
-
 int main() {
   build_world();
   

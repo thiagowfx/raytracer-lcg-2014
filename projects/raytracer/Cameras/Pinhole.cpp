@@ -1,5 +1,4 @@
 #include "Pinhole.h"
-#include "qwqw.h"
 
 Pinhole::Pinhole() :
   Camera(),
@@ -43,7 +42,6 @@ Pinhole* Pinhole::clone() const {
 
 
 void Pinhole::render_scene(const World& w, const char* image_file) {
-  qwqw();
   RGBColor  L;
   ViewPlane vp(w.vp);
   Ray	    ray;
