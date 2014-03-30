@@ -37,7 +37,7 @@ World::~World(void) {
 
 
 /* This uses orthographic viewing along the zw axis */
-void World::render_scene(FILE *fp) const {
+void World::render_scene(const char* image_file) const {
 
   RGBColor pixel_color;	 	
   Ray	   ray;					
@@ -45,11 +45,11 @@ void World::render_scene(FILE *fp) const {
   Vector2d sp;                  // sample point in [0,1] x [0,1]
   Vector2d pp;
   const int n = vp.sampler_ptr->get_num_samples();
-  
   ray.d = Vector3d(0.0, 0.0, -1.0);
-  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
+  
+  png::image< png::rgb_pixel > image(vp.hres, vp.vres);
 
-  for (int r = 0; r < vp.vres; r++)     // up
+  for (int r = 0; r < vp.vres; r++) {   // up
     for (int c = 0; c < vp.hres; c++) { // across
       pixel_color = RGBColor(0.0, 0.0, 0.0);
 
@@ -62,8 +62,11 @@ void World::render_scene(FILE *fp) const {
       }
 
       pixel_color /= n;         // average the colors
-      display_pixel(r, c, pixel_color, fp);
+      display_pixel(r, c, pixel_color, image);
     }
+  }
+
+  image.write(image_file);
 }
 
 
@@ -95,7 +98,7 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
    a PC's components will probably be in the range [0, 255]
    the system-dependent code is in the function convert_to_display_color
    the function SetCPixel is a Mac OS function */
-void World::display_pixel(const int row, const int column, const RGBColor& raw_color, FILE *fp) const {
+void World::display_pixel(const int row, const int column, const RGBColor& raw_color, png::image<png::rgb_pixel>& image) const {
   RGBColor mapped_color;
 
   if (vp.show_out_of_gamut)
@@ -110,7 +113,7 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
   int x = column;
   int y = vp.vres - row - 1;
 
-  fprintf(fp, "%d %d %d %d %d\n", x, y, (int)(mapped_color.r * 255), (int)(mapped_color.g * 255), (int)(mapped_color.b * 255));
+  image[y][x] = png::rgb_pixel(int(mapped_color.r * 255), int(mapped_color.g * 255), int(mapped_color.b * 255));
 }
 
 
@@ -166,22 +169,4 @@ void World::delete_lights(void) {
   }	
 	
   lights.erase (lights.begin(), lights.end());
-}
-
-
-/* Creates a PNG file from a world output file. */
-void World::file_to_png(FILE *fp, const char *imageFile) {
-  unsigned width, height, r, g, b, x, y;
-
-  /* Read size parameters */
-  if ( fscanf(fp, "%d %d\n", &width, &height) != 2 )
-    throw std::exception(); // "ERROR: input file couldn't be correctly parsed"
-      
-  /* Render the image */
-  png::image< png::rgb_pixel > image(width, height);
-  while ( fscanf(fp, "%u %u %u %u %u\n", &x, &y, &r, &g, &b) == 5 ) {
-    image[y][x] = png::rgb_pixel(r, g, b);
-  }
-
-  image.write(imageFile);
 }

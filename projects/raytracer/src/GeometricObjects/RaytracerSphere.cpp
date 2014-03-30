@@ -1,32 +1,32 @@
-#include "Sphere.h"
+#include "RaytracerSphere.h"
 
-Sphere::Sphere() :
+RaytracerSphere::RaytracerSphere() :
   GeometricObject(),
   center(Vector3d::Zero()),
   radius(1.0)
 {}
 
 
-Sphere::Sphere(Vector3d c, double r) :
+RaytracerSphere::RaytracerSphere(Vector3d c, double r) :
   GeometricObject(),
   center(c),
   radius(r)
 {}
 
 
-Sphere* Sphere::clone() const {
-  return new Sphere(*this);
+RaytracerSphere* RaytracerSphere::clone() const {
+  return new RaytracerSphere(*this);
 }
 
 
-Sphere::Sphere (const Sphere& sphere) :
+RaytracerSphere::RaytracerSphere (const RaytracerSphere& sphere) :
   GeometricObject(sphere),
   center(sphere.center),
   radius(sphere.radius)
 {}
 
 
-Sphere& Sphere::operator= (const Sphere& rhs) {
+RaytracerSphere& RaytracerSphere::operator= (const RaytracerSphere& rhs) {
   if (this != &rhs) {
     GeometricObject::operator= (rhs);
     center = rhs.center;
@@ -37,10 +37,10 @@ Sphere& Sphere::operator= (const Sphere& rhs) {
 }
 
 
-Sphere::~Sphere() {}
+RaytracerSphere::~RaytracerSphere() {}
 
 
-bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+bool RaytracerSphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   double   t;
   Vector3d temp = ray.o - center;
   double   a    = ray.d.dot(ray.d);

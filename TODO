@@ -10,7 +10,7 @@
 ** DONE implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
 ** DONE incluir vp.num_samples em cima do World render_scene -- corrigido com full suporte de samplers
 ** TODO implementar render_perspective no World (pegar código do livro) -- realmente necessário, dado que eu tenho a pinhole???
-** melhor interface de build -- OK, feito parcialmente: mais do que isso -- só deixando mais dinâmico
+** DONE melhor interface de build -- OK, feito parcialmente: mais do que isso -- só deixando mais dinâmico
 * General
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
 ** Quando (se) implementar depth, mudar nos tracers.
@@ -20,11 +20,11 @@
 ** Documentação (externa)?
 ** TODO Integração com o projeto do Daniel -- começar o design
 *** geometricobject class
-*** testar o código dele
+*** DONE testar o código dele
 *** importar a classe dele (includes)
-*** integrar o projeto dele com o cmake
-*** verificar as bibliotecas do projeto dele (anttweakbar etc), caminho e etc
-*** código de build primitive na main. E testar!!!
+*** IN_PROGRESS integrar o projeto dele com o cmake
+*** DONE verificar as bibliotecas do projeto dele (anttweakbar etc), caminho e etc
+*** IN_PROGRESS código de build primitive na main. E testar!!!
 ** TODO World and PNG simplifying -- ?? realmente necessário ?? --> habilitar isso de forma transparente, escondendo (ou deletando) o world_output
 * Classes
 ** DONE PerfectSpecular.cpp

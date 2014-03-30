@@ -44,13 +44,11 @@ class World {
   void add_light(Light* light_ptr); 
   void set_ambient_light(Light* light_ptr);			
   void set_camera(Camera* c_ptr);	 
-  void build();
-  void render_scene(FILE *fp) const;
+  void render_scene(const char* image_file) const;
   RGBColor max_to_one(const RGBColor& c) const;
   RGBColor clamp_to_color(const RGBColor& c) const;
-  void display_pixel(const int row, const int column, const RGBColor& pixel_color, FILE *fp) const;
+  void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
   ShadeRec hit_objects(const Ray& ray);
-  void file_to_png(FILE *fp, const char *imageFile);
 						
  private:
   void delete_objects();

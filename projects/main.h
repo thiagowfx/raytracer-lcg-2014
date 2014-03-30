@@ -12,7 +12,7 @@
 #include "Matte.h"
 #include "MultipleObjects.h"
 #include "Pinhole.h"
-#include "Plane.h"
+#include "RaytracerPlane.h"
 #include "Phong.h"
 #include "PrimitivaDaniel.h"
 #include "RayCast.h"
@@ -23,7 +23,7 @@
 #include "RayCast.h"
 #include "Tracer.h"
 #include "ShadeRec.h"
-#include "Sphere.h"
+#include "RaytracerSphere.h"
 #include "ViewPlane.h"
 #include "World.h"
 #include <Eigen/Dense>

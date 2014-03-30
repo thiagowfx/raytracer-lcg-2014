@@ -1,4 +1,5 @@
 #include "Pinhole.h"
+#include "qwqw.h"
 
 Pinhole::Pinhole() :
   Camera(),
@@ -41,7 +42,8 @@ Pinhole* Pinhole::clone() const {
 }
 
 
-void Pinhole::render_scene(const World& w, FILE *fp) {
+void Pinhole::render_scene(const World& w, const char* image_file) {
+  qwqw();
   RGBColor  L;
   ViewPlane vp(w.vp);
   Ray	    ray;
@@ -53,7 +55,7 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
   vp.px_size /= zoom;
   ray.o = eye;
 
-  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
+  png::image< png::rgb_pixel > image(vp.hres, vp.vres);
 		
   for (int r = 0; r < vp.vres; r++) { // up
     for (int c = 0; c < vp.hres; c++) { // across 					
@@ -69,7 +71,9 @@ void Pinhole::render_scene(const World& w, FILE *fp) {
 			
       L /= n;
       L *= exposure_time;
-      w.display_pixel(r, c, L, fp);
+      w.display_pixel(r, c, L, image);
     }
   }
+
+  image.write(image_file);
 }

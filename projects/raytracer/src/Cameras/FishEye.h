@@ -16,7 +16,7 @@ class FishEye: public Camera {
   void set_psi_max(const float max);
   void set_fov(const float fov);
   Vector3d ray_direction(const Vector2d& pixel_point, const int hres, const int vres, const float s, float& r_squared) const;
-  virtual void render_scene(const World& w, FILE *fp);
+  virtual void render_scene(const World& w, const char* image_file);
 
  private:
   float psi_max;          // in degrees

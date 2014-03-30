@@ -1,13 +1,13 @@
-#include "Plane.h"
+#include "RaytracerPlane.h"
 
-Plane::Plane() :
+RaytracerPlane::RaytracerPlane() :
   GeometricObject(),
   point(Vector3d::Zero()),
   normal(0.0, 1.0, 0.0)						
 {}
 
 
-Plane::Plane(const Vector3d& _point, const Vector3d& _normal) :
+RaytracerPlane::RaytracerPlane(const Vector3d& _point, const Vector3d& _normal) :
   GeometricObject(),
   point(_point),
   normal(_normal)
@@ -16,19 +16,19 @@ Plane::Plane(const Vector3d& _point, const Vector3d& _normal) :
 }
 
 
-Plane::Plane(const Plane& plane) :
+RaytracerPlane::RaytracerPlane(const RaytracerPlane& plane) :
   GeometricObject(plane),
   point(plane.point),
   normal(plane.normal) 
 {}
 
 
-Plane* Plane::clone() const {
-  return new Plane(*this);
+RaytracerPlane* RaytracerPlane::clone() const {
+  return new RaytracerPlane(*this);
 }
 
 
-Plane& Plane::operator= (const Plane& rhs) {
+RaytracerPlane& RaytracerPlane::operator= (const RaytracerPlane& rhs) {
   if (this != &rhs) {
     GeometricObject::operator= (rhs);
     point = rhs.point;
@@ -39,10 +39,10 @@ Plane& Plane::operator= (const Plane& rhs) {
 }
 
 
-Plane::~Plane() {}
+RaytracerPlane::~RaytracerPlane() {}
 
 
-bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
+bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
   float t = (point - ray.o).dot(normal) / ray.d.dot(normal); 
   
   if (t > kEpsilon) {

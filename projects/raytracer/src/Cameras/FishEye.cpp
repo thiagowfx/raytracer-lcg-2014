@@ -54,7 +54,7 @@ Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int v
 
 
 /* explained on page 187 */
-void FishEye::render_scene(const World& w, FILE *fp) {
+void FishEye::render_scene(const World& w, const char* image_file) {
   RGBColor  L;
   ViewPlane vp(w.vp);
   Ray       ray;
@@ -63,11 +63,11 @@ void FishEye::render_scene(const World& w, FILE *fp) {
   Vector2d  pp;        // sample point on the pixel
   float     r_squared; // sum of squares of normalised device coordinates
   const int n     = vp.sampler_ptr->get_num_samples();
-
   ray.o = eye;
-  fprintf(fp, "%d %d\n", vp.hres, vp.vres);
 
-  for (int r = 0; r < vp.vres; r++)        // up
+  png::image< png::rgb_pixel > image(vp.hres, vp.vres);
+
+  for (int r = 0; r < vp.vres; r++) {   // up
     for (int c = 0; c < vp.hres; c++) {    // across
       L = RGBColor(0.0, 0.0, 0.0);
 
@@ -83,6 +83,9 @@ void FishEye::render_scene(const World& w, FILE *fp) {
 
       L /= n;
       L *= exposure_time;
-      w.display_pixel(r, c, L, fp);
+      w.display_pixel(r, c, L, image);
     }
+  }
+
+  image.write(image_file);
 }
