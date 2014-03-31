@@ -8,7 +8,7 @@
 class Matte: public Material {
   
  public:
-  Matte(); 
+  Matte();
   Matte(const Matte& m);
   virtual Material* clone() const; 
   Matte& operator= (const Matte& rhs);

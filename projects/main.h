@@ -1,6 +1,7 @@
 #ifndef __MAIN__
 #define __MAIN__
 
+/* RAYTRACER */
 #include "Ambient.h"
 #include "Camera.h"
 #include "Constants.h"
@@ -29,8 +30,8 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-/* extern */
-// #include <DanielLib>
+/* PCS_DETECTION */
+#include "pc-shape-detection.h"
 
 
 #endif

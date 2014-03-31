@@ -54,7 +54,6 @@ Matte& Matte::operator= (const Matte& rhs) {
 
 
 Matte::~Matte() {
-
   if (ambient_brdf) {
     delete ambient_brdf;
     ambient_brdf = NULL;

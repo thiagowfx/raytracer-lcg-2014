@@ -6,7 +6,7 @@ file(
   GLOB
   PCS_DETECTION_SOURCES
   "${PCS_DETECTION_DIR}/cone.cpp"
-  "${PCS_DETECTION_DIR}/cylynder.cpp"
+  "${PCS_DETECTION_DIR}/cylinder.cpp"
   "${PCS_DETECTION_DIR}/kdtree.cpp"
   "${PCS_DETECTION_DIR}/pcsmath.cpp"
   "${PCS_DETECTION_DIR}/plane.cpp"
@@ -21,7 +21,7 @@ file(
   GLOB
   PCS_DETECTION_HEADERS
   "${PCS_DETECTION_DIR}/cone.h"
-  "${PCS_DETECTION_DIR}/cylynder.h"
+  "${PCS_DETECTION_DIR}/cylinder.h"
   "${PCS_DETECTION_DIR}/glwidget.h"
   "${PCS_DETECTION_DIR}/kdtree.h"
   "${PCS_DETECTION_DIR}/octree.h"

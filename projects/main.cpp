@@ -4,76 +4,89 @@ const char image_file[] = "raytraced_image.png";
 const float ka = 0.30;
 const float kd = 0.75;
 
-void build_world();
 void build_primitives(World& w);
 void build_single_sphere(World& w);
 void build_shaded_spheres(World& w);
 
 
-//glwidget.cpp -> loadMesh2()
-//primitive.h -> hit (rayIntersection)
-
-// void build_primitives() {
-//   vector<Primitive*> primitives;
-//   vector<Shape*> candidates;
-
-//   double epsilon = 0.3;
-//   double alpha = 40;
-//   double tao = 50;
-//   double pt = 0.99;
-//   int k = 3;
-//   int r = 100;
-//   int maxElements = 30;
-//   int maxLevel = 10;
-//   int option = -1;
-//   int option2 = -1;
-//   PCShapeDetection littlePCSD;
-//   epsilon = 0.05;
-//   alpha = 10;
-
-//   if (filename == 0)
-//     return;
-//   ifstream data(filename);
-//   double x,y,z;
-//   double nx, ny, nz;
-//   vector<Point> points;
-//   vector<Point> normals;
-//   while (data >> x >> y >> z) {
-//     Point newPoint(x,y,z);
-//     data >> nx >> ny >> nz;
-//     Point newNormal(nx, ny, nz);
-//     points.push_back(newPoint);
-//     normals.push_back(newNormal);
-//     Element newElement;
-//     newElement.location = newPoint;
-//     newElement.normal = newNormal;
-//     newPoints.push_back(newElement);
-//   }
-//   littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
-//   littlePCSD.detect(true);
-//   primitives = littlePCSD.getPrimitives();
-//   candidates = littlePCSD.getCandidates();
-//   //cout << "Numero de primitivas: " << primitives.size() << endl;
-//   //cout << "Numero de candidatos: " << candidates.size() << endl;
-// }
-
-
 int main() {
-  build_world();
-  
+  World w;
+
+  puts("INFO: BEGIN build_primitives");
+  build_primitives(w);
+  puts("INFO: END build_primitives");
+
+  // build_single_sphere(w);
+  build_shaded_spheres(w);
+
+  if (w.tracer_ptr == NULL) {
+    runtime_error("ERROR: No world tracer set.");
+    exit(1);
+  }
+
+  puts("INFO: BEGIN render_scene");
+  w.camera_ptr->render_scene(w, image_file);
+  puts("INFO: END render_scene");
+
   return 0;
 }
 
 
-void build_world() {
-  World w;
-  // build_single_sphere(w);
-  build_shaded_spheres(w);
-  
-  if (w.tracer_ptr == NULL)
-    runtime_error("ERROR: No world tracer set.");
+//glwidget.cpp -> loadMesh2()
+//primitive.h -> hit (rayIntersection)
 
-  w.camera_ptr->render_scene(w, image_file);
+void build_primitives(World& w) {
+  // TODO remover newPoints?
+  
+  /* global */
+  char filename[] = "/home/thiago/workbench/RaytracerProject/projects/SHAPES2";
+  vector<Primitive*> primitives;
+  vector<Shape*> candidates;
+  vector<Element> newPoints;
+
+  double epsilon = 0.3;
+  double alpha = 40;
+  double tao = 50;
+  double pt = 0.99;
+  int k = 3;
+  int r = 100;
+  int maxElements = 30;
+  int maxLevel = 10;
+  int option = -1;
+  int option2 = -1;
+  PCShapeDetection littlePCSD;
+
+  /* loadMesh2 */
+  epsilon = 0.05;
+  alpha = 10;
+  if (filename == 0) {
+    runtime_error("ERROR: No primitives file set.");
+  }
+  ifstream data(filename);
+  double x,y,z;
+  double nx, ny, nz;
+  vector<Point> points;
+  vector<Point> normals;
+  while (data >> x >> y >> z) {
+    Point newPoint(x,y,z);
+    data >> nx >> ny >> nz;
+    Point newNormal(nx, ny, nz);
+    points.push_back(newPoint);
+    normals.push_back(newNormal);
+    Element newElement;
+    newElement.location = newPoint;
+    newElement.normal = newNormal;
+    newPoints.push_back(newElement);
+  }
+  littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
+  littlePCSD.detect(true); // let this be TRUE
+  primitives = littlePCSD.getPrimitives();
+  candidates = littlePCSD.getCandidates();
+
+  cout << "Número de primitivas: " << primitives.size() << endl;
+  cout << "Número de candidatos: " << candidates.size() << endl;
+
+  PrimitivaDaniel pd;
 }
 
 
