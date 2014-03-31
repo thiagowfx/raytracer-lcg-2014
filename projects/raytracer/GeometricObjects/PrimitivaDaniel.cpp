@@ -1,36 +1,43 @@
 #include "PrimitivaDaniel.h"
 
-// FIXME construtor
-PrimitivaDaniel::PrimitivaDaniel() {}
+
+PrimitivaDaniel::PrimitivaDaniel() :
+  GeometricObject(),
+  primitive()
+{}
 
 
-// FIXME outro construtor
-PrimitivaDaniel::PrimitivaDaniel (const PrimitivaDaniel& pd) {}
+PrimitivaDaniel::PrimitivaDaniel(Primitive* p) :
+  GeometricObject(),
+  primitive(p)
+{}
 
 
-// FIXME operator=
-PrimitivaDaniel& PrimitivaDaniel::operator= (const PrimitivaDaniel& rhs) {
-  if (this != &rhs) {
+PrimitivaDaniel::~PrimitivaDaniel() {
+  if (primitive) {
+    delete primitive;
+    primitive = NULL;
   }
-
-  return *this;
 }
 
 
-PrimitivaDaniel* PrimitivaDaniel::clone() const {
-  return new PrimitivaDaniel(*this);
-}
+bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+  Vector3d intersectionPoint;
+  Vector3d intersectionNormal;
+  bool hit = false;
 
+  // for (unsigned int i = 0; i < primitives.size(); ++i) {
 
-// FIXME destrutor
-PrimitivaDaniel::~PrimitivaDaniel() {}
+  //   if (primitives[i]->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal)) {
+  //     hit = true;
+  //     sr.local_hit_point = intersectionPoint;
+  //     sr.normal = intersectionNormal;
+  //   }
+  // }
 
+  // if (hit) {
+  //   s = sr;
+  // }
 
-// FIXME operação principal
-bool PrimitivaDaniel::hit(const Ray& ray, double& t, ShadeRec& s) const {
-
-  // TODO: interface para a função hit original
-  // TODO: obter normal (...)
-  // TODO: vcg <-> Eigen
-  return false;
+  return hit;
 }

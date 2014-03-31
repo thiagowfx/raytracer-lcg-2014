@@ -1,22 +1,22 @@
-#ifndef __PRIMITIVADANIEL__
-#define __PRIMITIVADANIEL__
+#ifndef __PRIMITIVA_DANIEL__
+#define __PRIMITIVA_DANIEL__
 
-// FIXME :: includes aqui
+/* RAYTRACER */
 #include "GeometricObject.h"
+
+/* PCS_DETECTION */
+#include "primitive.h"
 
 class PrimitivaDaniel: public GeometricObject {
 
  public:
   PrimitivaDaniel();
-  PrimitivaDaniel(const PrimitivaDaniel& pd);
-  PrimitivaDaniel& operator= (const PrimitivaDaniel& pd);
-  virtual ~PrimitivaDaniel();
-  virtual PrimitivaDaniel* clone() const;
-
-  virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const;
+  PrimitivaDaniel(Primitive*);
+  ~PrimitivaDaniel();
+  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 
  private:
-
+  Primitive* primitive;
 };
 
 
