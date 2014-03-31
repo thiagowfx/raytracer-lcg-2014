@@ -36,26 +36,6 @@ World::~World(void) {
 }
 
 
-RGBColor World::max_to_one(const RGBColor& c) const {
-  float max_value = max(c.r, max(c.g, c.b));
-  return (max_value > 1.0) ? (c / max_value) : c;
-}
-
-
-/* Set color to red if any component is greater than one */
-RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
-  RGBColor c(raw_color);
-	
-  if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
-    c.r = 1.0;
-    c.g = 0.0;
-    c.b = 0.0;
-  }
-		
-  return c;
-}
-
-
 /* raw_color is the pixel color computed by the ray tracer
    its RGB floating point components can be arbitrarily large
    mapped_color has all components in the range [0, 1], but still floating point
@@ -68,9 +48,9 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
   RGBColor mapped_color;
 
   if (vp.show_out_of_gamut)
-    mapped_color = clamp_to_color(raw_color);
+    mapped_color = raw_color.clamp_to_red();
   else
-    mapped_color = max_to_one(raw_color);
+    mapped_color = raw_color.max_to_one();
 	
   if (vp.gamma != 1.0)
     mapped_color = mapped_color.powc(1.0 / vp.gamma);
