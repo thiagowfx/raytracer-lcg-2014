@@ -36,40 +36,6 @@ World::~World(void) {
 }
 
 
-/* This uses orthographic viewing along the zw axis */
-void World::render_scene(const char* image_file) const {
-
-  RGBColor pixel_color;	 	
-  Ray	   ray;					
-  float	   zw	= 100.0;        // hardwired in
-  Vector2d sp;                  // sample point in [0,1] x [0,1]
-  Vector2d pp;
-  const int n = vp.sampler_ptr->get_num_samples();
-  ray.d = Vector3d(0.0, 0.0, -1.0);
-  
-  png::image< png::rgb_pixel > image(vp.hres, vp.vres);
-
-  for (int r = 0; r < vp.vres; r++) {   // up
-    for (int c = 0; c < vp.hres; c++) { // across
-      pixel_color = RGBColor(0.0, 0.0, 0.0);
-
-      for (int j = 0; j < n; ++j) {
-        sp = vp.sampler_ptr->sample_unit_square();
-        pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
-        pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
-        ray.o = Vector3d(pp(0), pp(1), zw);
-        pixel_color += tracer_ptr->trace_ray(ray);
-      }
-
-      pixel_color /= n;         // average the colors
-      display_pixel(r, c, pixel_color, image);
-    }
-  }
-
-  image.write(image_file);
-}
-
-
 RGBColor World::max_to_one(const RGBColor& c) const {
   float max_value = max(c.r, max(c.g, c.b));
   return (max_value > 1.0) ? (c / max_value) : c;
