@@ -1,6 +1,5 @@
 #include "FishEye.h"
 
-
 FishEye::FishEye() :
   Camera(),
   psi_max(180.0) // is this a good default value?

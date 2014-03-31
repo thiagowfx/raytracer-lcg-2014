@@ -1,5 +1,6 @@
 find_package(PNG REQUIRED)
 include_directories(/usr/include/eigen3)
+include_directories(pcs-detection/vcglib)
 
 
 # do NOT change this order

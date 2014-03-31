@@ -14,7 +14,7 @@ class RaytracerSphere: public GeometricObject {
   RaytracerSphere& operator= (const RaytracerSphere& sphere);				
   void set_center(const Vector3d& c);
   void set_radius(const double r);
-  virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const;	
+  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;	
 		
  private:
   Vector3d center;              // center coordinates as a point  

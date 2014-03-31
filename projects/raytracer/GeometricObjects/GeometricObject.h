@@ -15,7 +15,7 @@ class GeometricObject {
   GeometricObject(const GeometricObject& object); 
   virtual GeometricObject* clone() const = 0;
   virtual ~GeometricObject ();	
-  virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
+  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
   Material* get_material() const;
   virtual void set_material(Material* mPtr);
   void set_color(const RGBColor& color);
