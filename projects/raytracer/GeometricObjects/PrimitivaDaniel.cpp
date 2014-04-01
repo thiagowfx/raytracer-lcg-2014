@@ -24,20 +24,13 @@ PrimitivaDaniel::~PrimitivaDaniel() {
 bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   Vector3d intersectionPoint;
   Vector3d intersectionNormal;
-  bool hit = false;
 
-  // for (unsigned int i = 0; i < primitives.size(); ++i) {
+  if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
+    tmin = (intersectionPoint - ray.o).norm();
+    sr.normal = intersectionNormal;
+    sr.local_hit_point = intersectionPoint;
+    return true;
+  }
 
-  //   if (primitives[i]->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal)) {
-  //     hit = true;
-  //     sr.local_hit_point = intersectionPoint;
-  //     sr.normal = intersectionNormal;
-  //   }
-  // }
-
-  // if (hit) {
-  //   s = sr;
-  // }
-
-  return hit;
+  return false;
 }

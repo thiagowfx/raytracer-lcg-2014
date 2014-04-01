@@ -14,11 +14,6 @@ RaytracerSphere::RaytracerSphere(Vector3d c, double r) :
 {}
 
 
-RaytracerSphere* RaytracerSphere::clone() const {
-  return new RaytracerSphere(*this);
-}
-
-
 RaytracerSphere::RaytracerSphere (const RaytracerSphere& sphere) :
   GeometricObject(sphere),
   center(sphere.center),

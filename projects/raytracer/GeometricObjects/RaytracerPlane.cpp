@@ -23,11 +23,6 @@ RaytracerPlane::RaytracerPlane(const RaytracerPlane& plane) :
 {}
 
 
-RaytracerPlane* RaytracerPlane::clone() const {
-  return new RaytracerPlane(*this);
-}
-
-
 RaytracerPlane& RaytracerPlane::operator= (const RaytracerPlane& rhs) {
   if (this != &rhs) {
     GeometricObject::operator= (rhs);

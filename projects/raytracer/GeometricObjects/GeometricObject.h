@@ -13,7 +13,6 @@ class GeometricObject {
  public:	
   GeometricObject();		
   GeometricObject(const GeometricObject& object); 
-  virtual GeometricObject* clone() const = 0;
   virtual ~GeometricObject ();	
   virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
   Material* get_material() const;
@@ -40,6 +39,5 @@ inline void GeometricObject::set_color(const RGBColor& color) {
 inline RGBColor GeometricObject::get_color() const {
   return color;
 }
-
 
 #endif

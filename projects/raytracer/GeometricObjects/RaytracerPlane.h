@@ -10,7 +10,6 @@ class RaytracerPlane : public GeometricObject {
   virtual ~RaytracerPlane();
   RaytracerPlane(const Vector3d& point, const Vector3d& normal);
   RaytracerPlane(const RaytracerPlane& plane);
-  virtual RaytracerPlane* clone() const;
   RaytracerPlane& operator= (const RaytracerPlane& rhs);	
   virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 		

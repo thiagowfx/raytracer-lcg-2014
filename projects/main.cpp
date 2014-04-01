@@ -4,6 +4,7 @@ const char image_file[] = "raytraced_image.png";
 const float ka = 0.30;
 const float kd = 0.75;
 
+void build_base_world(World& w);
 void build_primitives(World& w);
 void build_single_sphere(World& w);
 void build_shaded_spheres(World& w);
@@ -11,16 +12,17 @@ void build_shaded_spheres(World& w);
 
 int main() {
   World w;
+  build_base_world(w);
+
+  // build_single_sphere(w);
+  // build_shaded_spheres(w);
 
   puts("INFO: BEGIN build_primitives");
   build_primitives(w);
   puts("INFO: END build_primitives");
 
-  // build_single_sphere(w);
-  build_shaded_spheres(w);
-
   if (w.tracer_ptr == NULL) {
-    runtime_error("ERROR: No world tracer set.");
+    puts("ERROR: No world tracer set.");
     exit(1);
   }
 
@@ -32,12 +34,33 @@ int main() {
 }
 
 
-//glwidget.cpp -> loadMesh2()
-//primitive.h -> hit (rayIntersection)
+void build_base_world(World& w) {
+  w.background_color=yellow;
+  w.vp.set_hres(500);
+  w.vp.set_vres(500);
+  w.vp.set_pixel_size(1.0);
+  w.vp.set_samples(4);
+  w.tracer_ptr = new MultipleObjects(&w);
+  // w.tracer_ptr = new RayCast(&w);
+  Ambient* ambient_ptr = new Ambient();
+  ambient_ptr->scale_radiance(1.0);
+  w.set_ambient_light(ambient_ptr);
+  Pinhole* pinhole_ptr = new Pinhole();
+  pinhole_ptr->set_eye(Vector3d(0, 0, 500));
+  pinhole_ptr->set_lookat(Vector3d::Zero());
+  pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
+  pinhole_ptr->compute_uvw();
+  // FishEye* fisheye_ptr = new FishEye();
+  // fisheye_ptr->set_fov(35);
+  w.set_camera(pinhole_ptr);
+}
+
 
 void build_primitives(World& w) {
   // TODO remover newPoints?
-  
+  // glwidget.cpp -> loadMesh2()
+  // primitive.h -> hit (rayIntersection)
+
   /* global */
   char filename[] = "/home/thiago/workbench/RaytracerProject/projects/SHAPES2";
   vector<Primitive*> primitives;
@@ -59,14 +82,17 @@ void build_primitives(World& w) {
   /* loadMesh2 */
   epsilon = 0.05;
   alpha = 10;
+
   if (filename == 0) {
-    runtime_error("ERROR: No primitives file set.");
+    puts("ERROR: No primitives file set.");
   }
+
   ifstream data(filename);
   double x,y,z;
   double nx, ny, nz;
   vector<Point> points;
   vector<Point> normals;
+
   while (data >> x >> y >> z) {
     Point newPoint(x,y,z);
     data >> nx >> ny >> nz;
@@ -78,6 +104,7 @@ void build_primitives(World& w) {
     newElement.normal = newNormal;
     newPoints.push_back(newElement);
   }
+
   littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
   littlePCSD.detect(true); // let this be TRUE
   primitives = littlePCSD.getPrimitives();
@@ -86,23 +113,32 @@ void build_primitives(World& w) {
   cout << "Número de primitivas: " << primitives.size() << endl;
   cout << "Número de candidatos: " << candidates.size() << endl;
 
-  PrimitivaDaniel pd;
+  vector<RGBColor> colors;
+  colors.push_back(black);
+  colors.push_back(blue);
+  colors.push_back(brown);
+  colors.push_back(dark_green);
+  colors.push_back(dark_purple);
+  colors.push_back(dark_yellow);
+  colors.push_back(green);
+  colors.push_back(grey);
+  colors.push_back(light_green);
+  colors.push_back(light_purple);
+  colors.push_back(orange);
+  colors.push_back(red);
+  colors.push_back(white);
+  colors.push_back(yellow);
+
+  PrimitivaDaniel* pd;
+  for (unsigned int i = 0; i < primitives.size(); ++i) {
+    pd = new PrimitivaDaniel(primitives[i]);
+    pd->set_color(colors[i % colors.size()]);
+    w.add_object(pd);
+  }
 }
 
 
 void build_single_sphere(World& w) {
-  w.background_color=yellow;
-  w.vp.set_hres(500);
-  w.vp.set_vres(500);
-  w.vp.set_pixel_size(1.0);
-  w.vp.set_samples(5);
-  w.tracer_ptr = new MultipleObjects(&w);
-  Pinhole* pinhole_ptr = new Pinhole();
-  pinhole_ptr->set_eye(Vector3d(0, 0, 500));
-  pinhole_ptr->set_lookat(Vector3d::Zero());
-  pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
-  pinhole_ptr->compute_uvw();
-  w.set_camera(pinhole_ptr);
   Matte* matte_ptr1 = new Matte();
   matte_ptr1->set_ka(ka);
   matte_ptr1->set_kd(kd);
@@ -115,24 +151,6 @@ void build_single_sphere(World& w) {
 
 
 void build_shaded_spheres(World &w) {
-  w.background_color = yellow;
-  w.vp.set_hres(400);
-  w.vp.set_vres(400);
-  w.vp.set_pixel_size(0.5);
-  w.vp.set_samples(5);
-  w.tracer_ptr = new RayCast(&w);
-  Ambient* ambient_ptr = new Ambient();
-  ambient_ptr->scale_radiance(1.0);
-  ambient_ptr->set_color(red); // default: white
-  w.set_ambient_light(ambient_ptr);
-  Pinhole* pinhole_ptr = new Pinhole();
-  pinhole_ptr->set_eye(Vector3d(0, 0, 500));
-  pinhole_ptr->set_lookat(Vector3d::Zero());
-  pinhole_ptr->set_view_distance(600.0); // zoom: greater is nearer
-  pinhole_ptr->compute_uvw();
-  // FishEye* fisheye_ptr = new FishEye();
-  // fisheye_ptr->set_fov(35);
-  w.set_camera(pinhole_ptr);
   Directional* light_ptr1 = new Directional();
   light_ptr1->set_direction(Vector3d(100, 100, 200));
   light_ptr1->scale_radiance(3.0);

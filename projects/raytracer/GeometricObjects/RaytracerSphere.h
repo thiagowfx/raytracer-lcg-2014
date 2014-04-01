@@ -10,7 +10,6 @@ class RaytracerSphere: public GeometricObject {
   RaytracerSphere(Vector3d center, double r);
   RaytracerSphere(const RaytracerSphere& sphere);
   virtual ~RaytracerSphere();
-  virtual RaytracerSphere* clone() const;
   RaytracerSphere& operator= (const RaytracerSphere& sphere);				
   void set_center(const Vector3d& c);
   void set_radius(const double r);
