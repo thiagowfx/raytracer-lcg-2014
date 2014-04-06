@@ -1,5 +1,5 @@
 # -*- org -*-
-#+STARTUP: showall
+##+STARTUP: showall
 #+SEQ_TODO: TODO IN_PROGRESS DONE
 
 * Top-level
@@ -9,7 +9,7 @@
 ** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
 ** DONE implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
 ** DONE incluir vp.num_samples em cima do World render_scene -- corrigido com full suporte de samplers
-** TODO implementar render_perspective no World (pegar código do livro) -- realmente necessário, dado que eu tenho a pinhole???
+** DONE implementar render_perspective no World (pegar código do livro) -- realmente necessário, dado que eu tenho a pinhole???. Update: ortographic tem a sua própria classe agora.
 ** DONE melhor interface de build -- OK, feito parcialmente: mais do que isso -- só deixando mais dinâmico
 * General
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
@@ -18,14 +18,14 @@
 ** TODO Phong reflective model...specular!
 ** DONE Testes -- não são realmente necessários a priori, mas já temos suporte inicial, se for necessário
 ** Documentação (externa)?
-** TODO Integração com o projeto do Daniel -- começar o design
+** DONE Integração com o projeto do Daniel -- começar o design
 *** geometricobject class
 *** DONE testar o código dele
 *** importar a classe dele (includes)
 *** IN_PROGRESS integrar o projeto dele com o cmake
 *** DONE verificar as bibliotecas do projeto dele (anttweakbar etc), caminho e etc
 *** IN_PROGRESS código de build primitive na main. E testar!!!
-** TODO World and PNG simplifying -- ?? realmente necessário ?? --> habilitar isso de forma transparente, escondendo (ou deletando) o world_output
+** DONE World and PNG simplifying -- ?? realmente necessário ?? --> habilitar isso de forma transparente, escondendo (ou deletando) o world_output
 * Classes
 ** DONE PerfectSpecular.cpp
 ** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
@@ -36,8 +36,10 @@
 ** DONE 3 bare-bones
 ** DONE 4 antialiasing
 ** DONE 5 Samplers
+** DONE 6 Mais Samplers
+** DONE 7 Mais Samplers
 ** DONE 9 pinhole camera
-** 9 spherical projection
+** DONE 9 spherical projection
 ** TODO 14 Lights and Materials -- reforçar
 ** TODO 15 Specular Reflection
 ** TODO 16 Shadows

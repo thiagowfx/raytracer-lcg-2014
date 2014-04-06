@@ -2,8 +2,11 @@
 ##+STARTUP: showall
 #+SEQ_TODO: TODO IN_PROGRESS DONE
 
+* COMMENT PROJECT
 * Sources
 ** https://github.com/mikestaub/Ray-Tracer/
+
+* COMMENT TOOLS
 * CMake
 ** http://cmake.org/cmake/help/v2.8.8/cmake.html
 ** add_subdirectory(/path) to execute another CMakeLists.txt

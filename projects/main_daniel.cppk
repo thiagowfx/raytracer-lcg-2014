@@ -7,18 +7,18 @@ const float ks = 0.12;
 const float expi = 20;
 
 void build_base_world(World& w);
+void build_primitives(World& w);
 void build_single_sphere(World& w);
 void build_shaded_spheres(World& w);
 
 
 int main() {
   World w;
+  build_base_world(w);
 
-  
-
-  // build_base_world(w);
   // build_shaded_spheres(w);
-  // build_single_sphere(w);
+  build_single_sphere(w);
+  build_primitives(w);
 
   if (w.tracer_ptr == NULL) {
     puts("ERROR: No world tracer set.");
@@ -74,6 +74,94 @@ void build_base_world(World& w) {
   light_ptr1->scale_radiance(3.0);
   // DIFF light_ptr1->set_color(green);
   w.add_light(light_ptr1);
+}
+
+
+void build_primitives(World& w) {
+  puts("INFO: BEGIN build_primitives");
+  // glwidget.cpp -> loadMesh2()
+  // primitive.h -> hit (rayIntersection)
+
+  /* global */
+  char filename[] = "/home/thiago/workbench/RaytracerProject/projects/SHAPES2";
+  vector<Primitive*> primitives;
+  vector<Shape*> candidates;
+
+  double epsilon = 0.3;
+  double alpha = 40;
+  double tao = 50;
+  double pt = 0.99;
+  int k = 3;
+  int r = 100;
+  int maxElements = 30;
+  int maxLevel = 10;
+  int option = -1;
+  int option2 = -1;
+  PCShapeDetection littlePCSD;
+
+  /* loadMesh2 */
+  epsilon = 0.05;
+  alpha = 10;
+
+  if (filename == 0) {
+    puts("ERROR: No primitives file set.");
+  }
+
+  ifstream data(filename);
+  double x,y,z;
+  double nx, ny, nz;
+  vector<Point> points;
+  vector<Point> normals;
+
+  while (data >> x >> y >> z) {
+    Point newPoint(x,y,z);
+    data >> nx >> ny >> nz;
+    Point newNormal(nx, ny, nz);
+    points.push_back(newPoint);
+    normals.push_back(newNormal);
+    Element newElement;
+    newElement.location = newPoint;
+    newElement.normal = newNormal;
+  }
+
+  littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
+  littlePCSD.detect(true); // let this be TRUE
+  primitives = littlePCSD.getPrimitives();
+  candidates = littlePCSD.getCandidates();
+
+  cout << "Número de primitivas: " << primitives.size() << endl;
+  cout << "Número de candidatos: " << candidates.size() << endl;
+
+  vector<RGBColor> colors;
+  colors.push_back(grey);
+  colors.push_back(blue);
+  colors.push_back(brown);
+  colors.push_back(dark_purple);
+  colors.push_back(dark_yellow);
+  colors.push_back(green);
+  colors.push_back(light_green);
+  colors.push_back(light_purple);
+  colors.push_back(dark_green);
+  colors.push_back(orange);
+  colors.push_back(red);
+  colors.push_back(white);
+  colors.push_back(yellow);
+
+  PrimitivaDaniel* pd;
+  Matte* matte_ptr;
+
+  for (unsigned int i = 0; i < primitives.size(); ++i) {
+    pd = new PrimitivaDaniel(primitives[i]);
+    matte_ptr = new Matte;
+    matte_ptr->set_ka(ka);
+    matte_ptr->set_kd(kd);
+    matte_ptr->set_cd(colors[i % colors.size()]);
+    pd->set_color(colors[i % colors.size()]);
+    pd->set_material(matte_ptr);
+    w.add_object(pd);
+  }
+
+  puts("INFO: END build_primitives");
 }
 
 
