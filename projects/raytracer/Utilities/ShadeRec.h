@@ -16,7 +16,7 @@ class ShadeRec {
   Material* material_ptr;       // pointer to the nearest object's material
   Vector3d  hit_point;          // world coordinates of intersection
   Vector3d  local_hit_point;    // world coordinates of hit point on generic object (used for texture transformations)
-  Vector3d  normal;		// normal at hit point
+  Vector3d  normal;             // normal at hit point
   Ray 	    ray;                // required for specular hightlights and area lights
   int	    depth;              // recursion depth
   float	    t;                  // ray parameter

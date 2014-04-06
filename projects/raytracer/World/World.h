@@ -21,7 +21,7 @@
 #include "Tracer.h"
 #include "ViewPlane.h"
 #include <cstdio>
-#include <cstring>              // for png++ streerror
+#include <cstring>              /* for png++ streerror */
 #include <png++/png.hpp>
 #include <exception>
 #include <vector>
@@ -30,22 +30,22 @@ using namespace std;
 class World {
  
  public:	
-  ViewPlane		   vp;
-  RGBColor		   background_color;
-  Tracer*		   tracer_ptr;
-  Light*   		   ambient_ptr;
-  Camera*		   camera_ptr;		
+  ViewPlane                vp;
+  RGBColor                 background_color;
+  Tracer*                  tracer_ptr;
+  Light*                   ambient_ptr;
+  Camera*                  camera_ptr;		
   vector<GeometricObject*> objects;		
-  vector<Light*> 	   lights;
+  vector<Light*>           lights;
 		
   World();
   ~World();
-  void add_object(GeometricObject* object_ptr);
-  void add_light(Light* light_ptr); 
-  void set_ambient_light(Light* light_ptr);			
-  void set_camera(Camera* c_ptr);	 
+  void add_object(GeometricObject*);
+  void add_light(Light*); 
+  void set_ambient_light(Light*); 
+  void set_camera(Camera*);	 
   void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
-  ShadeRec hit_objects(const Ray& ray);
+  ShadeRec hit_objects(const Ray&);
 						
  private:
   void delete_objects();

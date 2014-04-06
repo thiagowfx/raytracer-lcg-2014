@@ -1,6 +1,8 @@
 #include "Regular.h"
 
-Regular::Regular() : Sampler() {}
+Regular::Regular() :
+  Sampler()
+{}
 
 
 Regular::Regular(const int num) :

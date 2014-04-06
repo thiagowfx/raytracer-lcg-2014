@@ -30,7 +30,6 @@ FishEye& FishEye::operator=(const FishEye& rhs) {
 FishEye::~FishEye() {}
 
 
-/* explained on page 188 */
 Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int vres, const float s, float& r_squared) const {
 
   /* compute the normalized device coordinates */
@@ -52,7 +51,6 @@ Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int v
 }
 
 
-/* explained on page 187 */
 void FishEye::render_scene(const World& w, const char* image_file) {
   RGBColor  L;
   ViewPlane vp(w.vp);

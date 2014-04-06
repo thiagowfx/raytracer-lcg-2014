@@ -19,17 +19,17 @@ class FishEye: public Camera {
   virtual void render_scene(const World& w, const char* image_file);
 
  private:
-  float psi_max;          // in degrees
+  float psi_max;                // in degrees
   
 };
 
 
-inline void FishEye::set_psi_max(float _m) {
-  psi_max = _m;
+inline void FishEye::set_psi_max(float m) {
+  this->psi_max = m;
 }
 
-inline void FishEye::set_fov(float _f) {
-  psi_max = 2 * _f; // this right? check page 187 later
+inline void FishEye::set_fov(float f) {
+  this->psi_max = 2 * f;
 }
 
 #endif

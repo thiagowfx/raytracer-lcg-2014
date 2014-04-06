@@ -7,10 +7,9 @@ class RayCast: public Tracer {
   
  public:
   RayCast();
-  RayCast(World* _worldPtr);
+  RayCast(World*);
   virtual ~RayCast();		
   virtual RGBColor trace_ray(const Ray& ray) const;
-  /* This ignores the depth argument for now */
   virtual RGBColor trace_ray(const Ray ray, const int depth) const;  
 };
 

@@ -21,17 +21,15 @@ ViewPlane::ViewPlane(const ViewPlane& vp) :
 {
   if (vp.sampler_ptr)
     sampler_ptr = vp.sampler_ptr->clone();
-  else
-    sampler_ptr = NULL;
 }
 
 
 ViewPlane& ViewPlane::operator= (const ViewPlane& rhs) {
   if (this != &rhs) {		
-    hres 	      = rhs.hres;
-    vres 	      = rhs.vres;
-    px_size       = rhs.px_size;
-    gamma	      = rhs.gamma;
+    hres              = rhs.hres;
+    vres              = rhs.vres;
+    px_size           = rhs.px_size;
+    gamma             = rhs.gamma;
     show_out_of_gamut = rhs.show_out_of_gamut;
 
     if (sampler_ptr) {

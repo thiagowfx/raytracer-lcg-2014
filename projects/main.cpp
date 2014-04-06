@@ -17,9 +17,7 @@ int main() {
   build_single_sphere(w);
   // build_shaded_spheres(w);
 
-  puts("INFO: BEGIN build_primitives");
   build_primitives(w);
-  puts("INFO: END build_primitives");
 
   if (w.tracer_ptr == NULL) {
     puts("ERROR: No world tracer set.");
@@ -35,28 +33,45 @@ int main() {
 
 
 void build_base_world(World& w) {
-  w.vp.set_hres(450);
-  w.vp.set_vres(450);
-  w.vp.set_pixel_size(0.6);
+  // DIFF w.background_color = yellow;
+
+  w.vp.set_hres(500);
+  w.vp.set_vres(500);
+  w.vp.set_pixel_size(0.5);
   w.vp.set_samples(5);
-  w.tracer_ptr = new MultipleObjects(&w);
-  // w.tracer_ptr = new RayCast(&w);
+  w.vp.set_max_depth(3);
+
+  // DIFF w.tracer_ptr = new MultipleObjects(&w);
+  w.tracer_ptr = new RayCast(&w);
+
   Ambient* ambient_ptr = new Ambient();
   ambient_ptr->scale_radiance(1.0);
+  // DIFF ambient_ptr->set_color(red);
   w.set_ambient_light(ambient_ptr);
+
   Pinhole* pinhole_ptr = new Pinhole();
   pinhole_ptr->set_eye(Vector3d(2, -1.5, 1));
   pinhole_ptr->set_lookat(Vector3d::Zero());
   pinhole_ptr->set_view_distance(75.0); // zoom: greater is nearer
+  // DIFF pinhole_ptr->set_zoom(2);
   pinhole_ptr->compute_uvw();
+
   // FishEye* fisheye_ptr = new FishEye();
   // fisheye_ptr->set_fov(35);
+
   w.set_camera(pinhole_ptr);
+
+  Directional* light_ptr1 = new Directional();
+  light_ptr1->set_direction(Vector3d(100, 100, 200));
+  // light_ptr1->set_direction(Vector3d(2, -1.5, 1));
+  light_ptr1->scale_radiance(3.0);
+  // light_ptr1->set_color(green);
+  w.add_light(light_ptr1);
 }
 
 
 void build_primitives(World& w) {
-  // TODO remover newPoints?
+  puts("INFO: BEGIN build_primitives");
   // glwidget.cpp -> loadMesh2()
   // primitive.h -> hit (rayIntersection)
 
@@ -64,7 +79,6 @@ void build_primitives(World& w) {
   char filename[] = "/home/thiago/workbench/RaytracerProject/projects/SHAPES2";
   vector<Primitive*> primitives;
   vector<Shape*> candidates;
-  vector<Element> newPoints;
 
   double epsilon = 0.3;
   double alpha = 40;
@@ -101,7 +115,6 @@ void build_primitives(World& w) {
     Element newElement;
     newElement.location = newPoint;
     newElement.normal = newNormal;
-    newPoints.push_back(newElement);
   }
 
   littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
@@ -129,7 +142,7 @@ void build_primitives(World& w) {
 
   PrimitivaDaniel* pd;
   Matte* matte_ptr;
-  
+
   for (unsigned int i = 0; i < primitives.size(); ++i) {
     pd = new PrimitivaDaniel(primitives[i]);
     matte_ptr = new Matte;
@@ -140,6 +153,8 @@ void build_primitives(World& w) {
     pd->set_material(matte_ptr);
     w.add_object(pd);
   }
+
+  puts("INFO: END build_primitives");
 }
 
 
@@ -156,12 +171,6 @@ void build_single_sphere(World& w) {
 
 
 void build_shaded_spheres(World &w) {
-  Directional* light_ptr1 = new Directional();
-  light_ptr1->set_direction(Vector3d(100, 100, 200));
-  light_ptr1->scale_radiance(3.0);
-  light_ptr1->set_color(green);
-  w.add_light(light_ptr1);
-
   /* RaytracerSpheres */
   Matte* matte_ptr1 = new Matte;
   matte_ptr1->set_ka(ka);

@@ -14,13 +14,3 @@ Tracer::~Tracer() {
   if (world_ptr)
     world_ptr = NULL;
 }
-
-
-RGBColor Tracer::trace_ray(const Ray& ray) const {
-  return RGBColor();
-}
-
-
-RGBColor Tracer::trace_ray(const Ray ray, const int depth) const {
-  return RGBColor();
-}

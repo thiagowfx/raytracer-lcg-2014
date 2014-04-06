@@ -5,7 +5,7 @@
    camera_ptr is set to NULL because the build functions will always have to construct a camera
    and set its parameters */
 
-World::World(void) :
+World::World() :
   background_color(),
   tracer_ptr(NULL),
   ambient_ptr(new Ambient),
@@ -13,7 +13,7 @@ World::World(void) :
 {}
 
 
-World::~World(void) {		
+World::~World() {		
   if(tracer_ptr) {
     delete tracer_ptr;
     tracer_ptr = NULL;
@@ -74,7 +74,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
   for (int j = 0; j < num_objects; j++)
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
       sr.hit_an_object = true;
-      tmin 	       = t;
+      tmin             = t;
       sr.material_ptr  = objects[j]->get_material();
       sr.color         = objects[j]->get_color();
       sr.hit_point     = ray.o + t * ray.d;
@@ -97,22 +97,22 @@ ShadeRec World::hit_objects(const Ray& ray) {
 void World::delete_objects(void) {
   int num_objects = objects.size();
 	
-  for (int j = 0; j < num_objects; j++) {
+  for (int j = 0; j < num_objects; ++j) {
     delete objects[j];
     objects[j] = NULL;
   }	
 	
-  objects.erase (objects.begin(), objects.end());
+  objects.erase(objects.begin(), objects.end());
 }
 
 
 void World::delete_lights(void) {
   int num_lights = lights.size();
 	
-  for (int j = 0; j < num_lights; j++) {
+  for (int j = 0; j < num_lights; ++j) {
     delete lights[j];
     lights[j] = NULL;
   }	
 	
-  lights.erase (lights.begin(), lights.end());
+  lights.erase(lights.begin(), lights.end());
 }
