@@ -1,23 +1,21 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.8)
 project(RAYTRACER)
 
-enable_testing()
 
-find_package(PNG REQUIRED)	# pngpp / png++ / libPNG
-include_directories(/usr/include/eigen3)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 --std=c++11 -g")
 
 
-file(GLOB_RECURSE RAYTRACER_SOURCES "src/*.cpp")
-file(GLOB_RECURSE RAYTRACER_HEADERS "src/*.h")
+MACRO(SUBDIRLIST result curdir)
+  # Returns to `result` a list with all subdirs of `curdir`. Absolute path!
+  FILE(GLOB children ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${child})
+      SET(dirlist ${dirlist} ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
 
-# include directories which contain these files
-set (RAYTRACER_INCLUDE_DIRS "")
-foreach (_headerFile ${RAYTRACER_HEADERS} ${RAYTRACER_SOURCES})
-    get_filename_component(_dir ${_headerFile} PATH)
-    list (APPEND RAYTRACER_INCLUDE_DIRS ${_dir})
-endforeach()
-list(REMOVE_DUPLICATES RAYTRACER_INCLUDE_DIRS)
 
-
-add_subdirectory(src)
-add_subdirectory(tests)
+add_subdirectory(projects)
