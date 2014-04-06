@@ -25,7 +25,7 @@ class GlossySpecular: public BRDF {
   float    ks;
   RGBColor cs;                  // specular color
   float    exp;                 // specular exponent
-  Sampler* sampler_ptr;             // for use in sample_f
+  Sampler* sampler_ptr;         // for use in sample_f
 };
 
 

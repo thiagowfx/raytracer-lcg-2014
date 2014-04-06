@@ -2,6 +2,7 @@
 #define __PERFECT_SPECULAR__
 
 /* this implements perfect specular reflection for indirect illumination with reflective materials */
+
 #include "BRDF.h"
 
 class PerfectSpecular: public BRDF {

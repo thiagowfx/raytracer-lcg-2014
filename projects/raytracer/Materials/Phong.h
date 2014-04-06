@@ -6,19 +6,20 @@
 #include "Lambertian.h"
 #include "World.h"
 
-class Phong :public Material
-{
+class Phong : public Material {
+
  public:
   Phong();
+  Phong(const Phong& m);
   virtual Material* clone() const;
   virtual ~Phong();
   virtual RGBColor shade (ShadeRec& s);
-  void set_ka ( float ka);
-  void set_kd ( float kd);
-  void set_ks ( float ks);
-  void set_cd (const RGBColor& color);
-  void set_exp ( float exp);
-  void set_cs (const RGBColor& color);
+  void set_ka(float ka);
+  void set_kd(float kd);
+  void set_ks(float ks);
+  void set_cd(const RGBColor& color);
+  void set_exp(float exp);
+  void set_cs(const RGBColor& color);
 
  private:
   Lambertian *ambient_brdf;
@@ -41,6 +42,7 @@ inline void Phong::set_ks (float ks) {
 inline void Phong::set_cd (const RGBColor& color) {
   diffuse_brdf->set_cd (color);
   ambient_brdf->set_cd (color);
+  specular_brdf->set_cs(color);
 }
 
 inline void Phong::set_exp (float exp) {

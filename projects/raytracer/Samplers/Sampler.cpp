@@ -134,18 +134,18 @@ void Sampler::map_samples_to_unit_disk() {
       }
       else {                    // sector 2
         r = sp(1);
-        phi = 2 - sp(0) / sp(1);
+        phi = 2.0 - sp(0) / sp(1);
       }
     }
     else {                      // sectors 3 and 4
       if (sp(0) < sp(1)) {        // sector 3
         r = -sp(0);
-        phi = 4 + sp(1) / sp(0);
+        phi = 4.0 + sp(1) / sp(0);
       }
       else {                    // sector 4
         r = -sp(1);
         if (sp(1) != 0.0)	// avoid division by zero at origin
-          phi = 6 - sp(0) / sp(1);
+          phi = 6.0 - sp(0) / sp(1);
         else
           phi  = 0.0;
       }

@@ -25,8 +25,8 @@ RGBColor PerfectSpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector
    the fabs in the last statement is for transparency */
 RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi) const {
   float ndotwo = sr.normal.dot(wo);
-  wi = -wo + 2.0 * sr.normal * ndotwo; 
-  return kr * cr / fabs(sr.normal.dot(wi)); // why is this fabs? // kr would be a Fresnel term in a Fresnel reflector for transparency when ray hits inside surface?, if so it should go in Chapter 24
+  wi = -wo + (2.0 * sr.normal * ndotwo);
+  return kr * cr / fabs(sr.normal.dot(wi));
 }
 
 
@@ -34,9 +34,9 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vecto
    it returns ndotwi in the pdf */
 RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, float& pdf) const {
   float ndotwo = sr.normal.dot(wo);
-  wi = -wo + 2.0 * sr.normal * ndotwo; 
+  wi = -wo + (2.0 * sr.normal * ndotwo);
   pdf = fabs(sr.normal.dot(wi));
-  return kr * cr;  
+  return kr * cr;
 }
 
 
