@@ -14,11 +14,9 @@ void build_shaded_spheres(World& w);
 int main() {
   World w;
 
-  
-
-  // build_base_world(w);
+  build_base_world(w);
   // build_shaded_spheres(w);
-  // build_single_sphere(w);
+  build_single_sphere(w);
 
   if (w.tracer_ptr == NULL) {
     puts("ERROR: No world tracer set.");
