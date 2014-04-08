@@ -14,9 +14,9 @@ ShadeRec::ShadeRec(World& wr) :
   normal(Vector3d::Zero()),
   ray(),
   depth(0),
+  color(),
   t(0.0),
-  w(wr),
-  color()
+  w(wr)
 {}
 
 
@@ -28,9 +28,9 @@ ShadeRec::ShadeRec(const ShadeRec& sr) :
   normal(sr.normal),
   ray(sr.ray),
   depth(sr.depth),
+  color(sr.color),
   t(sr.t),
-  w(sr.w),
-  color(sr.color)
+  w(sr.w)
 {}
 
 

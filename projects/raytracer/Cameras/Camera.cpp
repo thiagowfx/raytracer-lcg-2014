@@ -1,13 +1,13 @@
 #include "Camera.h"
 
 Camera::Camera() :
-  eye(0, 0, 500),
+  eye(0.0, 0.0, 500.0),
   lookat(Vector3d::Zero()),
-  ra(0),
-  u(1, 0, 0),
-  v(0, 1, 0),
-  w(0, 0, 1),
-  up(0, 1, 0),
+  ra(0.0),
+  u(1.0, 0.0, 0.0),
+  v(0.0, 1.0, 0.0),
+  w(0.0, 0.0, 1.0),
+  up(0.0, 1.0, 0.0),
   exposure_time(1.0)
 {}
 
@@ -55,15 +55,15 @@ void Camera::compute_uvw() {
   /* take care of the singularity by hardwiring in specific camera orientations */
   /* camera looking vertically down */
   if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) > lookat(1)) {
-    u = Vector3d(0, 0, 1);
-    v = Vector3d(1, 0, 0);
-    w = Vector3d(0, 1, 0);	
+    u = Vector3d(0.0, 0.0, 1.0);
+    v = Vector3d(1.0, 0.0, 0.0);
+    w = Vector3d(0.0, 1.0, 0.0);	
   }
 
   /* camera looking vertically up */
   if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) < lookat(1)) {
-    u = Vector3d(1, 0, 0);
-    v = Vector3d(0, 0, 1);
-    w = Vector3d(0, -1, 0);
+    u = Vector3d(1.0, 0.0, 0.0);
+    v = Vector3d(0.0, 0.0, 1.0);
+    w = Vector3d(0.0, -1.0, 0.0);
   }
 }

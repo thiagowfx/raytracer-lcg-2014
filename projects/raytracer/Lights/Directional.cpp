@@ -24,7 +24,6 @@ Light* Directional::clone() const {
 Directional& Directional::operator= (const Directional& rhs) {
   if (this != &rhs) {
     Light::operator= (rhs);
-
     ls	  = rhs.ls;
     color = rhs.color;
     dir   = rhs.dir;

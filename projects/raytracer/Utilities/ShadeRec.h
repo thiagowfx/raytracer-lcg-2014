@@ -19,13 +19,12 @@ class ShadeRec {
   Vector3d  normal;             // normal at hit point
   Ray 	    ray;                // required for specular hightlights and area lights
   int	    depth;              // recursion depth
+  RGBColor color;
   float	    t;                  // ray parameter
   World&    w;                  // world reference
-  RGBColor color;
   ShadeRec(World& wr);
   ShadeRec(const ShadeRec& sr);
   ~ShadeRec();
-  
 };
 
 #endif

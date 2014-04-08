@@ -10,13 +10,69 @@ void build_base_world(World& w);
 void build_single_sphere(World& w);
 void build_shaded_spheres(World& w);
 
-
 int main() {
   World w;
-
   build_base_world(w);
+
+  int num_samples = 1;
+
+  w.vp.set_hres(400);
+  w.vp.set_vres(400);
+  w.vp.set_samples(num_samples);
+
+  w.background_color = black;
+  w.tracer_ptr = new RayCast(&w);
+
+  Pinhole* camera_ptr = new Pinhole;
+  camera_ptr->set_eye(Vector3d(0, 0, 250));
+  camera_ptr->set_lookat(Vector3d::Zero());
+  camera_ptr->set_view_distance(200);   // for Figure 8.16(a)
+  //    camera_ptr->set_view_distance(450);     // for Figure 8.16(b)
+  //    camera_ptr->set_view_distance(1000);    // for Figure 8.16(c)
+  camera_ptr->compute_uvw();
+  w.set_camera(camera_ptr);
+
+
+  PointLight* light_ptr1 = new PointLight;
+  light_ptr1->set_location(Vector3d(50, 150, 200));
+  light_ptr1->set_location(Vector3d(0, 0, -250));
+  light_ptr1->scale_radiance(6.0);
+  // light_ptr1->set_shadows(true);
+  w.add_light(light_ptr1);
+
+
+  Phong* phong_ptr1 = new Phong;
+  phong_ptr1->set_ka(0.5);
+  phong_ptr1->set_kd(0.4);
+  phong_ptr1->set_cd(yellow);
+  phong_ptr1->set_ks(0.05);
+  phong_ptr1->set_exp(25);
+
+  Reflective* reflexive_ptr1 = new Reflective;
+  reflexive_ptr1->set_kr(1.0);
+  reflexive_ptr1->set_cd(red);
+
+  RaytracerSphere*   sphere_ptr1 = new RaytracerSphere(Vector3d(-45, 45, 40), 50);
+  sphere_ptr1->set_color(red);
+  sphere_ptr1->set_material(phong_ptr1);
+  // sphere_ptr1->set_material(reflexive_ptr1);
+  w.add_object(sphere_ptr1);
+
+  Phong*    phong_ptr2 = new Phong;
+  phong_ptr2->set_ka(0.25);
+  phong_ptr2->set_kd(0.5);
+  phong_ptr2->set_cd(RGBColor(0, 0.5, 0.5));     // cyan
+  phong_ptr2->set_ks(0.05);
+  phong_ptr2->set_exp(50);
+
+  Triangle* triangle_ptr1 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
+  triangle_ptr1->set_material(phong_ptr2);
+  triangle_ptr1->set_material(reflexive_ptr1);
+  w.add_object(triangle_ptr1);
+
+
   // build_shaded_spheres(w);
-  build_single_sphere(w);
+  // build_single_sphere(w);
 
   if (w.tracer_ptr == NULL) {
     puts("ERROR: No world tracer set.");
@@ -32,46 +88,42 @@ int main() {
 
 
 void build_base_world(World& w) {
-  // DIFF w.background_color = yellow;
-
+  w.background_color = black;
   w.vp.set_hres(500);
   w.vp.set_vres(500);
-  w.vp.set_pixel_size(0.5);
-  w.vp.set_samples(5);
+  w.vp.set_pixel_size(1.0);
+  w.vp.set_samples(4);
   w.vp.set_max_depth(3);
 
-  // DIFF w.tracer_ptr = new MultipleObjects(&w);
-  w.tracer_ptr = new RayCast(&w);
+  w.tracer_ptr = new MultipleObjects(&w);
+  // w.tracer_ptr = new RayCast(&w);
 
   Ambient* ambient_ptr = new Ambient();
   ambient_ptr->scale_radiance(1.0);
   w.set_ambient_light(ambient_ptr);
-  // DIFF ambient_ptr->set_color(red);
 
   Pinhole* pinhole_ptr = new Pinhole();
-  pinhole_ptr->set_eye(Vector3d(2, -1.5, 1));
+  // pinhole_ptr->set_eye(Vector3d(2, -1.5, 1));
+  pinhole_ptr->set_eye(Vector3d(0, 0, 100));
   pinhole_ptr->set_lookat(Vector3d::Zero());
   pinhole_ptr->set_view_distance(75.0); // zoom: greater is nearer
+  pinhole_ptr->set_zoom(1.0);
   pinhole_ptr->compute_uvw();
-  // DIFF pinhole_ptr->set_zoom(2);
+  // w.set_camera(pinhole_ptr);
 
-  // FishEye* fisheye_ptr = new FishEye();
-  // fisheye_ptr->set_fov(35);
+  Orthographic* ortographic_ptr = new Orthographic();
+  w.set_camera(ortographic_ptr);
 
-  // Spherical* spherical_ptr = new Spherical();
-  // spherical_ptr->set_vertical_fov(30);
-  // spherical_ptr->set_horizontal_fov(30);
+  // PointLight* light_ptr = new PointLight();
+  // light_ptr->set_location(Vector3d(100, 100, 200));
+  // light_ptr->scale_radiance(2.0);
+  // w.add_light(light_ptr);
 
-  // Ortographic* ortographic_ptr = new Ortographic();
-  
-  w.set_camera(pinhole_ptr);
-
-  Directional* light_ptr1 = new Directional();
-  light_ptr1->set_direction(Vector3d(100, 100, 200));
-  // DIFF light_ptr1->set_direction(Vector3d(2, -1.5, 1));
-  light_ptr1->scale_radiance(3.0);
-  // DIFF light_ptr1->set_color(green);
-  w.add_light(light_ptr1);
+  // Directional* light_ptr1 = new Directional();
+  // light_ptr1->set_direction(Vector3d(2, -1.5, 1));
+  // light_ptr1->set_direction(Vector3d(1.0, 1.0, 2.0));
+  // light_ptr1->scale_radiance(2.0);
+  // w.add_light(light_ptr1);
 }
 
 
@@ -87,7 +139,7 @@ void build_single_sphere(World& w) {
   matte_ptr1->set_ka(ka);
   matte_ptr1->set_kd(kd);
   matte_ptr1->set_cd(yellow);
-  
+
   RaytracerSphere* sphere_ptr1 = new RaytracerSphere(Vector3d(0, 0, 0), 1);
   sphere_ptr1->set_color(yellow);
   sphere_ptr1->set_material(matte_ptr1);
@@ -107,7 +159,7 @@ void build_shaded_spheres(World &w) {
   matte_ptr1->set_ka(ka);
   matte_ptr1->set_kd(kd);
   matte_ptr1->set_cd(yellow);
-  
+
   RaytracerSphere* sphere_ptr1 = new RaytracerSphere(Vector3d(5, 3, 0), 30);
   sphere_ptr1->set_color(yellow);
   sphere_ptr1->set_material(matte_ptr1);
@@ -124,7 +176,7 @@ void build_shaded_spheres(World &w) {
   matte_ptr2->set_ka(ka);
   matte_ptr2->set_kd(kd);
   matte_ptr2->set_cd(brown);
-  
+
   RaytracerSphere*   sphere_ptr2 = new RaytracerSphere(Vector3d(45, -7, -60), 20);
   sphere_ptr2->set_material(matte_ptr2);
   sphere_ptr2->set_color(brown);

@@ -27,9 +27,12 @@ bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
-    sr.normal = intersectionNormal;
-    sr.local_hit_point = intersectionPoint;
-    return true;
+
+    if (tmin > kEpsilon) {
+      sr.normal = intersectionNormal;
+      sr.local_hit_point = intersectionPoint;
+      return true;
+    }
   }
 
   return false;

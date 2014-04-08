@@ -17,7 +17,8 @@ ViewPlane::ViewPlane(const ViewPlane& vp) :
   vres(vp.vres), 
   px_size(vp.px_size),
   gamma(vp.gamma),
-  show_out_of_gamut(vp.show_out_of_gamut)
+  show_out_of_gamut(vp.show_out_of_gamut),
+  sampler_ptr(NULL)
 {
   if (vp.sampler_ptr)
     sampler_ptr = vp.sampler_ptr->clone();

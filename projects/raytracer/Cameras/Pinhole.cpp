@@ -29,7 +29,7 @@ Pinhole::~Pinhole() {}
 
 
 Vector3d Pinhole::get_direction(const Vector2d& p) const {
-  Vector3d dir = p(0) * u + p(1) * v - d * w;
+  Vector3d dir = (p(0) * u) + (p(1) * v) - (d * w);
   dir.normalize();
 	
   return dir;

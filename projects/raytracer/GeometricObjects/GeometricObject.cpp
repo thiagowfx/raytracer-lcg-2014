@@ -7,19 +7,17 @@ GeometricObject::GeometricObject() :
 
 
 GeometricObject::GeometricObject (const GeometricObject& object) :
+  material_ptr(NULL),
   color(object.color)
 {
   if (object.material_ptr)
     material_ptr = object.material_ptr->clone();
-  else
-    material_ptr = NULL;
 }	
 
 
 GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
   
-  if (this != &rhs) {
-    
+  if (this != &rhs) {    
     if (material_ptr) {
       delete material_ptr;
       material_ptr = NULL;

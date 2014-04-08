@@ -2,7 +2,6 @@
 #define __DIRECTIONAL__
 
 #include "Light.h"
-#include "RGBColor.h"
 #include "World.h"          // needed later on for shadows
 #include "ShadeRec.h"
 

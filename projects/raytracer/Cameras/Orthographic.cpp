@@ -1,18 +1,18 @@
-#include "Ortographic.h"
+#include "Orthographic.h"
 
-Ortographic::Ortographic() :
+Orthographic::Orthographic() :
   Camera(),
   zw(100.0)
 {}
 
 
-Ortographic::Ortographic(const Ortographic& orto) :
+Orthographic::Orthographic(const Orthographic& orto) :
   Camera(orto),
   zw(orto.zw)
 {}
 
 
-Ortographic& Ortographic::operator= (const Ortographic& rhs) {
+Orthographic& Orthographic::operator= (const Orthographic& rhs) {
   if (this != &rhs) {
     Camera::operator= (rhs);
     zw = rhs.zw;
@@ -22,15 +22,15 @@ Ortographic& Ortographic::operator= (const Ortographic& rhs) {
 }
 
 
-Ortographic::~Ortographic() {}
+Orthographic::~Orthographic() {}
 
 
-Ortographic* Ortographic::clone() const {
-  return new Ortographic(*this);
+Orthographic* Orthographic::clone() const {
+  return new Orthographic(*this);
 }
 
 
-void Ortographic::render_scene(const World& w, const char* image_file) {
+void Orthographic::render_scene(const World& w, const char* image_file) {
   RGBColor L;
   ViewPlane vp(w.vp);
   Ray      ray;
@@ -52,7 +52,8 @@ void Ortographic::render_scene(const World& w, const char* image_file) {
         pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
         pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
         ray.o = Vector3d(pp(0), pp(1), zw);
-        L += w.tracer_ptr->trace_ray(ray, depth);
+        // L += w.tracer_ptr->trace_ray(ray, depth);
+        L += w.tracer_ptr->trace_ray(ray);
       }
 
       L /= n;                   // average the colors

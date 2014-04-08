@@ -45,6 +45,7 @@ class World {
   void set_ambient_light(Light*); 
   void set_camera(Camera*);	 
   void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
+  ShadeRec hit_bare_bones_objects(const Ray&);
   ShadeRec hit_objects(const Ray&);
 						
  private:

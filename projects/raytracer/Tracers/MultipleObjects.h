@@ -2,6 +2,7 @@
 #define __MULTIPLE_OBJECTS__
 
 #include "Tracer.h"
+#include "World.h"
 
 class MultipleObjects: public Tracer {
   
@@ -10,7 +11,6 @@ class MultipleObjects: public Tracer {
   MultipleObjects(World*); 
   virtual ~MultipleObjects();
   virtual RGBColor trace_ray(const Ray& ray) const;
-  virtual RGBColor trace_ray(const Ray ray, const int depth) const;
 };
 
 

@@ -8,17 +8,15 @@ Matte::Matte () :
 
 
 Matte::Matte(const Matte& m) :
-  Material(m)
+  Material(m),
+  ambient_brdf(NULL),
+  diffuse_brdf(NULL)
 {
   if(m.ambient_brdf)
     ambient_brdf = m.ambient_brdf->clone(); 
-  else
-    ambient_brdf = NULL;
   
   if(m.diffuse_brdf)
     diffuse_brdf = m.diffuse_brdf->clone(); 
-  else
-    diffuse_brdf = NULL;
 }
 
 
