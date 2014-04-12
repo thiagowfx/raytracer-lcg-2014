@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // ui initial values
+    raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
+    raytracer.set_vres(ui->verticalResolutionSpinBox->value());
+
+    updateRaytracerImage();
 }
 
 MainWindow::~MainWindow()
@@ -16,4 +22,19 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::horizontalResolutionChanged(int resolution) {
+    raytracer.set_hres(resolution);
+    updateRaytracerImage();
+}
+
+void MainWindow::verticalResolutionChanged(int resolution) {
+    raytracer.set_vres(resolution);
+    updateRaytracerImage();
+}
+
+void MainWindow::updateRaytracerImage() {
+    raytracer.render_scene();
+    ui->raytracedImage->setPixmap(QPixmap(raytracer.image));
 }

@@ -1,10 +1,6 @@
-#ifndef __MAIN__
-#define __MAIN__
+#ifndef RAYTRACER_H
+#define RAYTRACER_H
 
-#include <Eigen/Dense>
-using Eigen::Vector3d;
-
-/* RAYTRACER */
 #include "Ambient.h"
 #include "Camera.h"
 #include "Constants.h"
@@ -36,7 +32,22 @@ using Eigen::Vector3d;
 #include "ViewPlane.h"
 #include "World.h"
 
-/* PCS_DETECTION */
-#include "pc-shape-detection.h"
+class Raytracer
+{
+public:
+    Raytracer();
+    ~Raytracer();
+    void set_hres(const int resolution);
+    void set_vres(const int resolution);
+    void render_scene();
+    void set_up();
+    const char* image="raytraced_image.png";
+private:
+    World* w;
+    const float ka = 0.25;
+    const float kd = 0.75;
+    const float ks = 0.12;
+    const float expi = 20;
+};
 
-#endif
+#endif // RAYTRACER_H

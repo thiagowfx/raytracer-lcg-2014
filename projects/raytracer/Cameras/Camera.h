@@ -14,7 +14,7 @@ class Camera {
   Camera(const Camera& camera);
   virtual Camera* clone() const = 0;
   virtual ~Camera(); 
-  virtual void render_scene(const World& w, const char* image_file) = 0;
+  virtual void render_scene(const World* w, const char* image_file) = 0;
   void set_eye(const Vector3d& p);
   void set_lookat(const Vector3d& p);
   void set_up_vector(const Vector3d& u);

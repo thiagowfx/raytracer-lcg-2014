@@ -51,9 +51,9 @@ Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int v
 }
 
 
-void FishEye::render_scene(const World& w, const char* image_file) {
+void FishEye::render_scene(const World* w, const char* image_file) {
   RGBColor  L;
-  ViewPlane vp(w.vp);
+  ViewPlane vp(w->vp);
   Ray       ray;
   int       depth = 0;
   Vector2d  sp;        // sample point in [0, 1] X [0, 1]
@@ -75,12 +75,12 @@ void FishEye::render_scene(const World& w, const char* image_file) {
         ray.d = ray_direction(pp, vp.hres, vp.vres, vp.px_size, r_squared);
 
         if (r_squared <= 1.0)
-          L += w.tracer_ptr->trace_ray(ray, depth);
+          L += w->tracer_ptr->trace_ray(ray, depth);
       }
 
       L /= n;
       L *= exposure_time;
-      w.display_pixel(r, c, L, image);
+      w->display_pixel(r, c, L, image);
     }
   }
 

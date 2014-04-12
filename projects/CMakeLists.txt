@@ -11,20 +11,6 @@ include_directories(${RAYTRACER_INCLUDE_DIRS})
 include_directories(${PCS_DETECTION_INCLUDE_DIRS})
 
 
-# Console build
-add_executable(
-  runRaytracer
-  main.cpp
-  $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
-  $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
-  )
-
-target_link_libraries(
-  runRaytracer
-  ${PNG_LIBRARY}
-  )
-
-
 # Qt Build
 # See http://qt-project.org/doc/qt-5/cmake-manual.html
 
@@ -48,10 +34,17 @@ add_executable(
   ${QT_RAYTRACER_EXECUTABLE}
   main_qt.cpp
   mainwindow.cpp
+  $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
+  $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
   ${${QT_RAYTRACER_EXECUTABLE}_UIS_H}
   )
 
 qt5_use_modules(
   ${QT_RAYTRACER_EXECUTABLE}  
   Widgets
+  )
+
+target_link_libraries(
+  ${QT_RAYTRACER_EXECUTABLE}
+  ${PNG_LIBRARY}
   )

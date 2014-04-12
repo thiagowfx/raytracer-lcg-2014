@@ -15,7 +15,7 @@ class Pinhole: public Camera {
   void set_view_distance(const float d);
   void set_zoom(const float zoom);
   Vector3d get_direction(const Vector2d& p) const;
-  virtual void render_scene(const World& w, const char* image_file);
+  virtual void render_scene(const World* w, const char* image_file);
 		
  private:
   float	d;                      // view plane distance

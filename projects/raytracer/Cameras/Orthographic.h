@@ -15,7 +15,7 @@ class Orthographic : public Camera {
   virtual ~Orthographic();
   virtual Orthographic* clone() const;
   void set_view_distance(const float);
-  virtual void render_scene(const World& w, const char* image_file);
+  virtual void render_scene(const World* w, const char* image_file);
 
  private:
   float zw;
