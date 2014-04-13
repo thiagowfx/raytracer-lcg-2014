@@ -37,8 +37,11 @@ class Raytracer
 public:
     Raytracer();
     ~Raytracer();
-    void set_hres(const int resolution);
-    void set_vres(const int resolution);
+    void set_hres(const int);
+    void set_vres(const int);
+    void set_number_of_samples(const int);
+    void set_pixel_size(double);
+    void set_gamma_correction(double);
     void render_scene();
     void set_up();
     const char* image="raytraced_image.png";

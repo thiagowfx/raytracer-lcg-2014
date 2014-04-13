@@ -21,6 +21,9 @@ private slots:
     void on_actionQuit_triggered();
     void horizontalResolutionChanged(int);
     void verticalResolutionChanged(int);
+    void numberOfSamplesChanged(int);
+    void pixelSizeChanged(double);
+    void gammaCorrectionChanged(double);
 
 private:
     Ui::MainWindow *ui;

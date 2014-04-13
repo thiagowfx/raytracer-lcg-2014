@@ -7,9 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // ui initial values
+    /* ui initial values */
     raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
     raytracer.set_vres(ui->verticalResolutionSpinBox->value());
+    raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
+    raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
+    raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
 
     updateRaytracerImage();
 }
@@ -31,6 +34,21 @@ void MainWindow::horizontalResolutionChanged(int resolution) {
 
 void MainWindow::verticalResolutionChanged(int resolution) {
     raytracer.set_vres(resolution);
+    updateRaytracerImage();
+}
+
+void MainWindow::numberOfSamplesChanged(int samples) {
+    raytracer.set_number_of_samples(samples);
+    updateRaytracerImage();
+}
+
+void MainWindow::pixelSizeChanged(double size) {
+    raytracer.set_pixel_size(size);
+    updateRaytracerImage();
+}
+
+void MainWindow::gammaCorrectionChanged(double gamma) {
+    raytracer.set_gamma_correction(gamma);
     updateRaytracerImage();
 }
 
