@@ -38,11 +38,13 @@ public:
     Raytracer();
     ~Raytracer();
     /* ViewPlane */
-    void set_hres(const int);
-    void set_vres(const int);
-    void set_number_of_samples(const int);
+    void set_hres(int);
+    void set_vres(int);
+    void set_number_of_samples(int);
     void set_pixel_size(double);
     void set_gamma_correction(double);
+    /* World */
+    void set_background_color(double,double,double);
     /* Raytracer */
     void render_scene();
     void set_up();

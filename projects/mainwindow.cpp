@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
     raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
     raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
+    QColor color = ui->backgroundColorPushButton->palette().color(QPalette::Window);
+    raytracer.set_background_color(color.red(), color.green(), color.blue());
 
     updateRaytracerImage();
 }
@@ -29,16 +31,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
-}
-
-void MainWindow::on_actionSave_PNG_Image_triggered()
-{
-    QString fileName = QFileDialog::getSaveFileName(
-                this,
-                tr("Export image"),
-                tr("."),
-                tr("Images (*.png *.jpg *.jpeg)"));
-    ui->raytracedImage->pixmap()->save(fileName);
 }
 
 void MainWindow::horizontalResolutionChanged(int resolution) {
@@ -77,4 +69,29 @@ void MainWindow::updateRaytracerImage() {
     raytracer.render_scene();
     ui->raytracedImage->setPixmap(QPixmap(raytracer.image));
     raytracerWorkingLabel->setText(tr("Idle"));
+}
+
+void MainWindow::on_actionSave_PNG_Image_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(
+                this,
+                tr("Export image"),
+                tr("."),
+                tr("Images (*.png *.jpg *.jpeg)"));
+    ui->raytracedImage->pixmap()->save(fileName);
+}
+
+void MainWindow::on_actionAbout_triggered() {
+    QMessageBox::about(this,
+                       tr("About"),
+                       tr("A simple raytracer project"));
+}
+
+void MainWindow::on_backgroundColorPushButton_clicked() {
+    QColor color = QColorDialog::getColor(Qt::black, this);
+    if (color.isValid()) {
+        ui->backgroundColorPushButton->setPalette(QPalette(color));
+        raytracer.set_background_color(color.red(), color.green(), color.blue());
+        if (ui->autoRenderingCheckBox->isChecked())
+            updateRaytracerImage();
+    }
 }

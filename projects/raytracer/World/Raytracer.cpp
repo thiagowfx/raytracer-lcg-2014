@@ -10,15 +10,15 @@ Raytracer::~Raytracer() {
     delete w;
 }
 
-void Raytracer::set_hres(const int resolution) {
+void Raytracer::set_hres(int resolution) {
     w->vp.set_hres(resolution);
 }
 
-void Raytracer::set_vres(const int resolution) {
+void Raytracer::set_vres(int resolution) {
     w->vp.set_vres(resolution);
 }
 
-void Raytracer::set_number_of_samples(const int samples) {
+void Raytracer::set_number_of_samples(int samples) {
     w->vp.set_samples(samples);
 }
 
@@ -30,6 +30,10 @@ void Raytracer::set_gamma_correction(double gamma) {
     w->vp.set_gamma(gamma);
 }
 
+void Raytracer::set_background_color(double r, double g, double b) {
+    w->background_color = RGBColor(r, g, b);
+}
+
 void Raytracer::render_scene() {
     puts("INFO: BEGIN Raytracer::render_scene()");
     w->camera_ptr->render_scene(w, image);
@@ -38,8 +42,6 @@ void Raytracer::render_scene() {
 
 void Raytracer::set_up() {
     w->background_color = green;
-    w->vp.set_pixel_size(1.0);
-    w->vp.set_samples(4);
 
     w->tracer_ptr = new RayCast(w);
 
