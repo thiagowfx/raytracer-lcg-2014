@@ -43,30 +43,36 @@ void MainWindow::on_actionSave_PNG_Image_triggered()
 
 void MainWindow::horizontalResolutionChanged(int resolution) {
     raytracer.set_hres(resolution);
-    updateRaytracerImage();
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::verticalResolutionChanged(int resolution) {
     raytracer.set_vres(resolution);
-    updateRaytracerImage();
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::numberOfSamplesChanged(int samples) {
     raytracer.set_number_of_samples(samples);
-    updateRaytracerImage();
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::pixelSizeChanged(double size) {
     raytracer.set_pixel_size(size);
-    updateRaytracerImage();
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::gammaCorrectionChanged(double gamma) {
     raytracer.set_gamma_correction(gamma);
-    updateRaytracerImage();
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::updateRaytracerImage() {
+    qDebug() << "updateRaytracerImage()";
     raytracerWorkingLabel->setText(tr("Rendering scene..."));
     raytracer.render_scene();
     ui->raytracedImage->setPixmap(QPixmap(raytracer.image));

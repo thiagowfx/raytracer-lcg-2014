@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>600</height>
+    <width>1100</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>531</width>
-      <height>431</height>
+      <width>550</width>
+      <height>550</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -33,11 +33,11 @@
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="autoRenderingCheckBox">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>20</y>
+      <x>570</x>
+      <y>10</y>
       <width>111</width>
       <height>20</height>
      </rect>
@@ -45,12 +45,15 @@
     <property name="text">
      <string>Auto-rendering</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>30</y>
+      <x>580</x>
+      <y>50</y>
       <width>202</width>
       <height>141</height>
      </rect>
@@ -79,13 +82,6 @@
        </property>
        <property name="value">
         <number>400</number>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Vertical Resolution</string>
        </property>
       </widget>
      </item>
@@ -174,6 +170,13 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Vertical Resolution</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -182,7 +185,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1101</width>
+     <width>1100</width>
      <height>19</height>
     </rect>
    </property>
@@ -251,6 +254,22 @@
  </resources>
  <connections>
   <connection>
+   <sender>actionRender</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>updateRaytracerImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>numberOfSamplesSpinBox</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -299,22 +318,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>gammaCorrectionDoubleSpinBox</sender>
-   <signal>valueChanged(double)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>gammaCorrectionChanged(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1084</x>
-     <y>288</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>horizontalResolutionSpinBox</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -330,6 +333,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>gammaCorrectionDoubleSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gammaCorrectionChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1084</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>horizontalResolutionChanged(int)</slot>
@@ -337,5 +356,6 @@
   <slot>numberOfSamplesChanged(int)</slot>
   <slot>pixelSizeChanged(double)</slot>
   <slot>gammaCorrectionChanged(double)</slot>
+  <slot>updateRaytracerImage()</slot>
  </slots>
 </ui>

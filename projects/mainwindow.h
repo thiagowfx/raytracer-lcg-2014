@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QLabel>
 #include <QMainWindow>
@@ -17,7 +18,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void updateRaytracerImage();
     
 private slots:
     void on_actionQuit_triggered();
@@ -26,6 +26,7 @@ private slots:
     void numberOfSamplesChanged(int);
     void pixelSizeChanged(double);
     void gammaCorrectionChanged(double);
+    void updateRaytracerImage();
 
     void on_actionSave_PNG_Image_triggered();
 
