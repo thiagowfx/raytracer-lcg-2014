@@ -23,7 +23,6 @@
 #include <cstdio>
 #include <cstring>              /* for png++ streerror */
 #include <png++/png.hpp>
-#include <exception>
 #include <vector>
 using namespace std;
 
@@ -73,6 +72,5 @@ inline void World::set_ambient_light(Light* light_ptr) {
 inline void World::set_camera(Camera* c_ptr) {
   camera_ptr = c_ptr;
 }
-
 
 #endif

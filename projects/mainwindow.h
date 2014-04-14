@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFileDialog>
+#include <QLabel>
 #include <QMainWindow>
 #include "Raytracer.h"
 
@@ -25,8 +27,12 @@ private slots:
     void pixelSizeChanged(double);
     void gammaCorrectionChanged(double);
 
+    void on_actionSave_PNG_Image_triggered();
+
 private:
     Ui::MainWindow *ui;
+    QLabel* raytracerWorkingLabel;
+
     Raytracer raytracer;
 };
 

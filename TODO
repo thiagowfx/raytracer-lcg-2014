@@ -3,7 +3,17 @@
 #+SEQ_TODO: TODO IN_PROGRESS DONE
 
 * Interface
-** TODO renderizar 1 de cada vez, num thread separado
+** TODO renderizar apenas uma imagem de cada vez, e num thread separado (para não congelar a UI)
+** barra de status informando o status
+** barra de status informando o progresso
+** TODO camera: set_eye (primitivo)
+** TODO camera: set look at
+** checker para escolher se vai renderizar em tempo real ou nao
+** mais um botao para renderizar manualmente / atualizar a renderização (para o caso anterior)
+** TODO trackball: camera
+** eventos com as teclas direcionais (setas)
+** aperfeiçoar a API (classe Raytracer): deixá-la o máximo independente entre o QT e a biblioteca quanto possível
+** TODO (complexo, deixar para bem mais tarde) forma de adicionar objetos e gerenciá-los a partir da própria interface
 ** 
 * General
 ** DONE Implementar todos os Samplers (nrooks, ...)

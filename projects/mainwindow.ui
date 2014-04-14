@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1101</width>
     <height>600</height>
    </rect>
   </property>
@@ -19,67 +19,54 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>500</width>
-      <height>500</height>
+      <width>531</width>
+      <height>431</height>
      </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="text">
      <string>RaytracedImage</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QCheckBox" name="checkBox">
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>60</y>
-      <width>191</width>
-      <height>25</height>
+      <y>20</y>
+      <width>111</width>
+      <height>20</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Vertical Resolution</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="verticalResolutionSpinBox">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>800</number>
-       </property>
-       <property name="singleStep">
-        <number>10</number>
-       </property>
-       <property name="value">
-        <number>400</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string>Auto-rendering</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>700</x>
       <y>30</y>
-      <width>191</width>
-      <height>25</height>
+      <width>202</width>
+      <height>141</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Horizontal Resolution</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
        <property name="minimum">
         <number>1</number>
@@ -95,26 +82,37 @@
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>90</y>
-      <width>174</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Vertical Resolution</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="verticalResolutionSpinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>800</number>
+       </property>
+       <property name="singleStep">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>400</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Number of Samples</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="2" column="1">
       <widget class="QSpinBox" name="numberOfSamplesSpinBox">
        <property name="minimum">
         <number>1</number>
@@ -127,26 +125,14 @@
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>120</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
+     <item row="3" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Pixel Size</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="3" column="1">
       <widget class="QDoubleSpinBox" name="pixelSizeDoubleSpinBox">
        <property name="minimum">
         <double>0.100000000000000</double>
@@ -162,26 +148,14 @@
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>160</y>
-      <width>188</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
+     <item row="4" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Gamma Correction</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="4" column="1">
       <widget class="QDoubleSpinBox" name="gammaCorrectionDoubleSpinBox">
        <property name="decimals">
         <number>1</number>
@@ -208,7 +182,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1101</width>
      <height>19</height>
     </rect>
    </property>
@@ -216,12 +190,30 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSave_PNG_Image"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionRender"/>
+  </widget>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/exit-24x24.png</normaloff>:/assets/assets/exit-24x24.png</iconset>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>
@@ -229,41 +221,35 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
+  <action name="actionSave_PNG_Image">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/save-24x24.png</normaloff>:/assets/assets/save-24x24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionRender">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/camera-24x24.png</normaloff>:/assets/assets/camera-24x24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Render</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
-  <connection>
-   <sender>horizontalResolutionSpinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>horizontalResolutionChanged(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>722</x>
-     <y>61</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>verticalResolutionSpinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>verticalResolutionChanged(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>713</x>
-     <y>111</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>numberOfSamplesSpinBox</sender>
    <signal>valueChanged(int)</signal>
@@ -271,8 +257,8 @@
    <slot>numberOfSamplesChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>709</x>
-     <y>121</y>
+     <x>1084</x>
+     <y>227</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -287,8 +273,24 @@
    <slot>pixelSizeChanged(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>696</x>
-     <y>151</y>
+     <x>1084</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalResolutionSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>verticalResolutionChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1084</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -303,8 +305,24 @@
    <slot>gammaCorrectionChanged(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>703</x>
-     <y>191</y>
+     <x>1084</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalResolutionSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>horizontalResolutionChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1084</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
