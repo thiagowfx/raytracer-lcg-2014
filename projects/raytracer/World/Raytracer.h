@@ -45,6 +45,8 @@ public:
     void set_gamma_correction(double);
     /* World */
     void set_background_color(double,double,double);
+    /* Ambient Light */
+    void set_ambient_radiance(double);
     /* Raytracer */
     void render_scene();
     void set_up();

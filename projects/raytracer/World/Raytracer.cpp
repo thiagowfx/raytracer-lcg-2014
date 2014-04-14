@@ -34,6 +34,12 @@ void Raytracer::set_background_color(double r, double g, double b) {
     w->background_color = RGBColor(r, g, b);
 }
 
+void Raytracer::set_ambient_radiance(double r) {
+    Ambient* ambient_light = new Ambient;
+    ambient_light->scale_radiance(r);
+    w->set_ambient_light(ambient_light);
+}
+
 void Raytracer::render_scene() {
     puts("INFO: BEGIN Raytracer::render_scene()");
     w->camera_ptr->render_scene(w, image);
@@ -41,8 +47,6 @@ void Raytracer::render_scene() {
 }
 
 void Raytracer::set_up() {
-    w->background_color = green;
-
     w->tracer_ptr = new RayCast(w);
 
     Pinhole* camera_ptr = new Pinhole;
@@ -52,10 +56,10 @@ void Raytracer::set_up() {
     camera_ptr->compute_uvw();
     w->set_camera(camera_ptr);
 
-    Phong*    phong_ptr2 = new Phong;
+    Phong* phong_ptr2 = new Phong;
     phong_ptr2->set_ka(0.25);
     phong_ptr2->set_kd(0.5);
-    phong_ptr2->set_cd(red);
+    phong_ptr2->set_cd(yellow);
     phong_ptr2->set_ks(0.05);
     phong_ptr2->set_exp(50);
 

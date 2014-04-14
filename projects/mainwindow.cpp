@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
     QColor color = ui->backgroundColorPushButton->palette().color(QPalette::Window);
     raytracer.set_background_color(color.red(), color.green(), color.blue());
+    raytracer.set_ambient_radiance(ui->ambientRadianceDoubleSpinBox->value());
 
     updateRaytracerImage();
 }
@@ -59,6 +60,12 @@ void MainWindow::pixelSizeChanged(double size) {
 
 void MainWindow::gammaCorrectionChanged(double gamma) {
     raytracer.set_gamma_correction(gamma);
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
+}
+
+void MainWindow::ambientRadianceChanged(double r) {
+    raytracer.set_ambient_radiance(r);
     if (ui->autoRenderingCheckBox->isChecked())
         updateRaytracerImage();
 }
