@@ -2,7 +2,17 @@
 ##+STARTUP: showall
 #+SEQ_TODO: TODO IN_PROGRESS DONE
 
-* Top-level
+* Interface
+** TODO renderizar 1 de cada vez, num thread separado
+** 
+* General
+** DONE Implementar todos os Samplers (nrooks, ...)
+** IN_PROGRESS Implementar todas as câmeras (thinlens...)
+
+** DONE PerfectSpecular.cpp
+** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
+** DONE Samplers -- realmente necessário? ao menos, retirar de onde não for preciso -- OK, refinado, inclusive no ViewPlane
+
 ** continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
 ** IN_PROGRESS ver o que falta colocar do livro (tweaks?) -- ok, progredindo
 ** incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
@@ -11,7 +21,7 @@
 ** DONE incluir vp.num_samples em cima do World render_scene -- corrigido com full suporte de samplers
 ** DONE implementar render_perspective no World (pegar código do livro) -- realmente necessário, dado que eu tenho a pinhole???. Update: ortographic tem a sua própria classe agora.
 ** DONE melhor interface de build -- OK, feito parcialmente: mais do que isso -- só deixando mais dinâmico
-* General
+
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
 ** Quando (se) implementar depth, mudar nos tracers.
 ** DONE Phong reflective model...básico
@@ -19,17 +29,13 @@
 ** DONE Testes -- não são realmente necessários a priori, mas já temos suporte inicial, se for necessário
 ** Documentação (externa)?
 ** DONE Integração com o projeto do Daniel -- começar o design
-*** geometricobject class
+*** DONE geometricobject class
 *** DONE testar o código dele
-*** importar a classe dele (includes)
-*** IN_PROGRESS integrar o projeto dele com o cmake
+*** DONE importar a classe dele (includes)
+*** DONE integrar o projeto dele com o cmake
 *** DONE verificar as bibliotecas do projeto dele (anttweakbar etc), caminho e etc
-*** IN_PROGRESS código de build primitive na main. E testar!!!
+*** DONE código de build primitive na main. E testar!!!
 ** DONE World and PNG simplifying -- ?? realmente necessário ?? --> habilitar isso de forma transparente, escondendo (ou deletando) o world_output
-* Classes
-** DONE PerfectSpecular.cpp
-** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
-** DONE Samplers -- realmente necessário? ao menos, retirar de onde não for preciso -- OK, refinado, inclusive no ViewPlane
 * Chapters
 ** DONE 1 raytracer design
 ** DONE 2 essential math
@@ -43,6 +49,3 @@
 ** TODO 14 Lights and Materials -- reforçar
 ** TODO 15 Specular Reflection
 ** TODO 16 Shadows
-* Extra
-** Implementar todos os Samplers (nrooks, ...)
-** Implementar todas as câmeras (thinlens...)
