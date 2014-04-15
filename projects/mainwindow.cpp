@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle(tr("Raytracer"));
 
     /* ui initial values */
     raytracerWorkingLabel = new QLabel();
@@ -27,11 +28,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete raytracerWorkingLabel;
-}
-
-void MainWindow::on_actionQuit_triggered()
-{
-    QApplication::quit();
 }
 
 void MainWindow::horizontalResolutionChanged(int resolution) {
@@ -78,6 +74,11 @@ void MainWindow::updateRaytracerImage() {
     raytracerWorkingLabel->setText(tr("Idle"));
 }
 
+void MainWindow::on_actionQuit_triggered()
+{
+    QApplication::quit();
+}
+
 void MainWindow::on_actionSave_PNG_Image_triggered() {
     QString fileName = QFileDialog::getSaveFileName(
                 this,
@@ -102,3 +103,22 @@ void MainWindow::on_backgroundColorPushButton_clicked() {
             updateRaytracerImage();
     }
 }
+
+/* void MainWindow::keyPressEvent(QKeyEvent *event) {
+
+    switch(event->key()){
+    case Qt::Key_Up:
+        qDebug() << "up";
+        break;
+    case Qt::Key_Left:
+        qDebug() << "left";
+        break;
+    case Qt::Key_Right:
+        qDebug() << "right";
+        break;
+    case Qt::Key_Down:
+        qDebug() << "down";
+        break;
+    }
+}
+*/

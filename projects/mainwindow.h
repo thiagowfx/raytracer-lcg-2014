@@ -4,6 +4,7 @@
 #include <QColorDialog>
 #include <QDebug>
 #include <QFileDialog>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QMainWindow>
 #include <QMessageBox>
@@ -23,7 +24,6 @@ public:
     ~MainWindow();
     
 private slots:
-    void on_actionQuit_triggered();
     void horizontalResolutionChanged(int);
     void verticalResolutionChanged(int);
     void numberOfSamplesChanged(int);
@@ -32,14 +32,16 @@ private slots:
     void ambientRadianceChanged(double);
     void updateRaytracerImage();
 
+    void on_actionQuit_triggered();
     void on_actionSave_PNG_Image_triggered();
     void on_actionAbout_triggered();
     void on_backgroundColorPushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QLabel* raytracerWorkingLabel;
+    /* void keyPressEvent(QKeyEvent *); */
 
+    QLabel* raytracerWorkingLabel;
     Raytracer raytracer;
 };
 
