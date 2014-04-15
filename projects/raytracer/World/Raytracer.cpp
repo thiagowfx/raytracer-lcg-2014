@@ -35,15 +35,11 @@ void Raytracer::set_background_color(double r, double g, double b) {
 }
 
 void Raytracer::set_ambient_radiance(double r) {
-    Ambient* ambient_light = new Ambient;
-    ambient_light->scale_radiance(r);
-    w->set_ambient_light(ambient_light);
+    w->ambient_ptr->scale_radiance(r);
 }
 
 void Raytracer::render_scene() {
-    puts("INFO: BEGIN Raytracer::render_scene()");
     w->camera_ptr->render_scene(w, image);
-    puts("INFO: END Raytracer::render_scene()");
 }
 
 void Raytracer::set_up() {

@@ -8,10 +8,10 @@ RGBColor::RGBColor() :
 {}
 
 
-RGBColor::RGBColor(float _r, float _g, float _b) :
-  r(_r),
-  g(_g),
-  b(_b)
+RGBColor::RGBColor(double r, double g, double b) :
+  r(r),
+  g(g),
+  b(b)
 {}
 
 
@@ -36,13 +36,13 @@ RGBColor& RGBColor::operator= (const RGBColor& rhs) {
 }
 
 
-RGBColor RGBColor::powc(float p) const {
+RGBColor RGBColor::powc(double p) const {
   return RGBColor(pow(r, p), pow(g, p), pow(b, p));
 }
 
 
 RGBColor RGBColor::max_to_one() const {
-  float max_value = max(r, max(g, b));
+  double max_value = max(r, max(g, b));
   return (max_value > 1.0) ? (*this / max_value) : *this;
 }
 

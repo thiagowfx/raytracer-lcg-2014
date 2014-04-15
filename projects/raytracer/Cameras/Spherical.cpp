@@ -31,23 +31,23 @@ Spherical& Spherical::operator=(const Spherical& rhs) {
 Spherical::~Spherical() {}
 
 
-Vector3d Spherical::ray_direction(const Vector2d& pp, const int hres, const int vres, const float s) const {
+Vector3d Spherical::ray_direction(const Vector2d& pp, const int hres, const int vres, const double s) const {
 
   // compute the normalised device coordinates
   Vector2d pn( 2.0 / (s * hres) * pp(0), 2.0 / (s * vres) * pp(1));
 
   // compute the angles lambda and phi in radians
-  float lambda = pn(0) * lambda_max * PI_ON_180;
-  float psi    = pn(1) * psi_max * PI_ON_180;
+  double lambda = pn(0) * lambda_max * PI_ON_180;
+  double psi    = pn(1) * psi_max * PI_ON_180;
 
   // compute the regular azimuth and polar angles
-  float phi         = PI - lambda;
-  float theta   = 0.5 * PI - psi;
+  double phi         = PI - lambda;
+  double theta   = 0.5 * PI - psi;
 
-  float sin_phi   = sin(phi);
-  float cos_phi   = cos(phi);
-  float sin_theta = sin(theta);
-  float cos_theta = cos(theta);
+  double sin_phi   = sin(phi);
+  double cos_phi   = cos(phi);
+  double sin_theta = sin(theta);
+  double cos_theta = cos(theta);
 
   // equation 11.6
   Vector3d dir  = sin_theta * sin_phi * u + cos_theta * v + sin_theta * cos_phi * w;

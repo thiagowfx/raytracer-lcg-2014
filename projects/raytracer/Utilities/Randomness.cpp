@@ -15,11 +15,11 @@ int rand_int(const int begin, const int end) {
 }
 
 
-float rand_float() {
-  return float(rand()) / float(RAND_MAX);
+double rand_double() {
+  return double(rand()) / double(RAND_MAX);
 }
 
 
-float rand_float(const float begin, const float end) {
-  return begin + ( rand_float() * (end - begin) );
+double rand_double(const double begin, const double end) {
+  return begin + ( rand_double() * (end - begin) );
 }

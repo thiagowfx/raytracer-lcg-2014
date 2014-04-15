@@ -13,8 +13,8 @@ class Matte: public Material {
   virtual Material* clone() const; 
   Matte& operator= (const Matte& rhs);
   ~Matte();		
-  void set_ka(const float k);		
-  void set_kd(const float k);
+  void set_ka(const double k);
+  void set_kd(const double k);
   void set_cd(const RGBColor& c);
   virtual RGBColor shade(ShadeRec& sr);
 		
@@ -26,13 +26,13 @@ class Matte: public Material {
 
 /* this sets Lambertian::kd,
    there is no Lambertian::ka data member because ambient reflection is diffuse reflection */
-inline void Matte::set_ka(const float ka) {
+inline void Matte::set_ka(const double ka) {
   ambient_brdf->set_kd(ka);
 }
 
 
 /* this also sets Lambertian::kd, but for a different Lambertian object */
-inline void Matte::set_kd (const float kd) {
+inline void Matte::set_kd (const double kd) {
   diffuse_brdf->set_kd(kd);
 }
 

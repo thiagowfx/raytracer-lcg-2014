@@ -30,19 +30,19 @@ FishEye& FishEye::operator=(const FishEye& rhs) {
 FishEye::~FishEye() {}
 
 
-Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int vres, const float s, float& r_squared) const {
+Vector3d FishEye::ray_direction(const Vector2d&  pp, const int hres, const int vres, const double s, double& r_squared) const {
 
   /* compute the normalized device coordinates */
   Vector2d pn(2.0 / (s * hres) * pp(0), 2.0 / (s * vres) * pp(1));
   r_squared = pn(0) * pn(0) + pn(1) * pn(1);
 
   if (r_squared <= 1.0) {
-    float r         = sqrt(r_squared);
-    float psi       = r * psi_max * PI_ON_180;
-    float sin_psi   = sin(psi);
-    float cos_psi   = cos(psi);
-    float sin_alpha = pn(1) / r;
-    float cos_alpha = pn(0) / r;
+    double r         = sqrt(r_squared);
+    double psi       = r * psi_max * PI_ON_180;
+    double sin_psi   = sin(psi);
+    double cos_psi   = cos(psi);
+    double sin_alpha = pn(1) / r;
+    double cos_alpha = pn(0) / r;
     Vector3d dir    = sin_psi * cos_alpha * u +  sin_psi * sin_alpha * v - cos_psi * w;
     return dir;
   }
@@ -58,7 +58,7 @@ void FishEye::render_scene(const World* w, const char* image_file) {
   int       depth = 0;
   Vector2d  sp;        // sample point in [0, 1] X [0, 1]
   Vector2d  pp;        // sample point on the pixel
-  float     r_squared; // sum of squares of normalised device coordinates
+  double     r_squared; // sum of squares of normalised device coordinates
   const int n     = vp.sampler_ptr->get_num_samples();
   ray.o = eye;
 

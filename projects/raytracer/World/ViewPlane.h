@@ -22,8 +22,8 @@ class ViewPlane {
 						
   void set_hres(const int);		
   void set_vres(const int);				
-  void set_pixel_size(const float);		
-  void set_gamma(const float);		
+  void set_pixel_size(const double);
+  void set_gamma(const double);
   void set_show_of_gamut(const bool);
   void set_sampler(Sampler*);
   void set_samples(const int);
@@ -41,12 +41,12 @@ inline void ViewPlane::set_vres(const int v_res) {
 }
 
 
-inline void ViewPlane::set_pixel_size(const float size) {
+inline void ViewPlane::set_pixel_size(const double size) {
   px_size = size;
 }
 
 
-inline void ViewPlane::set_gamma(const float g) {
+inline void ViewPlane::set_gamma(const double g) {
   gamma = g;
 }
 

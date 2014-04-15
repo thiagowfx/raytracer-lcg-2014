@@ -32,7 +32,7 @@ class World {
   ViewPlane                vp;
   RGBColor                 background_color;
   Tracer*                  tracer_ptr;
-  Light*                   ambient_ptr;
+  Ambient*                 ambient_ptr;
   Camera*                  camera_ptr;		
   vector<GeometricObject*> objects;		
   vector<Light*>           lights;
@@ -41,7 +41,7 @@ class World {
   ~World();
   void add_object(GeometricObject*);
   void add_light(Light*); 
-  void set_ambient_light(Light*); 
+  void set_ambient_light(Ambient*);
   void set_camera(Camera*);	 
   void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
   ShadeRec hit_bare_bones_objects(const Ray&);
@@ -64,7 +64,7 @@ inline void World::add_light(Light* light_ptr) {
 }
 
 
-inline void World::set_ambient_light(Light* light_ptr) {
+inline void World::set_ambient_light(Ambient* light_ptr) {
   ambient_ptr = light_ptr;
 }
 

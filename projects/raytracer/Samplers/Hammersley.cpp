@@ -53,7 +53,7 @@ double Hammersley::phi(int j) {
 void Hammersley::generate_samples() {
   for (int p = 0; p < num_sets; p++) {
     for (int j = 0; j < num_samples; j++) {
-      Vector2d pv((float) j / (float) num_samples, phi(j));
+      Vector2d pv((double) j / (double) num_samples, phi(j));
       samples.push_back(pv);
     }
   }

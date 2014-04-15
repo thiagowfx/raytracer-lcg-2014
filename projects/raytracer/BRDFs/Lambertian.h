@@ -13,25 +13,25 @@ class Lambertian: public BRDF {
   ~Lambertian();
   Lambertian& operator= (const Lambertian& rhs);
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
-  virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, float& pdf) const;
+  virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
-  void set_ka(const float ka);	
-  void set_kd(const float kd);
+  void set_ka(const double ka);
+  void set_kd(const double kd);
   void set_cd(const RGBColor& c);
 					
  private:
-  float	   kd;
+  double	   kd;
   RGBColor cd;
   
 };
 
 
-inline void Lambertian::set_ka(const float k) {
+inline void Lambertian::set_ka(const double k) {
   kd = k;
 }
 
 
-inline void Lambertian::set_kd(const float k) {
+inline void Lambertian::set_kd(const double k) {
   kd = k;
 }
 

@@ -53,10 +53,10 @@ public:
     const char* image="raytraced_image.png";
 private:
     World* w;
-    const float ka = 0.25;
-    const float kd = 0.75;
-    const float ks = 0.12;
-    const float expi = 20;
+    const double ka = 0.25;
+    const double kd = 0.75;
+    const double ks = 0.12;
+    const double expi = 20;
 };
 
 #endif // RAYTRACER_H

@@ -14,15 +14,15 @@ class Orthographic : public Camera {
   Orthographic& operator= (const Orthographic& rhs);
   virtual ~Orthographic();
   virtual Orthographic* clone() const;
-  void set_view_distance(const float);
+  void set_view_distance(const double);
   virtual void render_scene(const World* w, const char* image_file);
 
  private:
-  float zw;
+  double zw;
 };
 
 
-inline void Orthographic::set_view_distance(const float d) {
+inline void Orthographic::set_view_distance(const double d) {
   this->zw = d;
 }
 

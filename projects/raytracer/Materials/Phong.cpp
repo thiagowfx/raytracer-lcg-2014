@@ -59,7 +59,7 @@ RGBColor Phong::shade (ShadeRec& sr) {
 
   for (int i = 0; i < num_lights; ++i) {
     Vector3d wi = -sr.w.lights[i]->get_direction(sr);
-    float ndotwi = sr.normal.dot(wi);
+    double ndotwi = sr.normal.dot(wi);
     
     if (ndotwi > 0.0) {
       // bool in_shadow = false;

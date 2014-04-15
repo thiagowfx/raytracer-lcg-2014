@@ -46,7 +46,7 @@ NRooks::~NRooks() {}
 void NRooks::generate_samples() {
   for (int p = 0; p < num_sets; p++)
     for (int j = 0; j < num_samples; j++) {
-      Vector2d sp((j + rand_float()) / num_samples, (j + rand_float()) / num_samples);
+      Vector2d sp((j + rand_double()) / num_samples, (j + rand_double()) / num_samples);
       samples.push_back(sp);
     }
 

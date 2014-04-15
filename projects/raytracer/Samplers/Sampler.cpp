@@ -80,7 +80,7 @@ void Sampler::shuffle_x_coordinates() {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i <  num_samples - 1; i++) {
       int target = rand_int() % num_samples + p * num_samples;
-      float temp = samples[i + p * num_samples + 1](0);
+      double temp = samples[i + p * num_samples + 1](0);
       samples[i + p * num_samples + 1](0) = samples[target](0);
       samples[target](0) = temp;
     }
@@ -91,7 +91,7 @@ void Sampler::shuffle_y_coordinates() {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i <  num_samples - 1; i++) {
       int target = rand_int() % num_samples + p * num_samples;
-      float temp = samples[i + p * num_samples + 1](1);
+      double temp = samples[i + p * num_samples + 1](1);
       samples[i + p * num_samples + 1](1) = samples[target](1);
       samples[target](1) = temp;
     }	
@@ -116,7 +116,7 @@ void Sampler::setup_shuffled_indices() {
 
 void Sampler::map_samples_to_unit_disk() {
   int size = samples.size();
-  float r, phi;                 // polar coordinates
+  double r, phi;                 // polar coordinates
   Vector2d sp;                   // sample point on unit disk
 	
   disk_samples.reserve(size);
@@ -161,27 +161,27 @@ void Sampler::map_samples_to_unit_disk() {
 }
 
 
-void Sampler::map_samples_to_hemisphere(const float exp) {
+void Sampler::map_samples_to_hemisphere(const double exp) {
   int size = samples.size();
   hemisphere_samples.reserve(num_samples * num_sets);
 		
   for (int j = 0; j < size; j++) {
-    float cos_phi = cos(2.0 * PI * samples[j](0));
-    float sin_phi = sin(2.0 * PI * samples[j](0));	
-    float cos_theta = pow((1.0 - samples[j](1)), 1.0 / (exp + 1.0));
-    float sin_theta = sqrt (1.0 - cos_theta * cos_theta);
-    float pu = sin_theta * cos_phi;
-    float pv = sin_theta * sin_phi;
-    float pw = cos_theta;
+    double cos_phi = cos(2.0 * PI * samples[j](0));
+    double sin_phi = sin(2.0 * PI * samples[j](0));
+    double cos_theta = pow((1.0 - samples[j](1)), 1.0 / (exp + 1.0));
+    double sin_theta = sqrt (1.0 - cos_theta * cos_theta);
+    double pu = sin_theta * cos_phi;
+    double pv = sin_theta * sin_phi;
+    double pw = cos_theta;
     hemisphere_samples.push_back(Vector3d(pu, pv, pw)); 
   }
 }
 
 
 void Sampler::map_samples_to_sphere() {
-  float r1, r2;
-  float x, y, z;
-  float r, phi;
+  double r1, r2;
+  double x, y, z;
+  double r, phi;
 		
   sphere_samples.reserve(num_samples * num_sets);   
 		

@@ -12,7 +12,7 @@ class Reflective: public Phong {
   Reflective& operator= (const Reflective& rhs);
   virtual Reflective* clone() const; 
   ~Reflective(); 
-  void set_kr(const float k);
+  void set_kr(const double k);
   void set_cr(const RGBColor& c);
   virtual RGBColor shade(ShadeRec& s);
 		
@@ -22,7 +22,7 @@ class Reflective: public Phong {
 };
 
 
-inline void Reflective::set_kr(const float k) {
+inline void Reflective::set_kr(const double k) {
   reflective_brdf->set_kr(k);
 }
 

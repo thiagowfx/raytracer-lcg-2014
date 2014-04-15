@@ -38,7 +38,7 @@ RaytracerPlane::~RaytracerPlane() {}
 
 
 bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
-  float t = (point - ray.o).dot(normal) / ray.d.dot(normal); 
+  double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
   
   if (t > kEpsilon) {
     tmin = t;

@@ -14,11 +14,11 @@ class Phong : public Material {
   virtual Material* clone() const;
   virtual ~Phong();
   virtual RGBColor shade (ShadeRec& s);
-  void set_ka(float ka);
-  void set_kd(float kd);
-  void set_ks(float ks);
+  void set_ka(double ka);
+  void set_kd(double kd);
+  void set_ks(double ks);
   void set_cd(const RGBColor& color);
-  void set_exp(float exp);
+  void set_exp(double exp);
   void set_cs(const RGBColor& color);
 
  private:
@@ -27,15 +27,15 @@ class Phong : public Material {
   GlossySpecular *specular_brdf;
 };
 
-inline void Phong::set_ka (float ka) {
+inline void Phong::set_ka (double ka) {
   ambient_brdf->set_ka (ka);
 }
 
-inline void Phong::set_kd (float kd) {
+inline void Phong::set_kd (double kd) {
   diffuse_brdf->set_kd (kd);
 }
 
-inline void Phong::set_ks (float ks) {
+inline void Phong::set_ks (double ks) {
   specular_brdf->set_ks (ks);
 }
 
@@ -45,7 +45,7 @@ inline void Phong::set_cd (const RGBColor& color) {
   specular_brdf->set_cs(color);
 }
 
-inline void Phong::set_exp (float exp) {
+inline void Phong::set_exp (double exp) {
   specular_brdf->set_exp (exp);
 }
 

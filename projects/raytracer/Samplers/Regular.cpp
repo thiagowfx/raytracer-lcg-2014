@@ -37,7 +37,7 @@ Regular::~Regular() {}
 
 
 void Regular::generate_samples() {
-  int n = (int) sqrt((float)num_samples);
+  int n = (int) sqrt((double)num_samples);
 
   for (int j = 0; j < num_sets; j++)
     for (int p = 0; p < n; p++)		

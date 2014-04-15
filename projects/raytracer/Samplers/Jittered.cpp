@@ -44,12 +44,12 @@ Jittered::~Jittered(void) {}
 
 
 void Jittered::generate_samples(void) {	
-  int n = (int) sqrt((float)num_samples); 
+  int n = (int) sqrt((double)num_samples);
 	
   for (int p = 0; p < num_sets; p++)
     for (int j = 0; j < n; j++)		
       for (int k = 0; k < n; k++) {
-        Vector2d sp((k + rand_float()) / n, (j + rand_float()) / n);				
+        Vector2d sp((k + rand_double()) / n, (j + rand_double()) / n);
         samples.push_back(sp);
       }		
 }

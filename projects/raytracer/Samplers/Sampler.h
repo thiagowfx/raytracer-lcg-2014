@@ -28,7 +28,7 @@ class Sampler {
   void shuffle_y_coordinates(); // shuffle the y coordinates of the points within set
   void setup_shuffled_indices(); // sets up randomly shuffled indices for the samples array
   void map_samples_to_unit_disk(); // maps the 2D sample points in the square [-1,1] X [-1,1] to a unit disk, using Peter Shirley's concentric map function
-  void map_samples_to_hemisphere(const float p); // Maps the 2D sample points to 3D points on a unit hemisphere with a cosine power density distribution in the polar angle
+  void map_samples_to_hemisphere(const double p); // Maps the 2D sample points to 3D points on a unit hemisphere with a cosine power density distribution in the polar angle
   void map_samples_to_sphere(); // Maps the 2D sample points to 3D points on a unit sphere with a uniform density distribution over the surface -- this is used for modelling a spherical light
 		
   /* the following functions are not const because they change count and jump */

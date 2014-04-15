@@ -12,9 +12,9 @@ class Ray {
   int depth;
   Ray();
   ~Ray();
-  Ray(const Vector3d& origin, const Vector3d& dir);	
-  Ray(const Ray& ray); 		
-  Ray& operator= (const Ray& rhs); 
+  Ray(const Vector3d& origin, const Vector3d& dir);
+  Ray(const Ray& ray);
+  Ray& operator= (const Ray& rhs);
 };
 
 #endif

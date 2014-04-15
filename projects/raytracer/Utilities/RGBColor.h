@@ -6,22 +6,22 @@ using namespace std;
 
 class RGBColor {
  public:
-  float r, g, b;
+  double r, g, b;
   RGBColor();
-  RGBColor(float _r, float _g, float _b);
+  RGBColor(double _r, double _g, double _b);
   RGBColor(const RGBColor& c);
   ~RGBColor();
   RGBColor& operator= (const RGBColor& rhs);
   RGBColor operator+ (const RGBColor& c) const;
   RGBColor& operator+= (const RGBColor& c);
-  RGBColor operator* (const float a) const;
-  RGBColor& operator*= (const float a);
-  RGBColor operator/ (const float a) const;
-  RGBColor& operator/= (const float a);
+  RGBColor operator* (const double a) const;
+  RGBColor& operator*= (const double a);
+  RGBColor operator/ (const double a) const;
+  RGBColor& operator/= (const double a);
   RGBColor operator* (const RGBColor& c) const;
   bool operator== (const RGBColor& c) const;
-  RGBColor powc(float p) const; // Raise each component to the specified power
-  float average() const;        // The average of the three components
+  RGBColor powc(double p) const; // Raise each component to the specified power
+  double average() const;        // The average of the three components
   RGBColor max_to_one() const;
   RGBColor clamp_to_red() const; /* Set color to red if any component is greater than one */
 };
@@ -41,12 +41,12 @@ inline RGBColor& RGBColor::operator+= (const RGBColor& c) {
 }
 
 
-inline RGBColor RGBColor::operator* (const float a) const {
+inline RGBColor RGBColor::operator* (const double a) const {
   return RGBColor (r * a, g * a, b * a);
 }
 
 
-inline RGBColor& RGBColor::operator*= (const float a) {
+inline RGBColor& RGBColor::operator*= (const double a) {
   r *= a;
   g *= a;
   b *= a;
@@ -55,12 +55,12 @@ inline RGBColor& RGBColor::operator*= (const float a) {
 }
 
 
-inline RGBColor RGBColor::operator/ (const float a) const {
+inline RGBColor RGBColor::operator/ (const double a) const {
   return RGBColor (r / a, g / a, b / a);
 }
 
 
-inline RGBColor& RGBColor::operator/= (const float a) {
+inline RGBColor& RGBColor::operator/= (const double a) {
   r /= a;
   g /= a;
   b /= a;
@@ -79,15 +79,15 @@ inline bool RGBColor::operator== (const RGBColor& c) const {
 }
 
 
-inline float RGBColor::average() const {
-  return (1/3.0) * (r + g + b);
+inline double RGBColor::average() const {
+  return (r + g + b)/3.0;
 }
 
 
-/* Multiplication by a float on the left */
-RGBColor operator* (const float a, const RGBColor& c);
+/* Multiplication by a double on the left */
+RGBColor operator* (const double a, const RGBColor& c);
 
-inline RGBColor operator* (const float a, const RGBColor& c) {
+inline RGBColor operator* (const double a, const RGBColor& c) {
   return RGBColor (a * c.r, a * c.g, a * c.b);
 }
 

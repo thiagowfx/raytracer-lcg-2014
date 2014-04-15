@@ -37,8 +37,8 @@ World::~World() {
 
 
 /* raw_color is the pixel color computed by the ray tracer
-   its RGB floating point components can be arbitrarily large
-   mapped_color has all components in the range [0, 1], but still floating point
+   its RGB doubleing point components can be arbitrarily large
+   mapped_color has all components in the range [0, 1], but still doubleing point
    display color has integer components for computer display
    the Mac's components are in the range [0, 65535]
    a PC's components will probably be in the range [0, 255]
@@ -68,7 +68,7 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
   ShadeRec sr(*this);
   double   t;
-  float    tmin        = kHugeValue;
+  double    tmin        = kHugeValue;
   int      num_objects = objects.size();
 
   for (int j = 0; j < num_objects; j++)
@@ -87,7 +87,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
   double   t;
   Vector3d normal;
   Vector3d local_hit_point;
-  float    tmin        = kHugeValue;
+  double    tmin        = kHugeValue;
   int      num_objects = objects.size();
 
   for (int j = 0; j < num_objects; j++)

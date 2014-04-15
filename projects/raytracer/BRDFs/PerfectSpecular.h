@@ -11,21 +11,21 @@ class PerfectSpecular: public BRDF {
   PerfectSpecular();
   ~PerfectSpecular();
   virtual PerfectSpecular* clone() const;
-  void set_kr(const float k);
+  void set_kr(const double k);
   void set_cr(const RGBColor& c);
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi) const;
-  virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, float& pdf) const;
+  virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
 				
  private:
-  float	   kr;			// reflection coefficient
+  double	   kr;			// reflection coefficient
   RGBColor cr;			// the reflection colour
   
 };
 
 
-inline void PerfectSpecular::set_kr(const float k) {
+inline void PerfectSpecular::set_kr(const double k) {
   kr = k;
 }
 

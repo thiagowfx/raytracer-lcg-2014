@@ -18,17 +18,17 @@ class Camera {
   void set_eye(const Vector3d& p);
   void set_lookat(const Vector3d& p);
   void set_up_vector(const Vector3d& u);
-  void set_roll(const float ra);
-  void set_exposure_time(const float exposure);
+  void set_roll(const double ra);
+  void set_exposure_time(const double exposure);
   void compute_uvw();
 		
  protected:		
   Vector3d eye;			// eye point
   Vector3d lookat; 		// lookat point
-  float	   ra;			// roll angle
+  double	   ra;			// roll angle
   Vector3d u, v, w;		// orthonormal basis vectors
   Vector3d up;			// up vector
-  float	   exposure_time;
+  double	   exposure_time;
 		
   Camera& operator= (const Camera& camera);
 };
@@ -49,12 +49,12 @@ inline void Camera::set_up_vector(const Vector3d& u) {
 }
 
 
-inline void Camera::set_roll(const float r) { 
+inline void Camera::set_roll(const double r) {
   ra = r;
 }
 
 
-inline void Camera::set_exposure_time(const float exposure) {
+inline void Camera::set_exposure_time(const double exposure) {
   exposure_time = exposure;
 }
 

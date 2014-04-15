@@ -13,22 +13,22 @@ class FishEye: public Camera {
   virtual Camera* clone() const;
   FishEye& operator= (const FishEye& rhs);
   virtual ~FishEye();
-  void set_psi_max(const float max);
-  void set_fov(const float fov);
-  Vector3d ray_direction(const Vector2d& pixel_point, const int hres, const int vres, const float s, float& r_squared) const;
+  void set_psi_max(const double max);
+  void set_fov(const double fov);
+  Vector3d ray_direction(const Vector2d& pixel_point, const int hres, const int vres, const double s, double& r_squared) const;
   virtual void render_scene(const World* w, const char* image_file);
 
  private:
-  float psi_max;                // in degrees
+  double psi_max;                // in degrees
   
 };
 
 
-inline void FishEye::set_psi_max(float m) {
+inline void FishEye::set_psi_max(double m) {
   this->psi_max = m;
 }
 
-inline void FishEye::set_fov(float f) {
+inline void FishEye::set_fov(double f) {
   this->psi_max = 2 * f;
 }
 

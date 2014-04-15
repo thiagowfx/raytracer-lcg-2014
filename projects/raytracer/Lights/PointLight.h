@@ -18,13 +18,13 @@ class PointLight: public Light {
   /* virtual bool casts_shadows() const; */
   /* virtual void set_shadows(bool _s); */
   void set_location(Vector3d l);
-  void scale_radiance(float _r);
+  virtual void scale_radiance(const double _r);
   /* bool in_shadow(const Ray& ray, const ShadeRec& sr) const; */
-  virtual float G(const ShadeRec& sr) const;
-  virtual float pdf(const ShadeRec& sr) const;
+  virtual double G(const ShadeRec& sr) const;
+  virtual double pdf(const ShadeRec& sr) const;
   
  private:
-  float    ls;                  // radiant scale factor
+  double    ls;                  // radiant scale factor
   RGBColor color;
   Vector3d location;
 };
@@ -45,7 +45,7 @@ inline void PointLight::set_location(Vector3d l) {
 }
 
 
-inline void PointLight::scale_radiance(float _r) {
+inline void PointLight::scale_radiance(const double _r) {
   ls *= _r;
 }
 

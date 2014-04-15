@@ -11,19 +11,19 @@ class Ambient: public Light {
   virtual ~Ambient();
   virtual Light* clone() const;	
   Ambient& operator= (const Ambient& rhs); 
-  void scale_radiance(const float b);
+  void scale_radiance(const double b);
   void set_color(const RGBColor& c);
   virtual Vector3d get_direction(ShadeRec& s); 
   virtual RGBColor L(ShadeRec& s);
 	
  private:
-  float	   ls;
+  double ls;
   RGBColor color;               // light color
   
 };
 
 
-inline void Ambient::scale_radiance(const float b) { 
+inline void Ambient::scale_radiance(const double b) {
   ls = b;
 }
 

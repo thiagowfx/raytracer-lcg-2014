@@ -54,7 +54,7 @@ MultiJittered::~MultiJittered() {}
   for (int i = 0; i < n; i++)
   for (int j = 0; j < n; j++) {
   int k = rand_int(j, n - 1);
-  float t = samples[i * n + j + p * num_samples](0);
+  double t = samples[i * n + j + p * num_samples](0);
   samples[i * n + j + p * num_samples](0) = samples[i * n + k + p * num_samples](0);
   samples[i * n + k + p * num_samples](0) = t;
   }
@@ -67,15 +67,15 @@ MultiJittered::~MultiJittered() {}
 // ---------------------------------------------------------------- generate_samples
 
 // This is based on code in Chui et al. (1994), cited in the references
-// The overloaded functions rand_int and rand_float (called from rand_int), which take arguments,
+// The overloaded functions rand_int and rand_double (called from rand_int), which take arguments,
 // are defined in Maths.h
 // They should be defined here, as this is the only place they are usedm but I couldn't get them to compile
 
 void MultiJittered::generate_samples() {
   // num_samples needs to be a perfect square
 
-  int n = (int)sqrt((float)num_samples);
-  float subcell_width = 1.0 / ((float) num_samples);
+  int n = (int)sqrt((double)num_samples);
+  double subcell_width = 1.0 / ((double) num_samples);
 
   // fill the samples array with dummy points to allow us to use the [ ] notation when we set the
   // initial patterns
@@ -89,8 +89,8 @@ void MultiJittered::generate_samples() {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++) {
-        samples[i * n + j + p * num_samples](0) = (i * n + j) * subcell_width + rand_float(0, subcell_width);
-        samples[i * n + j + p * num_samples](1) = (j * n + i) * subcell_width + rand_float(0, subcell_width);
+        samples[i * n + j + p * num_samples](0) = (i * n + j) * subcell_width + rand_double(0, subcell_width);
+        samples[i * n + j + p * num_samples](1) = (j * n + i) * subcell_width + rand_double(0, subcell_width);
       }
 
   // shuffle x coordinates
@@ -99,7 +99,7 @@ void MultiJittered::generate_samples() {
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++) {
         int k = rand_int(j, n - 1);
-        float t = samples[i * n + j + p * num_samples](0);
+        double t = samples[i * n + j + p * num_samples](0);
         samples[i * n + j + p * num_samples](0) = samples[i * n + k + p * num_samples](0);
         samples[i * n + k + p * num_samples](0) = t;
       }
@@ -110,7 +110,7 @@ void MultiJittered::generate_samples() {
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++) {
         int k = rand_int(j, n - 1);
-        float t = samples[j * n + i + p * num_samples](1);
+        double t = samples[j * n + i + p * num_samples](1);
         samples[j * n + i + p * num_samples](1) = samples[k * n + i + p * num_samples](1);
         samples[k * n + i + p * num_samples](1) = t;
       }
