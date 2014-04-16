@@ -5,12 +5,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    /** MainWindow */
     ui->setupUi(this);
-    setWindowTitle(tr("Raytracer"));
+    this->setWindowTitle(tr("Raytracer"));
+    this->setFocus();
+    this->installEventFilter(this);
 
-    /* ui initial values */
-    raytracerWorkingLabel = new QLabel();
-    statusBar()->addWidget(raytracerWorkingLabel);
+    statusbarProgressLabel = new QLabel();
+    statusbarCameraLabel = new QLabel();
+
+    /** ui initial values */
+    statusBar()->addWidget(statusbarProgressLabel);
+    statusBar()->addWidget(statusbarCameraLabel);
 
     raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
     raytracer.set_vres(ui->verticalResolutionSpinBox->value());
@@ -27,7 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete raytracerWorkingLabel;
+
+    delete statusbarCameraLabel;
+    delete statusbarProgressLabel;
 }
 
 void MainWindow::horizontalResolutionChanged(int resolution) {
@@ -67,24 +75,27 @@ void MainWindow::ambientRadianceChanged(double r) {
 }
 
 void MainWindow::updateRaytracerImage() {
-    qDebug() << "updateRaytracerImage()";
-    raytracerWorkingLabel->setText(tr("Rendering scene..."));
+    qDebug() << "INFO: Begin updateRaytracerImage()";
+    statusbarCameraLabel->setText(raytracer.get_camera_eye_as_string());
+    statusbarProgressLabel->setText("Rendering...");
+    QApplication::instance()->processEvents();
     raytracer.render_scene();
     ui->raytracedImage->setPixmap(QPixmap(raytracer.image));
-    raytracerWorkingLabel->setText(tr("Idle"));
+    statusbarProgressLabel->setText("Idle");
+    qDebug() << "INFO: End updateRaytracerImage()";
 }
 
-void MainWindow::on_actionQuit_triggered()
-{
+void MainWindow::on_actionQuit_triggered() {
     QApplication::quit();
 }
 
 void MainWindow::on_actionSave_PNG_Image_triggered() {
+    /** http://qt-project.org/doc/qt-5/qpixmap.html#reading-and-writing-image-files */
     QString fileName = QFileDialog::getSaveFileName(
                 this,
-                tr("Export image"),
+                tr("Export Image"),
                 tr("."),
-                tr("Images (*.png *.jpg *.jpeg)"));
+                tr("Images (*.bmp *.gif *.png *.jpg *.jpeg)"));
     ui->raytracedImage->pixmap()->save(fileName);
 }
 
@@ -104,21 +115,31 @@ void MainWindow::on_backgroundColorPushButton_clicked() {
     }
 }
 
-/* void MainWindow::keyPressEvent(QKeyEvent *event) {
-
-    switch(event->key()){
-    case Qt::Key_Up:
-        qDebug() << "up";
-        break;
-    case Qt::Key_Left:
-        qDebug() << "left";
-        break;
-    case Qt::Key_Right:
-        qDebug() << "right";
-        break;
-    case Qt::Key_Down:
-        qDebug() << "down";
-        break;
-    }
+void MainWindow::on_leftArrow_pressed() {
+    qDebug() << "INFO: on_leftArrow_pressed()";
+    raytracer.move_camera_eye_relative(-2.0, 0.0, 0.0);
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
-*/
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+
+        switch(keyEvent->key()){
+        case Qt::Key_Up:
+            qDebug() << "up";
+            break;
+        case Qt::Key_Left:
+            on_leftArrow_pressed();
+            break;
+        case Qt::Key_Right:
+            qDebug() << "right";
+            break;
+        case Qt::Key_Down:
+            qDebug() << "down";
+            break;
+        }
+    }
+    return false;
+}

@@ -38,6 +38,18 @@ void Raytracer::set_ambient_radiance(double r) {
     w->ambient_ptr->scale_radiance(r);
 }
 
+const char* Raytracer::get_camera_eye_as_string() {
+    static char str[50];
+    Vector3d v = w->camera_ptr->get_eye();
+    sprintf(str, "Eye: (%.2lf, %.2lf, %.2lf)", v(0), v(1), v(2));
+    return str;
+}
+
+void Raytracer::move_camera_eye_relative(double x, double y, double z) {
+    Vector3d v = w->camera_ptr->get_eye();
+    w->camera_ptr->set_eye(Vector3d(v(0) + x, v(1) + y, v(2) + z));
+}
+
 void Raytracer::render_scene() {
     w->camera_ptr->render_scene(w, image);
 }

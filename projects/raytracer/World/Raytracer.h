@@ -31,9 +31,10 @@
 #include "Triangle.h"
 #include "ViewPlane.h"
 #include "World.h"
+#include <cstdio>
 
-class Raytracer
-{
+class Raytracer {
+
 public:
     Raytracer();
     ~Raytracer();
@@ -47,6 +48,9 @@ public:
     void set_background_color(double,double,double);
     /* Ambient Light */
     void set_ambient_radiance(double);
+    /* Camera */
+    const char* get_camera_eye_as_string();
+    void move_camera_eye_relative(double,double,double);
     /* Raytracer */
     void render_scene();
     void set_up();
