@@ -43,20 +43,20 @@ void BRDF::set_sampler(Sampler* sPtr) {
 
 
 RGBColor BRDF::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
-  return RGBColor();
+  return black;
 }
 
 
 RGBColor BRDF::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi) const {
-  return RGBColor();
+  return black;
 }
 
 
 RGBColor BRDF::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const {
-  return RGBColor();
+  return black;
 }
 
 
 RGBColor BRDF::rho(const ShadeRec& sr, const Vector3d& wo) const {
-  return RGBColor();
+  return black;
 }

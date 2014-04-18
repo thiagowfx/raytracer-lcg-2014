@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QColor color = ui->backgroundColorPushButton->palette().color(QPalette::Window);
     raytracer.set_background_color(color.red(), color.green(), color.blue());
     raytracer.set_ambient_radiance(ui->ambientRadianceDoubleSpinBox->value());
+    raytracer.set_tracer(ui->tracerComboBox->currentText());
 
     updateRaytracerImage();
 }
@@ -93,6 +94,12 @@ void MainWindow::updateRaytracerImage() {
 
     statusbarProgressLabel->setText("Idle");
     raytracingInProgress = false;
+}
+
+void MainWindow::tracerChanged(QString s) {
+    raytracer.set_tracer(s);
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
 }
 
 void MainWindow::on_actionQuit_triggered() {

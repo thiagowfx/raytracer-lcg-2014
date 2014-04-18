@@ -21,8 +21,8 @@ class BRDF {
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
 		
  protected:
-  BRDF& operator= (const BRDF& rhs);
   Sampler* sampler_ptr;         // for indirect illumination
+  BRDF& operator= (const BRDF& rhs);
 };
 
 

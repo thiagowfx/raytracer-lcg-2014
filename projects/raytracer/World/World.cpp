@@ -67,9 +67,9 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 
 ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
   ShadeRec sr(*this);
-  double   t;
-  double    tmin        = kHugeValue;
-  int      num_objects = objects.size();
+  double t;
+  double tmin = kHugeValue;
+  const int num_objects = objects.size();
 
   for (int j = 0; j < num_objects; j++)
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {

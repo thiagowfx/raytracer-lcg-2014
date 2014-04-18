@@ -2,13 +2,14 @@
 #define __RGB_COLOR__
 
 #include <algorithm>
+#include "Randomness.h"
 using namespace std;
 
 class RGBColor {
  public:
   double r, g, b;
   RGBColor();
-  RGBColor(double _r, double _g, double _b);
+  RGBColor(double, double, double);
   RGBColor(const RGBColor& c);
   ~RGBColor();
   RGBColor& operator= (const RGBColor& rhs);
@@ -20,8 +21,9 @@ class RGBColor {
   RGBColor& operator/= (const double a);
   RGBColor operator* (const RGBColor& c) const;
   bool operator== (const RGBColor& c) const;
-  RGBColor powc(double p) const; // Raise each component to the specified power
-  double average() const;        // The average of the three components
+  bool operator!= (const RGBColor& c) const;
+  RGBColor powc(double p) const;
+  double average() const;
   RGBColor max_to_one() const;
   RGBColor clamp_to_red() const; /* Set color to red if any component is greater than one */
 };
@@ -75,7 +77,12 @@ inline RGBColor RGBColor::operator* (const RGBColor& c) const {
 
 
 inline bool RGBColor::operator== (const RGBColor& c) const {
-  return r == c.r && g == c.g && b == c.b;
+    return compareDouble(r, c.r) && compareDouble(g, c.g) && compareDouble(b, c.b);
+}
+
+
+inline bool RGBColor::operator!= (const RGBColor& c) const {
+  return ! operator==(c);
 }
 
 

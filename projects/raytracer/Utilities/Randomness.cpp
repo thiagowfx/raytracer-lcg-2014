@@ -23,3 +23,13 @@ double rand_double() {
 double rand_double(const double begin, const double end) {
   return begin + ( rand_double() * (end - begin) );
 }
+
+
+bool compareDouble(const double a, const double b, const double eps) {
+    return fabs(a - b) < eps;
+}
+
+
+bool compareDouble(const double a, const double b) {
+    return fabs(a - b) < 1.0e-6;
+}

@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QPalette>
+#include <QString>
 #include "Raytracer.h"
 
 namespace Ui {
@@ -31,6 +32,7 @@ private slots:
     void gammaCorrectionChanged(double);
     void ambientRadianceChanged(double);
     void updateRaytracerImage();
+    void tracerChanged(QString);
 
     void on_actionQuit_triggered();
     void on_actionSave_PNG_Image_triggered();

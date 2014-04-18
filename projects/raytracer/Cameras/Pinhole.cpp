@@ -2,7 +2,7 @@
 
 Pinhole::Pinhole() :
   Camera(),
-  d(500),
+  d(500.0),
   zoom(1.0)
 {}
 
@@ -57,7 +57,7 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
 		
   for (int r = 0; r < vp.vres; r++) { // up
     for (int c = 0; c < vp.hres; c++) { // across 					
-      L = RGBColor(0.0, 0.0, 0.0);
+      L = black;
 
       for (int j = 0; j < n; ++j) {
         sp = vp.sampler_ptr->sample_unit_square();
@@ -66,7 +66,7 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
         ray.d = get_direction(pp);
         L += w->tracer_ptr->trace_ray(ray, depth);
       }
-			
+
       L /= n;
       L *= exposure_time;
       w->display_pixel(r, c, L, image);

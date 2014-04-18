@@ -30,9 +30,12 @@
 #include "Tracer.h"
 #include "Triangle.h"
 #include "ViewPlane.h"
+#include "Whitted.h"
 #include "World.h"
+
 #include <cstdio>
 #include <cmath>
+#include <QString>
 
 class Raytracer {
 
@@ -47,6 +50,8 @@ public:
     void set_gamma_correction(double);
     /* World */
     void set_background_color(double,double,double);
+    void set_tracer(Tracer*);
+    void set_tracer(QString);
     /* Ambient Light */
     void set_ambient_radiance(double);
     /* Camera */

@@ -2,7 +2,6 @@
 #define __LAMBERTIAN__
 
 #include "BRDF.h"
-#include "Constants.h"
 
 class Lambertian: public BRDF {
   
@@ -15,29 +14,38 @@ class Lambertian: public BRDF {
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
-  void set_ka(const double ka);
-  void set_kd(const double kd);
-  void set_cd(const RGBColor& c);
+  void set_ka(double);
+  void set_kd(double);
+  void set_cd(const RGBColor&);
+  void set_cd(double,double,double);
+  double get_kd() const;
+  RGBColor get_cd() const;
 					
  private:
-  double	   kd;
+  double kd;
   RGBColor cd;
   
 };
 
 
-inline void Lambertian::set_ka(const double k) {
+inline void Lambertian::set_ka(double k) {
   kd = k;
 }
 
 
-inline void Lambertian::set_kd(const double k) {
+inline void Lambertian::set_kd(double k) {
   kd = k;
 }
 
 
-inline void Lambertian::set_cd(const RGBColor& c) {
-  cd = c;
+inline void Lambertian::set_cd(const RGBColor& color) {
+  cd = color;
+}
+
+inline void Lambertian::set_cd(double r, double g, double b) {
+  cd.r = r;
+  cd.g = g;
+  cd.b = b;
 }
 
 

@@ -15,9 +15,12 @@ public:
   virtual Camera* clone() const = 0;
   virtual ~Camera();
   virtual void render_scene(const World* w, const char* image_file) = 0;
-  void set_eye(const Vector3d& p);
-  void set_lookat(const Vector3d& p);
-  void set_up_vector(const Vector3d& u);
+  void set_eye(const Vector3d&);
+  void set_eye(double, double, double);
+  void set_lookat(const Vector3d&);
+  void set_lookat(double,double,double);
+  void set_up_vector(const Vector3d&);
+  void set_up_vector(double,double,double);
   void set_roll(const double ra);
   void set_exposure_time(const double exposure);
   void compute_uvw();
@@ -29,8 +32,7 @@ protected:
   double ra;			// roll angle
   Vector3d u, v, w;		// orthonormal basis vectors
   Vector3d up;			// up vector
-  double	   exposure_time;
-
+  double exposure_time;
   Camera& operator= (const Camera& camera);
 };
 
@@ -40,13 +42,34 @@ inline void Camera::set_eye(const Vector3d& p) {
 }
 
 
+inline void Camera::set_eye(double x, double y, double z) {
+  eye(0) = x;
+  eye(1) = y;
+  eye(2) = z;
+}
+
+
 inline void Camera::set_lookat(const Vector3d& p) {
   lookat = p;
 }
 
 
+inline void Camera::set_lookat(double x, double y, double z) {
+  lookat(0) = x;
+  lookat(1) = y;
+  lookat(2) = z;
+}
+
+
 inline void Camera::set_up_vector(const Vector3d& u) {
   up = u;
+}
+
+
+inline void Camera::set_up_vector(double x, double y, double z) {
+  up(0) = x;
+  up(1) = y;
+  up(2) = z;
 }
 
 

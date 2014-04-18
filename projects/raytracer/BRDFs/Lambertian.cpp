@@ -43,7 +43,7 @@ RGBColor Lambertian::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& w
    the samples have to be stored with a cosine distribution */
 RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const {
   Vector3d w = sr.normal;
-  Vector3d v = Vector3d(0.0034, 1, 0.0071).cross(w);
+  Vector3d v = Vector3d(0.0034, 1.0, 0.0071).cross(w);
   v.normalize();
   Vector3d u = v.cross(w);
 
@@ -59,4 +59,14 @@ RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& 
 
 RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3d& wo) const {
   return kd * cd;
+}
+
+
+double Lambertian::get_kd() const {
+  return kd;
+}
+
+
+RGBColor Lambertian::get_cd() const {
+  return cd;
 }

@@ -625,6 +625,32 @@
         </property>
        </widget>
       </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Tracer</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QComboBox" name="tracerComboBox">
+        <item>
+         <property name="text">
+          <string>RayCast</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MultipleObjects</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Whitted</string>
+         </property>
+        </item>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -820,6 +846,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tracerComboBox</sender>
+   <signal>activated(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>tracerChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>493</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>horizontalResolutionChanged(int)</slot>
@@ -829,5 +871,6 @@
   <slot>gammaCorrectionChanged(double)</slot>
   <slot>updateRaytracerImage()</slot>
   <slot>ambientRadianceChanged(double)</slot>
+  <slot>tracerChanged(QString)</slot>
  </slots>
 </ui>

@@ -52,8 +52,7 @@ void Orthographic::render_scene(const World* w, const char* image_file) {
         pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
         pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
         ray.o = Vector3d(pp(0), pp(1), zw);
-        // L += w->tracer_ptr->trace_ray(ray, depth);
-        L += w->tracer_ptr->trace_ray(ray);
+        L += w->tracer_ptr->trace_ray(ray, depth);
       }
 
       L /= n;                   // average the colors

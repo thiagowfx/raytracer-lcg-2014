@@ -18,8 +18,8 @@ class Pinhole: public Camera {
   virtual void render_scene(const World* w, const char* image_file);
 		
  private:
-  double	d;                      // view plane distance
-  double	zoom;                   // zoom factor
+  double d;                      // view plane distance
+  double zoom;                   // zoom factor
 
 };
 

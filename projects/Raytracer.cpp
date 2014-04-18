@@ -35,6 +35,19 @@ void Raytracer::set_background_color(double r, double g, double b) {
     w->background_color = RGBColor(r, g, b);
 }
 
+void Raytracer::set_tracer(Tracer* tracer) {
+    w->tracer_ptr = tracer;
+}
+
+void Raytracer::set_tracer(QString s) {
+    if (s == QString("RayCast"))
+        w->tracer_ptr = new RayCast(w);
+    else if (s == QString("Whitted"))
+        w->tracer_ptr = new Whitted(w);
+    else if (s == QString("MultipleObjects"))
+        w->tracer_ptr=  new MultipleObjects(w);
+}
+
 void Raytracer::set_ambient_radiance(double r) {
     w->ambient_ptr->scale_radiance(r);
 }
@@ -103,8 +116,6 @@ void Raytracer::render_scene() {
 }
 
 void Raytracer::set_up() {
-    w->tracer_ptr = new RayCast(w);
-
     Pinhole* camera_ptr = new Pinhole;
     camera_ptr->set_eye(Vector3d(0, 0, 250));
     camera_ptr->set_lookat(Vector3d::Zero());
@@ -120,23 +131,20 @@ void Raytracer::set_up() {
     Matte* matte_ptr = new Matte;
     matte_ptr->set_ka(0.2);
     matte_ptr->set_kd(0.8);
-    matte_ptr->set_cd(RGBColor(1, 1, 0));				// yellow
+    matte_ptr->set_cd(RGBColor(0.9, 0.9, 0.2));				// yellow
 
     RaytracerSphere*	sphere_ptr = new RaytracerSphere(Vector3d::Zero(), 30.0);
     sphere_ptr->set_material(matte_ptr);
+    sphere_ptr->set_color(RGBColor(0.9, 0.9, 0.2));
     w->add_object(sphere_ptr);
 
     Matte* matte_ptr2 = new Matte;
     matte_ptr2->set_ka(ka);
     matte_ptr2->set_kd(kd);
-    matte_ptr2->set_cd(green);
+    matte_ptr2->set_cd(RGBColor(0.2, 0.9, 0.2));
 
     Triangle* triangle_ptr1 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
     triangle_ptr1->set_material(matte_ptr2);
+    triangle_ptr1->set_color(RGBColor(0.2, 0.9, 0.2));
     w->add_object(triangle_ptr1);
-
-    if (w->tracer_ptr == NULL) {
-      puts("ERROR: No world tracer set.");
-      exit(1);
-    }
 }

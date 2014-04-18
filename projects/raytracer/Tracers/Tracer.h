@@ -5,6 +5,7 @@
 #ifndef __TRACER__
 #define __TRACER__
 
+#include "Constants.h"
 #include "Material.h"
 #include "RGBColor.h"
 #include "Ray.h"
@@ -18,8 +19,7 @@ class Tracer {
   Tracer();
   Tracer(World*);
   virtual ~Tracer(); 
-  virtual RGBColor trace_ray(const Ray& ray) const; // only overridden in the tracers SingleSphere and MultipleObjects
-  virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+  virtual RGBColor trace_ray(const Ray ray, const int depth) const = 0;
 				
  protected:
   World* world_ptr;

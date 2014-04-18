@@ -77,6 +77,7 @@ add_executable(
   ${QT_RAYTRACER}
   main_qt.cpp
   mainwindow.cpp
+  Raytracer.cpp
   $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
   $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
   ${${QT_RAYTRACER}_UIC}
