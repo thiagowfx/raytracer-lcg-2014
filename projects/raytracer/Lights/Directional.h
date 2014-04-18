@@ -14,7 +14,8 @@ class Directional: public Light {
   Directional& operator= (const Directional& rhs); 
   virtual ~Directional(); 				
   virtual void scale_radiance(const double b);
-  void set_color(const RGBColor& c);
+  void set_color(const RGBColor&);
+  void set_color(double,double,double);
   void set_direction(Vector3d d);
   virtual Vector3d get_direction(ShadeRec& sr);
   virtual RGBColor L(ShadeRec& sr);	
@@ -34,6 +35,12 @@ inline void Directional::scale_radiance(const double b) {
 
 inline void Directional::set_color(const RGBColor& color) {
   this->color = color;
+}
+
+inline void Directional::set_color(double r, double g, double b) {
+  color.r = r;
+  color.g = g;
+  color.b = b;
 }
 
 

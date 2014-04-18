@@ -37,14 +37,20 @@ private slots:
     void on_actionAbout_triggered();
     void on_backgroundColorPushButton_clicked();
 
+private:
     void on_leftArrow_pressed();
+    void on_rightArrow_pressed();
+    void on_upArrow_pressed();
+    void on_downArrow_pressed();
 
 private:
     Ui::MainWindow *ui;
     bool eventFilter(QObject *object, QEvent *event);
 
     Raytracer raytracer;
-    QLabel *statusbarCameraLabel;
+    bool raytracingInProgress;
+    QLabel *statusbarCameraEyeLabel;
+    QLabel *statusbarCameraEyeSphericalLabel;
     QLabel *statusbarProgressLabel;
 };
 
