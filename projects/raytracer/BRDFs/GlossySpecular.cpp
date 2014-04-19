@@ -7,6 +7,17 @@ GlossySpecular::GlossySpecular() :
 {}
 
 
+GlossySpecular::GlossySpecular(const GlossySpecular &gloss) :
+  BRDF(gloss),
+  ks(gloss.ks),
+  cs(gloss.cs),
+  exp(gloss.exp)
+{
+  if (gloss.sampler_ptr != NULL)
+    sampler_ptr = gloss.sampler_ptr->clone();
+}
+
+
 GlossySpecular* GlossySpecular::clone () const {
   return new GlossySpecular(*this);
 }
@@ -49,7 +60,7 @@ RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector
   double ndotwo = sr.normal.dot(wo);
   Vector3d r = -wo + (2.0 * sr.normal * ndotwo); // direction of mirror reflection
   Vector3d w = r;
-  Vector3d u = Vector3d(0.00424, 1, 0.00764).cross(w);
+  Vector3d u = Vector3d(0.00424, 1.0, 0.00764).cross(w);
   u.normalize();
   Vector3d v = u.cross(w);
   Vector3d sp = sampler_ptr->sample_hemisphere();
@@ -66,5 +77,5 @@ RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector
 
 
 RGBColor GlossySpecular::rho(const ShadeRec& sr, const Vector3d& wo) const {
-  return RGBColor();
+  return black;
 }

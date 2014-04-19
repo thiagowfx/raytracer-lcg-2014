@@ -35,11 +35,14 @@ private slots:
     void updateRaytracerImage();
     void tracerChanged(QString);
 
+    void on_backgroundColorPushButton_clicked();
+    void on_ambientColorPushButton_clicked();
+
+    /** Actions */
     void on_actionQuit_triggered();
     void on_actionSave_PNG_Image_triggered();
     void on_actionAbout_triggered();
-    void on_backgroundColorPushButton_clicked();
-    void on_ambientColorPushButton_clicked();
+    void on_actionAbout_Qt_triggered();
 
 private:
     void on_leftArrow_pressed();
@@ -54,7 +57,7 @@ private:
     Raytracer raytracer;
     bool raytracingInProgress;
     QLabel *statusbarCameraEyeLabel;
-    QLabel *statusbarCameraEyeSphericalLabel;
+    QLabel *statusbarCameraEyeCylindricalLabel;
     QLabel *statusbarProgressLabel;
 };
 

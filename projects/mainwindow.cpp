@@ -16,10 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
   /** ui initial values */
   statusbarProgressLabel = new QLabel();
   statusbarCameraEyeLabel = new QLabel();
-  statusbarCameraEyeSphericalLabel = new QLabel();
+  statusbarCameraEyeCylindricalLabel = new QLabel();
   statusBar()->addWidget(statusbarProgressLabel);
   statusBar()->addPermanentWidget(statusbarCameraEyeLabel);
-  statusBar()->addPermanentWidget(statusbarCameraEyeSphericalLabel);
+  statusBar()->addPermanentWidget(statusbarCameraEyeCylindricalLabel);
 
   raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
   raytracer.set_vres(ui->verticalResolutionSpinBox->value());
@@ -40,7 +40,7 @@ MainWindow::~MainWindow()
   delete ui;
 
   delete statusbarCameraEyeLabel;
-  delete statusbarCameraEyeSphericalLabel;
+  delete statusbarCameraEyeCylindricalLabel;
   delete statusbarProgressLabel;
 }
 
@@ -93,7 +93,7 @@ void MainWindow::updateRaytracerImage() {
 
   raytracingInProgress = true;
   statusbarCameraEyeLabel->setText(raytracer.get_camera_eye_as_string());
-  statusbarCameraEyeSphericalLabel->setText(raytracer.get_camera_eye_spherical_as_string());
+  statusbarCameraEyeCylindricalLabel->setText(raytracer.get_camera_eye_cylindrical_as_string());
   statusbarProgressLabel->setText("Rendering...");
   QApplication::instance()->processEvents();
 
@@ -127,7 +127,7 @@ void MainWindow::on_actionSave_PNG_Image_triggered() {
 void MainWindow::on_actionAbout_triggered() {
   QMessageBox::about(this,
                      tr("About"),
-                     tr("A simple raytracer project"));
+                     tr("A simple raytracer"));
 }
 
 void MainWindow::on_backgroundColorPushButton_clicked() {
@@ -153,28 +153,28 @@ void MainWindow::on_ambientColorPushButton_clicked() {
 
 void MainWindow::on_leftArrow_pressed() {
   qDebug() << "INFO: left arrow pressed";
-  raytracer.move_camera_eye_relative_spherical(0.0, 0.05, 0.0);
+  raytracer.move_camera_eye_relative_cylindrical(0.0, 0.05, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_rightArrow_pressed() {
   qDebug() << "INFO: right arrow pressed";
-  raytracer.move_camera_eye_relative_spherical(0.0, -0.05, 0.0);
+  raytracer.move_camera_eye_relative_cylindrical(0.0, -0.05, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_upArrow_pressed() {
   qDebug() << "INFO: up arrow pressed";
-  raytracer.move_camera_eye_relative_spherical(0.0, 0.0, -0.05);
+  raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, 5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_downArrow_pressed() {
   qDebug() << "INFO: down arrow pressed";
-  raytracer.move_camera_eye_relative_spherical(0.0, 0.0, 0.05);
+  raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, -5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -199,4 +199,8 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     }
   }
   return false;
+}
+
+void MainWindow::on_actionAbout_Qt_triggered() {
+  QMessageBox::aboutQt(this);
 }

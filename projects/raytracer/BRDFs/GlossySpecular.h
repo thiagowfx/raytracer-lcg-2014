@@ -9,6 +9,7 @@ class GlossySpecular: public BRDF {
   
  public:
   GlossySpecular();
+  GlossySpecular(const GlossySpecular& gloss);
   ~GlossySpecular();
   virtual GlossySpecular* clone() const;
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;

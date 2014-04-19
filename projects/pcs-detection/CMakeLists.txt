@@ -15,7 +15,6 @@ file(
   "${PCS_DETECTION_DIR}/sphere.cpp"
   "${PCS_DETECTION_DIR}/torus.cpp"
   "${PCS_DETECTION_DIR}/tree.cpp"
-  "${PCS_DETECTION_DIR}/qwqw.cpp"
   )
 file(
   GLOB
@@ -33,7 +32,6 @@ file(
   "${PCS_DETECTION_DIR}/sphere.h"
   "${PCS_DETECTION_DIR}/torus.h"
   "${PCS_DETECTION_DIR}/tree.h"
-  "${PCS_DETECTION_DIR}/qwqw.h"
   )
 
 include_directories(${PCS_DETECTION_INCLUDE_DIRS})

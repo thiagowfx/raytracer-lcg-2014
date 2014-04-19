@@ -41,5 +41,5 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vecto
 
 
 RGBColor PerfectSpecular::rho(const ShadeRec& sr, const Vector3d& wo) const {
-  return RGBColor();
+  return black;
 }
