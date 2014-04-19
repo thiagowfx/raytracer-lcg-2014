@@ -45,10 +45,12 @@ private slots:
     void on_actionAbout_Qt_triggered();
 
 private:
-    void on_leftArrow_pressed();
-    void on_rightArrow_pressed();
-    void on_upArrow_pressed();
-    void on_downArrow_pressed();
+    void on_Key_Left_pressed();
+    void on_Key_Right_pressed();
+    void on_Key_Up_pressed();
+    void on_Key_Down_pressed();
+    void on_Key_W_pressed();
+    void on_Key_S_pressed();
 
 private:
     Ui::MainWindow *ui;

@@ -1109,17 +1109,17 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionSave_PNG_Image"/>
     <addaction name="separator"/>
-    <addaction name="actionAbout"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>&amp;About</string>
     </property>
+    <addaction name="actionAbout"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuFile"/>
@@ -1144,7 +1144,7 @@
      <normaloff>:/assets/assets/exit-24x24.png</normaloff>:/assets/assets/exit-24x24.png</iconset>
    </property>
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -1156,7 +1156,7 @@
      <normaloff>:/assets/assets/save-24x24.png</normaloff>:/assets/assets/save-24x24.png</iconset>
    </property>
    <property name="text">
-    <string>Export image</string>
+    <string>&amp;Export image</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>

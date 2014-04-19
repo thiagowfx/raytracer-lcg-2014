@@ -124,6 +124,12 @@ void Raytracer::set_up() {
   camera_ptr->compute_uvw();
   w->set_camera(camera_ptr);
 
+  Orthographic* o = new Orthographic;
+  o->set_eye(Vector3d(0, 0, 250));
+  o->set_lookat(Vector3d::Zero());
+  o->compute_uvw();
+  // w->set_camera(o);
+
   PointLight* light_ptr = new PointLight();
   light_ptr->set_location(Vector3d(100, 100, 200));
   light_ptr->scale_radiance(2.0);

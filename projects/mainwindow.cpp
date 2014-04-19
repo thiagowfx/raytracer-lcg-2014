@@ -151,30 +151,44 @@ void MainWindow::on_ambientColorPushButton_clicked() {
   }
 }
 
-void MainWindow::on_leftArrow_pressed() {
+void MainWindow::on_Key_Left_pressed() {
   qDebug() << "INFO: left arrow pressed";
   raytracer.move_camera_eye_relative_cylindrical(0.0, 0.05, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
-void MainWindow::on_rightArrow_pressed() {
+void MainWindow::on_Key_Right_pressed() {
   qDebug() << "INFO: right arrow pressed";
   raytracer.move_camera_eye_relative_cylindrical(0.0, -0.05, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
-void MainWindow::on_upArrow_pressed() {
+void MainWindow::on_Key_Up_pressed() {
   qDebug() << "INFO: up arrow pressed";
   raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, 5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
-void MainWindow::on_downArrow_pressed() {
+void MainWindow::on_Key_Down_pressed() {
   qDebug() << "INFO: down arrow pressed";
   raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, -5.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_W_pressed() {
+  qDebug() << "INFO: W key pressed";
+  raytracer.move_camera_eye_relative_cylindrical(-5.0, 0.0, 0.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_S_pressed() {
+  qDebug() << "INFO: S key pressed";
+  raytracer.move_camera_eye_relative_cylindrical(5.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -185,16 +199,22 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
 
     switch(keyEvent->key()){
     case Qt::Key_Left:
-      on_leftArrow_pressed();
+      on_Key_Left_pressed();
       break;
     case Qt::Key_Right:
-      on_rightArrow_pressed();
+      on_Key_Right_pressed();
       break;
     case Qt::Key_Up:
-      on_upArrow_pressed();
+      on_Key_Up_pressed();
       break;
     case Qt::Key_Down:
-      on_downArrow_pressed();
+      on_Key_Down_pressed();
+      break;
+    case Qt::Key_W:
+      on_Key_W_pressed();
+      break;
+    case Qt::Key_S:
+      on_Key_S_pressed();
       break;
     }
   }
