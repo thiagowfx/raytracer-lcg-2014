@@ -2,7 +2,7 @@
 
 Pinhole::Pinhole() :
   Camera(),
-  d(500.0),
+  d(250.0),
   zoom(1.0)
 {}
 

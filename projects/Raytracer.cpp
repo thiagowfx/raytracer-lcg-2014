@@ -35,8 +35,13 @@ void Raytracer::set_show_out_of_gamut(bool b) {
     w->vp.set_show_of_gamut(b);
 }
 
-void Raytracer::set_background_color(double r, double g, double b) {
-    w->background_color = RGBColor(r, g, b);
+
+void Raytracer::set_background_color(QColor c) {
+    w->background_color = RGBColor(c.redF(), c.greenF(), c.blueF());
+}
+
+void Raytracer::set_ambient_light_color(QColor c) {
+    w->ambient_ptr->set_color(RGBColor(c.redF(), c.greenF(), c.blueF()));
 }
 
 void Raytracer::set_tracer(Tracer* tracer) {
@@ -126,6 +131,11 @@ void Raytracer::set_up() {
     camera_ptr->set_view_distance(200);
     camera_ptr->compute_uvw();
     w->set_camera(camera_ptr);
+
+    Orthographic* ortho_ptr = new Orthographic;
+    ortho_ptr->set_view_distance(250.0);
+    w->set_camera(ortho_ptr);
+
 
     PointLight* light_ptr = new PointLight();
     light_ptr->set_location(Vector3d(100, 100, 200));

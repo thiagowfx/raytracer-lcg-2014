@@ -2,14 +2,14 @@
 
 Ambient::Ambient () :
   Light(),
-  ls(1.0),
+  radiance(1.0),
   color(1.0, 1.0, 1.0)
 {}
 
 
 Ambient::Ambient (const Ambient& a) :
   Light(a),
-  ls(a.ls),
+  radiance(a.radiance),
   color(a.color) 		
 {}
 
@@ -22,7 +22,7 @@ Light* Ambient::clone() const {
 Ambient& Ambient::operator= (const Ambient& rhs) {
   if (this != &rhs) {
     Light::operator= (rhs);    
-    ls 	  = rhs.ls;
+    radiance 	  = rhs.radiance;
     color = rhs.color;
   }
 	
@@ -39,5 +39,5 @@ Vector3d Ambient::get_direction(ShadeRec& s) {
 
 
 RGBColor Ambient::L(ShadeRec& sr) {	
-  return ls * color;
+  return radiance * color;
 }

@@ -39,6 +39,7 @@ private slots:
     void on_actionSave_PNG_Image_triggered();
     void on_actionAbout_triggered();
     void on_backgroundColorPushButton_clicked();
+    void on_ambientColorPushButton_clicked();
 
 private:
     void on_leftArrow_pressed();

@@ -2,13 +2,13 @@
 
 Orthographic::Orthographic() :
   Camera(),
-  zw(100.0)
+  zw(250.0)
 {}
 
 
-Orthographic::Orthographic(const Orthographic& orto) :
-  Camera(orto),
-  zw(orto.zw)
+Orthographic::Orthographic(const Orthographic& ortho) :
+  Camera(ortho),
+  zw(ortho.zw)
 {}
 
 

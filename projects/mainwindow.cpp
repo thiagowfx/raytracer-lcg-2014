@@ -27,8 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
     raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
     raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
-    QColor color = ui->backgroundColorPushButton->palette().color(QPalette::Window);
-    raytracer.set_background_color(color.red(), color.green(), color.blue());
+    raytracer.set_background_color(ui->backgroundColorPushButton->palette().color(QPalette::Window));
+    raytracer.set_ambient_light_color(ui->ambientColorPushButton->palette().color(QPalette::Window));
     raytracer.set_ambient_radiance(ui->ambientRadianceDoubleSpinBox->value());
     raytracer.set_tracer(ui->tracerComboBox->currentText());
 
@@ -46,6 +46,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::horizontalResolutionChanged(int resolution) {
     raytracer.set_hres(resolution);
+    ui->raytracedImage->adjustSize();
     if (ui->autoRenderingCheckBox->isChecked())
         updateRaytracerImage();
 }
@@ -133,7 +134,18 @@ void MainWindow::on_backgroundColorPushButton_clicked() {
     QColor color = QColorDialog::getColor(Qt::black, this);
     if (color.isValid()) {
         ui->backgroundColorPushButton->setPalette(QPalette(color));
-        raytracer.set_background_color(color.red(), color.green(), color.blue());
+        raytracer.set_background_color(color);
+        if (ui->autoRenderingCheckBox->isChecked())
+            updateRaytracerImage();
+    }
+}
+
+
+void MainWindow::on_ambientColorPushButton_clicked() {
+    QColor color = QColorDialog::getColor(Qt::white, this);
+    if (color.isValid()) {
+        ui->ambientColorPushButton->setPalette(QPalette(color));
+        raytracer.set_ambient_light_color(color);
         if (ui->autoRenderingCheckBox->isChecked())
             updateRaytracerImage();
     }
