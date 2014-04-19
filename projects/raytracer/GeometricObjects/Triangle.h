@@ -13,15 +13,13 @@ class Triangle: public GeometricObject {
   Triangle(const Triangle& triangle);
   ~Triangle();
   Triangle& operator= (const Triangle& rhs);
-  /* virtual BBox get_bounding_box(); */
   void compute_normal();
   virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-  /* virtual bool shadow_hit(const Ray& ray, double& tmin) const; */
+  virtual bool shadow_hit(const Ray& ray, double& tmin) const;
 
  private:
-  Vector3d   v0, v1, v2;
-  Vector3d    normal;
-  
+  Vector3d v0, v1, v2;
+  Vector3d normal;
 };
 
 #endif

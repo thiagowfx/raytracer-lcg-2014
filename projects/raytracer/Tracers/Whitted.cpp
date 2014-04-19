@@ -18,7 +18,6 @@ RGBColor Whitted::trace_ray(const Ray ray, const int depth) const {
     return black;
   else {
     ShadeRec sr(world_ptr->hit_objects(ray));
-
     if (sr.hit_an_object) {
       sr.depth = depth;
       sr.ray = ray;

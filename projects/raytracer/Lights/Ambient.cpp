@@ -41,3 +41,8 @@ Vector3d Ambient::get_direction(ShadeRec& s) {
 RGBColor Ambient::L(ShadeRec& sr) {	
   return radiance * color;
 }
+
+
+bool Ambient::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+  return false;
+}

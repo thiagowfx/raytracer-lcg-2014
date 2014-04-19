@@ -13,7 +13,8 @@ class Reflective: public Phong {
   virtual Reflective* clone() const; 
   ~Reflective(); 
   void set_kr(const double k);
-  void set_cr(const RGBColor& c);
+  void set_cr(const RGBColor&);
+  void set_cr(double,double,double);
   virtual RGBColor shade(ShadeRec& s);
 		
  private:
@@ -29,7 +30,11 @@ inline void Reflective::set_kr(const double k) {
 
 inline void Reflective::set_cr(const RGBColor& c) {
   reflective_brdf->set_cr(c);
-	
+}
+
+
+inline void Reflective::set_cr(double r, double g, double b) {
+  reflective_brdf->set_cr(r, g, b);
 }
 
 #endif

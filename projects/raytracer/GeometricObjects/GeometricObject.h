@@ -14,16 +14,21 @@ class GeometricObject {
   GeometricObject();		
   GeometricObject(const GeometricObject& object); 
   virtual ~GeometricObject ();	
+  virtual GeometricObject* clone() const = 0;
   virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
   Material* get_material() const;
   virtual void set_material(Material* mPtr);
   void set_color(const RGBColor& color);
   RGBColor get_color() const;
+  virtual bool shadow_hit(const Ray& ray, double& tmin) const = 0;
+  /* returns a sample point on the object for area light shading */
+  virtual Vector3d sample();
 	
  protected:
   /* mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const */
   mutable Material* material_ptr;
   RGBColor color;
+  bool shadows;
   GeometricObject& operator= (const GeometricObject& rhs);
 };
 

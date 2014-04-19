@@ -16,7 +16,8 @@ class GlossySpecular: public BRDF {
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
   void set_ks(const double ks);
   void set_exp(const double exp);
-  void set_cs(const RGBColor& c);
+  void set_cs(const RGBColor&);
+  void set_cs(double,double,double);
   void set_sampler(Sampler* sp, const double exp); // any type of sampling
   void set_samples(const int num_samples, const double exp); // multi jittered sampling
   void set_normal(const Vector3d& n);
@@ -40,6 +41,13 @@ inline void GlossySpecular::set_exp(const double e) {
 
 inline void GlossySpecular::set_cs(const RGBColor& c) {
   cs = c;
+}
+
+
+inline void GlossySpecular::set_cs(double r, double g, double b) {
+  cs.r = r;
+  cs.g = g;
+  cs.b = b;
 }
 
 

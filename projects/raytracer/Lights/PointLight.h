@@ -15,38 +15,32 @@ class PointLight: public Light {
   virtual ~PointLight();
   virtual Vector3d get_direction(ShadeRec& sr);
   virtual RGBColor L(ShadeRec& sr);
-  /* virtual bool casts_shadows() const; */
-  /* virtual void set_shadows(bool _s); */
-  void set_location(Vector3d l);
-  virtual void scale_radiance(const double _r);
-  /* bool in_shadow(const Ray& ray, const ShadeRec& sr) const; */
-  virtual double G(const ShadeRec& sr) const;
-  virtual double pdf(const ShadeRec& sr) const;
+  void set_location(Vector3d);
+  void set_location(double,double,double);
+  virtual void scale_radiance(double);
+  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
   
  private:
-  double    ls;                  // radiant scale factor
+  double radiance;
   RGBColor color;
   Vector3d location;
 };
 
 
-/* inline bool PointLight::casts_shadows() const { */
-/*   return Light::casts_shadows(); */
-/* } */
-
-
-/* inline void PointLight::set_shadows(bool _s) { */
-/*   return Light::set_shadows(_s); */
-/* } */
-
-
-inline void PointLight::set_location(Vector3d l) {
-  this->location = l;
+inline void PointLight::set_location(Vector3d v) {
+  location = v;
 }
 
 
-inline void PointLight::scale_radiance(const double _r) {
-  ls *= _r;
+inline void PointLight::set_location(double x, double y, double z) {
+  location(0) = x;
+  location(1) = y;
+  location(2) = z;
+}
+
+
+inline void PointLight::scale_radiance(double r) {
+  radiance *= r;
 }
 
 #endif

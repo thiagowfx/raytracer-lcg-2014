@@ -2,12 +2,14 @@
 
 GeometricObject::GeometricObject() :
   material_ptr(NULL),
+  shadows(true),
   color()
 {}
 
 
 GeometricObject::GeometricObject (const GeometricObject& object) :
   material_ptr(NULL),
+  shadows(object.shadows),
   color(object.color)
 {
   if (object.material_ptr)
@@ -17,7 +19,7 @@ GeometricObject::GeometricObject (const GeometricObject& object) :
 
 GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
   
-  if (this != &rhs) {    
+  if (this != &rhs) {
     if (material_ptr) {
       delete material_ptr;
       material_ptr = NULL;
@@ -25,6 +27,8 @@ GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
 
     if (rhs.material_ptr)
       material_ptr = rhs.material_ptr->clone();
+
+    shadows = rhs.shadows;
   }
 
   return *this;
@@ -41,4 +45,9 @@ GeometricObject::~GeometricObject () {
 
 void GeometricObject::set_material(Material* mPtr) {
   material_ptr = mPtr;
+}
+
+
+Vector3d GeometricObject::sample() {
+  return Vector3d::Zero();
 }

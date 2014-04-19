@@ -1,9 +1,13 @@
 #include "Light.h"
 
-Light::Light() {}
+Light::Light() :
+    shadows(true)
+{}
 
 
-Light::Light(const Light& ls) {}
+Light::Light(const Light& ls) :
+    shadows(ls.casts_shadows())
+{}
 
 
 Light& Light::operator= (const Light& rhs) {
@@ -15,7 +19,15 @@ Light::~Light() {}
 
 
 RGBColor Light::L(ShadeRec& s) {
-  return RGBColor();
+  return black;
 }
 
 
+void Light::set_shadows(const bool shadow){
+  shadows = shadow;
+}
+
+
+bool Light::casts_shadows() const {
+  return shadows;
+}

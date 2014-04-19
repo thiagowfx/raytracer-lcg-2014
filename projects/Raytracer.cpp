@@ -132,11 +132,6 @@ void Raytracer::set_up() {
     camera_ptr->compute_uvw();
     w->set_camera(camera_ptr);
 
-    Orthographic* ortho_ptr = new Orthographic;
-    ortho_ptr->set_view_distance(250.0);
-    w->set_camera(ortho_ptr);
-
-
     PointLight* light_ptr = new PointLight();
     light_ptr->set_location(Vector3d(100, 100, 200));
     light_ptr->scale_radiance(2.0);
@@ -147,7 +142,7 @@ void Raytracer::set_up() {
     matte_ptr->set_kd(0.8);
     matte_ptr->set_cd(RGBColor(0.9, 0.9, 0.2));				// yellow
 
-    RaytracerSphere*	sphere_ptr = new RaytracerSphere(Vector3d::Zero(), 30.0);
+    RaytracerSphere*	sphere_ptr = new RaytracerSphere(Vector3d::Zero() + Vector3d(250.0, 0.0, 0.0), 20.0);
     sphere_ptr->set_material(matte_ptr);
     sphere_ptr->set_color(RGBColor(0.9, 0.9, 0.2));
     w->add_object(sphere_ptr);

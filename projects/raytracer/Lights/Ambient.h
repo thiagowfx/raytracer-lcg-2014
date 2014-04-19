@@ -16,6 +16,7 @@ class Ambient: public Light {
   void set_color(double,double,double);
   virtual Vector3d get_direction(ShadeRec& s); 
   virtual RGBColor L(ShadeRec& s);
+  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 	
  private:
   double radiance;

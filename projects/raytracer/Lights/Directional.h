@@ -16,12 +16,14 @@ class Directional: public Light {
   virtual void scale_radiance(const double b);
   void set_color(const RGBColor&);
   void set_color(double,double,double);
-  void set_direction(Vector3d d);
+  void set_direction(Vector3d);
+  void set_direction(double,double,double);
   virtual Vector3d get_direction(ShadeRec& sr);
-  virtual RGBColor L(ShadeRec& sr);	
+  virtual RGBColor L(ShadeRec& sr);
+  bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 		
  private:
-  double	   ls;
+  double radiance;
   RGBColor color;
   Vector3d dir;                 // direction the light comes from
   
@@ -29,7 +31,7 @@ class Directional: public Light {
 
 
 inline void Directional::scale_radiance(const double b) {
-  ls = b;
+  radiance = b;
 }
 
 
@@ -47,6 +49,13 @@ inline void Directional::set_color(double r, double g, double b) {
 inline void Directional::set_direction(Vector3d d) {
   dir = d;
   dir.normalize();
+}
+
+
+inline void Directional::set_direction(double x, double y, double z) {
+  dir(0) = x;
+  dir(1) = y;
+  dir(2) = z;
 }
 
 #endif

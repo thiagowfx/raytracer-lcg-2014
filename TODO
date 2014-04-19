@@ -4,28 +4,27 @@
 
 * Interface
 ** TODO renderizar apenas uma imagem de cada vez, e num thread separado (para não congelar a UI)
-** barra de status informando o status
+** IN_PROGRESS barra de status informando o status
 ** barra de status informando o progresso
 ** TODO camera: set_eye (primitivo)
 ** TODO camera: set look at
-** checker para escolher se vai renderizar em tempo real ou nao
-** mais um botao para renderizar manualmente / atualizar a renderização (para o caso anterior)
-** TODO trackball: camera
-** eventos com as teclas direcionais (setas)
-** aperfeiçoar a API (classe Raytracer): deixá-la o máximo independente entre o QT e a biblioteca quanto possível
+** DONE checker para escolher se vai renderizar em tempo real ou nao
+** DONE mais um botao para renderizar manualmente / atualizar a renderização (para o caso anterior)
+** IN_PROGRESS trackball: camera
+** IN_PROGRESS eventos com as teclas direcionais (setas)
+** DONE aperfeiçoar a API (classe Raytracer): deixá-la o máximo independente entre o QT e a biblioteca quanto possível
 ** TODO (complexo, deixar para bem mais tarde) forma de adicionar objetos e gerenciá-los a partir da própria interface
-** 
 * General
 ** DONE Implementar todos os Samplers (nrooks, ...)
-** IN_PROGRESS Implementar todas as câmeras (thinlens...)
+** DONE Implementar todas as câmeras (thinlens...)
 
 ** DONE PerfectSpecular.cpp
 ** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
 ** DONE Samplers -- realmente necessário? ao menos, retirar de onde não for preciso -- OK, refinado, inclusive no ViewPlane
 
-** continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
+** TODO continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
 ** IN_PROGRESS ver o que falta colocar do livro (tweaks?) -- ok, progredindo
-** incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
+** TODO incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
 ** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
 ** DONE implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
 ** DONE incluir vp.num_samples em cima do World render_scene -- corrigido com full suporte de samplers

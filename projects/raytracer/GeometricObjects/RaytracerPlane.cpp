@@ -3,7 +3,7 @@
 RaytracerPlane::RaytracerPlane() :
   GeometricObject(),
   point(Vector3d::Zero()),
-  normal(0.0, 1.0, 0.0)						
+  normal(0.0, 1.0, 0.0)
 {}
 
 
@@ -19,7 +19,7 @@ RaytracerPlane::RaytracerPlane(const Vector3d& _point, const Vector3d& _normal) 
 RaytracerPlane::RaytracerPlane(const RaytracerPlane& plane) :
   GeometricObject(plane),
   point(plane.point),
-  normal(plane.normal) 
+  normal(plane.normal)
 {}
 
 
@@ -36,6 +36,10 @@ RaytracerPlane& RaytracerPlane::operator= (const RaytracerPlane& rhs) {
 
 RaytracerPlane::~RaytracerPlane() {}
 
+RaytracerPlane *RaytracerPlane::clone() const {
+  return new RaytracerPlane(*this);
+}
+
 
 bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
   double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
@@ -44,9 +48,25 @@ bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     tmin = t;
     sr.normal = normal;
     sr.local_hit_point = ray.o + t * ray.d;
-    
+
     return true;
   }
   
+  return false;
+}
+
+
+bool RaytracerPlane::shadow_hit(const Ray& ray, double& tmin) const {
+
+  if(!shadows)
+    return false;
+
+  double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
+
+  if (t > kEpsilon) {
+    tmin = t;
+    return true;
+  }
+
   return false;
 }
