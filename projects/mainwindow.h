@@ -30,6 +30,7 @@ private slots:
     void numberOfSamplesChanged(int);
     void pixelSizeChanged(double);
     void gammaCorrectionChanged(double);
+    void outOfGamutChanged();
     void ambientRadianceChanged(double);
     void updateRaytracerImage();
     void tracerChanged(QString);

@@ -31,6 +31,10 @@ void Raytracer::set_gamma_correction(double gamma) {
     w->vp.set_gamma(gamma);
 }
 
+void Raytracer::set_show_out_of_gamut(bool b) {
+    w->vp.set_show_of_gamut(b);
+}
+
 void Raytracer::set_background_color(double r, double g, double b) {
     w->background_color = RGBColor(r, g, b);
 }

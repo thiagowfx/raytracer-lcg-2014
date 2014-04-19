@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
     raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
     raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
+    raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
     QColor color = ui->backgroundColorPushButton->palette().color(QPalette::Window);
     raytracer.set_background_color(color.red(), color.green(), color.blue());
     raytracer.set_ambient_radiance(ui->ambientRadianceDoubleSpinBox->value());
@@ -69,6 +70,12 @@ void MainWindow::pixelSizeChanged(double size) {
 
 void MainWindow::gammaCorrectionChanged(double gamma) {
     raytracer.set_gamma_correction(gamma);
+    if (ui->autoRenderingCheckBox->isChecked())
+        updateRaytracerImage();
+}
+
+void MainWindow::outOfGamutChanged() {
+    raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
     if (ui->autoRenderingCheckBox->isChecked())
         updateRaytracerImage();
 }
