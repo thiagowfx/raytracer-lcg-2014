@@ -23,8 +23,7 @@ class Lambertian: public BRDF {
 					
  private:
   double kd;
-  RGBColor cd;
-  
+  RGBColor cd;  
 };
 
 
@@ -48,5 +47,14 @@ inline void Lambertian::set_cd(double r, double g, double b) {
   cd.b = b;
 }
 
+
+inline double Lambertian::get_kd() const {
+  return kd;
+}
+
+
+inline RGBColor Lambertian::get_cd() const {
+  return cd;
+}
 
 #endif

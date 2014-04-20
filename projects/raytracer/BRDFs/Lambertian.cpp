@@ -28,7 +28,6 @@ Lambertian& Lambertian::operator= (const Lambertian& rhs) {
     kd = rhs.kd;
     cd = rhs.cd;
   }
-
   return *this;
 }
 
@@ -59,14 +58,4 @@ RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& 
 
 RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3d& wo) const {
   return kd * cd;
-}
-
-
-double Lambertian::get_kd() const {
-  return kd;
-}
-
-
-RGBColor Lambertian::get_cd() const {
-  return cd;
 }

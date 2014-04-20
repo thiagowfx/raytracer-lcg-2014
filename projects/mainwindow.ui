@@ -55,7 +55,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Horizontal Resolution</string>
+         <string>Horizontal resolution</string>
         </property>
        </widget>
       </item>
@@ -94,7 +94,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Number of Samples</string>
+         <string>Number of samples</string>
         </property>
        </widget>
       </item>
@@ -114,7 +114,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Pixel Size</string>
+         <string>Pixel size</string>
         </property>
        </widget>
       </item>
@@ -137,7 +137,7 @@
       <item row="5" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Gamma Correction</string>
+         <string>Gamma correction</string>
         </property>
        </widget>
       </item>
@@ -150,7 +150,7 @@
          <double>0.100000000000000</double>
         </property>
         <property name="maximum">
-         <double>2.000000000000000</double>
+         <double>3.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -163,14 +163,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Vertical Resolution</string>
+         <string>Vertical resolution</string>
         </property>
        </widget>
       </item>
       <item row="7" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Background Color</string>
+         <string>Background color</string>
         </property>
        </widget>
       </item>
@@ -602,7 +602,7 @@
       <item row="8" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Ambient Radiance</string>
+         <string>Ambient radiance</string>
         </property>
        </widget>
       </item>
@@ -654,7 +654,7 @@
       <item row="6" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Show Out Of Gamut</string>
+         <string>Show out of gamut</string>
         </property>
        </widget>
       </item>
@@ -668,7 +668,7 @@
       <item row="9" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>Ambient Color</string>
+         <string>Ambient color</string>
         </property>
        </widget>
       </item>
@@ -1097,7 +1097,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>Zoom Level</string>
+         <string>Zoom level</string>
         </property>
        </widget>
       </item>
