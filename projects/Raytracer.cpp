@@ -1,8 +1,7 @@
 #include "Raytracer.h"
 
 Raytracer::Raytracer() :
-  w(new World),
-  cc(250.0, 0.0, 0.0)
+  w(new World)
 {
   set_up();
 }
@@ -50,15 +49,31 @@ void Raytracer::set_tracer(Tracer* tracer) {
 
 void Raytracer::set_tracer(QString s) {
   if (s == QString("RayCast"))
-    w->tracer_ptr = new RayCast(w);
+    set_tracer(new RayCast(w));
   else if (s == QString("Whitted"))
-    w->tracer_ptr = new Whitted(w);
+    set_tracer(new Whitted(w));
   else if (s == QString("MultipleObjects"))
-    w->tracer_ptr=  new MultipleObjects(w);
+    set_tracer(new MultipleObjects(w));
+  else {
+    std::cout << "No tracer set" << std::endl;
+    exit(1);
+  }
 }
 
 void Raytracer::set_ambient_radiance(double r) {
   w->ambient_ptr->scale_radiance(r);
+}
+
+void Raytracer::change_view_distance(double dd) {
+  set_view_distance(w->camera_ptr->get_view_distance() + dd);
+}
+
+void Raytracer::set_view_distance(double d) {
+  w->camera_ptr->set_view_distance(d);
+}
+
+void Raytracer::set_camera_zoom(double z) {
+  w->camera_ptr->set_zoom(z);
 }
 
 const char* Raytracer::get_camera_eye_as_string() {
@@ -68,7 +83,7 @@ const char* Raytracer::get_camera_eye_as_string() {
   return str;
 }
 
-const char *Raytracer::get_camera_eye_cylindrical_as_string() {
+const char* Raytracer::get_camera_eye_cylindrical_as_string() {
   static char str[50];
   sprintf(str, "Eye(cyl): (%.2lf, %.2lf, %.2lf)", cc(0), cc(1), cc(2));
   return str;
@@ -117,18 +132,17 @@ void Raytracer::render_scene() {
 }
 
 void Raytracer::set_up() {
+
+  /* Camera */
   Pinhole* camera_ptr = new Pinhole;
-  camera_ptr->set_eye(Vector3d(0, 0, 250));
+  // Orthographic* camera_ptr = new Orthographic;
+  cc = Vector3d(0.0, 0.0, 500.0);
+  camera_ptr->set_eye(cc);
   camera_ptr->set_lookat(Vector3d::Zero());
-  camera_ptr->set_view_distance(50);
+  camera_ptr->set_view_distance(250.0);
+  camera_ptr->set_zoom(1.0);
   camera_ptr->compute_uvw();
   w->set_camera(camera_ptr);
-
-  Orthographic* o = new Orthographic;
-  o->set_eye(Vector3d(0, 0, 250));
-  o->set_lookat(Vector3d::Zero());
-  o->compute_uvw();
-  // w->set_camera(o);
 
   PointLight* light_ptr = new PointLight();
   light_ptr->set_location(Vector3d(100, 100, 200));

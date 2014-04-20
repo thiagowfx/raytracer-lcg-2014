@@ -56,6 +56,9 @@ public:
   /* Ambient Light */
   void set_ambient_radiance(double);
   /* Camera */
+  void change_view_distance(double);
+  void set_view_distance(double);
+  void set_camera_zoom(double);
   const char* get_camera_eye_as_string();
   const char* get_camera_eye_cylindrical_as_string();
   void move_camera_eye_absolute(Vector3d);

@@ -1,26 +1,19 @@
 #include "Pinhole.h"
 
 Pinhole::Pinhole() :
-  Camera(),
-  d(250.0),
-  zoom(1.0)
+  Camera()
 {}
 
 
 Pinhole::Pinhole(const Pinhole& c) :
-  Camera(c),
-  d(c.d),
-  zoom(c.zoom)
+  Camera(c)
 {}
 
 
 Pinhole& Pinhole::operator= (const Pinhole& rhs) {
   if (this != &rhs) {
     Camera::operator= (rhs);
-    d    = rhs.d;
-    zoom = rhs.zoom;
   }
-
   return *this;
 }
 
@@ -31,7 +24,6 @@ Pinhole::~Pinhole() {}
 Vector3d Pinhole::get_direction(const Vector2d& p) const {
   Vector3d dir = (p(0) * u) + (p(1) * v) - (d * w);
   dir.normalize();
-	
   return dir;
 }
 
@@ -44,7 +36,7 @@ Pinhole* Pinhole::clone() const {
 void Pinhole::render_scene(const World* w, const char* image_file) {
   RGBColor  L;
   ViewPlane vp(w->vp);
-  Ray	    ray;
+  Ray	      ray;
   int 	    depth = 0;
   Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel
@@ -66,12 +58,10 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
         ray.d = get_direction(pp);
         L += w->tracer_ptr->trace_ray(ray, depth);
       }
-
       L /= n;
       L *= exposure_time;
       w->display_pixel(r, c, L, image);
     }
   }
-
   image.write(image_file);
 }

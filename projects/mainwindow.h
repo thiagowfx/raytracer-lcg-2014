@@ -29,6 +29,7 @@ private slots:
     void verticalResolutionChanged(int);
     void numberOfSamplesChanged(int);
     void pixelSizeChanged(double);
+    void zoomChanged(double);
     void gammaCorrectionChanged(double);
     void outOfGamutChanged();
     void ambientRadianceChanged(double);
@@ -51,6 +52,10 @@ private:
     void on_Key_Down_pressed();
     void on_Key_W_pressed();
     void on_Key_S_pressed();
+    void on_Key_PageUp_pressed();
+    void on_Key_PageDown_pressed();
+
+    void createStatusBar();
 
 private:
     Ui::MainWindow *ui;

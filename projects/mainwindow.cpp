@@ -11,20 +11,15 @@ MainWindow::MainWindow(QWidget *parent) :
   this->setFocus();
   this->installEventFilter(this);
 
-  raytracingInProgress = false;
+  createStatusBar();
 
   /** ui initial values */
-  statusbarProgressLabel = new QLabel();
-  statusbarCameraEyeLabel = new QLabel();
-  statusbarCameraEyeCylindricalLabel = new QLabel();
-  statusBar()->addWidget(statusbarProgressLabel);
-  statusBar()->addPermanentWidget(statusbarCameraEyeLabel);
-  statusBar()->addPermanentWidget(statusbarCameraEyeCylindricalLabel);
-
+  raytracingInProgress = false;
   raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
   raytracer.set_vres(ui->verticalResolutionSpinBox->value());
   raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
   raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
+  raytracer.set_camera_zoom(ui->zoomDoubleSpinBox->value());
   raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
   raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
   raytracer.set_background_color(ui->backgroundColorPushButton->palette().color(QPalette::Window));
@@ -35,10 +30,17 @@ MainWindow::MainWindow(QWidget *parent) :
   updateRaytracerImage();
 }
 
-MainWindow::~MainWindow()
-{
-  delete ui;
+void MainWindow::createStatusBar() {
+  statusbarProgressLabel = new QLabel();
+  statusbarCameraEyeLabel = new QLabel();
+  statusbarCameraEyeCylindricalLabel = new QLabel();
+  statusBar()->addPermanentWidget(statusbarProgressLabel);
+  statusBar()->addWidget(statusbarCameraEyeLabel);
+  statusBar()->addWidget(statusbarCameraEyeCylindricalLabel);
+}
 
+MainWindow::~MainWindow() {
+  delete ui;
   delete statusbarCameraEyeLabel;
   delete statusbarCameraEyeCylindricalLabel;
   delete statusbarProgressLabel;
@@ -65,6 +67,12 @@ void MainWindow::numberOfSamplesChanged(int samples) {
 
 void MainWindow::pixelSizeChanged(double size) {
   raytracer.set_pixel_size(size);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::zoomChanged(double z) {
+  raytracer.set_camera_zoom(z);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -181,13 +189,27 @@ void MainWindow::on_Key_Down_pressed() {
 
 void MainWindow::on_Key_W_pressed() {
   qDebug() << "INFO: W key pressed";
-  raytracer.move_camera_eye_relative_cylindrical(-5.0, 0.0, 0.0);
+  raytracer.change_view_distance(3.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_S_pressed() {
   qDebug() << "INFO: S key pressed";
+  raytracer.change_view_distance(-3.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_PageUp_pressed() {
+  qDebug() << "INFO: Page Up key pressed";
+  raytracer.move_camera_eye_relative_cylindrical(-5.0, 0.0, 0.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_PageDown_pressed() {
+  qDebug() << "INFO: Page Down key pressed";
   raytracer.move_camera_eye_relative_cylindrical(5.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
@@ -215,6 +237,12 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
       break;
     case Qt::Key_S:
       on_Key_S_pressed();
+      break;
+    case Qt::Key_PageUp:
+      on_Key_PageUp_pressed();
+      break;
+    case Qt::Key_PageDown:
+      on_Key_PageDown_pressed();
       break;
     }
   }

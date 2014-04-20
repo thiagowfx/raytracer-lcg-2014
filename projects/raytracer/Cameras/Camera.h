@@ -21,18 +21,21 @@ public:
   void set_lookat(double,double,double);
   void set_up_vector(const Vector3d&);
   void set_up_vector(double,double,double);
-  void set_roll(const double ra);
-  void set_exposure_time(const double exposure);
+  void set_exposure_time(double exposure);
+  void set_zoom(double zoom);
+  void set_view_distance(double d);
   void compute_uvw();
   Vector3d get_eye() const;
+  double get_view_distance() const;
 
 protected:
   Vector3d eye;			// eye point
   Vector3d lookat; 		// lookat point
-  double ra;			// roll angle
   Vector3d u, v, w;		// orthonormal basis vectors
   Vector3d up;			// up vector
   double exposure_time;
+  double zoom;      // zoom factor
+  double d;         // view plane distance
   Camera& operator= (const Camera& camera);
 };
 
@@ -73,18 +76,28 @@ inline void Camera::set_up_vector(double x, double y, double z) {
 }
 
 
-inline void Camera::set_roll(const double r) {
-  ra = r;
-}
-
-
-inline void Camera::set_exposure_time(const double exposure) {
-  exposure_time = exposure;
+inline void Camera::set_exposure_time(double exposure_time) {
+  this->exposure_time = exposure_time;
 }
 
 
 inline Vector3d Camera::get_eye() const {
   return eye;
+}
+
+
+inline double Camera::get_view_distance() const {
+  return d;
+}
+
+
+inline void Camera::set_zoom(double zoom) {
+  this->zoom = zoom;
+}
+
+
+inline void Camera::set_view_distance(double d) {
+  this->d = d;
 }
 
 #endif
