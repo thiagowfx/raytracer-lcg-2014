@@ -17,6 +17,8 @@ class Matte: public Material {
   void set_kd(const double k);
   void set_cd(const RGBColor& c);
   virtual RGBColor shade(ShadeRec& sr);
+  static Matte* dummy(RGBColor);
+  virtual RGBColor get_color() const;
 		
  private:
   Lambertian* ambient_brdf;
@@ -32,7 +34,7 @@ inline void Matte::set_ka(const double ka) {
 
 
 /* this also sets Lambertian::kd, but for a different Lambertian object */
-inline void Matte::set_kd (const double kd) {
+inline void Matte::set_kd(const double kd) {
   diffuse_brdf->set_kd(kd);
 }
 

@@ -18,8 +18,7 @@ class Reflective: public Phong {
   virtual RGBColor shade(ShadeRec& s);
 		
  private:
-  PerfectSpecular* reflective_brdf;
-  
+  PerfectSpecular* reflective_brdf;  
 };
 
 

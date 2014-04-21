@@ -31,6 +31,7 @@ private slots:
     void pixelSizeChanged(double);
     void zoomChanged(double);
     void gammaCorrectionChanged(double);
+    void viewPlaneDistanceChanged(double);
     void outOfGamutChanged();
     void ambientRadianceChanged(double);
     void updateRaytracerImage();
@@ -44,23 +45,26 @@ private slots:
     void on_actionSave_PNG_Image_triggered();
     void on_actionAbout_triggered();
     void on_actionAbout_Qt_triggered();
+    void on_actionReset_camera_triggered();
 
 private:
+    /* Keys */
+    bool eventFilter(QObject *object, QEvent *event);
     void on_Key_Left_pressed();
     void on_Key_Right_pressed();
     void on_Key_Up_pressed();
     void on_Key_Down_pressed();
-    void on_Key_W_pressed();
-    void on_Key_S_pressed();
     void on_Key_PageUp_pressed();
     void on_Key_PageDown_pressed();
+    void on_Key_W_pressed();
+    void on_Key_S_pressed();
+    void on_Key_A_pressed();
+    void on_Key_D_pressed();
 
     void createStatusBar();
 
 private:
     Ui::MainWindow *ui;
-    bool eventFilter(QObject *object, QEvent *event);
-
     Raytracer raytracer;
     bool raytracingInProgress;
     QLabel *statusbarCameraEyeLabel;

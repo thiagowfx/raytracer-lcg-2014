@@ -20,6 +20,7 @@ class Phong : public Material {
   void set_cd(const RGBColor& color);
   void set_exp(double exp);
   void set_cs(const RGBColor& color);
+  virtual RGBColor get_color() const;
 
  private:
   Lambertian *ambient_brdf;

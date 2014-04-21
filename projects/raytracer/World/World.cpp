@@ -73,9 +73,9 @@ ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 
   for (int j = 0; j < num_objects; j++)
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
-      sr.hit_an_object  = true;
-      tmin              = t;
-      sr.color          = objects[j]->get_color();
+      sr.hit_an_object = true;
+      tmin             = t;
+      sr.material_ptr  = objects[j]->get_material();
     }
   return sr;
 }
@@ -86,7 +86,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
   double   t;
   Vector3d normal;
   Vector3d local_hit_point;
-  double   tmin        = kHugeValue;
+  double   tmin         = kHugeValue;
   const int num_objects = objects.size();
 
   for (int j = 0; j < num_objects; ++j)
@@ -94,7 +94,6 @@ ShadeRec World::hit_objects(const Ray& ray) {
       sr.hit_an_object = true;
       tmin             = t;
       sr.material_ptr  = objects[j]->get_material();
-      sr.color         = objects[j]->get_color();
       sr.hit_point     = ray.o + (t * ray.d);
       normal           = sr.normal;
       local_hit_point  = sr.local_hit_point;
@@ -105,7 +104,6 @@ ShadeRec World::hit_objects(const Ray& ray) {
     sr.normal = normal;
     sr.local_hit_point = local_hit_point;
   }
-
   return sr;
 }
 

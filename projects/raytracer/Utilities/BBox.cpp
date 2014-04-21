@@ -1,6 +1,5 @@
 #include "BBox.h"
 
-
 BBox::BBox () :
   x0(-1), x1(1), y0(-1), y1(1), z0(-1), z1(1)
 {}

@@ -75,3 +75,8 @@ RGBColor Phong::shade (ShadeRec& sr) {
 
   return L;
 }
+
+
+RGBColor Phong::get_color() const {
+  return diffuse_brdf->get_cd();
+}

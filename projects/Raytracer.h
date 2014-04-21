@@ -71,17 +71,21 @@ public:
   double clamp(double x, double max); /** ASSUME: max > 0. Return [0, max) */
   /* Raytracer */
   void render_scene();
+  void set_up_camera();
   void set_up();
   void set_up_testing();
   const char* image="raytraced_image.png";
 private:
   World* w;
   Vector3d cc; /** cylindrical coordinates */
+
+  /** Dummy constants / defaults */
   const double ls = 1.00; /** valor para escalar a intensidade da luz */
   const double ka = 0.20; /** valor para constante ambiente */
   const double kd = 0.80; /** valor para constante difusa */
   const double ks = 0.12; /** valor para constante especular */
-  const double expi = 20;
+  const double expi = 20.0;
+  const double dx = 15.0;
 };
 
 #endif // RAYTRACER_H

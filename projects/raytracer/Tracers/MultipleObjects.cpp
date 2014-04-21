@@ -14,10 +14,10 @@ MultipleObjects::~MultipleObjects() {}
 
 
 inline RGBColor MultipleObjects::trace_ray(const Ray ray, const int depth) const {
-  ShadeRec sr(world_ptr->hit_objects(ray)); // sr is copy constructed
+  ShadeRec sr(world_ptr->hit_bare_bones_objects(ray)); // sr is copy constructed
 
   if (sr.hit_an_object) {
-    return sr.color;
+    return sr.material_ptr->get_color();
   }
   else {
     return world_ptr->background_color;

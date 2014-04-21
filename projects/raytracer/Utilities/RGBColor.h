@@ -6,8 +6,10 @@
 using namespace std;
 
 class RGBColor {
- public:
+public:
   double r, g, b;
+
+public:
   RGBColor();
   RGBColor(double, double, double);
   RGBColor(const RGBColor& c);
@@ -77,7 +79,7 @@ inline RGBColor RGBColor::operator* (const RGBColor& c) const {
 
 
 inline bool RGBColor::operator== (const RGBColor& c) const {
-    return compareDouble(r, c.r) && compareDouble(g, c.g) && compareDouble(b, c.b);
+  return compareDouble(r, c.r) && compareDouble(g, c.g) && compareDouble(b, c.b);
 }
 
 
