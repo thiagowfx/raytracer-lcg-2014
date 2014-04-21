@@ -2,7 +2,7 @@
 
 Directional::Directional() :
   Light(),
-  radiance(1.0),
+  ls(1.0),
   color(1.0, 1.0, 1.0),
   dir(0.0, 1.0, 0.0)			
 {}
@@ -10,7 +10,7 @@ Directional::Directional() :
 
 Directional::Directional(const Directional& dl) :
   Light(dl),
-  radiance(dl.radiance),
+  ls(dl.ls),
   color(dl.color),
   dir(dl.dir)  		
 {}
@@ -24,11 +24,10 @@ Light* Directional::clone() const {
 Directional& Directional::operator= (const Directional& rhs) {
   if (this != &rhs) {
     Light::operator= (rhs);
-    radiance	  = rhs.radiance;
+    ls	  = rhs.ls;
     color = rhs.color;
     dir   = rhs.dir;
   }
-  
   return *this;
 }
 
@@ -43,7 +42,7 @@ Vector3d Directional::get_direction(ShadeRec& sr) {
 
 
 RGBColor Directional::L(ShadeRec& s) {	
-  return radiance * color;
+  return ls * color;
 }
 
 

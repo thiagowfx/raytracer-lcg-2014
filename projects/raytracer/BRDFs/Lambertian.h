@@ -14,7 +14,6 @@ class Lambertian: public BRDF {
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
-  void set_ka(double);
   void set_kd(double);
   void set_cd(const RGBColor&);
   void set_cd(double,double,double);
@@ -25,11 +24,6 @@ class Lambertian: public BRDF {
   double kd;
   RGBColor cd;  
 };
-
-
-inline void Lambertian::set_ka(double k) {
-  kd = k;
-}
 
 
 inline void Lambertian::set_kd(double k) {

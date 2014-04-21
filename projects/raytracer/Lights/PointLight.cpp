@@ -2,7 +2,7 @@
 
 PointLight::PointLight () :
   Light(),
-  radiance(1.0),
+  ls(1.0),
   color(RGBColor(1.0, 1.0, 1.0)),
   location(Vector3d::Zero())
 {}
@@ -10,7 +10,7 @@ PointLight::PointLight () :
 
 PointLight::PointLight (const PointLight& a) :
   Light(a),
-  radiance(a.radiance),
+  ls(a.ls),
   color(a.color),
   location(a.location)
 {}
@@ -24,7 +24,7 @@ Light* PointLight::clone() const {
 PointLight& PointLight::operator= (const PointLight& rhs) {
   if (this != &rhs) {
       Light::operator= (rhs);
-      radiance = rhs.radiance;
+      ls = rhs.ls;
       color = rhs.color;
       location = rhs.location;
     }
@@ -42,7 +42,7 @@ Vector3d PointLight::get_direction(ShadeRec& sr) {
 
 
 RGBColor PointLight::L(ShadeRec& sr) {
-  return radiance * color;
+  return ls * color;
 }
 
 

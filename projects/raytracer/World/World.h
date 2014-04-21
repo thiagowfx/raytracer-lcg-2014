@@ -49,8 +49,7 @@ class World {
 						
  private:
   void delete_objects();
-  void delete_lights();
-  
+  void delete_lights();  
 };
 
 

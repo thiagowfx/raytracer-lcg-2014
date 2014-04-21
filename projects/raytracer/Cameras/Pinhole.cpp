@@ -21,6 +21,7 @@ Pinhole& Pinhole::operator= (const Pinhole& rhs) {
 Pinhole::~Pinhole() {}
 
 
+/** Retorna o vetor com origem em eye e destino em p. */
 Vector3d Pinhole::get_direction(const Vector2d& p) const {
   Vector3d dir = (p(0) * u) + (p(1) * v) - (d * w);
   dir.normalize();
@@ -36,7 +37,7 @@ Pinhole* Pinhole::clone() const {
 void Pinhole::render_scene(const World* w, const char* image_file) {
   RGBColor  L;
   ViewPlane vp(w->vp);
-  Ray	      ray;
+  Ray	      ray;                // primqry ray
   int 	    depth = 0;
   Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel

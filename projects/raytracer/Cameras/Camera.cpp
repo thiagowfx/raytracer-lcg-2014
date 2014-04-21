@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 Camera::Camera() :
-  eye(0.0, 0.0, 500.0),
+  eye(0.0, 0.0, 250.0),
   lookat(Vector3d::Zero()),
   u(1.0, 0.0, 0.0),
   v(0.0, 1.0, 0.0),

@@ -19,13 +19,13 @@ class Ambient: public Light {
   virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 	
  private:
-  double radiance;
+  double ls;                    // radiance
   RGBColor color;               // light color  
 };
 
 
 inline void Ambient::scale_radiance(const double b) {
-  radiance = b;
+  ls = b;
 }
 
 inline void Ambient::set_color(const RGBColor& color) {

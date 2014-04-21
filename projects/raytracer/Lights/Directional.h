@@ -13,25 +13,24 @@ class Directional: public Light {
   virtual Light* clone() const;			
   Directional& operator= (const Directional& rhs); 
   virtual ~Directional(); 				
-  virtual void scale_radiance(const double b);
+  void scale_radiance(const double b);
   void set_color(const RGBColor&);
   void set_color(double,double,double);
   void set_direction(Vector3d);
   void set_direction(double,double,double);
   virtual Vector3d get_direction(ShadeRec& sr);
   virtual RGBColor L(ShadeRec& sr);
-  bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
+  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 		
  private:
-  double radiance;
+  double ls;                    // radiance
   RGBColor color;
   Vector3d dir;                 // direction the light comes from
-  
 };
 
 
 inline void Directional::scale_radiance(const double b) {
-  radiance = b;
+  ls = b;
 }
 
 
@@ -56,6 +55,7 @@ inline void Directional::set_direction(double x, double y, double z) {
   dir(0) = x;
   dir(1) = y;
   dir(2) = z;
+  dir.normalize();
 }
 
 #endif

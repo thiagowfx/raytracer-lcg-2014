@@ -4,6 +4,7 @@ Raytracer::Raytracer() :
   w(new World)
 {
   set_up();
+  // set_up_testing();
 }
 
 Raytracer::~Raytracer() {
@@ -131,12 +132,16 @@ void Raytracer::render_scene() {
   w->camera_ptr->render_scene(w, image);
 }
 
-void Raytracer::set_up() {
+/**
+ * REMAINDERS:
+ * Luzes: parâmetro principal, cor e intensidade.
+ */
 
-  /* Camera */
+void Raytracer::set_up() {
+  /** Camera */
   Pinhole* camera_ptr = new Pinhole;
   // Orthographic* camera_ptr = new Orthographic;
-  cc = Vector3d(0.0, 0.0, 500.0);
+  cc = Vector3d(0.0, 0.0, 250.0);
   camera_ptr->set_eye(cc);
   camera_ptr->set_lookat(Vector3d::Zero());
   camera_ptr->set_view_distance(250.0);
@@ -145,34 +150,127 @@ void Raytracer::set_up() {
   w->set_camera(camera_ptr);
 
   PointLight* light_ptr = new PointLight();
-  light_ptr->set_location(Vector3d(100, 100, 200));
+  light_ptr->set_location(Vector3d(100.0, 100.0, 200.0));
   light_ptr->scale_radiance(2.0);
   w->add_light(light_ptr);
 
-  Matte* matte_ptr = new Matte;
-  matte_ptr->set_ka(0.2);
-  matte_ptr->set_kd(0.8);
-  matte_ptr->set_cd(RGBColor(0.9, 0.9, 0.2));				// yellow
-  RaytracerSphere*	sphere_ptr = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
-  sphere_ptr->set_material(matte_ptr);
-  sphere_ptr->set_color(RGBColor(0.9, 0.9, 0.2));
-  w->add_object(sphere_ptr);
+  Matte* mat1 = new Matte;
+  mat1->set_ka(ka);
+  mat1->set_kd(kd);
+  mat1->set_cd(yellow);
+  RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
+  sphere1->set_material(mat1);
+  sphere1->set_color(yellow);
+  w->add_object(sphere1);
 
-  Matte* matte_ptr3 = new Matte;
-  matte_ptr3->set_ka(0.2);
-  matte_ptr3->set_kd(0.8);
-  matte_ptr3->set_cd(orange);
-  RaytracerSphere*	sphere_ptr3 = new RaytracerSphere(Vector3d::Zero(), 15.0);
-  sphere_ptr3->set_material(matte_ptr3);
-  sphere_ptr3->set_color(orange);
-  w->add_object(sphere_ptr3);
+  Matte* mat2 = new Matte;
+  mat2->set_ka(ka);
+  mat2->set_kd(kd);
+  mat2->set_cd(white);
+  RaytracerSphere*	sphere2 = new RaytracerSphere(Vector3d::Zero(), 15.0);
+  sphere2->set_material(mat2);
+  sphere2->set_color(white);
+  w->add_object(sphere2);
 
-  Matte* matte_ptr2 = new Matte;
-  matte_ptr2->set_ka(ka);
-  matte_ptr2->set_kd(kd);
-  matte_ptr2->set_cd(RGBColor(0.2, 0.9, 0.2));
-  Triangle* triangle_ptr1 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
-  triangle_ptr1->set_material(matte_ptr2);
-  triangle_ptr1->set_color(RGBColor(0.2, 0.9, 0.2));
-  w->add_object(triangle_ptr1);
+  double dx = 15.0;
+
+  Matte* mat3 = new Matte;
+  mat3->set_ka(ka);
+  mat3->set_kd(kd);
+  mat3->set_cd(light_green);
+  RaytracerSphere*	sphere3 = new RaytracerSphere(Vector3d(-2 * dx, 0.0, 0.0), dx);
+  sphere3->set_material(mat3);
+  w->add_object(sphere3);
+
+
+  Matte* mat4 = new Matte;
+  mat4->set_ka(ka);
+  mat4->set_kd(kd);
+  mat4->set_cd(dark_green);
+  RaytracerSphere*	sphere4 = new RaytracerSphere(Vector3d(2 * dx, 0.0, 0.0), dx);
+  sphere4->set_material(mat4);
+  w->add_object(sphere4);
+
+
+  Matte* mat6 = new Matte;
+  mat6->set_ka(ka);
+  mat6->set_kd(kd);
+  mat6->set_cd(light_grey);
+  RaytracerSphere*	sphere6 = new RaytracerSphere(Vector3d(0.0, -2 * dx, 0.0), dx);
+  sphere6->set_material(mat6);
+  w->add_object(sphere6);
+
+
+  Matte* mat7 = new Matte;
+  mat7->set_ka(ka);
+  mat7->set_kd(kd);
+  mat7->set_cd(grey);
+  RaytracerSphere*	sphere7 = new RaytracerSphere(Vector3d(0.0, 2 * dx, 0.0), dx);
+  sphere7->set_material(mat7);
+  w->add_object(sphere7);
+
+  Matte* mat5 = new Matte;
+  mat5->set_ka(ka);
+  mat5->set_kd(kd);
+  mat5->set_cd(brown);
+  Triangle* triangle_ptr5 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
+  triangle_ptr5->set_material(mat5);
+  // w->add_object(triangle_ptr5);
+
+  Matte* mat8 = new Matte;
+  mat8->set_ka(ka);
+  mat8->set_kd(kd);
+  mat8->set_cd(light_purple);
+  RaytracerSphere*	sphere8 = new RaytracerSphere(Vector3d(0.0, 0.0, -2 * dx), dx);
+  sphere8->set_material(mat8);
+  w->add_object(sphere8);
+
+  Matte* mat9 = new Matte;
+  mat9->set_ka(ka);
+  mat9->set_kd(kd);
+  mat9->set_cd(dark_purple);
+  RaytracerSphere*	sphere9 = new RaytracerSphere(Vector3d(0.0, 0.0, 2 * dx), dx);
+  sphere9->set_material(mat9);
+  w->add_object(sphere9);
+}
+
+void Raytracer::set_up_testing() {
+  /** Camera */
+  Pinhole* camera_ptr = new Pinhole;
+  cc = Vector3d(250.0, 0.0, 250.0);
+  camera_ptr->set_eye(cc);
+  camera_ptr->set_lookat(Vector3d::Zero());
+  camera_ptr->set_view_distance(250.0);
+  camera_ptr->compute_uvw();
+  w->set_camera(camera_ptr);
+
+  /** Luzes */
+  Directional* dir1 = new Directional();
+  dir1->set_direction(cc);
+  dir1->scale_radiance(1.0);
+  dir1->set_color(white);
+
+  Matte* mat1 = new Matte;
+  mat1->set_cd(blue);
+  mat1->set_ka(ka);
+  mat1->set_kd(kd);
+  RaytracerPlane* plan_xy = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 0.0, 1.0));
+  plan_xy->set_material(mat1);
+  w->add_object(plan_xy);
+
+  Matte* mat2 = new Matte;
+  mat2->set_cd(green);
+  mat2->set_ka(ka);
+  mat2->set_kd(kd);
+  RaytracerPlane* plan_yz = new RaytracerPlane(Vector3d::Zero(), Vector3d(1.0, 0.0, 0.0));
+  plan_yz->set_material(mat2);
+  w->add_object(plan_yz);
+
+  Matte* mat3 = new Matte;
+  mat3->set_cd(red);
+  mat3->set_ka(ka);
+  mat3->set_kd(kd);
+  RaytracerPlane* plan_xz = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
+  plan_xz->set_material(mat3);
+  w->add_object(plan_xz);
 }

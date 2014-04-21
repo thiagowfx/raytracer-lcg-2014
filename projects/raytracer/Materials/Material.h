@@ -11,15 +11,13 @@ class Material {
   
  public:	
   Material();
+  virtual ~Material();
   Material(const Material& material);
   virtual Material* clone() const = 0; 
-  virtual ~Material();
-  virtual RGBColor shade(ShadeRec& sr);	
+  virtual RGBColor shade(ShadeRec& sr) = 0;
 		
  protected:
-  Material& operator= (const Material& rhs);
-  
+  Material& operator= (const Material& rhs);  
 };
-
 
 #endif

@@ -28,15 +28,15 @@ class Phong : public Material {
 };
 
 inline void Phong::set_ka (double ka) {
-  ambient_brdf->set_ka (ka);
+  ambient_brdf->set_kd(ka);
 }
 
 inline void Phong::set_kd (double kd) {
-  diffuse_brdf->set_kd (kd);
+  diffuse_brdf->set_kd(kd);
 }
 
 inline void Phong::set_ks (double ks) {
-  specular_brdf->set_ks (ks);
+  specular_brdf->set_ks(ks);
 }
 
 inline void Phong::set_cd (const RGBColor& color) {

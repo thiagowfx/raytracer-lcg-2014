@@ -23,7 +23,6 @@ BRDF& BRDF::operator= (const BRDF& rhs) {
     if (rhs.sampler_ptr)
       sampler_ptr = rhs.sampler_ptr->clone();
   }
-
   return *this;
 }
 

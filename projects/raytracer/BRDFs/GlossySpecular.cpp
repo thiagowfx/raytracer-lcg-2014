@@ -2,7 +2,7 @@
 
 GlossySpecular::GlossySpecular() :
   ks(0.0),
-  cs(RGBColor(1.0, 1.0, 1.0)),
+  cs(1.0, 1.0, 1.0),
   sampler(NULL)
 {}
 

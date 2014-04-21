@@ -12,8 +12,3 @@ Material& Material::operator= (const Material& rhs) {
 
 
 Material::~Material() {}
-
-
-RGBColor Material::shade(ShadeRec& sr) {
-  return RGBColor();
-}
