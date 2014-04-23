@@ -16,6 +16,9 @@ class Material {
   Material(const Material& material);
   virtual Material* clone() const = 0; 
   virtual RGBColor shade(ShadeRec& sr) = 0;
+  virtual RGBColor whitted_shade(ShadeRec& src);
+  virtual RGBColor area_light_shade(ShadeRec& sr);
+  virtual RGBColor path_shade(ShadeRec& sr);
   virtual RGBColor get_color() const = 0;
 		
  protected:

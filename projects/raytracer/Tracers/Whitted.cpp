@@ -23,7 +23,8 @@ RGBColor Whitted::trace_ray(const Ray ray, const int depth) const {
       sr.ray = ray;
       return sr.material_ptr->shade(sr);
     }
-    else
+    else {
       return world_ptr->background_color;
+    }
   }
 }

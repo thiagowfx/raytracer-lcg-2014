@@ -25,7 +25,6 @@ Ambient& Ambient::operator= (const Ambient& rhs) {
     ls 	  = rhs.ls;
     color = rhs.color;
   }
-	
   return *this;
 }
 

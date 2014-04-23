@@ -61,27 +61,28 @@ Matte::~Matte() {
 
 
 RGBColor Matte::shade(ShadeRec& sr) {
-  /** Direção para onde a luz sai (que é justamente o contrário de onde o raio primário da câmera vem */
+  /** wo = contrário da direção de onde o raio primário da câmera vem (para o olho) */
   Vector3d wo = -sr.ray.d;
 
   /** Luz ambiente. Criada para simular, de maneira global, a iluminação difusa indireta.
    * Suposta constante para todos os objetos da cena. Modelo de campo isotrópico 3D.
    * rho = kd * cd, significa: o quanto o material reflete (entre 0 e 1) vezes a cor do material.
-   * Adicionalmente: a cor da luz vezes a intensidade da luz.
+   * Adicionalmente: cl * ls, isto é, a cor da luz vezes a intensidade da luz.
    */
   RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 
   const int num_lights = sr.w.lights.size();
 
   for (int j = 0; j < num_lights; j++) {
-    /** Direção da onde a luz vem (tendência: apontar para *fora* do objeto!). Isso explica a convenção da luz direcional de especificar o contrário. */
+    /** wi = Direção da onde a luz vem (tendência: apontar para *fora* do objeto!). Isso explica a convenção da luz direcional de especificar o contrário. */
     Vector3d wi = sr.w.lights[j]->get_direction(sr);    
     double ndotwi = sr.normal.dot(wi);
 	
     if (ndotwi > 0.0) 
-      /** f: constante de reflexão do material * a cor do material sobre pi (componente lambertiana difusa, refletindo igualmente para todos os lados)
-       * L: intensidade da luz vezes a cor da luz
-       *
+      /** f = (kd * cd) / pi: constante de reflexão do material * a cor do material sobre pi (componente lambertiana difusa, refletindo igualmente para todos os lados)
+       * L = cl * ls (intensidade da luz vezes a cor da luz)
+       * ndotwi = produto interno entre a normal e a direção de onde a luz vem, representando cos(theta)
+       * quanto menor for esse ângulo, maior é a intensidade absorvida da luz
        */
       L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
   }

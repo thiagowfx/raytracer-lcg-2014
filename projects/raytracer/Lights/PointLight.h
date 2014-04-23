@@ -39,8 +39,8 @@ inline void PointLight::set_location(double x, double y, double z) {
 }
 
 
-inline void PointLight::scale_radiance(double r) {
-  ls *= r;
+inline void PointLight::scale_radiance(double b) {
+  ls = b;
 }
 
 #endif

@@ -65,22 +65,6 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 }
 
 
-ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
-  ShadeRec sr(*this);
-  double t;
-  double tmin = kHugeValue;
-  const int num_objects = objects.size();
-
-  for (int j = 0; j < num_objects; j++)
-    if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
-      sr.hit_an_object = true;
-      tmin             = t;
-      sr.material_ptr  = objects[j]->get_material();
-    }
-  return sr;
-}
-
-
 ShadeRec World::hit_objects(const Ray& ray) {
   ShadeRec sr(*this);
   double   t;
@@ -89,7 +73,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
   double   tmin         = kHugeValue;
   const int num_objects = objects.size();
 
-  for (int j = 0; j < num_objects; ++j)
+  for (int j = 0; j < num_objects; ++j) {
     if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
       sr.hit_an_object = true;
       tmin             = t;
@@ -98,7 +82,8 @@ ShadeRec World::hit_objects(const Ray& ray) {
       normal           = sr.normal;
       local_hit_point  = sr.local_hit_point;
     }
-
+  }
+  /** needed because the hit function may overwrite these */
   if(sr.hit_an_object) {
     sr.t = tmin;
     sr.normal = normal;
