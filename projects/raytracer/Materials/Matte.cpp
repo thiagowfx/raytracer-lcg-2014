@@ -88,7 +88,8 @@ RGBColor Matte::shade(ShadeRec& sr) {
   return L;
 }
 
-Matte *Matte::dummy(RGBColor color) {
+
+Matte* Matte::dummy(RGBColor color) {
   Matte* m = new Matte();
   m->set_ka(0.20);
   m->set_kd(0.80);

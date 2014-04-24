@@ -57,7 +57,7 @@ RGBColor Phong::shade (ShadeRec& sr) {
   const int num_lights = sr.w.lights.size();
 
   for (int j = 0; j < num_lights; ++j) {
-    Vector3d wi = -sr.w.lights[j]->get_direction(sr);
+    Vector3d wi = sr.w.lights[j]->get_direction(sr);
     double ndotwi = sr.normal.dot(wi);
     
     if (ndotwi > 0.0) {
@@ -73,6 +73,18 @@ RGBColor Phong::shade (ShadeRec& sr) {
   }
 
   return L;
+}
+
+
+Phong* Phong::dummy(RGBColor color) {
+  Phong* p = new Phong();
+  p->set_ka(0.20);
+  p->set_kd(0.80);
+  p->set_cd(color);
+  p->set_ks(0.12);
+  p->set_cs(color);
+  p->set_exp(10.0);
+  return p;
 }
 
 

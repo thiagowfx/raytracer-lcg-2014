@@ -4,7 +4,10 @@ Raytracer::Raytracer() :
   w(new World)
 {
   set_up_camera();
-  set_up();
+
+  /** Only uncomment one */
+  // set_up_axis_matte();
+  set_up_axis_phong();
   // set_up_testing();
 }
 
@@ -153,9 +156,9 @@ void Raytracer::set_up_camera() {
  * Luzes: parâmetro principal, cor e intensidade.
  */
 
-void Raytracer::set_up() {
+void Raytracer::set_up_axis_matte() {
   PointLight* light_ptr = new PointLight();
-  light_ptr->set_location(Vector3d(100.0, 100.0, 200.0));
+  light_ptr->set_location(w->camera_ptr->get_eye());
   light_ptr->scale_radiance(2.0);
   w->add_light(light_ptr);
 
@@ -196,6 +199,52 @@ void Raytracer::set_up() {
 
   RaytracerSphere*	sphere9 = new RaytracerSphere(Vector3d(0.0, 0.0, 2 * dx), dx);
   sphere9->set_material(Matte::dummy(dark_purple));
+  w->add_object(sphere9);
+}
+
+void Raytracer::set_up_axis_phong() {
+  PointLight* light_ptr = new PointLight();
+  light_ptr->set_location(w->camera_ptr->get_eye());
+  light_ptr->scale_radiance(2.0);
+  w->add_light(light_ptr);
+
+  RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
+  sphere1->set_material(Phong::dummy(light_green));
+  w->add_object(sphere1);
+
+  RaytracerSphere*	sphere2 = new RaytracerSphere(Vector3d::Zero(), 15.0);
+  sphere2->set_material(Phong::dummy(white));
+  w->add_object(sphere2);
+
+  RaytracerSphere*	sphere3 = new RaytracerSphere(Vector3d(-2 * dx, 0.0, 0.0), dx);
+  sphere3->set_material(Phong::dummy(light_green));
+  w->add_object(sphere3);
+
+  RaytracerSphere*	sphere4 = new RaytracerSphere(Vector3d(2 * dx, 0.0, 0.0), dx);
+  sphere4->set_material(Phong::dummy(dark_green));
+  w->add_object(sphere4);
+
+  RaytracerSphere*	sphere6 = new RaytracerSphere(Vector3d(0.0, -2 * dx, 0.0), dx);
+  sphere6->set_material(Phong::dummy(light_grey));
+  w->add_object(sphere6);
+
+
+  RaytracerSphere*	sphere7 = new RaytracerSphere(Vector3d(0.0, 2 * dx, 0.0), dx);
+  sphere7->set_material(Phong::dummy(grey));
+  w->add_object(sphere7);
+
+  /*
+  Triangle* triangle_ptr5 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
+  triangle_ptr5->set_material(Phong::dummy(brown));
+  w->add_object(triangle_ptr5);
+  */
+
+  RaytracerSphere*	sphere8 = new RaytracerSphere(Vector3d(0.0, 0.0, -2 * dx), dx);
+  sphere8->set_material(Phong::dummy(light_purple));
+  w->add_object(sphere8);
+
+  RaytracerSphere*	sphere9 = new RaytracerSphere(Vector3d(0.0, 0.0, 2 * dx), dx);
+  sphere9->set_material(Phong::dummy(dark_purple));
   w->add_object(sphere9);
 }
 

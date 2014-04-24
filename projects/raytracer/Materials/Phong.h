@@ -20,6 +20,7 @@ class Phong : public Material {
   void set_ks(double ks);
   void set_exp(double exp);
   virtual RGBColor shade (ShadeRec& s);
+  static Phong* dummy(RGBColor);
   virtual RGBColor get_color() const;
 
  private:

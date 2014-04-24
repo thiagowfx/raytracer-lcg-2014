@@ -72,7 +72,8 @@ public:
   /* Raytracer */
   void render_scene();
   void set_up_camera();
-  void set_up();
+  void set_up_axis_matte();
+  void set_up_axis_phong();
   void set_up_testing();
   const char* image="raytraced_image.png";
 private:
