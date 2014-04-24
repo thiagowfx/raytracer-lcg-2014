@@ -168,70 +168,84 @@ void MainWindow::on_ambientColorPushButton_clicked() {
 
 void MainWindow::on_Key_Left_pressed() {
   qDebug() << "INFO: left arrow pressed";
-  raytracer.move_camera_eye_relative_cylindrical(0.0, M_PI/60.0, 0.0);
+  raytracer.camera_eye_relative_cylindrical(0.0, M_PI/60.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Right_pressed() {
   qDebug() << "INFO: right arrow pressed";
-  raytracer.move_camera_eye_relative_cylindrical(0.0, -M_PI/60.0, 0.0);
+  raytracer.camera_eye_relative_cylindrical(0.0, -M_PI/60.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Up_pressed() {
   qDebug() << "INFO: up arrow pressed";
-  raytracer.move_camera_eye_relative_cylindrical(-5.0, 0.0, 0.0);
+  raytracer.camera_eye_relative_cylindrical(-5.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Down_pressed() {
   qDebug() << "INFO: down arrow pressed";
-  raytracer.move_camera_eye_relative_cylindrical(5.0, 0.0, 0.0);
+  raytracer.camera_eye_relative_cylindrical(5.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_PageUp_pressed() {
   qDebug() << "INFO: Page Up key pressed";
-  raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, 5.0);
+  raytracer.camera_eye_relative_cylindrical(0.0, 0.0, 5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_PageDown_pressed() {
   qDebug() << "INFO: Page Down key pressed";
-  raytracer.move_camera_eye_relative_cylindrical(0.0, 0.0, -5.0);
+  raytracer.camera_eye_relative_cylindrical(0.0, 0.0, -5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_W_pressed() {
   qDebug() << "INFO: W key pressed";
-  raytracer.move_camera_eye_relative(0.0, 5.0, 0.0);
+  raytracer.camera_eye_relative(0.0, 5.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_S_pressed() {
   qDebug() << "INFO: S key pressed";
-  raytracer.move_camera_eye_relative(0.0, -5.0, 0.0);
+  raytracer.camera_eye_relative(0.0, -5.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_A_pressed() {
   qDebug() << "INFO: A key pressed";
-  raytracer.move_camera_eye_relative(-5.0, 0.0, 0.0);
+  raytracer.camera_eye_relative(-5.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_D_pressed() {
   qDebug() << "INFO: D key pressed";
-  raytracer.move_camera_eye_relative(5.0, 0.0, 0.0);
+  raytracer.camera_eye_relative(5.0, 0.0, 0.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_R_pressed() {
+  qDebug() << "INFO: R key pressed";
+  raytracer.camera_eye_relative(0.0, 0.0, 5.0);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::on_Key_F_pressed() {
+  qDebug() << "INFO: F key pressed";
+  raytracer.camera_eye_relative(0.0, 0.0, -5.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -270,6 +284,12 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
       break;
     case Qt::Key_D:
       on_Key_D_pressed();
+      break;
+    case Qt::Key_R:
+      on_Key_R_pressed();
+      break;
+    case Qt::Key_F:
+      on_Key_F_pressed();
       break;
     }
   }

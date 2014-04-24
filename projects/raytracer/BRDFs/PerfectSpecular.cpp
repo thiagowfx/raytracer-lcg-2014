@@ -15,8 +15,9 @@ PerfectSpecular* PerfectSpecular::clone() const {
 }	
 
 
+/** this is correct (page 229) */
 RGBColor PerfectSpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
-  return RGBColor();
+  return black;
 }
 
 
@@ -40,6 +41,7 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vecto
 }
 
 
+/** this is correct (page 229) */
 RGBColor PerfectSpecular::rho(const ShadeRec& sr, const Vector3d& wo) const {
   return black;
 }

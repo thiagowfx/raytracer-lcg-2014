@@ -3,6 +3,7 @@
 Raytracer::Raytracer() :
   w(new World)
 {
+  set_up_camera();
   set_up();
   // set_up_testing();
 }
@@ -86,34 +87,31 @@ const char* Raytracer::get_camera_eye_as_string() {
 
 const char* Raytracer::get_camera_eye_cylindrical_as_string() {
   static char str[50];
+  Vector3d cc = absolute_to_cylindrical(w->camera_ptr->get_eye());
   sprintf(str, "C: (p = %.2lf, phi = %.1lfº, z = %.2lf)", cc(0), cc(1) * (180.0/ M_PI), cc(2));
   return str;
 }
 
-void Raytracer::move_camera_eye_absolute(Vector3d v) {
+void Raytracer::camera_eye_absolute(Vector3d v) {
   w->camera_ptr->set_eye(v);
   w->camera_ptr->compute_uvw();
 }
 
-void Raytracer::move_camera_eye_absolute(double x, double y, double z) {
-  move_camera_eye_absolute(Vector3d(x, y, z));
+void Raytracer::camera_eye_absolute(double x, double y, double z) {
+  camera_eye_absolute(Vector3d(x, y, z));
 }
 
-void Raytracer::move_camera_eye_relative(double dx, double dy, double dz) {
+void Raytracer::camera_eye_relative(double dx, double dy, double dz) {
   Vector3d v = w->camera_ptr->get_eye();
-  move_camera_eye_absolute(v(0) + dx, v(1) + dy, v(2) + dz);
+  camera_eye_absolute(v(0) + dx, v(1) + dy, v(2) + dz);
 }
 
-void Raytracer::move_camera_eye_absolute_cylindrical(double p, double phi, double z) {
-  cc = Vector3d(p, phi, z);
-  move_camera_eye_absolute(cylindrical_to_absolute(cc));
-}
-
-void Raytracer::move_camera_eye_relative_cylindrical(double dp, double dphi, double dz) {
+void Raytracer::camera_eye_relative_cylindrical(double dp, double dphi, double dz) {
+  Vector3d cc = absolute_to_cylindrical(w->camera_ptr->get_eye());
   cc(0) += dp;
   cc(1) = clamp(cc(1) + dphi, 2 * M_PI);
   cc(2) += dz;
-  move_camera_eye_absolute(cylindrical_to_absolute(cc));
+  camera_eye_absolute(cylindrical_to_absolute(cc));
 }
 
 Vector3d Raytracer::cylindrical_to_absolute(Vector3d c) {
@@ -122,6 +120,14 @@ Vector3d Raytracer::cylindrical_to_absolute(Vector3d c) {
   a(1) = c(0) * sin(c(1));
   a(2) = c(2);
   return a;
+}
+
+Vector3d Raytracer::absolute_to_cylindrical(Vector3d a) {
+  Vector3d c;
+  c(0) = sqrt(a(0) * a(0) + a(1) * a(1));
+  c(1) = atan2(a(1), a(0));
+  c(2) = a(2);
+  return c;
 }
 
 inline double Raytracer::clamp(double x, double max) {
@@ -136,8 +142,7 @@ void Raytracer::set_up_camera() {
   Pinhole* camera_ptr = new Pinhole();
   // Orthographic* camera_ptr = new Orthographic();
 
-  cc = Vector3d(250.0, 0.0, 250.0);
-  camera_ptr->set_eye(cc);
+  camera_ptr->set_eye(Vector3d(250.0, 0.0, 250.0));
   camera_ptr->set_lookat(Vector3d::Zero());
   camera_ptr->compute_uvw();
   w->set_camera(camera_ptr);
@@ -149,8 +154,6 @@ void Raytracer::set_up_camera() {
  */
 
 void Raytracer::set_up() {
-  set_up_camera();
-
   PointLight* light_ptr = new PointLight();
   light_ptr->set_location(Vector3d(100.0, 100.0, 200.0));
   light_ptr->scale_radiance(2.0);
@@ -181,9 +184,11 @@ void Raytracer::set_up() {
   sphere7->set_material(Matte::dummy(grey));
   w->add_object(sphere7);
 
+  /*
   Triangle* triangle_ptr5 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
   triangle_ptr5->set_material(Matte::dummy(brown));
   w->add_object(triangle_ptr5);
+  */
 
   RaytracerSphere*	sphere8 = new RaytracerSphere(Vector3d(0.0, 0.0, -2 * dx), dx);
   sphere8->set_material(Matte::dummy(light_purple));
@@ -195,11 +200,9 @@ void Raytracer::set_up() {
 }
 
 void Raytracer::set_up_testing() {
-  set_up_camera();
-
   /** Luzes */
   Directional* dir1 = new Directional();
-  dir1->set_direction(cc);
+  dir1->set_direction(w->camera_ptr->get_eye());
   dir1->scale_radiance(1.0);
   dir1->set_color(white);
 

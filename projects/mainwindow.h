@@ -60,6 +60,8 @@ private:
     void on_Key_S_pressed();
     void on_Key_A_pressed();
     void on_Key_D_pressed();
+    void on_Key_R_pressed();
+    void on_Key_F_pressed();
 
     void createStatusBar();
 

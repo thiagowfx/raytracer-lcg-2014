@@ -13,13 +13,13 @@ class Phong : public Material {
   Phong(const Phong& m);
   virtual Material* clone() const;
   virtual ~Phong();
-  virtual RGBColor shade (ShadeRec& s);
   void set_ka(double ka);
-  void set_kd(double kd);
-  void set_ks(double ks);
   void set_cd(const RGBColor& color);
-  void set_exp(double exp);
+  void set_kd(double kd);
   void set_cs(const RGBColor& color);
+  void set_ks(double ks);
+  void set_exp(double exp);
+  virtual RGBColor shade (ShadeRec& s);
   virtual RGBColor get_color() const;
 
  private:
@@ -41,17 +41,17 @@ inline void Phong::set_ks (double ks) {
 }
 
 inline void Phong::set_cd (const RGBColor& color) {
-  diffuse_brdf->set_cd (color);
-  ambient_brdf->set_cd (color);
+  ambient_brdf->set_cd(color);
+  diffuse_brdf->set_cd(color);
   specular_brdf->set_cs(color);
 }
 
 inline void Phong::set_exp (double exp) {
-  specular_brdf->set_exp (exp);
+  specular_brdf->set_exp(exp);
 }
 
-inline void Phong::set_cs (const RGBColor& color) {
-  specular_brdf->set_cs (color);
+inline void Phong::set_cs(const RGBColor& color) {
+  specular_brdf->set_cs(color);
 }
 
 

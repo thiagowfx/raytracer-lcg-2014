@@ -1,6 +1,5 @@
 #include "Phong.h"
 
-
 Phong::Phong():
   Material (),
   ambient_brdf (new Lambertian),
@@ -55,10 +54,10 @@ Material* Phong::clone() const {
 RGBColor Phong::shade (ShadeRec& sr) {
   Vector3d wo    = -sr.ray.d;
   RGBColor L     = ambient_brdf->rho (sr,wo) * sr.w.ambient_ptr->L(sr);
-  int num_lights = sr.w.lights.size();
+  const int num_lights = sr.w.lights.size();
 
-  for (int i = 0; i < num_lights; ++i) {
-    Vector3d wi = -sr.w.lights[i]->get_direction(sr);
+  for (int j = 0; j < num_lights; ++j) {
+    Vector3d wi = -sr.w.lights[j]->get_direction(sr);
     double ndotwi = sr.normal.dot(wi);
     
     if (ndotwi > 0.0) {
@@ -69,7 +68,7 @@ RGBColor Phong::shade (ShadeRec& sr) {
       // }
       //if (in_shadow) OutputDebugString ("Hit\n");
       // if (!in_shadow)
-      L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[i]->L(sr) * ndotwi;
+      L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi;
     }
   }
 

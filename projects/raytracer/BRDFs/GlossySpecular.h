@@ -24,16 +24,17 @@ class GlossySpecular: public BRDF {
   void set_normal(const Vector3d& n);
 
  private:
-  double    ks;
-  RGBColor cs;                  // specular color
-  double    exp;                 // specular exponent
-  Sampler* sampler;             // for use in sample_f
+  double ks;
+  RGBColor cs;               // specular color
+  double exp;                // specular exponent (e)
+  Sampler* sampler;          // for use in sample_f
 };
 
 
 inline void GlossySpecular::set_ks(const double k) {
   ks = k;
 }
+
 
 inline void GlossySpecular::set_exp(const double e) {
   exp = e;
@@ -50,6 +51,5 @@ inline void GlossySpecular::set_cs(double r, double g, double b) {
   cs.g = g;
   cs.b = b;
 }
-
 
 #endif

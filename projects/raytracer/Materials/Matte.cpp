@@ -70,10 +70,9 @@ RGBColor Matte::shade(ShadeRec& sr) {
    * Adicionalmente: cl * ls, isto é, a cor da luz vezes a intensidade da luz.
    */
   RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-
   const int num_lights = sr.w.lights.size();
 
-  for (int j = 0; j < num_lights; j++) {
+  for (int j = 0; j < num_lights; ++j) {
     /** wi = Direção da onde a luz vem (tendência: apontar para *fora* do objeto!). Isso explica a convenção da luz direcional de especificar o contrário. */
     Vector3d wi = sr.w.lights[j]->get_direction(sr);    
     double ndotwi = sr.normal.dot(wi);

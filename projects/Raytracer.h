@@ -61,13 +61,13 @@ public:
   void set_camera_zoom(double);
   const char* get_camera_eye_as_string();
   const char* get_camera_eye_cylindrical_as_string();
-  void move_camera_eye_absolute(Vector3d);
-  void move_camera_eye_absolute(double,double,double);
-  void move_camera_eye_relative(double,double,double);
-  void move_camera_eye_absolute_cylindrical(double,double,double);
-  void move_camera_eye_relative_cylindrical(double,double,double);
+  void camera_eye_absolute(Vector3d);
+  void camera_eye_absolute(double,double,double);
+  void camera_eye_relative(double,double,double);
+  void camera_eye_relative_cylindrical(double,double,double);
   /* Utilities*/
   Vector3d cylindrical_to_absolute(Vector3d);
+  Vector3d absolute_to_cylindrical(Vector3d);
   double clamp(double x, double max); /** ASSUME: max > 0. Return [0, max) */
   /* Raytracer */
   void render_scene();
@@ -77,14 +77,13 @@ public:
   const char* image="raytraced_image.png";
 private:
   World* w;
-  Vector3d cc; /** cylindrical coordinates */
 
   /** Dummy constants / defaults */
   const double ls = 1.00; /** valor para escalar a intensidade da luz */
   const double ka = 0.20; /** valor para constante ambiente */
   const double kd = 0.80; /** valor para constante difusa */
   const double ks = 0.12; /** valor para constante especular */
-  const double expi = 20.0;
+  const double expi = 10.0; /** expoente para reflexão especular */
   const double dx = 15.0;
 };
 

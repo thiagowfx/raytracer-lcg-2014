@@ -21,8 +21,7 @@ class PerfectSpecular: public BRDF {
 				
  private:
   double kr;			// reflection coefficient
-  RGBColor cr;			// the reflection colour
-  
+  RGBColor cr;			// the reflection colour  
 };
 
 
