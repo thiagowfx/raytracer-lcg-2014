@@ -13,8 +13,8 @@
 #include "Orthographic.h"
 #include "Phong.h"
 #include "Pinhole.h"
-#include "PointLight.h"
 #include "PrimitivaDaniel.h"
+#include "PointLight.h"
 #include "RGBColor.h"
 #include "Randomness.h"
 #include "Ray.h"
@@ -61,13 +61,17 @@ public:
   void set_camera_zoom(double);
   const char* get_camera_eye_as_string();
   const char* get_camera_eye_cylindrical_as_string();
+  const char* get_camera_eye_spherical_as_string();
   void camera_eye_absolute(Vector3d);
   void camera_eye_absolute(double,double,double);
   void camera_eye_relative(double,double,double);
   void camera_eye_relative_cylindrical(double,double,double);
+  void camera_eye_relative_spherical(double,double,double);
   /* Utilities*/
   Vector3d cylindrical_to_absolute(Vector3d);
   Vector3d absolute_to_cylindrical(Vector3d);
+  Vector3d spherical_to_absolute(Vector3d);
+  Vector3d absolute_to_spherical(Vector3d);
   double clamp(double x, double max); /** ASSUME: max > 0. Return [0, max) */
   /* Raytracer */
   void render_scene();
