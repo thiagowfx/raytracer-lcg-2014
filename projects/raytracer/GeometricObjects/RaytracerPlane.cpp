@@ -44,7 +44,7 @@ RaytracerPlane *RaytracerPlane::clone() const {
 bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
   double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
   
-  if (t > kEpsilon) {
+  if (t > kEpsilonShadows) {
     tmin = t;
     sr.normal = normal;
     sr.local_hit_point = ray.o + t * ray.d;
@@ -63,7 +63,7 @@ bool RaytracerPlane::shadow_hit(const Ray& ray, double& tmin) const {
 
   double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
 
-  if (t > kEpsilon) {
+  if (t >  kEpsilonShadows) {
     tmin = t;
     return true;
   }

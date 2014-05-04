@@ -92,7 +92,7 @@ bool Triangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   double e3 = a * p - b * r + d * s;
   double t = e3 * inv_denom;
 
-  if (t < kEpsilon)
+  if (t < kEpsilonShadows)
     return (false);
 
   tmin              = t;
@@ -131,7 +131,7 @@ bool Triangle::shadow_hit(const Ray& ray, double& tmin) const {
   double e3 = a * p - b * r + d * s;
   double t = e3 * inv_denom;
 
-  if (t < kEpsilon)
+  if (t < kEpsilonShadows)
     return false;
 
   tmin = t;

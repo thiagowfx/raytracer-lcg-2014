@@ -1,60 +1,20 @@
 # -*- org -*-
-##+STARTUP: showall
+#+STARTUP: showall
 #+SEQ_TODO: TODO IN_PROGRESS DONE
 
-* Interface
 ** TODO renderizar apenas uma imagem de cada vez, e num thread separado (para não congelar a UI)
 ** IN_PROGRESS barra de status informando o status
-** barra de status informando o progresso
 ** TODO camera: set_eye (primitivo)
-** TODO camera: set look at
-** DONE checker para escolher se vai renderizar em tempo real ou nao
-** DONE mais um botao para renderizar manualmente / atualizar a renderização (para o caso anterior)
-** IN_PROGRESS trackball: camera
-** IN_PROGRESS eventos com as teclas direcionais (setas)
-** DONE aperfeiçoar a API (classe Raytracer): deixá-la o máximo independente entre o QT e a biblioteca quanto possível
-** TODO (complexo, deixar para bem mais tarde) forma de adicionar objetos e gerenciá-los a partir da própria interface
-* General
-** DONE Implementar todos os Samplers (nrooks, ...)
-** DONE Implementar todas as câmeras (thinlens...)
-
-** DONE PerfectSpecular.cpp
+** DONE trackball: camera
+** DONE eventos com as teclas direcionais (setas)
 ** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
-** DONE Samplers -- realmente necessário? ao menos, retirar de onde não for preciso -- OK, refinado, inclusive no ViewPlane
-
 ** TODO continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
 ** IN_PROGRESS ver o que falta colocar do livro (tweaks?) -- ok, progredindo
-** TODO incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
+** IN_PROGRESS incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
 ** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
-** DONE implementar pelo menos mais um tipo de câmera --  que tal a fisheye? Só para saber se o projeto das Cameras está realmente bom
-** DONE incluir vp.num_samples em cima do World render_scene -- corrigido com full suporte de samplers
-** DONE implementar render_perspective no World (pegar código do livro) -- realmente necessário, dado que eu tenho a pinhole???. Update: ortographic tem a sua própria classe agora.
-** DONE melhor interface de build -- OK, feito parcialmente: mais do que isso -- só deixando mais dinâmico
-
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
-** Quando (se) implementar depth, mudar nos tracers.
-** DONE Phong reflective model...básico
 ** TODO Phong reflective model...specular!
-** DONE Testes -- não são realmente necessários a priori, mas já temos suporte inicial, se for necessário
-** Documentação (externa)?
-** DONE Integração com o projeto do Daniel -- começar o design
-*** DONE geometricobject class
-*** DONE testar o código dele
-*** DONE importar a classe dele (includes)
-*** DONE integrar o projeto dele com o cmake
-*** DONE verificar as bibliotecas do projeto dele (anttweakbar etc), caminho e etc
-*** DONE código de build primitive na main. E testar!!!
-** DONE World and PNG simplifying -- ?? realmente necessário ?? --> habilitar isso de forma transparente, escondendo (ou deletando) o world_output
-* Chapters
-** DONE 1 raytracer design
-** DONE 2 essential math
-** DONE 3 bare-bones
-** DONE 4 antialiasing
-** DONE 5 Samplers
-** DONE 6 Mais Samplers
-** DONE 7 Mais Samplers
-** DONE 9 pinhole camera
 ** DONE 9 spherical projection
-** TODO 14 Lights and Materials -- reforçar
-** TODO 15 Specular Reflection
+** DONE 14 Lights and Materials -- reforçar
+** DONE 15 Phong
 ** TODO 16 Shadows

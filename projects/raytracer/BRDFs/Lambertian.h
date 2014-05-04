@@ -35,6 +35,7 @@ inline void Lambertian::set_cd(const RGBColor& color) {
   cd = color;
 }
 
+
 inline void Lambertian::set_cd(double r, double g, double b) {
   cd.r = r;
   cd.g = g;

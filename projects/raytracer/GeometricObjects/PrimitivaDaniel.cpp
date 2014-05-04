@@ -44,7 +44,7 @@ bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
 
-    if (tmin > kEpsilon) {
+    if (tmin >  kEpsilonShadows) {
       sr.normal = intersectionNormal;
       sr.local_hit_point = intersectionPoint;
       return true;
@@ -60,7 +60,7 @@ bool PrimitivaDaniel::shadow_hit(const Ray &ray, double &tmin) const {
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
 
-    if (tmin > kEpsilon)
+    if (tmin >  kEpsilonShadows)
       return true;
   }
   return false;

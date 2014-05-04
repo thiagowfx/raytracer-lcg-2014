@@ -56,7 +56,7 @@ bool RaytracerSphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     double denom = 2.0 * a;
     t = (-b - e) / denom;       // smaller root
 
-    if (t > kEpsilon) {
+    if (t > kEpsilonShadows) {
       tmin = t;
       sr.normal 	 = (temp + t * ray.d) / radius;
       sr.local_hit_point = ray.o + t * ray.d;
@@ -65,7 +65,7 @@ bool RaytracerSphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 
     t = (-b + e) / denom;       // larger root
 
-    if (t > kEpsilon) {
+    if (t > kEpsilonShadows) {
       tmin = t;
       sr.normal   = (temp + t * ray.d) / radius;
       sr.local_hit_point = ray.o + t * ray.d;
@@ -98,14 +98,14 @@ bool RaytracerSphere::shadow_hit(const Ray& ray, double& tmin) const {
     double denom = 2.0 * a;
     t = (-b - e) / denom;       // smaller root
 
-    if (t > kEpsilon) {
+    if (t >  kEpsilonShadows) {
       tmin = t;
       return true;
     }
 
     t = (-b + e) / denom;       // larger root
 
-    if (t > kEpsilon) {
+    if (t >  kEpsilonShadows) {
       tmin = t;
       return true;
     }

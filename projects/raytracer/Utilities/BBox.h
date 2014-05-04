@@ -17,8 +17,7 @@ class BBox {
   BBox& operator= (const BBox& rhs);
   ~BBox();
   bool hit(const Ray& ray) const;
-  bool inside(const Vector3d& p) const;
-  
+  bool inside(const Vector3d& p) const; 
 };
 
 #endif
