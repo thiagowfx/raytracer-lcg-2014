@@ -6,8 +6,8 @@ Raytracer::Raytracer() :
     set_up_camera();
 
     /** Only uncomment one */
-    // set_up_axis_matte();
-    set_up_axis_phong();
+    set_up_axis_matte();
+    // set_up_axis_phong();
 }
 
 Raytracer::~Raytracer() {
@@ -242,6 +242,12 @@ void Raytracer::set_up_axis_matte() {
     RaytracerPlane* plane0 = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
     plane0->set_material(Matte::dummy(light_gray));
     w->add_object(plane0);
+
+    vector<PrimitivaDaniel*> pds = PrimitivaDaniel::dummy("/home/thiago/workbench/RaytracerProject/projects/pcs-detection/pcs-detection/SHAPES2");
+    for (unsigned i = 0; i < pds.size(); ++i) {
+      pds[i]->set_material(Matte::dummy(yellow));
+      w->add_object(pds[i]);
+    }
 }
 
 void Raytracer::set_up_axis_phong() {
@@ -251,7 +257,6 @@ void Raytracer::set_up_axis_phong() {
     light_ptr->set_shadows(false);
     w->add_light(light_ptr);
 
-    /*
     RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
     sphere1->set_material(Phong::dummy(light_green));
     w->add_object(sphere1);
@@ -292,73 +297,4 @@ void Raytracer::set_up_axis_phong() {
     RaytracerPlane* plane0 = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
     plane0->set_material(Phong::dummy(light_gray));
     w->add_object(plane0);
-    */
-
-    char filename[] = "/home/thiago/workbench/RaytracerProject/projects/pcs-detection/pcs-detection/SHAPES3";
-    vector<Primitive*> primitives;
-    vector<Shape*> candidates;
-    double epsilon = 0.3;
-    double alpha = 40;
-    double tao = 50;
-    double pt = 0.99;
-    int k = 3;
-    int r = 100;
-    int maxElements = 30;
-    int maxLevel = 10;
-    int option = -1;
-    int option2 = -1;
-    PCShapeDetection littlePCSD;
-    epsilon = 0.05;
-    alpha = 10;
-    if (filename == 0) {
-      puts("ERROR: No primitives file set.");
-    }
-    ifstream data(filename);
-    double x,y,z;
-    double nx, ny, nz;
-    vector<Point> points;
-    vector<Point> normals;
-    while (data >> x >> y >> z) {
-      Point newPoint(x,y,z);
-      data >> nx >> ny >> nz;
-      Point newNormal(nx, ny, nz);
-      points.push_back(newPoint);
-      normals.push_back(newNormal);
-      Element newElement;
-      newElement.location = newPoint;
-      newElement.normal = newNormal;
-    }
-    littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
-    littlePCSD.detect(true); // let this be TRUE
-    primitives = littlePCSD.getPrimitives();
-    candidates = littlePCSD.getCandidates();
-    cout << "Número de primitivas: " << primitives.size() << endl;
-    cout << "Número de candidatos: " << candidates.size() << endl;
-    vector<RGBColor> colors;
-    colors.push_back(grey);
-    colors.push_back(blue);
-    colors.push_back(brown);
-    colors.push_back(dark_purple);
-    colors.push_back(dark_yellow);
-    colors.push_back(green);
-    colors.push_back(light_green);
-    colors.push_back(light_purple);
-    colors.push_back(dark_green);
-    colors.push_back(orange);
-    colors.push_back(red);
-    colors.push_back(white);
-    colors.push_back(yellow);
-    PrimitivaDaniel* pd;
-    Matte* matte_ptr;
-    for (unsigned int i = 0; i < primitives.size(); ++i) {
-      pd = new PrimitivaDaniel(primitives[i]);
-      matte_ptr = new Matte;
-      matte_ptr->set_ka(0.2);
-      matte_ptr->set_kd(0.8);
-      matte_ptr->set_cd(colors[i % colors.size()]);
-      pd->set_color(colors[i % colors.size()]);
-      pd->set_material(matte_ptr);
-      w->add_object(pd);
-    }
-    puts("INFO: END build_primitives");
 }

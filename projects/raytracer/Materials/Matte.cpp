@@ -13,9 +13,9 @@ Matte::Matte(const Matte& m) :
   diffuse_brdf(NULL)
 {
   if(m.ambient_brdf)
-    ambient_brdf = m.ambient_brdf->clone(); 
+    ambient_brdf = m.ambient_brdf->clone();
   if(m.diffuse_brdf)
-    diffuse_brdf = m.diffuse_brdf->clone(); 
+    diffuse_brdf = m.diffuse_brdf->clone();
 }
 
 
@@ -25,9 +25,9 @@ Material* Matte::clone() const {
 
 
 Matte& Matte::operator= (const Matte& rhs) {
-  if (this != &rhs) {		
+  if (this != &rhs) {
     Material::operator=(rhs);
-	
+
     if (ambient_brdf) {
       delete ambient_brdf;
       ambient_brdf = NULL;
@@ -35,7 +35,7 @@ Matte& Matte::operator= (const Matte& rhs) {
 
     if (rhs.ambient_brdf)
       ambient_brdf = rhs.ambient_brdf->clone();
-		
+
     if (diffuse_brdf) {
       delete diffuse_brdf;
       diffuse_brdf = NULL;
@@ -74,16 +74,24 @@ RGBColor Matte::shade(ShadeRec& sr) {
 
   for (int j = 0; j < num_lights; ++j) {
     /** wi = Direção da onde a luz vem (tendência: apontar para *fora* do objeto!). Isso explica a convenção da luz direcional de especificar o contrário. */
-    Vector3d wi = sr.w.lights[j]->get_direction(sr);    
+    Vector3d wi = sr.w.lights[j]->get_direction(sr);
     double ndotwi = sr.normal.dot(wi);
-	
-    if (ndotwi > 0.0) 
+
+    if (ndotwi > 0.0) {
+      bool in_shadow = false;
+
+      if (sr.w.lights[j]->casts_shadows()) {
+        Ray shadow_ray(sr.hit_point, wi);
+        in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
+      }
       /** f = (kd * cd) / pi: constante de reflexão do material * a cor do material sobre pi (componente lambertiana difusa, refletindo igualmente para todos os lados)
        * L = cl * ls (intensidade da luz vezes a cor da luz)
        * ndotwi = produto interno entre a normal e a direção de onde a luz vem, representando cos(theta)
        * quanto menor for esse ângulo, maior é a intensidade absorvida da luz
        */
-      L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
+      if (!in_shadow)
+        L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
+    }
   }
   return L;
 }

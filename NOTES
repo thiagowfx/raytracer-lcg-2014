@@ -1,6 +1,9 @@
 # -*- org -*-
 #+STARTUP: showall
 
+* Website
+- http://www.raytracegroundup.com/
+- http://www.raytracegroundup.com/downloads/errata.pdf
 * Project sources
 - https://github.com/danoli3/Multithreaded-Ray-Tracer
 - https://github.com/mikestaub/Ray-Tracer/

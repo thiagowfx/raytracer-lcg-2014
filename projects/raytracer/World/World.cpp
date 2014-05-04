@@ -35,7 +35,6 @@ World::~World() {
   delete_lights();
 }
 
-
 /* raw_color is the pixel color computed by the ray tracer
    its RGB doubleing point components can be arbitrarily large
    mapped_color has all components in the range [0, 1], but still doubleing point

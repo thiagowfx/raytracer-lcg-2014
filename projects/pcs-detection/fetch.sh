@@ -6,12 +6,14 @@ EIGEN3="/usr/include/eigen3"
 [[ ! -d AntTweakBar ]] && git clone git://git.code.sf.net/p/anttweakbar/code AntTweakBar
 cd AntTweakBar/src/
 make
+echo "AntTweakBar OK"
 cd ../../
 
 # glew
 [[ ! -d glew ]] && git clone https://github.com/nigels-com/glew.git glew
 cd glew/
-make extensions
+make extensions && make
+echo "GLEW OK"
 cd ../
 
 # vcglib
@@ -19,9 +21,11 @@ cd ../
 rm -r vcglib/eigenlib/{Eigen,unsupported}
 ln -s "${EIGEN3}"/Eigen       vcglib/eigenlib/
 ln -s "${EIGEN3}"/unsupported vcglib/eigenlib/
+echo "vcglib OK"
 
 # pcs-detection
 [[ ! -d pcs-detection ]] && git clone git://git.lcg.ufrj.br/daniel-coutinho/pcs-detection.git pcs-detection
 cd pcs-detection/
 qmake && make
+echo "pcs-detection OK"
 cd ../

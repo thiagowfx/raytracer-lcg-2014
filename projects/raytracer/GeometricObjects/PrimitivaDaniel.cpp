@@ -12,6 +12,7 @@ PrimitivaDaniel::PrimitivaDaniel(Primitive* p) :
   primitive(p)
 {}
 
+
 PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& pd) :
   GeometricObject(pd),
   primitive(NULL)
@@ -65,4 +66,53 @@ bool PrimitivaDaniel::shadow_hit(const Ray &ray, double &tmin) const {
       return true;
   }
   return false;
+}
+
+vector<PrimitivaDaniel*> PrimitivaDaniel::dummy(const char *path_to_shape) {
+  vector<PrimitivaDaniel*> pds;
+
+  puts("INFO: begin build PrimitivaDaniel::dummy");
+  vector<Primitive*> primitives;
+  vector<Shape*> candidates;
+  double epsilon = 0.05;
+  double alpha = 10;
+  double tao = 50;
+  double pt = 0.99;
+  int k = 3;
+  int r = 100;
+  int maxElements = 30;
+  int maxLevel = 10;
+  int option = -1;
+  int option2 = -1;
+  PCShapeDetection littlePCSD;
+  if (path_to_shape == 0) {
+    puts("ERROR: No primitives file set.");
+    exit(1);
+  }
+  ifstream data(path_to_shape);
+  double x,y,z;
+  double nx, ny, nz;
+  vector<Point> points;
+  vector<Point> normals;
+  while (data >> x >> y >> z) {
+    Point newPoint(x,y,z);
+    data >> nx >> ny >> nz;
+    Point newNormal(nx, ny, nz);
+    points.push_back(newPoint);
+    normals.push_back(newNormal);
+    Element newElement;
+    newElement.location = newPoint;
+    newElement.normal = newNormal;
+  }
+  littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
+  littlePCSD.detect(true); // let this be TRUE
+  primitives = littlePCSD.getPrimitives();
+  candidates = littlePCSD.getCandidates();
+  cout << "Number of primitives: " << primitives.size() << endl;
+  cout << "Number of candidates: " << candidates.size() << endl;
+  for (unsigned int i = 0; i < primitives.size(); ++i)
+    pds.push_back(new PrimitivaDaniel(primitives[i]));
+  puts("INFO: end build PrimitivaDaniel::dummy");
+
+  return pds;
 }

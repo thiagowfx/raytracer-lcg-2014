@@ -2,8 +2,8 @@ find_package(PNG REQUIRED)
 include_directories(/usr/include/eigen3)
 
 # pcs detection should come before raytracer
-add_subdirectory(pcs-detection)
 include_directories(pcs-detection/vcglib)
+add_subdirectory(pcs-detection)
 include_directories(${PCS_DETECTION_INCLUDE_DIRS})
 
 add_subdirectory(raytracer)
