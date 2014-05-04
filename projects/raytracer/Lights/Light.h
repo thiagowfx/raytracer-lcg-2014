@@ -1,7 +1,7 @@
 #ifndef __LIGHT__
 #define __LIGHT__
 
-#include "Constants.h"
+#include "Utilities.h"
 #include "Ray.h"
 #include "RGBColor.h"
 #include <Eigen/Dense>

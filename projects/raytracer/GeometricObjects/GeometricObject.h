@@ -1,7 +1,7 @@
 #ifndef __GEOMETRIC_OBJECT__
 #define __GEOMETRIC_OBJECT__
 
-#include "Constants.h"
+#include "Utilities.h"
 #include "Ray.h"
 #include "ShadeRec.h"
 #include "Material.h"

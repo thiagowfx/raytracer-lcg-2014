@@ -7,7 +7,6 @@
 const double kEpsilonShadows = 1.0e-3;
 const double kEpsilon        = 1.0e-5;
 const double kHugeValue      = 1.0e10;
-const double invRAND_MAX     = 1.0 / double(RAND_MAX);
 
 const RGBColor black(0.0, 0.0, 0.0);
 const RGBColor white(1.0, 1.0, 1.0);
@@ -39,13 +38,6 @@ int rand_int(int begin, int end);
 double rand_double();
 
 /** Return a random double from begin to end */
-double rand_double(const double begin, const double end);
-
-/** a == b? Tolerance: eps */
-bool compareDouble(const double a, const double b, const double eps);
-
-/** a == b? */
-bool compareDouble(const double a, const double b);
-
+double rand_double(double begin, double end);
 
 #endif

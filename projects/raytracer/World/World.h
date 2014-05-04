@@ -12,7 +12,7 @@
 
 #include "Ambient.h"
 #include "Camera.h"
-#include "Constants.h"
+#include "Utilities.h"
 #include "GeometricObject.h"
 #include "Light.h"
 #include "RGBColor.h"

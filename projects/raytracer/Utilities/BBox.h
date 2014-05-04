@@ -1,7 +1,7 @@
 #ifndef __BBOX__
 #define __BBOX__
 
-#include "Constants.h"
+#include "Utilities.h"
 #include "Ray.h"
 
 class BBox {

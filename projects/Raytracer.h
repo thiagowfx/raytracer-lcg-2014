@@ -3,7 +3,6 @@
 
 #include "Ambient.h"
 #include "Camera.h"
-#include "Constants.h"
 #include "Directional.h"
 #include "GeometricObject.h"
 #include "Light.h"
@@ -16,7 +15,6 @@
 #include "PointLight.h"
 #include "PrimitivaDaniel.h"
 #include "RGBColor.h"
-#include "Randomness.h"
 #include "Ray.h"
 #include "RayCast.h"
 #include "Raytracer.h"

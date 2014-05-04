@@ -2,7 +2,7 @@
 #define __RGB_COLOR__
 
 #include <algorithm>
-#include "Randomness.h"
+#include <cmath>
 using namespace std;
 
 class RGBColor {
@@ -40,7 +40,6 @@ inline RGBColor& RGBColor::operator+= (const RGBColor& c) {
   r += c.r;
   g += c.g;
   b += c.b;
-
   return *this;
 }
 
@@ -54,7 +53,6 @@ inline RGBColor& RGBColor::operator*= (const double a) {
   r *= a;
   g *= a;
   b *= a;
-
   return *this;
 }
 
@@ -68,7 +66,6 @@ inline RGBColor& RGBColor::operator/= (const double a) {
   r /= a;
   g /= a;
   b /= a;
-
   return *this;
 }
 
@@ -79,7 +76,8 @@ inline RGBColor RGBColor::operator* (const RGBColor& c) const {
 
 
 inline bool RGBColor::operator== (const RGBColor& c) const {
-  return compareDouble(r, c.r) && compareDouble(g, c.g) && compareDouble(b, c.b);
+  const double kEpsilon = 1.0e-6;
+  return fabs(r - c.r) < kEpsilon && fabs(g - c.g) < kEpsilon && fabs(b - c.b) < kEpsilon;
 }
 
 

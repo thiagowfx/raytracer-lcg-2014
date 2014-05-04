@@ -2,7 +2,7 @@
 #define __MATERIAL__
 
 // #include "World.h" // required for the shade function in all derived classes
-#include "Constants.h"
+#include "Utilities.h"
 #include "RGBColor.h"
 #include "ShadeRec.h"
 #include <Eigen/Dense>
