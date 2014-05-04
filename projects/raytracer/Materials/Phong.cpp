@@ -61,14 +61,15 @@ RGBColor Phong::shade (ShadeRec& sr) {
     double ndotwi = sr.normal.dot(wi);
     
     if (ndotwi > 0.0) {
-      // bool in_shadow = false;
-      // if (sr.w.render_ptr->render_shadow) {
-      // Ray shadow_ray(sr.hit_point, wi);
-      // in_shadow = sr.w.lights[i]->in_shadow (shadow_ray, sr);
-      // }
-      //if (in_shadow) OutputDebugString ("Hit\n");
-      // if (!in_shadow)
-      L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi;
+      bool in_shadow = false;
+
+      if (sr.w.lights[j]->casts_shadows()) {
+        Ray shadow_ray(sr.hit_point, wi);
+        in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
+      }
+
+      if (!in_shadow)
+        L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi;
     }
   }
 

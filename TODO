@@ -4,17 +4,13 @@
 
 ** TODO renderizar apenas uma imagem de cada vez, e num thread separado (para não congelar a UI)
 ** IN_PROGRESS barra de status informando o status
-** TODO camera: set_eye (primitivo)
-** DONE trackball: camera
-** DONE eventos com as teclas direcionais (setas)
+** DONE camera: set_eye (primitivo)
 ** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
 ** TODO continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
 ** IN_PROGRESS ver o que falta colocar do livro (tweaks?) -- ok, progredindo
 ** IN_PROGRESS incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
-** TODO relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
+** DONE relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
 ** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
-** TODO Phong reflective model...specular!
-** DONE 9 spherical projection
-** DONE 14 Lights and Materials -- reforçar
 ** DONE 15 Phong
 ** TODO 16 Shadows
+** TODO ? 17 ambient occlusion

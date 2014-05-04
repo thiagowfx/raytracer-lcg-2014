@@ -46,13 +46,15 @@ RGBColor PointLight::L(ShadeRec& sr) {
 }
 
 
+/** Chapter 16 */
 bool PointLight::in_shadow(const Ray& ray, const ShadeRec& sr) const {
   double t = 0;
   const int num_objects = sr.w.objects.size();
-  double d = (location - ray.o).norm();
+  const double distance = (location - ray.o).norm();
 
   for (int j = 0; j < num_objects; j++)
-    if (sr.w.objects[j]->shadow_hit(ray, t) && t < d)
+    /** t < d means: an object only blocks a point light if it is before the light */
+    if (sr.w.objects[j]->shadow_hit(ray, t) && t < distance)
       return true;
 
   return false;

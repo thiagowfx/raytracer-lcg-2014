@@ -57,16 +57,14 @@ bool RaytracerPlane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 
 
 bool RaytracerPlane::shadow_hit(const Ray& ray, double& tmin) const {
-
   if(!shadows)
     return false;
 
   double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
 
-  if (t >  kEpsilonShadows) {
+  if (t > kEpsilonShadows) {
     tmin = t;
     return true;
   }
-
   return false;
 }

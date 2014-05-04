@@ -72,13 +72,11 @@ bool RaytracerSphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
       return true;
     }
   }
-
   return false;
 }
 
 
 bool RaytracerSphere::shadow_hit(const Ray& ray, double& tmin) const {
-
   if(!shadows)
     return false;
 

@@ -42,6 +42,7 @@ RGBColor Ambient::L(ShadeRec& sr) {
 }
 
 
+/** Chapter 16: Always false */
 bool Ambient::in_shadow(const Ray& ray, const ShadeRec& sr) const {
   return false;
 }

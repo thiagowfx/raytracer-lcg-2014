@@ -23,8 +23,6 @@ PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& pd) :
 }
 
 
-
-
 PrimitivaDaniel::~PrimitivaDaniel() {
   if (primitive) {
     delete primitive;
@@ -44,7 +42,7 @@ bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
 
-    if (tmin >  kEpsilonShadows) {
+    if (tmin > kEpsilonShadows) {
       sr.normal = intersectionNormal;
       sr.local_hit_point = intersectionPoint;
       return true;
@@ -54,13 +52,16 @@ bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool PrimitivaDaniel::shadow_hit(const Ray &ray, double &tmin) const {
+  if(!shadows)
+    return false;
+
   Vector3d intersectionPoint;
   Vector3d intersectionNormal;
 
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
 
-    if (tmin >  kEpsilonShadows)
+    if (tmin > kEpsilonShadows)
       return true;
   }
   return false;

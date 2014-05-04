@@ -170,42 +170,42 @@ void MainWindow::on_ambientColorPushButton_clicked() {
 
 void MainWindow::on_Key_Left_pressed() {
   qDebug() << "INFO: left arrow pressed";
-  raytracer.camera_eye_relative_spherical(0.0, +M_PI/20.0, 0.0);
+  raytracer.camera_eye_relative_spherical(0.0, +M_PI/30.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Right_pressed() {
   qDebug() << "INFO: right arrow pressed";
-  raytracer.camera_eye_relative_spherical(0.0, -M_PI/20.0, 0.0);
+  raytracer.camera_eye_relative_spherical(0.0, -M_PI/30.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Up_pressed() {
   qDebug() << "INFO: up arrow pressed";
-  raytracer.camera_eye_relative_spherical(0.0, 0.0, -M_PI/20.0);
+  raytracer.camera_eye_relative_spherical(0.0, 0.0, -M_PI/30.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Down_pressed() {
   qDebug() << "INFO: down arrow pressed";
-  raytracer.camera_eye_relative_spherical(0.0, 0.0, +M_PI/20.0);
+  raytracer.camera_eye_relative_spherical(0.0, 0.0, +M_PI/30.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_PageUp_pressed() {
   qDebug() << "INFO: Page Up key pressed";
-  raytracer.camera_eye_relative_spherical(25.0, 0.0, 0.0);
+  raytracer.camera_eye_relative_spherical(-10.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
 
 void MainWindow::on_Key_PageDown_pressed() {
   qDebug() << "INFO: Page Down key pressed";
-  raytracer.camera_eye_relative_spherical(-25.0, 0.0, 0.0);
+  raytracer.camera_eye_relative_spherical(+10.0, 0.0, 0.0);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }

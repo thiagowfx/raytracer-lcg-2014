@@ -77,33 +77,35 @@ bool Triangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
   double beta = e1 * inv_denom;
 
   if (beta < 0.0)
-    return (false);
+    return false;
 
   double r = r = e * l - h * i;
   double e2 = a * n + d * q + c * r;
   double gamma = e2 * inv_denom;
 
-  if (gamma < 0.0 )
-    return (false);
+  if (gamma < 0.0)
+    return false;
 
   if (beta + gamma > 1.0)
-    return (false);
+    return false;
 
   double e3 = a * p - b * r + d * s;
   double t = e3 * inv_denom;
 
   if (t < kEpsilonShadows)
-    return (false);
+    return false;
 
   tmin              = t;
   sr.normal             = normal;
   sr.local_hit_point    = ray.o + t * ray.d;
-
-  return (true);
+  return true;
 }
 
 
 bool Triangle::shadow_hit(const Ray& ray, double& tmin) const {
+  if(!shadows)
+    return false;
+
   double a = v0(0) - v1(0), b = v0(0) - v2(0), c = ray.d(0), d = v0(0) - ray.o(0);
   double e = v0(1) - v1(1), f = v0(1) - v2(1), g = ray.d(1), h = v0(1) - ray.o(1);
   double i = v0(2) - v1(2), j = v0(2) - v2(2), k = ray.d(2), l = v0(2) - ray.o(2);
@@ -135,6 +137,5 @@ bool Triangle::shadow_hit(const Ray& ray, double& tmin) const {
     return false;
 
   tmin = t;
-
   return true;
 }

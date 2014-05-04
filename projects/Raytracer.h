@@ -29,6 +29,8 @@
 #include "Whitted.h"
 #include "World.h"
 
+#include "pc-shape-detection.h"
+
 #include <cstdio>
 #include <cmath>
 #include <QColor>
@@ -76,15 +78,9 @@ public:
   void set_up_camera();
   void set_up_axis_matte();
   void set_up_axis_phong();
-  void set_up_testing();
   const char* image="raytraced_image.png";
 private:
   World* w;
-
-  /** Dummy constants / defaults */
-  const double ls = 1.00; /** valor para escalar a intensidade da luz */
-  const double ka = 0.20; /** valor para constante ambiente */
-  const double kd = 0.80; /** valor para constante difusa */
   const double ks = 0.12; /** valor para constante especular */
   const double expi = 10.0; /** expoente para reflexão especular */
   const double dx = 15.0;

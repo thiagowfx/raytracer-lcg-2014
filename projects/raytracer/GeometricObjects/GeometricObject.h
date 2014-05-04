@@ -23,6 +23,8 @@ class GeometricObject {
   virtual bool shadow_hit(const Ray& ray, double& tmin) const = 0;
   /* returns a sample point on the object for area light shading */
   virtual Vector3d sample();
+  bool casts_shadows() const;
+  void set_shadows(const bool shadow);
 	
  protected:
   /* mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const */
