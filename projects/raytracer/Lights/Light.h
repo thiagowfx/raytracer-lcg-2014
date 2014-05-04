@@ -6,7 +6,6 @@
 #include "RGBColor.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
-
 class ShadeRec;
 
 class Light {

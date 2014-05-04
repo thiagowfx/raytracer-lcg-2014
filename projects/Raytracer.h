@@ -2,6 +2,7 @@
 #define RAYTRACER_H
 
 #include "Ambient.h"
+#include "AmbientOccluder.h"
 #include "Camera.h"
 #include "Directional.h"
 #include "GeometricObject.h"

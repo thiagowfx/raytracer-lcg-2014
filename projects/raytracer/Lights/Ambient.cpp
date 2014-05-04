@@ -7,7 +7,7 @@ Ambient::Ambient () :
 {}
 
 
-Ambient::Ambient (const Ambient& a) :
+Ambient::Ambient(const Ambient& a) :
   Light(a),
   ls(a.ls),
   color(a.color) 		
@@ -19,7 +19,7 @@ Light* Ambient::clone() const {
 }	
 
 
-Ambient& Ambient::operator= (const Ambient& rhs) {
+Ambient& Ambient::operator=(const Ambient& rhs) {
   if (this != &rhs) {
     Light::operator= (rhs);    
     ls 	  = rhs.ls;

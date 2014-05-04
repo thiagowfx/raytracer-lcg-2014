@@ -6,8 +6,8 @@ Raytracer::Raytracer() :
     set_up_camera();
 
     /** Only uncomment one */
-    set_up_axis_matte();
-    // set_up_axis_phong();
+    // set_up_axis_matte();
+    set_up_axis_phong();
 }
 
 Raytracer::~Raytracer() {
@@ -256,6 +256,8 @@ void Raytracer::set_up_axis_phong() {
     light_ptr->scale_radiance(2.0);
     light_ptr->set_shadows(false);
     w->add_light(light_ptr);
+
+    w->set_ambient_light(new AmbientOccluder);
 
     RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
     sphere1->set_material(Phong::dummy(light_green));
