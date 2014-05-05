@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>389</width>
-    <height>428</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="focusPolicy">
    <enum>Qt::StrongFocus</enum>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Raytracer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -39,11 +39,11 @@
     </item>
     <item row="0" column="1">
      <widget class="QCheckBox" name="autoRenderingCheckBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>Auto-rendering</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -72,6 +72,13 @@
         </property>
         <property name="value">
          <number>400</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Vertical resolution</string>
         </property>
        </widget>
       </item>
@@ -134,6 +141,26 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Zoom level</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QDoubleSpinBox" name="zoomDoubleSpinBox">
+        <property name="minimum">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>100.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
@@ -141,29 +168,43 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QDoubleSpinBox" name="gammaCorrectionDoubleSpinBox">
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Viewplane distance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QDoubleSpinBox" name="viewPlaneDistanceDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
         </property>
         <property name="minimum">
-         <double>0.100000000000000</double>
+         <double>1.000000000000000</double>
         </property>
         <property name="maximum">
-         <double>3.000000000000000</double>
+         <double>1000.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>0.100000000000000</double>
+         <double>5.000000000000000</double>
         </property>
         <property name="value">
-         <double>1.000000000000000</double>
+         <double>250.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Vertical resolution</string>
+         <string>Show out of gamut</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="outOfGamutCheckBox">
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -599,14 +640,14 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
+      <item row="10" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Ambient radiance</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
+      <item row="10" column="1">
        <widget class="QDoubleSpinBox" name="ambientRadianceDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
@@ -626,53 +667,13 @@
        </widget>
       </item>
       <item row="11" column="0">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>Tracer</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="1">
-       <widget class="QComboBox" name="tracerComboBox">
-        <item>
-         <property name="text">
-          <string>RayCast</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>MultipleObjects</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Whitted</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Show out of gamut</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QCheckBox" name="outOfGamutCheckBox">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
          <string>Ambient color</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="1">
+      <item row="11" column="1">
        <widget class="QPushButton" name="ambientColorPushButton">
         <property name="palette">
          <palette>
@@ -1094,50 +1095,70 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_11">
+      <item row="12" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>Zoom level</string>
+         <string>Tracer</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QDoubleSpinBox" name="zoomDoubleSpinBox">
-        <property name="minimum">
-         <double>0.010000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>100.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
+      <item row="12" column="1">
+       <widget class="QComboBox" name="tracerComboBox">
+        <item>
+         <property name="text">
+          <string>RayCast</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MultipleObjects</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Whitted</string>
+         </property>
+        </item>
        </widget>
       </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>Viewplane distance</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QDoubleSpinBox" name="viewPlaneDistanceDoubleSpinBox">
+      <item row="5" column="1">
+       <widget class="QDoubleSpinBox" name="gammaCorrectionDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
         </property>
         <property name="minimum">
-         <double>1.000000000000000</double>
+         <double>0.100000000000000</double>
         </property>
         <property name="maximum">
-         <double>1000.000000000000000</double>
+         <double>3.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>5.000000000000000</double>
+         <double>0.100000000000000</double>
         </property>
         <property name="value">
-         <double>250.000000000000000</double>
+         <double>1.000000000000000</double>
         </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Ambient Light Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QComboBox" name="ambientLightComboBox">
+        <item>
+         <property name="text">
+          <string>Ambient</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>AmbientOccluder</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
@@ -1150,7 +1171,7 @@
      <x>0</x>
      <y>0</y>
      <width>389</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1341,7 +1362,7 @@
    <sender>ambientRadianceDoubleSpinBox</sender>
    <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
-   <slot>ambientRadianceChanged(double)</slot>
+   <slot>update_ambient_light()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>499</x>
@@ -1417,6 +1438,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ambientLightComboBox</sender>
+   <signal>activated(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>update_ambient_light()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>366</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>horizontalResolutionChanged(int)</slot>
@@ -1425,10 +1462,10 @@
   <slot>pixelSizeChanged(double)</slot>
   <slot>gammaCorrectionChanged(double)</slot>
   <slot>updateRaytracerImage()</slot>
-  <slot>ambientRadianceChanged(double)</slot>
   <slot>tracerChanged(QString)</slot>
   <slot>outOfGamutChanged()</slot>
   <slot>zoomChanged(double)</slot>
   <slot>viewPlaneDistanceChanged(double)</slot>
+  <slot>update_ambient_light()</slot>
  </slots>
 </ui>

@@ -7,10 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   /** MainWindow */
   ui->setupUi(this);
-  this->setWindowTitle(tr("Raytracer"));
   this->setFocus();
   this->installEventFilter(this);
-
   createStatusBar();
 
   /** ui initial values */
@@ -24,10 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
   raytracer.set_view_distance(ui->viewPlaneDistanceDoubleSpinBox->value());
   raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
   raytracer.set_background_color(ui->backgroundColorPushButton->palette().color(QPalette::Window));
-  raytracer.set_ambient_light_color(ui->ambientColorPushButton->palette().color(QPalette::Window));
-  raytracer.set_ambient_radiance(ui->ambientRadianceDoubleSpinBox->value());
   raytracer.set_tracer(ui->tracerComboBox->currentText());
+  update_ambient_light();
 
+  ui->autoRenderingCheckBox->setChecked(true);
   updateRaytracerImage();
 }
 
@@ -96,8 +94,8 @@ void MainWindow::outOfGamutChanged() {
     updateRaytracerImage();
 }
 
-void MainWindow::ambientRadianceChanged(double r) {
-  raytracer.set_ambient_radiance(r);
+void MainWindow::tracerChanged(QString s) {
+  raytracer.set_tracer(s);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -119,12 +117,6 @@ void MainWindow::updateRaytracerImage() {
 
   statusbarProgressLabel->setText("Idle");
   raytracingInProgress = false;
-}
-
-void MainWindow::tracerChanged(QString s) {
-  raytracer.set_tracer(s);
-  if (ui->autoRenderingCheckBox->isChecked())
-    updateRaytracerImage();
 }
 
 void MainWindow::on_actionQuit_triggered() {
@@ -158,14 +150,24 @@ void MainWindow::on_backgroundColorPushButton_clicked() {
 }
 
 
-void MainWindow::on_ambientColorPushButton_clicked() {
-  QColor color = QColorDialog::getColor(Qt::white, this);
-  if (color.isValid()) {
-    ui->ambientColorPushButton->setPalette(QPalette(color));
-    raytracer.set_ambient_light_color(color);
-    if (ui->autoRenderingCheckBox->isChecked())
-      updateRaytracerImage();
-  }
+void MainWindow::update_ambient_light() {
+  Ambient* ambient_light;
+
+  QString ambient_type = ui->ambientLightComboBox->currentText();
+  if (ambient_type == "AmbientOccluder")
+    ambient_light = new AmbientOccluder();
+  else
+    ambient_light = new Ambient();
+
+  double radiance = ui->ambientRadianceDoubleSpinBox->value();
+  ambient_light->scale_radiance(radiance);
+
+  QColor color = ui->ambientColorPushButton->palette().color(QPalette::Window);
+  ambient_light->set_color(color.redF(), color.greenF(), color.blueF());
+
+  raytracer.set_ambient_light(ambient_light);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
 }
 
 void MainWindow::on_Key_Left_pressed() {

@@ -64,6 +64,10 @@ inline void World::add_light(Light* light_ptr) {
 
 
 inline void World::set_ambient_light(Ambient* light_ptr) {
+  if (ambient_ptr != NULL) {
+    delete ambient_ptr;
+    ambient_ptr = NULL;
+  }
   ambient_ptr = light_ptr;
 }
 

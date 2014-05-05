@@ -33,12 +33,10 @@ private slots:
     void gammaCorrectionChanged(double);
     void viewPlaneDistanceChanged(double);
     void outOfGamutChanged();
-    void ambientRadianceChanged(double);
-    void updateRaytracerImage();
     void tracerChanged(QString);
-
+    void updateRaytracerImage();
+    void update_ambient_light();
     void on_backgroundColorPushButton_clicked();
-    void on_ambientColorPushButton_clicked();
 
     /** Actions */
     void on_actionQuit_triggered();

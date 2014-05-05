@@ -51,11 +51,9 @@ public:
   void set_show_out_of_gamut(bool);
   /* World */
   void set_background_color(QColor);
-  void set_ambient_light_color(QColor);
   void set_tracer(Tracer*);
   void set_tracer(QString);
-  /* Ambient Light */
-  void set_ambient_radiance(double);
+  void set_ambient_light(Ambient*);
   /* Camera */
   void change_view_distance(double);
   void set_view_distance(double);
