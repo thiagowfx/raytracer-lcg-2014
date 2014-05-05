@@ -4,13 +4,14 @@
 
 ** TODO renderizar apenas uma imagem de cada vez, e num thread separado (para não congelar a UI)
 ** IN_PROGRESS barra de status informando o status
-** DONE camera: set_eye (primitivo)
 ** TODO Reflective.cpp -- falta adicionar o conceito de depth para o raio e sabe-se lá mais oq
 ** TODO continuar a parte do reflective shading no reflective material -- aí sim teremos o raytracer completíssimo
 ** IN_PROGRESS ver o que falta colocar do livro (tweaks?) -- ok, progredindo
-** IN_PROGRESS incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
-** DONE relacionar completamente as fórmulas da wikipedia com as do código (por alto eu já comparei e vi que está OK)
-** TODO Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole
+** DONE incluir o conceito de sombras???? -- acho que não é absolutamente necessário a priori -- ver chapter 16
+** IN_PROGRESS corrigir o efeito de pimenta (pepper effect) quando inclui sombras. Não está dando certo, no momento, mesmo com a sugestão do livro
+** IN_PROGRESS Camera Roll Angle -- não é absolutamente necessário,seria apenas mais uma feature no caso da pinhole --> em breve descobrirei se isso poderá ser removido
 ** DONE 15 Phong
-** TODO 16 Shadows
-** TODO ? 17 ambient occlusion
+** IN_PROGRESS 16 Shadows
+** IN_PROGRESS 17 Ambient Occlusionn
+** TODO 18 Area Lights
+
