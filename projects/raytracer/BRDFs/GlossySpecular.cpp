@@ -42,7 +42,7 @@ void GlossySpecular::set_samples(const int num_samples, const double exp) {
 
 /* no sampling here: just use the Phong formula
    this is used for direct illumination only */
-/** this is correct (page 229) */
+/** Chapter 15: this is correct (page 229) */
 RGBColor GlossySpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
   RGBColor L;
   double ndotwi = sr.normal.dot(wi);
@@ -74,10 +74,4 @@ RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector
   pdf = phong_lobe * (sr.normal.dot(wi));
 
   return ks * cs * phong_lobe;
-}
-
-
-/** this is correct (page 229) */
-RGBColor GlossySpecular::rho(const ShadeRec& sr, const Vector3d& wo) const {
-  return black;
 }

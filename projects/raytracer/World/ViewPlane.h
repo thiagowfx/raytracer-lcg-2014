@@ -11,9 +11,9 @@ class ViewPlane {
   int      vres;                // vertical image resolution
   double   px_size;             // pixel size --> decrease to zoom into the image
   double   gamma;               // gamma correction factor
-  bool     show_out_of_gamut;	// display red if RGBColor out of gamut
+  bool     show_out_of_gamut;	  // display red if RGBColor out of gamut
   Sampler* sampler_ptr;
-  int      max_depth;
+  int      max_depth;           // max number of bounces for reflective rays
 									
   ViewPlane(); 
   ~ViewPlane(); 

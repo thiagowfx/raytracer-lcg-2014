@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>389</width>
-    <height>498</height>
+    <height>529</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -1106,17 +1106,17 @@
        <widget class="QComboBox" name="tracerComboBox">
         <item>
          <property name="text">
+          <string>Whitted</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>RayCast</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>MultipleObjects</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Whitted</string>
          </property>
         </item>
        </widget>

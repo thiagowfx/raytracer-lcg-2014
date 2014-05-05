@@ -179,6 +179,7 @@ void Raytracer::set_up_camera() {
   camera_ptr->set_lookat(Vector3d::Zero());
   camera_ptr->compute_uvw();
   w->set_camera(camera_ptr);
+  w->vp.set_max_depth(5);
 }
 
 /**
@@ -246,10 +247,8 @@ void Raytracer::set_up_axis_phong() {
   PointLight* light_ptr = new PointLight();
   light_ptr->set_location(w->camera_ptr->get_eye());
   light_ptr->scale_radiance(2.0);
-  light_ptr->set_shadows(false);
+  light_ptr->set_shadows(true);
   w->add_light(light_ptr);
-
-  w->set_ambient_light(new AmbientOccluder);
 
   RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
   sphere1->set_material(Phong::dummy(light_green));
@@ -289,6 +288,12 @@ void Raytracer::set_up_axis_phong() {
   w->add_object(sphere9);
 
   RaytracerPlane* plane0 = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-  plane0->set_material(Phong::dummy(light_gray));
+  plane0->set_material(Reflective::nodirect(red));
+  // plane0->set_material(Reflective::uncolored());
   w->add_object(plane0);
+
+  RaytracerPlane* plane1 = new RaytracerPlane(Vector3d(0.0, 100.0, 0.0), Vector3d(0.0, 1.0, 0.0));
+  plane1->set_material(Reflective::nodirect(light_gray));
+  // plane1->set_material(Reflective::uncolored());
+  w->add_object(plane1);
 }

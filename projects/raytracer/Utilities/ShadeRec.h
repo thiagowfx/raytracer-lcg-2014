@@ -18,7 +18,7 @@ class ShadeRec {
   Vector3d  local_hit_point;    // world coordinates of hit point on generic object (used for texture transformations)
   Vector3d  normal;             // normal at hit point
   Ray 	    ray;                // required for specular hightlights and area lights
-  int	      depth;              // recursion depth
+  int	      depth;              // recursion depth for reflected rays
   double	  t;                  // ray parameter
   World&    w;                  // world reference
   ShadeRec(World& wr);

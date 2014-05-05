@@ -50,13 +50,13 @@ RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& 
 }
 
 
-
-
+/** Chapter 14 */
 RGBColor Lambertian::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
   return kd * cd * (1 / M_PI);
 }
 
 
+/** Chapter 14: overall color = constant * hue */
 RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3d& wo) const {
   return kd * cd;
 }

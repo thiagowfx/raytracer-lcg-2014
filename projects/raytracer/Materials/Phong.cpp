@@ -79,12 +79,12 @@ RGBColor Phong::shade (ShadeRec& sr) {
 
 Phong* Phong::dummy(RGBColor color) {
   Phong* p = new Phong();
-  p->set_ka(0.20);
-  p->set_kd(0.80);
+  p->set_ka(kKa);
+  p->set_kd(kKd);
   p->set_cd(color);
-  p->set_ks(0.12);
+  p->set_ks(kKs);
   p->set_cs(color);
-  p->set_exp(10.0);
+  p->set_exp(kExp);
   return p;
 }
 

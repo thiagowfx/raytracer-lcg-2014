@@ -18,8 +18,8 @@ class BRDF {
   void set_sampler(Sampler* sPtr);
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi) const;
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
-  virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const = 0;
-  virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const = 0;
+  virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
+  virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
 		
  protected:
   Sampler* sampler_ptr;         // for indirect illumination

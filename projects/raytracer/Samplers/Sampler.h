@@ -2,7 +2,6 @@
 #define __SAMPLER__
 
 #include "Utilities.h"
-#include "Utilities.h"
 #include <Eigen/Dense>
 #include <algorithm> // for random_shuffle in Sampler::setup_shuffled_indices
 #include <cmath>

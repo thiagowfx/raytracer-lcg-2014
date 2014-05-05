@@ -38,7 +38,6 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
   RGBColor  L;
   ViewPlane vp(w->vp);
   Ray	      ray;                // primqry ray
-  int 	    depth = 0;
   Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel
   const int n = vp.sampler_ptr->get_num_samples();
@@ -57,7 +56,7 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
         pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
         pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
         ray.d = get_direction(pp);
-        L += w->tracer_ptr->trace_ray(ray, depth);
+        L += w->tracer_ptr->trace_ray(ray, 0);
       }
       L /= n;
       L *= exposure_time;

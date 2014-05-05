@@ -16,6 +16,9 @@ class Reflective: public Phong {
   void set_cr(const RGBColor&);
   void set_cr(double,double,double);
   virtual RGBColor shade(ShadeRec& s);
+  static Reflective* dummy(RGBColor);
+  static Reflective* nodirect(RGBColor);
+  static Reflective* uncolored();
 		
  private:
   PerfectSpecular* reflective_brdf;  
