@@ -38,6 +38,9 @@ void Raytracer::set_show_out_of_gamut(bool b) {
   w->vp.set_show_of_gamut(b);
 }
 
+void Raytracer::set_max_depth(int depth) {
+  w->vp.set_max_depth(depth);
+}
 
 void Raytracer::set_background_color(QColor c) {
   w->background_color = RGBColor(c.redF(), c.greenF(), c.blueF());

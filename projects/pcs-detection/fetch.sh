@@ -1,5 +1,5 @@
 #!/bin/sh
-# Download and compiles all libraries necessary to the project.
+# Download and compile all libraries necessary to the project.
 EIGEN3="/usr/include/eigen3"
 
 # AntTweakBar

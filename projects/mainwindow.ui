@@ -61,6 +61,9 @@
       </item>
       <item row="0" column="1">
        <widget class="QSpinBox" name="horizontalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>
@@ -84,6 +87,9 @@
       </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="verticalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>
@@ -107,6 +113,9 @@
       </item>
       <item row="2" column="1">
        <widget class="QSpinBox" name="numberOfSamplesSpinBox">
+        <property name="suffix">
+         <string> samples</string>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>
@@ -118,14 +127,14 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Pixel size</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QDoubleSpinBox" name="pixelSizeDoubleSpinBox">
         <property name="minimum">
          <double>0.050000000000000</double>
@@ -141,15 +150,18 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>Zoom level</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="5" column="1">
        <widget class="QDoubleSpinBox" name="zoomDoubleSpinBox">
+        <property name="suffix">
+         <string>x</string>
+        </property>
         <property name="minimum">
          <double>0.010000000000000</double>
         </property>
@@ -161,21 +173,21 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Gamma correction</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="7" column="0">
        <widget class="QLabel" name="label_12">
         <property name="text">
          <string>Viewplane distance</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="7" column="1">
        <widget class="QDoubleSpinBox" name="viewPlaneDistanceDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
@@ -194,28 +206,28 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
          <string>Show out of gamut</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="8" column="1">
        <widget class="QCheckBox" name="outOfGamutCheckBox">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
          <string>Background color</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
+      <item row="9" column="1">
        <widget class="QPushButton" name="backgroundColorPushButton">
         <property name="palette">
          <palette>
@@ -640,14 +652,14 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
+      <item row="11" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Ambient radiance</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="1">
+      <item row="11" column="1">
        <widget class="QDoubleSpinBox" name="ambientRadianceDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
@@ -666,14 +678,14 @@
         </property>
        </widget>
       </item>
-      <item row="11" column="0">
+      <item row="12" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
          <string>Ambient color</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="1">
+      <item row="12" column="1">
        <widget class="QPushButton" name="ambientColorPushButton">
         <property name="palette">
          <palette>
@@ -1095,14 +1107,14 @@
         </property>
        </widget>
       </item>
-      <item row="12" column="0">
+      <item row="13" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>Tracer</string>
+         <string>Tracer type</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="1">
+      <item row="13" column="1">
        <widget class="QComboBox" name="tracerComboBox">
         <item>
          <property name="text">
@@ -1121,7 +1133,7 @@
         </item>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="6" column="1">
        <widget class="QDoubleSpinBox" name="gammaCorrectionDoubleSpinBox">
         <property name="decimals">
          <number>1</number>
@@ -1140,14 +1152,14 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
+      <item row="10" column="0">
        <widget class="QLabel" name="label_13">
         <property name="text">
-         <string>Ambient Light Type</string>
+         <string>Ambient light type</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
+      <item row="10" column="1">
        <widget class="QComboBox" name="ambientLightComboBox">
         <item>
          <property name="text">
@@ -1159,6 +1171,29 @@
           <string>AmbientOccluder</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>Max depth</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="maxDepthSpinBox">
+        <property name="suffix">
+         <string> reflection(s)</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>30</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
        </widget>
       </item>
      </layout>
@@ -1454,6 +1489,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>maxDepthSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>maxDepthChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>horizontalResolutionChanged(int)</slot>
@@ -1467,5 +1518,6 @@
   <slot>zoomChanged(double)</slot>
   <slot>viewPlaneDistanceChanged(double)</slot>
   <slot>update_ambient_light()</slot>
+  <slot>maxDepthChanged(int)</slot>
  </slots>
 </ui>

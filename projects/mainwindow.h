@@ -28,6 +28,7 @@ private slots:
     void horizontalResolutionChanged(int);
     void verticalResolutionChanged(int);
     void numberOfSamplesChanged(int);
+    void maxDepthChanged(int);
     void pixelSizeChanged(double);
     void zoomChanged(double);
     void gammaCorrectionChanged(double);

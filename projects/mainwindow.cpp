@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
   raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
   raytracer.set_vres(ui->verticalResolutionSpinBox->value());
   raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
+  raytracer.set_max_depth(ui->maxDepthSpinBox->value());
   raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
   raytracer.set_camera_zoom(ui->zoomDoubleSpinBox->value());
   raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
@@ -60,6 +61,12 @@ void MainWindow::verticalResolutionChanged(int resolution) {
 
 void MainWindow::numberOfSamplesChanged(int samples) {
   raytracer.set_number_of_samples(samples);
+  if (ui->autoRenderingCheckBox->isChecked())
+    updateRaytracerImage();
+}
+
+void MainWindow::maxDepthChanged(int depth) {
+  raytracer.set_max_depth(depth);
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }

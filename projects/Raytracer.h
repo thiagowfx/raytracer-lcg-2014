@@ -49,6 +49,7 @@ public:
   void set_pixel_size(double);
   void set_gamma_correction(double);
   void set_show_out_of_gamut(bool);
+  void set_max_depth(int);
   /* World */
   void set_background_color(QColor);
   void set_tracer(Tracer*);
