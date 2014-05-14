@@ -170,7 +170,8 @@ void MainWindow::update_ambient_light() {
   ambient_light->scale_radiance(radiance);
 
   QColor color = ui->ambientColorPushButton->palette().color(QPalette::Window);
-  ambient_light->set_color(color.redF(), color.greenF(), color.blueF());
+  if (color.isValid())
+    ambient_light->set_color(color.redF(), color.greenF(), color.blueF());
 
   raytracer.set_ambient_light(ambient_light);
   if (ui->autoRenderingCheckBox->isChecked())
@@ -315,4 +316,12 @@ void MainWindow::on_actionReset_camera_triggered() {
   raytracer.set_up_camera();
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
+}
+
+void MainWindow::on_ambientColorPushButton_clicked() {
+  QColor color = QColorDialog::getColor(Qt::white, this);
+  if (color.isValid()) {
+    ui->ambientColorPushButton->setPalette(QPalette(color));
+    update_ambient_light();
+  }
 }
