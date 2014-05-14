@@ -9,11 +9,11 @@
 using Eigen::Vector3d;
 
 class GeometricObject {	
-	
- public:	
-  GeometricObject();		
-  GeometricObject(const GeometricObject& object); 
-  virtual ~GeometricObject ();	
+
+public:
+  GeometricObject();
+  GeometricObject(const GeometricObject& object);
+  virtual ~GeometricObject ();
   virtual GeometricObject* clone() const = 0;
   virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
   Material* get_material() const;
@@ -22,11 +22,14 @@ class GeometricObject {
   RGBColor get_color() const;
   virtual bool shadow_hit(const Ray& ray, double& tmin) const = 0;
   /* returns a sample point on the object for area light shading */
-  virtual Vector3d sample();
   bool casts_shadows() const;
   void set_shadows(const bool shadow);
-	
- protected:
+  /* the following three functions are needed for objects which are area lights */
+  virtual Vector3d sample();
+  virtual double pdf(const ShadeRec& sr);
+  virtual Vector3d get_normal(const Vector3d& p);
+
+protected:
   /* mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const */
   mutable Material* material_ptr;
   RGBColor color;

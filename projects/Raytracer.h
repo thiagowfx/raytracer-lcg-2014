@@ -20,6 +20,7 @@
 #include "Raytracer.h"
 #include "RaytracerPlane.h"
 #include "RaytracerSphere.h"
+#include "Rectangle.h"
 #include "Reflective.h"
 #include "Regular.h"
 #include "ShadeRec.h"

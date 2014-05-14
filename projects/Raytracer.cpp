@@ -6,8 +6,8 @@ Raytracer::Raytracer() :
   set_up_camera();
 
   /** Only uncomment one */
-  // set_up_axis_matte();
-  set_up_axis_phong();
+  set_up_axis_matte();
+  // set_up_axis_phong();
 }
 
 Raytracer::~Raytracer() {
@@ -192,6 +192,7 @@ void Raytracer::set_up_axis_matte() {
   PointLight* light_ptr = new PointLight();
   light_ptr->set_location(w->camera_ptr->get_eye());
   light_ptr->scale_radiance(2.0);
+  light_ptr->set_shadows(false);
   w->add_light(light_ptr);
 
   RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
@@ -219,11 +220,9 @@ void Raytracer::set_up_axis_matte() {
   sphere7->set_material(Matte::dummy(grey));
   w->add_object(sphere7);
 
-  /*
-    Triangle* triangle_ptr5 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
-    triangle_ptr5->set_material(Matte::dummy(brown));
-    w->add_object(triangle_ptr5);
-    */
+  Triangle* triangle_ptr5 = new Triangle(Vector3d(-110, -85, 80), Vector3d(120, 10, 20), Vector3d(-40, 50, -30));
+  triangle_ptr5->set_material(Matte::dummy(brown));
+  w->add_object(triangle_ptr5);
 
   RaytracerSphere*	sphere8 = new RaytracerSphere(Vector3d(0.0, 0.0, -2 * dx), dx);
   sphere8->set_material(Matte::dummy(light_purple));
@@ -237,11 +236,15 @@ void Raytracer::set_up_axis_matte() {
   plane0->set_material(Matte::dummy(light_gray));
   w->add_object(plane0);
 
-  vector<PrimitivaDaniel*> pds = PrimitivaDaniel::dummy("/home/thiago/workbench/RaytracerProject/projects/pcs-detection/pcs-detection/SHAPES2");
+  /* vector<PrimitivaDaniel*> pds = PrimitivaDaniel::dummy("/home/thiago/workbench/RaytracerProject/projects/pcs-detection/pcs-detection/SHAPES2");
   for (unsigned i = 0; i < pds.size(); ++i) {
     pds[i]->set_material(Matte::dummy(yellow));
     w->add_object(pds[i]);
-  }
+  }*/
+
+  Rectangle* rect0 = new Rectangle(Vector3d(0, 0, 0),Vector3d(0, 100, 0), Vector3d(0, 0, 20));
+  rect0->set_material(Matte::dummy(yellow));
+  w->add_object(rect0);
 }
 
 void Raytracer::set_up_axis_phong() {

@@ -10,10 +10,10 @@ class ShadeRec;
 
 class Light {
   
- public:
+public:
   Light();
-  Light(const Light& ls); 
-  Light& operator= (const Light& rhs); 
+  Light(const Light& ls);
+  Light& operator= (const Light& rhs);
   virtual Light* clone() const = 0;
   virtual ~Light();
   virtual Vector3d get_direction(ShadeRec&) = 0;
@@ -21,9 +21,10 @@ class Light {
   bool casts_shadows() const;
   void set_shadows(const bool shadow);
   virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const = 0;
- protected:
+  virtual double G(const ShadeRec& sr) const; /* for area lights */
+  virtual double pdf(const ShadeRec& sr) const; /* for area lights */
+protected:
   bool shadows;
 };
-
 
 #endif

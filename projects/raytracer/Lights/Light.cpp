@@ -31,3 +31,13 @@ void Light::set_shadows(const bool shadow){
 bool Light::casts_shadows() const {
   return shadows;
 }
+
+
+double Light::G(const ShadeRec& sr) const {
+  return 1.0;
+}
+
+
+double Light::pdf(const ShadeRec& sr) const {
+  return 1.0;
+}

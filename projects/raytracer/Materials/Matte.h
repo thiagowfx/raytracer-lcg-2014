@@ -17,6 +17,7 @@ class Matte: public Material {
   void set_kd(const double k);
   void set_cd(const RGBColor& c);
   virtual RGBColor shade(ShadeRec& sr);
+  virtual RGBColor area_light_shade(ShadeRec& sr);
   static Matte* dummy(RGBColor);
   virtual RGBColor get_color() const;
 		

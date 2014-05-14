@@ -3,7 +3,7 @@
 GeometricObject::GeometricObject() :
   material_ptr(NULL),
   shadows(true),
-  color()
+  color(black)
 {}
 
 
@@ -48,6 +48,16 @@ void GeometricObject::set_material(Material* mPtr) {
 
 
 Vector3d GeometricObject::sample() {
+  return Vector3d::Zero();
+}
+
+
+double GeometricObject::pdf(const ShadeRec &sr) {
+  return 0.0;
+}
+
+
+Vector3d GeometricObject::get_normal(const Eigen::Vector3d &p) {
   return Vector3d::Zero();
 }
 
