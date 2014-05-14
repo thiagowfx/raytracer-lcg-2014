@@ -57,10 +57,8 @@ void Raytracer::set_tracer(Tracer* tracer) {
 void Raytracer::set_tracer(QString s) {
   if (s == QString("Whitted"))
     set_tracer(new Whitted(w));
-  else if (s == QString("MultipleObjects"))
-    set_tracer(new MultipleObjects(w));
   else
-    set_tracer(new RayCast(w));
+    set_tracer(new MultipleObjects(w));
 }
 
 void Raytracer::change_view_distance(double dd) {

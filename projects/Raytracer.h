@@ -17,7 +17,6 @@
 #include "PrimitivaDaniel.h"
 #include "RGBColor.h"
 #include "Ray.h"
-#include "RayCast.h"
 #include "Raytracer.h"
 #include "RaytracerPlane.h"
 #include "RaytracerSphere.h"
