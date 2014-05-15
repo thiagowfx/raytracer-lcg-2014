@@ -25,7 +25,7 @@ Rectangle::Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b
   inv_area(1.0 / area),
   sampler_ptr(NULL)
 {
-  normal = a.cross(b);
+  normal = -a.cross(b);
   normal.normalize();
 }
 

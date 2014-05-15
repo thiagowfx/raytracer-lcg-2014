@@ -1118,6 +1118,11 @@
        <widget class="QComboBox" name="tracerComboBox">
         <item>
          <property name="text">
+          <string>AreaLighting</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Whitted</string>
          </property>
         </item>

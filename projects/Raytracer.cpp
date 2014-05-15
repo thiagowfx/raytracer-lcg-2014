@@ -57,6 +57,8 @@ void Raytracer::set_tracer(Tracer* tracer) {
 void Raytracer::set_tracer(QString s) {
   if (s == QString("Whitted"))
     set_tracer(new Whitted(w));
+  else if (s == QString("AreaLighting"))
+    set_tracer(new AreaLighting(w));
   else
     set_tracer(new MultipleObjects(w));
 }
@@ -189,11 +191,11 @@ void Raytracer::set_up_camera() {
  */
 
 void Raytracer::set_up_axis_matte() {
-  PointLight* light_ptr = new PointLight();
+  /*PointLight* light_ptr = new PointLight();
   light_ptr->set_location(w->camera_ptr->get_eye());
   light_ptr->scale_radiance(2.0);
   light_ptr->set_shadows(false);
-  w->add_light(light_ptr);
+  w->add_light(light_ptr);*/
 
   RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
   sphere1->set_material(Matte::dummy(light_green));
@@ -242,9 +244,18 @@ void Raytracer::set_up_axis_matte() {
     w->add_object(pds[i]);
   }*/
 
-  Rectangle* rect0 = new Rectangle(Vector3d(0, 0, 0),Vector3d(0, 100, 0), Vector3d(0, 0, 20));
-  rect0->set_material(Matte::dummy(yellow));
+  Rectangle* rect0 = new Rectangle(Vector3d(80, 80, 0),Vector3d(0, 50, 20), Vector3d(0, 0, 50));
+  // rect0->set_material(Matte::dummy(yellow));
+  rect0->set_material(Emissive::dummy(white, 40.0));
+  rect0->set_sampler(new MultiJittered(100));
+  rect0->set_shadows(false);
   w->add_object(rect0);
+
+  AreaLight* area_light_ptr = new AreaLight();
+  area_light_ptr->set_object(rect0);
+  area_light_ptr->set_shadows(true);
+  w->add_light(area_light_ptr);
+
 }
 
 void Raytracer::set_up_axis_phong() {

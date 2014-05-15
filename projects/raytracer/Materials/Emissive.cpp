@@ -49,6 +49,13 @@ RGBColor Emissive::get_color() const {
   return ls * ce;
 }
 
+Emissive *Emissive::dummy(RGBColor c, double radiance = 1.0) {
+  Emissive* em = new Emissive();
+  em->set_ce(c);
+  em->scale_radiance(radiance);
+  return em;
+}
+
 
 RGBColor Emissive::get_Le(ShadeRec& sr) const {
   return ls * ce;
