@@ -86,8 +86,6 @@ public:
   const char* image="raytraced_image.png";
 private:
   World* w;
-  const double ks = 0.12; /** valor para constante especular */
-  const double expi = 10.0; /** expoente para reflexão especular */
   const double dx = 15.0;
 };
 

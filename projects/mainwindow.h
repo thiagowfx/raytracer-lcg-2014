@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QMutex>
 #include <QPalette>
 #include <QString>
 #include "Raytracer.h"
@@ -18,61 +19,61 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
-    
+  Q_OBJECT
+
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
+
 private slots:
-    void horizontalResolutionChanged(int);
-    void verticalResolutionChanged(int);
-    void numberOfSamplesChanged(int);
-    void maxDepthChanged(int);
-    void pixelSizeChanged(double);
-    void zoomChanged(double);
-    void gammaCorrectionChanged(double);
-    void viewPlaneDistanceChanged(double);
-    void outOfGamutChanged();
-    void tracerChanged(QString);
-    void updateRaytracerImage();
-    void update_ambient_light();
+  void horizontalResolutionChanged(int);
+  void verticalResolutionChanged(int);
+  void numberOfSamplesChanged(int);
+  void maxDepthChanged(int);
+  void pixelSizeChanged(double);
+  void zoomChanged(double);
+  void gammaCorrectionChanged(double);
+  void viewPlaneDistanceChanged(double);
+  void outOfGamutChanged();
+  void tracerChanged(QString);
+  void updateRaytracerImage();
 
-    void on_backgroundColorPushButton_clicked();
-    void on_ambientColorPushButton_clicked();
+  void on_backgroundColorPushButton_clicked();
+  void on_ambientColorPushButton_clicked();
 
-    /** Actions */
-    void on_actionQuit_triggered();
-    void on_actionSave_PNG_Image_triggered();
-    void on_actionAbout_triggered();
-    void on_actionAbout_Qt_triggered();
-    void on_actionReset_camera_triggered();
-
-private:
-    /* Keys */
-    bool eventFilter(QObject *object, QEvent *event);
-    void on_Key_Left_pressed();
-    void on_Key_Right_pressed();
-    void on_Key_Up_pressed();
-    void on_Key_Down_pressed();
-    void on_Key_PageUp_pressed();
-    void on_Key_PageDown_pressed();
-    void on_Key_W_pressed();
-    void on_Key_S_pressed();
-    void on_Key_A_pressed();
-    void on_Key_D_pressed();
-    void on_Key_R_pressed();
-    void on_Key_F_pressed();
-
-    void createStatusBar();
+  /** Actions */
+  void on_actionQuit_triggered();
+  void on_actionSave_PNG_Image_triggered();
+  void on_actionAbout_triggered();
+  void on_actionAbout_Qt_triggered();
+  void on_actionReset_camera_triggered();
 
 private:
-    Ui::MainWindow *ui;
-    Raytracer raytracer;
-    bool raytracingInProgress;
-    QLabel *statusbarCameraEyeLabel;
-    QLabel *statusbarCameraEyeCylindricalLabel;
-    QLabel *statusbarProgressLabel;
+  /* Keys */
+  bool eventFilter(QObject *object, QEvent *event);
+  void on_Key_Left_pressed();
+  void on_Key_Right_pressed();
+  void on_Key_Up_pressed();
+  void on_Key_Down_pressed();
+  void on_Key_PageUp_pressed();
+  void on_Key_PageDown_pressed();
+  void on_Key_W_pressed();
+  void on_Key_S_pressed();
+  void on_Key_A_pressed();
+  void on_Key_D_pressed();
+  void on_Key_R_pressed();
+  void on_Key_F_pressed();
+
+  void createStatusBar();
+  void updateStatusBar();
+  void update_ambient_light();
+
+  Ui::MainWindow *ui;
+  Raytracer raytracer;
+  QMutex mutex; /* raytracingInProgress? */
+  QLabel *statusbarCameraEyeLabel;
+  QLabel *statusbarCameraEyeCylindricalLabel;
+  QLabel *statusbarProgressLabel;
 };
 
 #endif // MAINWINDOW_H
