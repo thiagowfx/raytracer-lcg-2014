@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
   /** ui initial values */
   raytracer.set_hres(ui->horizontalResolutionSpinBox->value());
   raytracer.set_vres(ui->verticalResolutionSpinBox->value());
-  raytracer.set_number_of_samples(ui->numberOfSamplesSpinBox->value());
+  raytracer.set_number_of_samples(stoi(ui->numberOfSamplesComboBox->currentText().toStdString()));
   raytracer.set_max_depth(ui->maxDepthSpinBox->value());
   raytracer.set_pixel_size(ui->pixelSizeDoubleSpinBox->value());
   raytracer.set_camera_zoom(ui->zoomDoubleSpinBox->value());
@@ -63,8 +63,9 @@ void MainWindow::verticalResolutionChanged(int resolution) {
     updateRaytracerImage();
 }
 
-void MainWindow::numberOfSamplesChanged(int samples) {
-  raytracer.set_number_of_samples(samples);
+void MainWindow::numberOfSamplesChanged() {
+  cout << stoi(ui->numberOfSamplesComboBox->currentText().toStdString()) << endl;
+  raytracer.set_number_of_samples(stoi(ui->numberOfSamplesComboBox->currentText().toStdString()));
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }
@@ -117,11 +118,13 @@ void MainWindow::updateRaytracerImage() {
 
   statusbarProgressLabel->setText("Rendering...");
   updateStatusBar();
+  QCoreApplication::processEvents();
 
   raytracer.render_scene();
   ui->raytracedImage->setPixmap(QPixmap(raytracer.image));
 
   statusbarProgressLabel->setText("Idle");
+  QCoreApplication::processEvents();
 
   mutex.unlock();
 }

@@ -28,7 +28,7 @@ public:
 private slots:
   void horizontalResolutionChanged(int);
   void verticalResolutionChanged(int);
-  void numberOfSamplesChanged(int);
+  void numberOfSamplesChanged();
   void maxDepthChanged(int);
   void pixelSizeChanged(double);
   void zoomChanged(double);
@@ -48,6 +48,8 @@ private slots:
   void on_actionAbout_Qt_triggered();
   void on_actionReset_camera_triggered();
 
+  void update_ambient_light();
+
 private:
   /* Keys */
   bool eventFilter(QObject *object, QEvent *event);
@@ -66,7 +68,6 @@ private:
 
   void createStatusBar();
   void updateStatusBar();
-  void update_ambient_light();
 
   Ui::MainWindow *ui;
   Raytracer raytracer;
