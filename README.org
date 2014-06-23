@@ -1,16 +1,15 @@
 # -*- org -*-
 #+STARTUP: overview
+#+TITLE: README
 
-* Website
-- http://www.raytracegroundup.com/
-- http://www.raytracegroundup.com/downloads/errata.pdf
-* Project sources
-- https://github.com/danoli3/Multithreaded-Ray-Tracer
+* Links
+- book homepage :: http://www.raytracegroundup.com/
+- cmake manual :: http://cmake.org/cmake/help/v2.8.8/cmake.html
+** Repositories
 - https://github.com/mikestaub/Ray-Tracer/
+- https://github.com/danoli3/Multithreaded-Ray-Tracer
 - https://code.google.com/p/pwsraytracer/
 - https://code.google.com/p/vcraytracer/
 - https://code.google.com/p/openglfun/
 - https://github.com/stefanoborini/python-raytracer
 - https://code.google.com/p/grounduptracer/
-* CMake
-- http://cmake.org/cmake/help/v2.8.8/cmake.html

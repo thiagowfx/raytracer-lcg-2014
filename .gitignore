@@ -5,4 +5,4 @@ projects/pcs-detection/pcs-detection/
 projects/pcs-detection/vcglib/
 *~
 \#*
-
+*.o

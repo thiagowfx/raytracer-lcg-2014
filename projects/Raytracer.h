@@ -19,7 +19,7 @@
 #include "Phong.h"
 #include "Pinhole.h"
 #include "PointLight.h"
-#include "PrimitivaDaniel.h"
+// #include "PrimitivaDaniel.h"
 #include "RGBColor.h"
 #include "Ray.h"
 #include "Raytracer.h"
@@ -35,7 +35,7 @@
 #include "Whitted.h"
 #include "World.h"
 
-#include "pc-shape-detection.h"
+// #include "pc-shape-detection.h"
 
 #include <cstdio>
 #include <cmath>
