@@ -1,31 +1,52 @@
 #!/bin/sh
 # Download and compile all libraries necessary to the project.
 EIGEN3="/usr/include/eigen3"
+WORKING_DIR=$(pwd)
+
+msg() {
+    echo "--> $*"
+}
 
 # AntTweakBar
-[[ ! -d AntTweakBar ]] && git clone git://git.code.sf.net/p/anttweakbar/code AntTweakBar
-cd AntTweakBar/src/
+if [[ ! -d AntTweakBar ]];
+then
+    git clone git://git.code.sf.net/p/anttweakbar/code AntTweakBar
+fi
+cd AntTweakBar/
+git pull origin master
+cd src/
 make
-echo "AntTweakBar OK"
-cd ../../
+msg "AntTweakBar OK"
+cd $WORKING_DIR
 
 # glew
-[[ ! -d glew ]] && git clone https://github.com/nigels-com/glew.git glew
+if [[ ! -d glew ]]; then
+    git clone https://github.com/nigels-com/glew.git glew
+fi
 cd glew/
+git pull origin master
 make extensions && make
-echo "GLEW OK"
-cd ../
+msg "glew OK"
+cd $WORKING_DIR
 
 # vcglib
-[[ ! -d vcglib ]] && svn checkout svn://svn.code.sf.net/p/vcg/code/trunk/vcglib vcglib
-rm -r vcglib/eigenlib/{Eigen,unsupported}
-ln -s "${EIGEN3}"/Eigen       vcglib/eigenlib/
-ln -s "${EIGEN3}"/unsupported vcglib/eigenlib/
-echo "vcglib OK"
+if [[ ! -d vcglib ]]; then
+    svn checkout svn://svn.code.sf.net/p/vcg/code/trunk/vcglib vcglib
+fi
+cd vcglib/
+# svn update
+rm -r eigenlib/{Eigen,unsupported}
+ln -s "${EIGEN3}"/Eigen       eigenlib/
+ln -s "${EIGEN3}"/unsupported eigenlib/
+msg "vcglib OK"
+cd $WORKING_DIR
 
 # pcs-detection
-[[ ! -d pcs-detection ]] && git clone git://git.lcg.ufrj.br/daniel-coutinho/pcs-detection.git pcs-detection
+if [[ ! -d pcs-detection ]]; then
+    git clone git://git.lcg.ufrj.br/daniel-coutinho/pcs-detection.git pcs-detection
+fi
 cd pcs-detection/
+git pull origin master
 qmake && make
-echo "pcs-detection OK"
-cd ../
+msg "pcs-detection OK"
+cd $WORKING_DIR
