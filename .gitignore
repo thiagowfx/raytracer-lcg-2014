@@ -3,6 +3,7 @@ projects/pcs-detection/AntTweakBar/
 projects/pcs-detection/glew/
 projects/pcs-detection/pcs-detection/
 projects/pcs-detection/vcglib/
+CMakeLists.txt.user
 *~
 \#*
 *.o
