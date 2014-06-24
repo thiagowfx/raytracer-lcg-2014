@@ -35,9 +35,8 @@ if [[ ! -d vcglib ]]; then
 fi
 cd vcglib/
 # svn update
-rm -r eigenlib/{Eigen,unsupported}
-ln -s "${EIGEN3}"/Eigen       eigenlib/
-ln -s "${EIGEN3}"/unsupported eigenlib/
+rm -r eigenlib
+ln -s "${EIGEN3}" eigenlib
 msg "vcglib OK"
 cd $WORKING_DIR
 
