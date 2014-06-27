@@ -1,0 +1,36 @@
+#+TITLE: Raytracer Documentation
+#+DESCRIPTION: Raytracer Documentation
+#+KEYWORDS: raytracer, documentation
+#+AUTHOR: Thiago Perrotta
+#+EMAIL: thiagoperrotta95@gmail.com
+#+OPTIONS: ':t *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+#+OPTIONS: creator:comment d:(not LOGBOOK) date:t e:t email:t f:t inline:t
+#+OPTIONS: num:t p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:t toc:t
+#+OPTIONS: todo:t |:t
+#+EXCLUDE_TAGS: noexport
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+OPTIONS: html-postamble:auto html-preamble:t tex:t
+#+HTML_CONTAINER: section
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="solarized-light.min.css" />
+#+HTML_HEAD_EXTRA:
+#+HTML_HTML5_FANCY:
+#+HTML_INCLUDE_SCRIPTS:
+#+HTML_INCLUDE_STYLE:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+
+* To developers
+** Organization
+This project uses [[http://www.cmake.org/][CMake]] as its management tool. The directory tree is
+organized as follows:
+
+- root/
+  - projects/
+    - test/
+
+
+* To final users
