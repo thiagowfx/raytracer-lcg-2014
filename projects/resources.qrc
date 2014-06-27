@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/assets">
-        <file>assets/camera-24x24.png</file>
-        <file>assets/save-24x24.png</file>
-        <file>assets/exit-24x24.png</file>
-    </qresource>
-</RCC>

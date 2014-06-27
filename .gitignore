@@ -1,10 +1,7 @@
 build/
-projects/pcs-detection/AntTweakBar/
-projects/pcs-detection/glew/
-projects/pcs-detection/pcs-detection/
-projects/pcs-detection/vcglib/
+lib/pcs-detection/
 CMakeLists.txt.user
 *~
 \#*
 *.o
-DOC.html
+docs/doc.html

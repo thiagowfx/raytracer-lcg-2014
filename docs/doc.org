@@ -29,8 +29,23 @@ This project uses [[http://www.cmake.org/][CMake]] as its management tool. The d
 organized as follows:
 
 - root/
-  - projects/
-    - test/
-
+  - CMakeLists.txt
+  - lib/
+    - pcs-detection
+    - raytracer
+    - CMakeLists.txt
 
 * To final users
+
+* Helpers
+** Links
+- book homepage :: http://www.raytracegroundup.com/
+- cmake manual :: http://cmake.org/cmake/help/v2.8.8/cmake.html
+** Repositories
+- https://github.com/mikestaub/Ray-Tracer/
+- https://github.com/danoli3/Multithreaded-Ray-Tracer
+- https://code.google.com/p/pwsraytracer/
+- https://code.google.com/p/vcraytracer/
+- https://code.google.com/p/openglfun/
+- https://github.com/stefanoborini/python-raytracer
+- https://code.google.com/p/grounduptracer/
