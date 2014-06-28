@@ -1,8 +1,6 @@
 #include "Light.h"
 
-Light::Light() :
-    shadows(true)
-{}
+Light::Light() {}
 
 
 Light::Light(const Light& ls) :
@@ -15,7 +13,7 @@ Light& Light::operator= (const Light& rhs) {
 }
 
 
-Light::~Light() {} 
+Light::~Light() {}
 
 
 RGBColor Light::L(ShadeRec& s) {

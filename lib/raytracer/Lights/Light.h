@@ -24,7 +24,7 @@ public:
   virtual double G(const ShadeRec& sr) const; /* for area lights */
   virtual double pdf(const ShadeRec& sr) const; /* for area lights */
 protected:
-  bool shadows;
+  bool shadows = true;
 };
 
 #endif

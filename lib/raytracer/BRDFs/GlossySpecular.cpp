@@ -1,6 +1,7 @@
 #include "GlossySpecular.h"
 
 GlossySpecular::GlossySpecular() :
+  BRDF(),
   ks(0.0),
   cs(1.0, 1.0, 1.0),
   sampler(NULL)

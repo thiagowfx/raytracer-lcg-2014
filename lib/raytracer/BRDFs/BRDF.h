@@ -8,9 +8,9 @@
 using Eigen::Vector3d;
 
 class BRDF {
-  
- public:	
-  BRDF();						
+
+ public:
+  BRDF();
   BRDF(const BRDF& object);
   virtual BRDF* clone() const = 0;
   BRDF& operator= (const BRDF& rhs);
@@ -20,9 +20,9 @@ class BRDF {
   virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
   virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
-		
+
  protected:
-  Sampler* sampler_ptr;         // for indirect illumination
+  Sampler* sampler_ptr = NULL;	// for indirect illumination
 };
 
 

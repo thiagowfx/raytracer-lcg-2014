@@ -2,13 +2,10 @@
 
 Camera::Camera() :
   eye(0.0, 0.0, 250.0),
-  lookat(Vector3d::Zero()),
   u(1.0, 0.0, 0.0),
   v(0.0, 1.0, 0.0),
   w(0.0, 0.0, 1.0),
   up(0.0, 1.0, 0.0),
-  exposure_time(1.0),
-  zoom(1.0),
   d(250.0)
 {}
 
@@ -58,7 +55,7 @@ void Camera::compute_uvw() {
   if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) > lookat(1)) {
     u = Vector3d(0.0, 0.0, 1.0);
     v = Vector3d(1.0, 0.0, 0.0);
-    w = Vector3d(0.0, 1.0, 0.0);	
+    w = Vector3d(0.0, 1.0, 0.0);
   }
 
   /* camera looking vertically up */

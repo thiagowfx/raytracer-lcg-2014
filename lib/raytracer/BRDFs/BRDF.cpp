@@ -1,8 +1,6 @@
 #include "BRDF.h"
 
-BRDF::BRDF() :
-  sampler_ptr(NULL)
-{}
+BRDF::BRDF() {}
 
 
 BRDF::BRDF(const BRDF& brdf) :
@@ -19,7 +17,6 @@ BRDF& BRDF::operator= (const BRDF& rhs) {
       delete sampler_ptr;
       sampler_ptr = NULL;
     }
-
     if (rhs.sampler_ptr)
       sampler_ptr = rhs.sampler_ptr->clone();
   }

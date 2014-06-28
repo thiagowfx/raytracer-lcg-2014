@@ -29,12 +29,12 @@ public:
   double get_view_distance() const;
 
 protected:
-  Vector3d eye;			// eye point
-  Vector3d lookat; 		// lookat point
+  Vector3d eye;
+  Vector3d lookat = Vector3d::Zero();
   Vector3d u, v, w;		// orthonormal basis vectors
   Vector3d up;			// up vector
-  double exposure_time;
-  double zoom;      // zoom factor
+  double exposure_time = 1.0;
+  double zoom = 1.0;      // zoom factor
   double d;         // view plane distance
   Camera& operator= (const Camera& camera);
 };
