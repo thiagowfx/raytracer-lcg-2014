@@ -25,18 +25,59 @@
 
 * To developers
 ** Organization
-This project uses [[http://www.cmake.org/][CMake]] as its management tool. The directory tree is
+This project uses [[http://www.cmake.org/][CMake]] as its management tool. Its directory tree is
 organized as follows:
 
 - root/
   - CMakeLists.txt
+  - CMakeLists.txt.user
+  - docs/
+    - CMakeLists.txt
+    - doc.org
   - lib/
-    - pcs-detection
-    - raytracer
+    - assets/
+    - pcs-detection/
+    - raytracer/
     - CMakeLists.txt
 
-* To final users
+This ensures the following:
 
+- The main build file is ~lib/CMakeLists.txt~. Previously we maintained
+  several of these, however this led to duplication of information.
+- CMakeLists.txt.user is a file created by Qt Creator. It shouldn't be
+  shipped with the project.
+- Documentation is maintained as a single [[http://orgmode.org/][Org]] file. To generate a
+  html document from it, open a recent version of [[https://www.gnu.org/software/emacs/][Emacs]] (23+), then
+  execute ~M-x org-html-export-to-html~.
+- The ~lib/~ folder contains the project source files, as some
+  assets for the UI.
+
+To build the project, create a build folder (say, ~root/build~), cd
+into it, then run ~cmake $PATH_TO_ROOT && make~. The compiled binary
+will be ~lib/qtRayTracer~.
+** Build Dependencies
+- AntTweakBar[fn:1] :: Illumination library
+- Eigen 3.x+ :: a C++ linear algebra library
+- Glew[fn:1] :: the OpenGL extension wrangler library
+- Qt 4.x+ (Qt 5.x+ recommended) :: GUI Toolkit
+- cmake 2.6.x+ (2.8.x+ recommended) :: build management tool
+- g++ (4.8+ recommended) :: C/C++ compiler
+- vcglib[fn:1] :: Visualization and Computer Graphics library for
+                  dealing with triangle meshes
+** Hacking
+
+It is recommended to use [[http://qt-project.org/][Qt Creator]] as your main IDE, together with
+your favorite text editor.
+
+Those principles are encouraged:
+
+- [[https://en.wikipedia.org/wiki/Don%27t_repeat_yourself][DRY]] :: don't repeat yourself
+- [[https://en.wikipedia.org/wiki/KISS_principle][KISS]] :: keep it short & simple
+
+To speed up successive compilations, [[https://ccache.samba.org/][ccache]] is highly recommended.
+
+
+* To final users
 * Helpers
 ** Links
 - book homepage :: http://www.raytracegroundup.com/
@@ -49,3 +90,8 @@ organized as follows:
 - https://code.google.com/p/openglfun/
 - https://github.com/stefanoborini/python-raytracer
 - https://code.google.com/p/grounduptracer/
+
+* Footnotes
+
+[fn:1] Those should be automatically fetched with the
+~lib/fetch-pcs-detection.sh~ script.
