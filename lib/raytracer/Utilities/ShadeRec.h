@@ -10,7 +10,7 @@ class Material;
 class World;
 
 class ShadeRec {
-  
+
  public:
   bool	    hit_an_object;      // did the ray hit an object?
   Material* material_ptr;       // pointer to the nearest object's material

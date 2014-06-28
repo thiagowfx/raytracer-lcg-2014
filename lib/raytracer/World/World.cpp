@@ -73,7 +73,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
   const int num_objects = objects.size();
 
   for (int j = 0; j < num_objects; ++j) {
-    if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+    if (objects[j]->hit(PRIMARY_RAY, ray, t, sr) && (t < tmin)) {
       sr.hit_an_object = true;
       tmin             = t;
       sr.material_ptr  = objects[j]->get_material();

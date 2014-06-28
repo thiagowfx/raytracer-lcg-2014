@@ -4,7 +4,7 @@ Directional::Directional() :
   Light(),
   ls(1.0),
   color(1.0, 1.0, 1.0),
-  dir(0.0, 1.0, 0.0)			
+  dir(0.0, 1.0, 0.0)
 {}
 
 
@@ -12,7 +12,7 @@ Directional::Directional(const Directional& dl) :
   Light(dl),
   ls(dl.ls),
   color(dl.color),
-  dir(dl.dir)  		
+  dir(dl.dir)
 {}
 
 
@@ -38,20 +38,20 @@ Directional::~Directional() {}
 /* as this function is virtual, it shouldn't be inlined */
 Vector3d Directional::get_direction(ShadeRec& sr) {
   return dir;
-}	
+}
 
 
-RGBColor Directional::L(ShadeRec& s) {	
+RGBColor Directional::L(ShadeRec& s) {
   return ls * color;
 }
 
 
-bool Directional::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+bool Directional::in_shadow(const Ray& ray, ShadeRec& sr) const {
   double t;
   const int num_objects = sr.w.objects.size();
 
   for (int j = 0; j < num_objects; j++)
-    if (sr.w.objects[j]->shadow_hit(ray, t))
+    if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
       return true;
 
   return false;

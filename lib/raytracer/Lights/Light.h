@@ -9,7 +9,7 @@ using Eigen::Vector3d;
 class ShadeRec;
 
 class Light {
-  
+
 public:
   Light();
   Light(const Light& ls);
@@ -20,7 +20,7 @@ public:
   virtual RGBColor L(ShadeRec& sr) = 0; // radiance
   bool casts_shadows() const;
   void set_shadows(const bool shadow);
-  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const = 0;
+  virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const = 0;
   virtual double G(const ShadeRec& sr) const; /* for area lights */
   virtual double pdf(const ShadeRec& sr) const; /* for area lights */
 protected:

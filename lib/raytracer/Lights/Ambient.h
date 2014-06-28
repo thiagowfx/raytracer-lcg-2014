@@ -4,23 +4,23 @@
 #include "Light.h"
 
 class Ambient: public Light {
-  
+
  public:
-  Ambient(); 
+  Ambient();
   Ambient(const Ambient& a);
   virtual ~Ambient();
-  virtual Light* clone() const;	
-  Ambient& operator= (const Ambient& rhs); 
+  virtual Light* clone() const;
+  Ambient& operator= (const Ambient& rhs);
   virtual void scale_radiance(const double b);
   virtual void set_color(const RGBColor&);
   virtual void set_color(double,double,double);
-  virtual Vector3d get_direction(ShadeRec& s); 
+  virtual Vector3d get_direction(ShadeRec& s);
   virtual RGBColor L(ShadeRec& s);
-  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
-	
+  virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+
  protected:
   double ls;                    // radiance
-  RGBColor color;               // light color  
+  RGBColor color;               // light color
 };
 
 

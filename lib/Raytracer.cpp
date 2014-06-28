@@ -191,11 +191,11 @@ void Raytracer::set_up_camera() {
  */
 
 void Raytracer::set_up_axis_matte() {
-  /*PointLight* light_ptr = new PointLight();
+  PointLight* light_ptr = new PointLight();
   light_ptr->set_location(w->camera_ptr->get_eye());
   light_ptr->scale_radiance(2.0);
   light_ptr->set_shadows(false);
-  w->add_light(light_ptr);*/
+  w->add_light(light_ptr);
 
   RaytracerSphere* sphere1 = new RaytracerSphere(Vector3d(250.0, 0.0, 0.0), 30.0);
   sphere1->set_material(Matte::dummy(light_green));
@@ -235,7 +235,7 @@ void Raytracer::set_up_axis_matte() {
   w->add_object(sphere9);
 
   RaytracerPlane* plane0 = new RaytracerPlane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-  plane0->set_material(Matte::dummy(light_gray));
+  plane0->set_material(Matte::dummy(red));
   w->add_object(plane0);
 
   /* vector<PrimitivaDaniel*> pds = PrimitivaDaniel::dummy("/home/thiago/workbench/RaytracerProject/projects/pcs-detection/pcs-detection/SHAPES2");

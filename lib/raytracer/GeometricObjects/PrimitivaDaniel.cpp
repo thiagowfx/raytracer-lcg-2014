@@ -1,12 +1,5 @@
 #include "PrimitivaDaniel.h"
 
-
-PrimitivaDaniel::PrimitivaDaniel() :
-  GeometricObject(),
-  primitive()
-{}
-
-
 PrimitivaDaniel::PrimitivaDaniel(Primitive* p) :
   GeometricObject(),
   primitive(p)
@@ -15,8 +8,7 @@ PrimitivaDaniel::PrimitivaDaniel(Primitive* p) :
 
 PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& pd) :
   GeometricObject(pd),
-  primitive(NULL)
-{
+  primitive(NULL) {
   /*
   if(primitive)
       primitive = pd.primitive->clone();
@@ -35,25 +27,8 @@ PrimitivaDaniel *PrimitivaDaniel::clone() const {
   return new PrimitivaDaniel(*this);
 }
 
-
-bool PrimitivaDaniel::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-  Vector3d intersectionPoint;
-  Vector3d intersectionNormal;
-
-  if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
-    tmin = (intersectionPoint - ray.o).norm();
-
-    if (tmin > kEpsilonShadows) {
-      sr.normal = intersectionNormal;
-      sr.local_hit_point = intersectionPoint;
-      return true;
-    }
-  }
-  return false;
-}
-
-bool PrimitivaDaniel::shadow_hit(const Ray &ray, double &tmin) const {
-  if(!shadows)
+bool PrimitivaDaniel::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
+  if (type == SHADOW_RAY && !shadows)
     return false;
 
   Vector3d intersectionPoint;
@@ -62,11 +37,17 @@ bool PrimitivaDaniel::shadow_hit(const Ray &ray, double &tmin) const {
   if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
     tmin = (intersectionPoint - ray.o).norm();
 
-    if (tmin > kEpsilonShadows)
+    if (tmin > kEpsilonShadows) {
+      if (type == PRIMARY_RAY) {
+	sr.normal = intersectionNormal;
+	sr.local_hit_point = intersectionPoint;
+      }
       return true;
+    }
   }
   return false;
 }
+
 
 vector<PrimitivaDaniel*> PrimitivaDaniel::dummy(const char *path_to_shape) {
   vector<PrimitivaDaniel*> pds;

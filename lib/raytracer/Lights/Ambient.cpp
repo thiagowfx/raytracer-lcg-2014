@@ -10,18 +10,18 @@ Ambient::Ambient () :
 Ambient::Ambient(const Ambient& a) :
   Light(a),
   ls(a.ls),
-  color(a.color) 		
+  color(a.color)
 {}
 
 
 Light* Ambient::clone() const {
   return new Ambient(*this);
-}	
+}
 
 
 Ambient& Ambient::operator=(const Ambient& rhs) {
   if (this != &rhs) {
-    Light::operator= (rhs);    
+    Light::operator= (rhs);
     ls 	  = rhs.ls;
     color = rhs.color;
   }
@@ -37,12 +37,12 @@ Vector3d Ambient::get_direction(ShadeRec& s) {
 }
 
 
-RGBColor Ambient::L(ShadeRec& sr) {	
+RGBColor Ambient::L(ShadeRec& sr) {
   return ls * color;
 }
 
 
 /** Chapter 16: Always false */
-bool Ambient::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+bool Ambient::in_shadow(const Ray& ray, ShadeRec& sr) const {
   return false;
 }

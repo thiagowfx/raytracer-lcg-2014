@@ -14,13 +14,11 @@
 class PrimitivaDaniel: public GeometricObject {
 
  public:
-  PrimitivaDaniel();
   PrimitivaDaniel(Primitive*);
   PrimitivaDaniel(const PrimitivaDaniel&);
   ~PrimitivaDaniel();
   virtual PrimitivaDaniel* clone() const;
-  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-  virtual bool shadow_hit(const Ray& ray, double& tmin) const;
+  virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
   static vector<PrimitivaDaniel*> dummy(const char* path_to_shape);
 
  private:

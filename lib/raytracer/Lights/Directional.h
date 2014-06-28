@@ -6,13 +6,13 @@
 #include "ShadeRec.h"
 
 class Directional: public Light {
-  
+
  public:
-  Directional();   							
-  Directional(const Directional& dl); 
-  virtual Light* clone() const;			
-  Directional& operator= (const Directional& rhs); 
-  virtual ~Directional(); 				
+  Directional();
+  Directional(const Directional& dl);
+  virtual Light* clone() const;
+  Directional& operator= (const Directional& rhs);
+  virtual ~Directional();
   void scale_radiance(const double b);
   void set_color(const RGBColor&);
   void set_color(double,double,double);
@@ -20,8 +20,8 @@ class Directional: public Light {
   void set_direction(double,double,double);
   virtual Vector3d get_direction(ShadeRec& sr);
   virtual RGBColor L(ShadeRec& sr);
-  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
-		
+  virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+
  private:
   double ls;                    // radiance
   RGBColor color;

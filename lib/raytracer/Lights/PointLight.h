@@ -18,8 +18,8 @@ class PointLight: public Light {
   void set_location(Vector3d);
   void set_location(double,double,double);
   void scale_radiance(double);
-  virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
-  
+  virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+
  private:
   double ls;                     // radiance
   RGBColor color;

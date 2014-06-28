@@ -16,7 +16,7 @@ public:
   virtual ~AmbientOccluder();
   virtual Vector3d get_direction(ShadeRec& sr);
   virtual RGBColor L(ShadeRec& s);
-  bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
+  bool in_shadow(const Ray& ray, ShadeRec& sr) const;
   void set_sampler(Sampler* s_ptr);
   void set_min_amount(int n);
 

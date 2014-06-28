@@ -32,6 +32,8 @@ const RGBColor yellow(1.0, 1.0, 0.0);
 const RGBColor dark_yellow(0.61, 0.61, 0.0);
 const RGBColor orange(1.0, 0.75, 0.0);
 
+enum Ray_t { PRIMARY_RAY, SHADOW_RAY };
+
 void set_rand_seed(int);
 int rand_int();                               /** Return a random integer from 0 to RAND_MAX */
 int rand_int(int begin, int end);             /** Return a random integer from begin to end */

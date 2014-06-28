@@ -8,19 +8,18 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-class GeometricObject {	
+class GeometricObject {
 
 public:
   GeometricObject();
   GeometricObject(const GeometricObject& object);
   virtual ~GeometricObject ();
   virtual GeometricObject* clone() const = 0;
-  virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
+  virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
   Material* get_material() const;
   virtual void set_material(Material* mPtr);
   void set_color(const RGBColor& color);
   RGBColor get_color() const;
-  virtual bool shadow_hit(const Ray& ray, double& tmin) const = 0;
   /* returns a sample point on the object for area light shading */
   bool casts_shadows() const;
   void set_shadows(const bool shadow);

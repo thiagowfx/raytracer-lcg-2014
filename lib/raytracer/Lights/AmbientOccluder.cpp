@@ -79,11 +79,11 @@ RGBColor AmbientOccluder::L(ShadeRec& sr) {
 }
 
 
-bool AmbientOccluder::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+bool AmbientOccluder::in_shadow(const Ray& ray, ShadeRec& sr) const {
   double t;
   const int num_objects = sr.w.objects.size();
   for (int j = 0; j < num_objects; j++)
-    if (sr.w.objects[j]->shadow_hit(ray, t))
+    if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
       return true;
   return false;
 }

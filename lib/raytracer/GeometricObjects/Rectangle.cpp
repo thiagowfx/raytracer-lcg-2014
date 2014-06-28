@@ -1,18 +1,5 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle() :
-  GeometricObject(),
-  p0(-1, 0, -1),
-  a(0, 0, 2), b(2, 0, 0),
-  a_len_squared(4.0),
-  b_len_squared(4.0),
-  normal(0, 1, 0),
-  area(4.0),
-  inv_area(0.25),
-  sampler_ptr(NULL)
-{}
-
-
 // this constructs the normal
 Rectangle::Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b) :
   GeometricObject(),
@@ -108,7 +95,10 @@ Rectangle::~Rectangle () {
 // }
 
 
-bool Rectangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+bool Rectangle::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
+  if (type == SHADOW_RAY && !shadows)
+    return false;
+
   double t = (p0 - ray.o).dot(normal) / (ray.d.dot(normal));
 
   if (t <= kEpsilonShadows)
@@ -116,33 +106,6 @@ bool Rectangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 
   Vector3d p = ray.o + t * ray.d;
   Vector3d d = p - p0;
-
-  double ddota = d.dot(a);
-
-  if (ddota < 0.0 || ddota > a_len_squared)
-    return false;
-
-  double ddotb = d.dot(b);
-
-  if (ddotb < 0.0 || ddotb > b_len_squared)
-    return false;
-
-  tmin        = t;
-  sr.normal   = normal;
-  sr.local_hit_point  = p;
-
-  return true;
-}
-
-bool Rectangle::shadow_hit(const Ray &ray, double &tmin) const {
-  double t = (p0 - ray.o).dot(normal) / (ray.d.dot(normal));
-
-  if (t <= kEpsilonShadows)
-    return false;
-
-  Vector3d p = ray.o + t * ray.d;
-  Vector3d d = p - p0;
-
   double ddota = d.dot(a);
 
   if (ddota < 0.0 || ddota > a_len_squared)
@@ -154,6 +117,10 @@ bool Rectangle::shadow_hit(const Ray &ray, double &tmin) const {
     return false;
 
   tmin = t;
+  if (type == PRIMARY_RAY) {
+    sr.normal = normal;
+    sr.local_hit_point = p;
+  }
   return true;
 }
 
