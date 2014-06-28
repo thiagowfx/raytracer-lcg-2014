@@ -1312,7 +1312,7 @@
   <action name="actionQuit">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/assets/assets/exit-24x24.png</normaloff>:/assets/assets/exit-24x24.png</iconset>
+     <normaloff>:/assets/assets/actions-dialog-close-icon-32x32.png</normaloff>:/assets/assets/actions-dialog-close-icon-32x32.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Quit</string>
@@ -1324,10 +1324,10 @@
   <action name="actionSave_PNG_Image">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/assets/assets/save-24x24.png</normaloff>:/assets/assets/save-24x24.png</iconset>
+     <normaloff>:/assets/assets/document-save-as-32x32.png</normaloff>:/assets/assets/document-save-as-32x32.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Export image</string>
+    <string>&amp;Export Image</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -1336,23 +1336,31 @@
   <action name="actionRender">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/assets/assets/camera-24x24.png</normaloff>:/assets/assets/camera-24x24.png</iconset>
+     <normaloff>:/assets/assets/view-refresh-32x32.png</normaloff>:/assets/assets/view-refresh-32x32.png</iconset>
    </property>
    <property name="text">
-    <string>Render</string>
+    <string>Render Image</string>
    </property>
    <property name="shortcut">
     <string>F5</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/help-about-32x32.png</normaloff>:/assets/assets/help-about-32x32.png</iconset>
+   </property>
    <property name="text">
     <string>About Qt</string>
    </property>
   </action>
   <action name="actionReset_camera">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/arrow-left-double-32x32.png</normaloff>:/assets/assets/arrow-left-double-32x32.png</iconset>
+   </property>
    <property name="text">
-    <string>Reset camera</string>
+    <string>Reset Camera</string>
    </property>
   </action>
  </widget>

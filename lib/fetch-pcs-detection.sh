@@ -57,6 +57,5 @@ if [[ ! -d pcs-detection ]]; then
 fi
 cd pcs-detection/
 git pull origin master
-msg "pcs-detection OK"
-# qmake && make && msg "pcs-detection OK" || error "pcs-detection failed"
+qmake && make && msg "pcs-detection OK" || error "pcs-detection failed"
 cd $WORKING_DIR
