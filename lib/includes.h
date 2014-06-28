@@ -43,7 +43,7 @@ using Eigen::Vector3d;
 #include <QColor>
 #include <QString>
 
-// #include "PrimitivaDaniel.h"
-// #include "pc-shape-detection.h"
+#include "PrimitivaDaniel.h"
+#include "pc-shape-detection.h"
 
 #endif

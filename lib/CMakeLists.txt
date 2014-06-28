@@ -7,28 +7,31 @@ set(PCS_DETECTION_INCLUDE_DIRS "${PCS_DETECTION_DIR}")
 file(
   GLOB
   PCS_DETECTION_SOURCES
-  # "${PCS_DETECTION_DIR}/cone.cpp"
-  # "${PCS_DETECTION_DIR}/cylinder.cpp"
-  # "${PCS_DETECTION_DIR}/kdtree.cpp"
-  # "${PCS_DETECTION_DIR}/plane.cpp"
-  # "${PCS_DETECTION_DIR}/primitive.cpp"
-  # "${PCS_DETECTION_DIR}/shape.cpp"
-  # "${PCS_DETECTION_DIR}/sphere.cpp"
-  # "${PCS_DETECTION_DIR}/torus.cpp"
-  # "${PCS_DETECTION_DIR}/tree.cpp"
+  "${PCS_DETECTION_DIR}/cone.cpp"
+  "${PCS_DETECTION_DIR}/cylinder.cpp"
+  "${PCS_DETECTION_DIR}/kdtree.cpp"
+  "${PCS_DETECTION_DIR}/pcsmath.cpp"
+  "${PCS_DETECTION_DIR}/plane.cpp"
+  "${PCS_DETECTION_DIR}/primitive.cpp"
+  "${PCS_DETECTION_DIR}/shape.cpp"
+  "${PCS_DETECTION_DIR}/sphere.cpp"
+  "${PCS_DETECTION_DIR}/torus.cpp"
+  "${PCS_DETECTION_DIR}/tree.cpp"
   )
 file(
   GLOB
   PCS_DETECTION_HEADERS
-  # "${PCS_DETECTION_DIR}/cone.h"
-  # "${PCS_DETECTION_DIR}/cylinder.h"
-  # "${PCS_DETECTION_DIR}/kdtree.h"
-  # "${PCS_DETECTION_DIR}/plane.h"
-  # "${PCS_DETECTION_DIR}/primitive.h"
-  # "${PCS_DETECTION_DIR}/shape.h"
-  # "${PCS_DETECTION_DIR}/sphere.h"
-  # "${PCS_DETECTION_DIR}/torus.h"
-  # "${PCS_DETECTION_DIR}/tree.h"
+  "${PCS_DETECTION_DIR}/cone.h"
+  "${PCS_DETECTION_DIR}/cylinder.h"
+  "${PCS_DETECTION_DIR}/kdtree.h"
+  "${PCS_DETECTION_DIR}/pc-shape-detection.h"
+  "${PCS_DETECTION_DIR}/pcsmath.h"
+  "${PCS_DETECTION_DIR}/plane.h"
+  "${PCS_DETECTION_DIR}/primitive.h"
+  "${PCS_DETECTION_DIR}/shape.h"
+  "${PCS_DETECTION_DIR}/sphere.h"
+  "${PCS_DETECTION_DIR}/torus.h"
+  "${PCS_DETECTION_DIR}/tree.h"
   )
 
 include_directories(${PCS_DETECTION_INCLUDE_DIRS})

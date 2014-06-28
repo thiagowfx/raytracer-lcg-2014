@@ -142,12 +142,6 @@ void MainWindow::on_actionSave_PNG_Image_triggered() {
   ui->raytracedImage->pixmap()->save(fileName);
 }
 
-void MainWindow::on_actionAbout_triggered() {
-  QMessageBox::about(this,
-                     tr("About"),
-                     tr("A simple raytracer"));
-}
-
 void MainWindow::on_backgroundColorPushButton_clicked() {
   QColor color = QColorDialog::getColor(Qt::black, this);
   if (color.isValid()) {

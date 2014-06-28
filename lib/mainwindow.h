@@ -44,7 +44,6 @@ private slots:
   /** Actions */
   void on_actionQuit_triggered();
   void on_actionSave_PNG_Image_triggered();
-  void on_actionAbout_triggered();
   void on_actionAbout_Qt_triggered();
   void on_actionReset_camera_triggered();
 

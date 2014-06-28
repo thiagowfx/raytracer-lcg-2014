@@ -1279,17 +1279,10 @@
     </property>
     <addaction name="actionSave_PNG_Image"/>
     <addaction name="separator"/>
+    <addaction name="actionAbout_Qt"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout">
-    <property name="title">
-     <string>&amp;About</string>
-    </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionAbout_Qt"/>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -1350,11 +1343,6 @@
    </property>
    <property name="shortcut">
     <string>F5</string>
-   </property>
-  </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About...</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
