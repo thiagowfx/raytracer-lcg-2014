@@ -1,11 +1,7 @@
 #include "RGBColor.h"
 #include <math.h>
 
-RGBColor::RGBColor() :
-  r(0.0),
-  g(0.0),
-  b(0.0) 
-{}
+RGBColor::RGBColor() {}
 
 
 RGBColor::RGBColor(double r, double g, double b) :
@@ -19,8 +15,8 @@ RGBColor::RGBColor(const RGBColor& c) :
   r(c.r),
   g(c.g),
   b(c.b)
-{} 				 
-		
+{}
+
 
 RGBColor::~RGBColor() {}
 
@@ -31,7 +27,6 @@ RGBColor& RGBColor::operator= (const RGBColor& rhs) {
     g = rhs.g;
     b = rhs.b;
   }
-
   return *this;
 }
 

@@ -5,12 +5,7 @@
    camera_ptr is set to NULL because the build functions will always have to construct a camera
    and set its parameters */
 
-World::World() :
-  background_color(),
-  tracer_ptr(NULL),
-  ambient_ptr(new Ambient),
-  camera_ptr(NULL)
-{}
+World::World() {}
 
 
 World::~World() {
@@ -18,19 +13,14 @@ World::~World() {
     delete tracer_ptr;
     tracer_ptr = NULL;
   }
-
-
   if (ambient_ptr) {
     delete ambient_ptr;
     ambient_ptr = NULL;
   }
-
-
   if (camera_ptr) {
     delete camera_ptr;
     camera_ptr = NULL;
   }
-
   delete_objects();
   delete_lights();
 }

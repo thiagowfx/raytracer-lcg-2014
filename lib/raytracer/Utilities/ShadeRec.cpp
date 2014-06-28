@@ -7,14 +7,6 @@
 #include "ShadeRec.h"
 
 ShadeRec::ShadeRec(World& wr) :
-  hit_an_object(false),
-  material_ptr(NULL),
-  hit_point(Vector3d::Zero()),
-  local_hit_point(Vector3d::Zero()),
-  normal(Vector3d::Zero()),
-  ray(),
-  depth(0),
-  t(0.0),
   w(wr)
 {}
 
