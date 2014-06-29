@@ -11,7 +11,7 @@
 #include <QMutex>
 #include <QPalette>
 #include <QString>
-#include "Raytracer.h"
+#include "RaytracerApi.h"
 
 namespace Ui {
 class MainWindow;
@@ -69,7 +69,7 @@ private:
   void updateStatusBar();
 
   Ui::MainWindow *ui;
-  Raytracer raytracer;
+  Raytracer::Api raytracer;
   QMutex mutex; /* raytracingInProgress? */
   QLabel *statusbarCameraEyeLabel;
   QLabel *statusbarCameraEyeCylindricalLabel;

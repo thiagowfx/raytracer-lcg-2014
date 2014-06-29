@@ -85,8 +85,8 @@ add_executable(
   mainwindow.h
   main_qt.cpp
   includes.h
-  Raytracer.cpp
-  Raytracer.h
+  RaytracerApi.cpp
+  RaytracerApi.h
   $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
   $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
   ${QT_UIS}
