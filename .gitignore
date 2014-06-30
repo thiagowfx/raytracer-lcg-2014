@@ -1,7 +1,20 @@
-build/
 lib/pcs-detection/
+
+# CMake
+build/
 CMakeLists.txt.user
+
+# c/cpp obj files
+*.o
+
+# backup files
 *~
 \#*
-*.o
+
+# documentation
 docs/doc.html
+
+# gnu global tags
+GTAGS
+GRTAGS
+GPATH
