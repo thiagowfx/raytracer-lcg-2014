@@ -1,11 +1,10 @@
-#ifndef __RAYTRACER_PLANE__
-#define __RAYTRACER_PLANE__
+#ifndef _PLANE_MINE_
+#define _PLANE_MINE_
 
 #include "GeometricObject.h"
 
 namespace Raytracer {
   class Plane : public GeometricObject {
-
   public:
     ~Plane();
     virtual Plane* clone() const;
@@ -20,4 +19,4 @@ namespace Raytracer {
   };
 }
 
-#endif
+#endif // _PLANE_MINE_

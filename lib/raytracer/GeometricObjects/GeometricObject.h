@@ -1,10 +1,10 @@
 #ifndef __GEOMETRIC_OBJECT__
 #define __GEOMETRIC_OBJECT__
 
-#include "Utilities.h"
+#include "Material.h"
 #include "Ray.h"
 #include "ShadeRec.h"
-#include "Material.h"
+#include "Utilities.h"
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
