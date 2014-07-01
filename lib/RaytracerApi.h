@@ -12,11 +12,11 @@ namespace Raytracer {
     /* ViewPlane */
     void set_hres(int);
     void set_vres(int);
-    void set_number_of_samples(int);
     void set_pixel_size(double);
-    void set_gamma_correction(double);
+    void set_gamma(double);
     void set_out_of_gamut(bool);
     void set_max_depth(int);
+    void set_number_of_samples(int);
     /* World */
     void set_background_color(QColor);
     void set_tracer(Tracer*);

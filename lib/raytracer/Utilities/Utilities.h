@@ -2,17 +2,18 @@
 #define __UTILITIES__
 
 #include <cstdlib>
+#include <time.h>
 #include "RGBColor.h"
 
-const double kEpsilonShadows = 1.0e-3;
-const double kEpsilon        = 1.0e-5;
-const double kHugeValue      = 1.0e10;
+const double kEpsilonShadows = 1.0e-3; /**< Small constant for shadows. */
+const double kEpsilon        = 1.0e-5; /**< Small constant. */
+const double kHugeValue      = 1.0e10; /**< Huge constant. */
 
-const double kKa = 0.20; /** ambient constant */
-const double kKd = 0.80; /** diffuse constant */
-const double kKs = 0.12; /** specular constant */
-const double kExp = 10.0; /** exponent for specular */
-const double kKr = 0.75; /** reflective constant */
+const double kKa = 0.20;  /**< Ambient Constant. */
+const double kKd = 0.80;  /**< Diffuse Constant. */
+const double kKs = 0.12;  /**< Specular Constant. */
+const double kExp = 10.0; /**< Specular Exponent. */
+const double kKr = 0.75;  /**< Reflective Constant. */
 
 const RGBColor black(0.0, 0.0, 0.0);
 const RGBColor brown(0.71, 0.40, 0.16);
@@ -34,10 +35,8 @@ const RGBColor orange(1.0, 0.75, 0.0);
 
 enum Ray_t { PRIMARY_RAY, SHADOW_RAY };
 
-void set_rand_seed(int);
-int rand_int();                               /** Return a random integer from 0 to RAND_MAX */
-int rand_int(int begin, int end);             /** Return a random integer from begin to end */
-double rand_double();                         /** Return a random double from 0.0 to 1.0 */
-double rand_double(double begin, double end); /** Return a random double from begin to end */
+void generate_random_seed(); /**< Generate a new seed for randomness. */
+int get_random_int(int begin = 0, int end = RAND_MAX); /**< Return a random integer from begin to end, or from 0 to RAND_MAX. */
+double get_random_double(double begin = 0.0, double end = 1.0); /**< Return a random double from begin to end, or from 0.0 to 1.0. */
 
 #endif

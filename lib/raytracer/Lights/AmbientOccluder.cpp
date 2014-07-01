@@ -1,12 +1,7 @@
 #include "AmbientOccluder.h"
 
 AmbientOccluder::AmbientOccluder() :
-  Ambient(),
-  min_amount(0.25),
-  u(Vector3d::Zero()),
-  v(Vector3d::Zero()),
-  w(Vector3d::Zero()),
-  sampler_ptr(NULL)
+  Ambient()
 {
   this->set_sampler(new MultiJittered(4));
 }
@@ -81,8 +76,8 @@ RGBColor AmbientOccluder::L(ShadeRec& sr) {
 
 bool AmbientOccluder::in_shadow(const Ray& ray, ShadeRec& sr) const {
   double t;
-  const int num_objects = sr.w.objects.size();
-  for (int j = 0; j < num_objects; j++)
+  const unsigned num_objects = sr.w.objects.size();
+  for (unsigned j = 0; j < num_objects; j++)
     if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
       return true;
   return false;

@@ -1,8 +1,6 @@
 #include "Tracer.h"
 
-Tracer::Tracer() :
-  world_ptr(NULL)
-{}
+Tracer::Tracer() {}
 
 
 Tracer::Tracer(World* _worldPtr) :

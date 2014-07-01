@@ -19,15 +19,6 @@ PureRandom::PureRandom(const PureRandom& r)  :
 }
 
 
-PureRandom& PureRandom::operator= (const PureRandom& rhs) {
-  if (this != &rhs) {
-    Sampler::operator=(rhs);
-  }
-
-  return *this;
-}
-
-
 PureRandom* PureRandom::clone() const {
   return new PureRandom(*this);
 }
@@ -37,7 +28,7 @@ PureRandom::~PureRandom() {}
 
 
 void PureRandom::generate_samples() {
-  for (int p = 0; p < num_sets; p++)
-    for (int q = 0; q < num_samples; q++)
-      samples.push_back(Vector2d(rand_double(), rand_double()));
+  for (unsigned p = 0; p < num_sets; p++)
+    for (unsigned q = 0; q < num_samples; q++)
+      samples.push_back(Vector2d(get_random_double(), get_random_double()));
 }

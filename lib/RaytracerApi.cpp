@@ -31,7 +31,7 @@ namespace Raytracer {
     w->vp.set_pixel_size(size);
   }
 
-  void Api::set_gamma_correction(double gamma) {
+  void Api::set_gamma(double gamma) {
     w->vp.set_gamma(gamma);
   }
 

@@ -1,11 +1,11 @@
-#ifndef __CAMERA__
-#define __CAMERA__
+#ifndef _CAMERA_MINE_
+#define _CAMERA_MINE_
 
 /* There is no view plane distance because the fisheye and panoramic cameras don't use it */
 #include <Eigen/Dense>
 using Eigen::Vector2d;
 using Eigen::Vector3d;
-class World;  // can't #include "World" here because it contains a camera pointer
+class World;
 
 class Camera {
 
@@ -34,9 +34,8 @@ protected:
   Vector3d u, v, w;		// orthonormal basis vectors
   Vector3d up;			// up vector
   double exposure_time = 1.0;
-  double zoom = 1.0;      // zoom factor
-  double d;         // view plane distance
-  Camera& operator= (const Camera& camera);
+  double zoom = 1.0; /**< Zoom factor. */
+  double d = 250.0; /**< View plane distance. */
 };
 
 
@@ -46,9 +45,7 @@ inline void Camera::set_eye(const Vector3d& p) {
 
 
 inline void Camera::set_eye(double x, double y, double z) {
-  eye(0) = x;
-  eye(1) = y;
-  eye(2) = z;
+  eye = Vector3d(x,y,z);
 }
 
 
@@ -58,9 +55,7 @@ inline void Camera::set_lookat(const Vector3d& p) {
 
 
 inline void Camera::set_lookat(double x, double y, double z) {
-  lookat(0) = x;
-  lookat(1) = y;
-  lookat(2) = z;
+  lookat = Vector3d(x,y,z);
 }
 
 
@@ -70,9 +65,7 @@ inline void Camera::set_up_vector(const Vector3d& u) {
 
 
 inline void Camera::set_up_vector(double x, double y, double z) {
-  up(0) = x;
-  up(1) = y;
-  up(2) = z;
+  up = Vector3d(x,y,z);
 }
 
 
@@ -100,4 +93,5 @@ inline void Camera::set_view_distance(double d) {
   this->d = d;
 }
 
-#endif
+
+#endif // _CAMERA_MINE_

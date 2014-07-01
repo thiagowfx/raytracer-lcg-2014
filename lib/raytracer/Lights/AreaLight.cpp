@@ -1,9 +1,7 @@
 #include "AreaLight.h"
 
 AreaLight::AreaLight() :
-  Light(),
-  object_ptr(NULL),
-  material_ptr(NULL)
+  Light()
 {}
 
 
@@ -32,7 +30,6 @@ AreaLight::~AreaLight() {
     delete object_ptr;
     object_ptr = NULL;
   }
-
   if (material_ptr) {
     delete material_ptr;
     material_ptr = NULL;
@@ -56,7 +53,6 @@ AreaLight& AreaLight::operator= (const AreaLight& rhs) {
     if (rhs.material_ptr)
       material_ptr = rhs.material_ptr->clone();
   }
-
   return *this;
 }
 
@@ -72,7 +68,6 @@ Vector3d AreaLight::get_direction(ShadeRec& sr) {
 
 RGBColor AreaLight::L(ShadeRec& sr) {
   double ndotd = -light_normal.dot(wi);
-
   if (ndotd > 0.0)
     return (material_ptr->get_Le(sr));
   else

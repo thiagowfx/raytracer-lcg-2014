@@ -2,11 +2,14 @@
 #define __DIRECTIONAL__
 
 #include "Light.h"
-#include "World.h"          // needed later on for shadows
+#include "World.h"
 #include "ShadeRec.h"
 
+/** @brief Directional Light.
+ *
+ *  Represents a directional light, having a direction, a color and an intensity.
+ */
 class Directional: public Light {
-
  public:
   Directional();
   Directional(const Directional& dl);
@@ -23,14 +26,14 @@ class Directional: public Light {
   virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
 
  private:
-  double ls; /**< Radiance of light. */
-  RGBColor color; /**< Color of light. */
-  Vector3d direction; /**< Direction of light. */
+  double ls = 1.0; /**< Radiance of light. */
+  RGBColor color = white; /**< Color of light. */
+  Vector3d direction = Vector3d(0.0, 1.0, 0.0); /**< Direction of light. */
 };
 
 
-inline void Directional::scale_radiance(const double b) {
-  ls = b;
+inline void Directional::scale_radiance(const double ls) {
+  this->ls = ls;
 }
 
 
@@ -46,16 +49,14 @@ inline void Directional::set_color(double r, double g, double b) {
 
 
 inline void Directional::set_direction(Vector3d d) {
-  dir = d;
-  dir.normalize();
+  direction = d;
+  direction.normalize();
 }
 
 
 inline void Directional::set_direction(double x, double y, double z) {
-  dir(0) = x;
-  dir(1) = y;
-  dir(2) = z;
-  dir.normalize();
+  direction = Vector3d(x,y,z);
+  direction.normalize();
 }
 
 #endif

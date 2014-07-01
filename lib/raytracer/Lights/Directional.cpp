@@ -1,10 +1,7 @@
 #include "Directional.h"
 
 Directional::Directional() :
-  Light(),
-  ls(1.0),
-  color(1.0, 1.0, 1.0),
-  dir(0.0, 1.0, 0.0)
+  Light()
 {}
 
 
@@ -12,7 +9,7 @@ Directional::Directional(const Directional& dl) :
   Light(dl),
   ls(dl.ls),
   color(dl.color),
-  dir(dl.dir)
+  direction(dl.direction)
 {}
 
 
@@ -26,7 +23,7 @@ Directional& Directional::operator= (const Directional& rhs) {
     Light::operator= (rhs);
     ls	  = rhs.ls;
     color = rhs.color;
-    dir   = rhs.dir;
+    direction   = rhs.direction;
   }
   return *this;
 }
@@ -37,7 +34,7 @@ Directional::~Directional() {}
 
 /* as this function is virtual, it shouldn't be inlined */
 Vector3d Directional::get_direction(ShadeRec& sr) {
-  return dir;
+  return direction;
 }
 
 

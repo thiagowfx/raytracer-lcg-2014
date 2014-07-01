@@ -4,6 +4,8 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
+/** @brief A ray, which has an origin and a direction.
+ */
 class Ray {
  public:
   Ray();

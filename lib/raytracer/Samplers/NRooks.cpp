@@ -26,15 +26,6 @@ NRooks::NRooks(const NRooks& nr) :
 }
 
 
-NRooks& NRooks::operator= (const NRooks& rhs) {
-  if (this != &rhs) {
-    Sampler::operator=(rhs);
-  }
-
-  return *this;
-}
-
-
 NRooks* NRooks::clone() const {
   return new NRooks(*this);
 }
@@ -44,12 +35,11 @@ NRooks::~NRooks() {}
 
 
 void NRooks::generate_samples() {
-  for (int p = 0; p < num_sets; p++)
-    for (int j = 0; j < num_samples; j++) {
-      Vector2d sp((j + rand_double()) / num_samples, (j + rand_double()) / num_samples);
+  for (unsigned p = 0; p < num_sets; p++)
+    for (unsigned j = 0; j < num_samples; j++) {
+      Vector2d sp((j + get_random_double()) / num_samples, (j + get_random_double()) / num_samples);
       samples.push_back(sp);
     }
-
   shuffle_x_coordinates();
   shuffle_y_coordinates();
 }

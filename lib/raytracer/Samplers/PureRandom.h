@@ -1,21 +1,18 @@
-#ifndef __PURE_RANDOM__
-#define __PURE_RANDOM__
+#ifndef _PURERANDOM_MINE_
+#define _PURERANDOM_MINE_
 
 #include "Sampler.h"
 
 class PureRandom: public Sampler {
- 
  public:
   PureRandom();
-  PureRandom(const int num);
-  PureRandom(const PureRandom& r);
-  PureRandom& operator= (const PureRandom& rhs);
+  PureRandom(const int);
+  PureRandom(const PureRandom&);
   virtual PureRandom* clone() const;
   virtual ~PureRandom();
 
  private:
   virtual void generate_samples();
-  
 };
 
-#endif
+#endif // _PURERANDOM_MINE_

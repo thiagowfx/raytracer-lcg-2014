@@ -5,8 +5,7 @@ Camera::Camera() :
   u(1.0, 0.0, 0.0),
   v(0.0, 1.0, 0.0),
   w(0.0, 0.0, 1.0),
-  up(0.0, 1.0, 0.0),
-  d(250.0)
+  up(0.0, 1.0, 0.0)
 {}
 
 
@@ -21,22 +20,6 @@ Camera::Camera(const Camera& c) :
   zoom(c.zoom),
   d(c.d)
 {}
-
-
-Camera& Camera::operator= (const Camera& rhs) {
-  if (this != &rhs) {
-    eye           = rhs.eye;
-    lookat        = rhs.lookat;
-    up            = rhs.up;
-    u             = rhs.u;
-    v             = rhs.v;
-    w             = rhs.w;
-    exposure_time = rhs.exposure_time;
-    zoom          = rhs.zoom;
-    d             = rhs.d;
-  }
-  return *this;
-}
 
 
 Camera::~Camera() {}

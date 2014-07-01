@@ -1,6 +1,6 @@
 #include "Jittered.h"
 
-Jittered::Jittered(void) :
+Jittered::Jittered() :
   Sampler()
 {}
 
@@ -26,15 +26,6 @@ Jittered::Jittered(const Jittered& js) :
 }
 
 
-Jittered& Jittered::operator= (const Jittered& rhs) {
-  if (this != &rhs) {
-    Sampler::operator= (rhs);
-  }
-
-  return *this;
-}
-
-
 Jittered* Jittered::clone(void) const {
   return new Jittered(*this);
 }
@@ -43,13 +34,14 @@ Jittered* Jittered::clone(void) const {
 Jittered::~Jittered(void) {}
 
 
-void Jittered::generate_samples(void) {	
-  int n = (int) sqrt((double)num_samples);
-	
-  for (int p = 0; p < num_sets; p++)
-    for (int j = 0; j < n; j++)		
-      for (int k = 0; k < n; k++) {
-        Vector2d sp((k + rand_double()) / n, (j + rand_double()) / n);
+void Jittered::generate_samples(void) {
+  unsigned n = (unsigned) sqrt((double)num_samples);
+  for (unsigned p = 0; p < num_sets; p++) {
+    for (unsigned j = 0; j < n; j++) {
+      for (unsigned k = 0; k < n; k++) {
+        Vector2d sp((k + get_random_double()) / n, (j + get_random_double()) / n);
         samples.push_back(sp);
-      }		
+      }
+    }
+  }
 }

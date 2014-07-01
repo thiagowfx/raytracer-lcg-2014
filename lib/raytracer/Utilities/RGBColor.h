@@ -29,7 +29,7 @@ public:
   RGBColor powc(double p) const;
   double average() const;
   RGBColor max_to_one() const;
-  RGBColor clamp_to_red() const; /* Set color to red if any component is greater than one */
+  RGBColor clamp_to_red() const; /**< Set color to red if any component is greater than one. */
 };
 
 

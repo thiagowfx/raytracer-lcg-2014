@@ -1,22 +1,19 @@
-#ifndef __HAMMERSLEY__
-#define __HAMMERSLEY__
+#ifndef _HAMMERSLEY_MINE_
+#define _HAMMERSLEY_MINE_
 
 #include "Sampler.h"
 
 class Hammersley: public Sampler {
-
  public:
   Hammersley();
-  Hammersley(const int num);
-  Hammersley(const Hammersley& r);
-  Hammersley& operator= (const Hammersley& rhs);
+  Hammersley(const int);
+  Hammersley(const Hammersley&);
   virtual Hammersley* clone() const;
   virtual ~Hammersley();
-  double phi(int j);
+  double phi(int);
 
  private:
   virtual void generate_samples();
-
 };
 
-#endif
+#endif // _HAMMERSLEY_MINE_

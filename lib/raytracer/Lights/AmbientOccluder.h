@@ -7,8 +7,7 @@
 #include "World.h"
 
 class AmbientOccluder: public Ambient {
-
-public:
+ public:
   AmbientOccluder();
   AmbientOccluder(const AmbientOccluder& a);
   virtual Ambient* clone() const;
@@ -20,10 +19,12 @@ public:
   void set_sampler(Sampler* s_ptr);
   void set_min_amount(int n);
 
-private:
-  double		min_amount;
-  Vector3d	u, v, w;
-  Sampler*	sampler_ptr;
+ private:
+  double min_amount = 0.25;
+  Vector3d u = Vector3d::Zero();
+  Vector3d v = Vector3d::Zero();
+  Vector3d w = Vector3d::Zero();
+  Sampler* sampler_ptr = NULL;
 };
 
 

@@ -4,6 +4,9 @@
 #include "MultiJittered.h"
 #include "Regular.h"
 
+/**
+ * @brief View plane.
+ */
 class ViewPlane {
  public:
   ViewPlane();

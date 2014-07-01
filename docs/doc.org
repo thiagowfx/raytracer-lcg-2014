@@ -25,6 +25,8 @@
 
 * To developers
 ** Overview
+There is [[file:html/index.html][Doxygen]] documentation available.
+
 This project uses [[http://www.cmake.org/][CMake]] as its management tool. Its directory tree is
 organized as follows:
 
@@ -70,8 +72,8 @@ attention to the version of its packages, such as the Qt toolchain.
                   dealing with triangle meshes
 *** Documentation
 - Emacs 23.x+ (24.x+ recommended) :: text editor
-- Orgmode 8.x+ :: markup language / documentation generator
-
+- Orgmode 8.x+ :: markup language / project manager
+- Doxygen (1.8.x+ recommended) :: documentation generator
 ** Hacking
 
 It is recommended to use [[http://qt-project.org/][Qt Creator]] as your main IDE, together with
@@ -87,10 +89,8 @@ To speed up successive compilations, [[https://ccache.samba.org/][ccache]] is hi
 [[http://feh.finalrewind.org/][feh]] is a simple image viewer.
 
 * To final users
-
 The main executable is ~lib/qtRaytracer~, just open it. The GUI should
 be self explanatory.
-
 * External Resources
 ** Links
 - book companion page :: http://www.raytracegroundup.com/

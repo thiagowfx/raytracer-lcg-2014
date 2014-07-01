@@ -10,14 +10,6 @@ Orthographic::Orthographic(const Orthographic& o) :
 {}
 
 
-Orthographic& Orthographic::operator= (const Orthographic& rhs) {
-  if (this != &rhs) {
-    Camera::operator= (rhs);
-  }
-  return *this;
-}
-
-
 Orthographic::~Orthographic() {}
 
 

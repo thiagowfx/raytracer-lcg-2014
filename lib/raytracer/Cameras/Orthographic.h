@@ -6,11 +6,10 @@
 
 /* This uses ortographic viewing along the zw axis */
 class Orthographic : public Camera {
-  
+
  public:
   Orthographic();
   Orthographic(const Orthographic&);
-  Orthographic& operator= (const Orthographic& rhs);
   virtual ~Orthographic();
   virtual Orthographic* clone() const;
   virtual void render_scene(const World* w, const char* image_file);
