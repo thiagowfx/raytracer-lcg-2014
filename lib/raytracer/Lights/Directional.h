@@ -23,9 +23,9 @@ class Directional: public Light {
   virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
 
  private:
-  double ls;                    // radiance
-  RGBColor color;
-  Vector3d dir;                 // direction the light comes from
+  double ls; /**< Radiance of light. */
+  RGBColor color; /**< Color of light. */
+  Vector3d direction; /**< Direction of light. */
 };
 
 

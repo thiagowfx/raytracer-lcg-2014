@@ -1,5 +1,5 @@
-#ifndef __WORLD__
-#define __WORLD__
+#ifndef _WORLD_MINE_
+#define _WORLD_MINE_
 
 /* This file contains the declaration of the class World
    The World class does not have a copy constructor or an assignment operator, for the followign reasons:
@@ -21,35 +21,31 @@
 #include "Tracer.h"
 #include "ViewPlane.h"
 #include <cstdio>
-#include <cstring>              /* for png++ streerror */
+#include <cstring> /* for png++ streerror */
 #include <png++/png.hpp>
 #include <vector>
 using namespace std;
 
 class World {
-
  public:
-  ViewPlane vp;
-  RGBColor background_color = black;
-  Tracer* tracer_ptr = NULL;
-  Ambient* ambient_ptr = new Ambient();
-  Camera* camera_ptr = NULL;
-  vector<GeometricObject*> objects;
-  vector<Light*> lights;
-
   World();
   ~World();
-  void add_object(GeometricObject*);
+  ViewPlane vp;
+  RGBColor background_color = black; /**< World background color. */
+  Ambient* ambient_ptr = new Ambient();
+  Camera* camera_ptr = NULL;
+  Tracer* tracer_ptr = NULL;
+  vector<GeometricObject*> objects;
+  vector<Light*> lights;
   void add_light(Light*);
+  void add_object(GeometricObject*);
+  void delete_lights(); /**< Delete all light sources from the world. */
+  void delete_objects(); /**< Delete all objects from the world. */
   void set_ambient_light(Ambient*);
   void set_camera(Camera*);
   void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
   ShadeRec hit_bare_bones_objects(const Ray&);
   ShadeRec hit_objects(const Ray&);
-
- private:
-  void delete_objects();
-  void delete_lights();
 };
 
 
@@ -76,4 +72,4 @@ inline void World::set_camera(Camera* camera) {
   camera_ptr = camera;
 }
 
-#endif
+#endif // _WORLD_MINE_

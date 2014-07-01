@@ -5,8 +5,11 @@
 #include "ShadeRec.h"
 #include "World.h"
 
+/** @brief Point Light.
+ *
+ *  Represents a point light, having a position, a color and an intensity.
+ */
 class PointLight: public Light {
-
  public:
   PointLight();
   PointLight(const PointLight& a);
@@ -21,26 +24,24 @@ class PointLight: public Light {
   virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
 
  private:
-  double ls;                     // radiance
-  RGBColor color;
-  Vector3d location;
+  double ls = 1.0; /**< Radiance of light. */
+  RGBColor color = white; /**< Color of light. */
+  Vector3d location = Vector3d::Zero(); /**< Location of light. */
 };
 
 
-inline void PointLight::set_location(Vector3d v) {
-  location = v;
+inline void PointLight::set_location(Vector3d location) {
+  this->location = location;
 }
 
 
 inline void PointLight::set_location(double x, double y, double z) {
-  location(0) = x;
-  location(1) = y;
-  location(2) = z;
+  this->location = Vector3d(x,y,z);
 }
 
 
-inline void PointLight::scale_radiance(double b) {
-  ls = b;
+inline void PointLight::scale_radiance(double ls) {
+  this->ls = ls;
 }
 
 #endif

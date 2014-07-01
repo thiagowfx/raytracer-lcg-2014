@@ -41,20 +41,20 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
   Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel
   const int n = vp.sampler_ptr->get_num_samples();
-		
-  vp.px_size /= zoom;
+
+  vp.pixel_size /= zoom;
   ray.o = eye;
 
   png::image< png::rgb_pixel > image(vp.hres, vp.vres);
-		
+
   for (int r = 0; r < vp.vres; r++) { // up
-    for (int c = 0; c < vp.hres; c++) { // across 					
+    for (int c = 0; c < vp.hres; c++) { // across
       L = black;
 
       for (int j = 0; j < n; ++j) {
         sp = vp.sampler_ptr->sample_unit_square();
-        pp(0) = vp.px_size * (c - 0.5 * vp.hres + sp(0));
-        pp(1) = vp.px_size * (r - 0.5 * vp.vres + sp(1));
+        pp(0) = vp.pixel_size * (c - 0.5 * vp.hres + sp(0));
+        pp(1) = vp.pixel_size * (r - 0.5 * vp.vres + sp(1));
         ray.d = get_direction(pp);
         L += w->tracer_ptr->trace_ray(ray, 0);
       }

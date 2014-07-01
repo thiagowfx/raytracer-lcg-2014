@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
   raytracer.set_camera_zoom(ui->zoomDoubleSpinBox->value());
   raytracer.set_gamma_correction(ui->gammaCorrectionDoubleSpinBox->value());
   raytracer.set_view_distance(ui->viewPlaneDistanceDoubleSpinBox->value());
-  raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
+  raytracer.set_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
   raytracer.set_background_color(ui->backgroundColorPushButton->palette().color(QPalette::Window));
   raytracer.set_tracer(ui->tracerComboBox->currentText());
   update_ambient_light();
@@ -101,7 +101,7 @@ void MainWindow::viewPlaneDistanceChanged(double d) {
 }
 
 void MainWindow::outOfGamutChanged() {
-  raytracer.set_show_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
+  raytracer.set_out_of_gamut(ui->outOfGamutCheckBox->isChecked());
   if (ui->autoRenderingCheckBox->isChecked())
     updateRaytracerImage();
 }

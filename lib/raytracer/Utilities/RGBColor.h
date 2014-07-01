@@ -7,15 +7,15 @@ using namespace std;
 
 class RGBColor {
 public:
-  double r = 0.0;
-  double g = 0.0;
-  double b = 0.0;
+  double r = 0.0; /**< Red component. */
+  double g = 0.0; /**< Green component. */
+  double b = 0.0; /**< Blue component. */
 
 public:
   RGBColor();
+  ~RGBColor();
   RGBColor(double, double, double);
   RGBColor(const RGBColor& c);
-  ~RGBColor();
   RGBColor& operator= (const RGBColor& rhs);
   RGBColor operator+ (const RGBColor& c) const;
   RGBColor& operator+= (const RGBColor& c);
@@ -84,7 +84,7 @@ inline bool RGBColor::operator== (const RGBColor& c) const {
 
 
 inline bool RGBColor::operator!= (const RGBColor& c) const {
-  return ! operator==(c);
+  return !operator==(c);
 }
 
 
@@ -92,9 +92,6 @@ inline double RGBColor::average() const {
   return (r + g + b)/3.0;
 }
 
-
-/* Multiplication by a double on the left */
-RGBColor operator* (const double a, const RGBColor& c);
 
 inline RGBColor operator* (const double a, const RGBColor& c) {
   return RGBColor (a * c.r, a * c.g, a * c.b);

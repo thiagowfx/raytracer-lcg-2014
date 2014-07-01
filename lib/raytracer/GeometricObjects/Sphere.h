@@ -11,7 +11,6 @@ namespace Raytracer {
     Sphere(const Sphere& sphere);
     ~Sphere();
     virtual Sphere* clone() const;
-    Sphere& operator= (const Sphere& sphere);
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
 
   private:

@@ -2,7 +2,6 @@
 
 
 ViewPlane::ViewPlane() {
-  sampler_ptr = NULL;
   set_samples(1);
 }
 
@@ -10,11 +9,10 @@ ViewPlane::ViewPlane() {
 ViewPlane::ViewPlane(const ViewPlane& vp) :
   hres(vp.hres),
   vres(vp.vres),
-  px_size(vp.px_size),
+  pixel_size(vp.pixel_size),
   gamma(vp.gamma),
-  show_out_of_gamut(vp.show_out_of_gamut),
-  max_depth(vp.max_depth),
-  sampler_ptr(NULL)
+  out_of_gamut(vp.out_of_gamut),
+  max_depth(vp.max_depth)
 {
   if (vp.sampler_ptr)
     sampler_ptr = vp.sampler_ptr->clone();

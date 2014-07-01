@@ -1,7 +1,6 @@
 #include "World.h"
 
 /* tracer_ptr is set to NULL because the build functions will always construct the appropriate tracer
-   ambient_ptr is set to a default ambient light because this will do for most scenes
    camera_ptr is set to NULL because the build functions will always have to construct a camera
    and set its parameters */
 
@@ -36,7 +35,7 @@ World::~World() {
 void World::display_pixel(const int row, const int column, const RGBColor& raw_color, png::image<png::rgb_pixel>& image) const {
   RGBColor mapped_color;
 
-  if (vp.show_out_of_gamut)
+  if (vp.out_of_gamut)
     mapped_color = raw_color.clamp_to_red();
   else
     mapped_color = raw_color.max_to_one();
@@ -56,13 +55,13 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 
 ShadeRec World::hit_objects(const Ray& ray) {
   ShadeRec sr(*this);
-  double   t;
+  double t;
   Vector3d normal;
   Vector3d local_hit_point;
-  double   tmin         = kHugeValue;
-  const int num_objects = objects.size();
+  double tmin = kHugeValue;
+  const unsigned num_objects = objects.size();
 
-  for (int j = 0; j < num_objects; ++j) {
+  for (unsigned j = 0; j < num_objects; ++j) {
     if (objects[j]->hit(PRIMARY_RAY, ray, t, sr) && (t < tmin)) {
       sr.hit_an_object = true;
       tmin             = t;
@@ -82,27 +81,21 @@ ShadeRec World::hit_objects(const Ray& ray) {
 }
 
 
-/* Deletes the objects in the objects array, and erases the array.
-   The objects array still exists, because it's an automatic variable, but it's empty */
 void World::delete_objects() {
-  int num_objects = objects.size();
-
+  const unsigned num_objects = objects.size();
   for (int j = 0; j < num_objects; ++j) {
     delete objects[j];
     objects[j] = NULL;
   }
-
   objects.erase(objects.begin(), objects.end());
 }
 
 
 void World::delete_lights() {
-  int num_lights = lights.size();
-
+  const unsigned num_lights = lights.size();
   for (int j = 0; j < num_lights; ++j) {
     delete lights[j];
     lights[j] = NULL;
   }
-
   lights.erase(lights.begin(), lights.end());
 }

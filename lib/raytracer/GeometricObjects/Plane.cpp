@@ -16,16 +16,6 @@ namespace Raytracer {
   }
 
 
-  Plane& Plane::operator= (const Plane& rhs) {
-    if (this != &rhs) {
-      GeometricObject::operator= (rhs);
-      point = rhs.point;
-      normal = rhs.normal;
-    }
-    return *this;
-  }
-
-
   Plane::~Plane() {}
 
 

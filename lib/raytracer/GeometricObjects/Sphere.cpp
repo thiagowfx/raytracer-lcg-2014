@@ -15,16 +15,6 @@ namespace Raytracer {
   {}
 
 
-  Sphere& Sphere::operator= (const Sphere& rhs) {
-    if (this != &rhs) {
-      GeometricObject::operator=(rhs);
-      center = rhs.center;
-      radius = rhs.radius;
-    }
-    return *this;
-  }
-
-
   Sphere::~Sphere() {}
 
 

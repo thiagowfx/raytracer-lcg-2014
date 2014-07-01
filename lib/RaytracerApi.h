@@ -15,7 +15,7 @@ namespace Raytracer {
     void set_number_of_samples(int);
     void set_pixel_size(double);
     void set_gamma_correction(double);
-    void set_show_out_of_gamut(bool);
+    void set_out_of_gamut(bool);
     void set_max_depth(int);
     /* World */
     void set_background_color(QColor);

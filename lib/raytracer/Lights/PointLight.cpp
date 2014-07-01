@@ -1,10 +1,7 @@
 #include "PointLight.h"
 
 PointLight::PointLight () :
-  Light(),
-  ls(1.0),
-  color(RGBColor(1.0, 1.0, 1.0)),
-  location(Vector3d::Zero())
+  Light()
 {}
 
 
@@ -28,7 +25,6 @@ PointLight& PointLight::operator= (const PointLight& rhs) {
       color = rhs.color;
       location = rhs.location;
     }
-
   return *this;
 }
 
@@ -49,13 +45,11 @@ RGBColor PointLight::L(ShadeRec& sr) {
 /** Chapter 16 */
 bool PointLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
   double t = 0;
-  const int num_objects = sr.w.objects.size();
+  const unsigned num_objects = sr.w.objects.size();
   const double distance = (location - ray.o).norm();
-
-  for (int j = 0; j < num_objects; j++)
+  for (unsigned j = 0; j < num_objects; ++j)
     /** t < d means: an object only blocks a point light if it is before the light */
     if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < distance)
       return true;
-
   return false;
 }

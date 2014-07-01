@@ -30,10 +30,9 @@ public:
 
 protected:
   /* mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const */
-  mutable Material* material_ptr;
-  RGBColor color;
-  bool shadows;
-  GeometricObject& operator= (const GeometricObject& rhs);
+  mutable Material* material_ptr = NULL;
+  RGBColor color = black;
+  bool shadows = true;
 };
 
 

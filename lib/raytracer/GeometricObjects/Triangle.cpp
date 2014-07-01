@@ -32,14 +32,12 @@ namespace Raytracer {
     normal.normalize();
   }
 
-
   // BBox Triangle::get_bounding_box() {
   //   const double delta = 0.000001;
   //   return (BBox(min(min(v0(0), v1(0)), v2(0)) - delta, max(max(v0(0), v1(0)), v2(0)) + delta,
   //                min(min(v0(1), v1(1)), v2(1)) - delta, max(max(v0(1), v1(1)), v2(1)) + delta,
   //                min(min(v0(2), v1(2)), v2(2)) - delta, max(max(v0(2), v1(2)), v2(2)) + delta));
   // }
-
 
   bool Triangle::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
     if (type == SHADOW_RAY && !shadows)

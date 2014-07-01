@@ -25,10 +25,8 @@ namespace Raytracer {
 
   private:
     Vector3d p0;                // corner vertex
-    Vector3d a;                 // side
-    Vector3d b;                 // side
-    double a_len_squared;       // square of the length of side a
-    double b_len_squared;       // square of the length of side b
+    Vector3d a, b; /** sides */
+    double a_len_squared, b_len_squared; /** square of length of sides */
     Vector3d normal;
     double area;             // for rectangular lights
     double inv_area;         // for rectangular lights

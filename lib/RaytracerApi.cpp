@@ -35,8 +35,8 @@ namespace Raytracer {
     w->vp.set_gamma(gamma);
   }
 
-  void Api::set_show_out_of_gamut(bool b) {
-    w->vp.set_show_of_gamut(b);
+  void Api::set_out_of_gamut(bool b) {
+    w->vp.set_out_of_gamut(b);
   }
 
   void Api::set_max_depth(int depth) {

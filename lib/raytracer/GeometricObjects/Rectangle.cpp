@@ -46,38 +46,14 @@ namespace Raytracer {
     b(r.b),
     a_len_squared(r.a_len_squared),
     b_len_squared(r.b_len_squared),
-    normal(r.normal),
     area(r.area),
-    inv_area(r.inv_area)
+    inv_area(r.inv_area),
+    normal(r.normal)
   {
     if(r.sampler_ptr)
       sampler_ptr = r.sampler_ptr->clone();
     else
       sampler_ptr = NULL;
-  }
-
-
-  Rectangle& Rectangle::operator= (const Rectangle& rhs) {
-    if (this != &rhs) {
-      GeometricObject::operator=(rhs);
-      p0        = rhs.p0;
-      a       = rhs.a;
-      b       = rhs.b;
-      a_len_squared = rhs.a_len_squared;
-      b_len_squared = rhs.b_len_squared;
-      area      = rhs.area;
-      inv_area    = rhs.inv_area;
-      normal      = rhs.normal;
-
-      if (sampler_ptr) {
-        delete sampler_ptr;
-        sampler_ptr = NULL;
-      }
-      if (rhs.sampler_ptr)
-        sampler_ptr= rhs.sampler_ptr->clone();
-    }
-
-    return *this;
   }
 
 
