@@ -38,13 +38,27 @@ using Eigen::Vector3d;
 #include "Whitted.h"
 #include "World.h"
 
+/* STL */
 #include <cstdio>
 #include <cmath>
-#include <QColor>
-#include <QString>
 
 /* PCS_DETECTION */
 #include "PrimitivaDaniel.h"
 #include "pc-shape-detection.h"
+
+/* QT */
+
+#include <QColor>
+#include <QColorDialog>
+#include <QDebug>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QMutex>
+#include <QPalette>
+#include <QSpinBox>
+#include <QString>
 
 #endif
