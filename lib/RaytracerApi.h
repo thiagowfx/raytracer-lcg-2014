@@ -50,6 +50,15 @@ namespace Raytracer {
     /** ViewPlane: get max depth of reflections for secondary rays */
     int get_max_depth();
 
+    /** ViewPlane: set sampler type and number of samples */
+    void set_sampler(QString, int);
+
+    /** ViewPlane: get number of samples */
+    int get_number_of_samples();
+
+    /** ViewPlane: get sampler type name */
+    QString get_sampler_type();
+
     /** Camera: render scene */
     // TODO
     void render_scene();

@@ -18,6 +18,11 @@ public:
 private slots:
   void printCallback();
 
+  /******************* Actions ******************/
+  void on_actionQuit_triggered();
+
+  void on_actionAbout_Qt_triggered();
+
 private:
   Ui::MainWindow *ui;
   Raytracer::Api *api;

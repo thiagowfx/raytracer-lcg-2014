@@ -30,12 +30,18 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->maxDepthSpinBox->setValue(api->get_max_depth());
 }
 
-
 MainWindow::~MainWindow() {
   delete ui;
 }
 
-
 void MainWindow::printCallback() {
   std::cout << "callback" << std::endl;
+}
+
+void MainWindow::on_actionQuit_triggered() {
+    QApplication::quit();
+}
+
+void MainWindow::on_actionAbout_Qt_triggered() {
+    QMessageBox::aboutQt(this);
 }

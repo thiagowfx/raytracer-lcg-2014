@@ -38,6 +38,15 @@ using Eigen::Vector3d;
 #include "Whitted.h"
 #include "World.h"
 
+/* Samplers */
+#include "Hammersley.h"
+#include "Jittered.h"
+#include "MultiJittered.h"
+#include "NRooks.h"
+#include "PureRandom.h"
+#include "Regular.h"
+#include "Sampler.h"
+
 /* STL */
 #include <cstdio>
 #include <cmath>
@@ -47,7 +56,6 @@ using Eigen::Vector3d;
 #include "pc-shape-detection.h"
 
 /* QT */
-
 #include <QColor>
 #include <QColorDialog>
 #include <QDebug>

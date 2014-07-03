@@ -57,6 +57,29 @@ namespace Raytracer {
     return w->vp.max_depth;
   }
 
+  void Api::set_sampler(QString name, int samples) {
+    Sampler* sampler;
+    if (name == "Hammersley")
+      w->vp.set_sampler(new Hammersley(samples));
+    else if (name == "Jittered")
+      w->vp.set_sampler(new Jittered(samples));
+    else if (name == "MultiJittered")
+      w->vp.set_sampler(new MultiJittered(samples));
+    else if (name == "NRooks")
+      w->vp.set_sampler(new NRooks(samples));
+    else if (name == "PureRandom")
+      w->vp.set_sampler(new PureRandom(samples));
+    else // if (name == "Regular")
+      w->vp.set_sampler(new Regular(samples));
+  }
+
+  int Api::get_number_of_samples() {
+    return w->vp.sampler_ptr->get_num_samples();
+  }
+
+  QString Api::get_sampler_type()   {
+    return w->vp.sampler_ptr;
+  }
 
   void Api::render_scene() {
     w->camera_ptr->render_scene(w, image);
