@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>389</width>
+    <width>609</width>
     <height>561</height>
    </rect>
   </property>
@@ -17,58 +17,80 @@
    <string>Raytracer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" rowspan="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QLabel" name="raytracedImage">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="text">
-       <string>RaytracedImage</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0">
+   <widget class="QLabel" name="raytracedImage">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>237</y>
+      <width>100</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="text">
+     <string>RaytracedImage</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QToolBox" name="Viewplane">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>50</y>
+      <width>291</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="page">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>291</width>
+       <height>299</height>
+      </rect>
+     </property>
+     <attribute name="label">
+      <string>Viewplane</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="0">
+       <widget class="QLabel" name="pixelSizeLabel">
+        <property name="text">
+         <string>Pixel size</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QLabel" name="horizontalResolutionLabel">
         <property name="text">
          <string>Horizontal resolution</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="pixelSizeDoubleSpinBox">
         <property name="suffix">
-         <string> pixels</string>
+         <string>x</string>
         </property>
         <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
+         <double>0.010000000000000</double>
         </property>
         <property name="singleStep">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="verticalResolution">
-        <property name="text">
-         <string>Vertical resolution</string>
+         <double>0.100000000000000</double>
         </property>
        </widget>
       </item>
@@ -88,16 +110,220 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="verticalResolution">
+        <property name="text">
+         <string>Vertical resolution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="gammaLevelLabel">
+        <property name="text">
+         <string>Gamma level</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QDoubleSpinBox" name="gammaLevelDoubleSpinBox">
+        <property name="minimum">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="outOfGamutCheckBox">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string>Show?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="maxDepthLabel">
+        <property name="text">
+         <string>Max depth</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="numberofSamplesLabel">
+        <property name="text">
+         <string>Number of samples</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QSpinBox" name="maxDepthSpinBox">
+        <property name="suffix">
+         <string> reflection(s)</string>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="samplerTypeLabel">
+        <property name="text">
+         <string>Sampler Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="samplerTypeComboBox">
+        <item>
+         <property name="text">
+          <string>Hammersley</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Jittered</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MultiJittered</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>NRooks</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>PureRandom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Regular</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QComboBox" name="numberofSamplesComboBox">
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>16</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>32</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>64</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>128</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>256</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>512</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="outOfGamutLabel">
+        <property name="text">
+         <string>Out of gamut colors</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </item>
-   </layout>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>291</width>
+       <height>299</height>
+      </rect>
+     </property>
+     <attribute name="label">
+      <string>Page 2</string>
+     </attribute>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>389</width>
+     <width>609</width>
      <height>22</height>
     </rect>
    </property>

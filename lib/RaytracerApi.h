@@ -26,6 +26,30 @@ namespace Raytracer {
     /** ViewPlane: get vertical resolution */
     int get_vres();
 
+    /** ViewPlane: set pixel size */
+    void set_pixel_size(double);
+
+    /** ViewPlane: get pixel size */
+    double get_pixel_size();
+
+    /** ViewPlane: set gamma level */
+    void set_gamma(double);
+
+    /** ViewPlane: get gamma level */
+    double get_gamma();
+
+    /** ViewPlane: set show out of gamut colors */
+    void set_out_of_gamut(bool);
+
+    /** ViewPlane: get show out of gamut colors */
+    bool get_out_of_gamut();
+
+    /** ViewPlane: set max depth of reflections for secondary rays */
+    void set_max_depth(int);
+
+    /** ViewPlane: get max depth of reflections for secondary rays */
+    int get_max_depth();
+
     /** Camera: render scene */
     // TODO
     void render_scene();

@@ -20,7 +20,7 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
-  Raytracer::Api api;
+  Raytracer::Api *api;
 };
 
 #endif // MAINWINDOW_H
