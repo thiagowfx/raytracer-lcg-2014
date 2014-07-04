@@ -88,11 +88,42 @@ namespace Raytracer {
     return q;
   }
 
+  void Api::set_tracer_type(QString name) {
+    Tracer* tracer;
+    if (name == "AreaLighting")
+      w->set_tracer(new AreaLighting(w));
+    else if (name == "MultipleObjects")
+      w->set_tracer(new MultipleObjects(w));
+    else // if (name == "Whitted")
+      w->set_tracer(new Whitted(w));
+  }
+
+  const char *Api::get_tracer_type() {
+    return w->tracer_ptr->to_string();
+  }
+
+  QStringListModel* Api::get_tracer_type_model() {
+    QStringListModel* q = new QStringListModel();
+    q->setStringList(QStringList() << "AreaLighting" << "MultipleObjects" << "Whitted");
+    return q;
+  }
+
+  void Api::set_background_color(QColor color) {
+    w->set_background_color(RGBColor(color.redF(), color.greenF(), color.blueF()));
+  }
+
+  QColor Api::get_background_color() {
+    QColor qcolor;
+    RGBColor color = w->background_color;
+    qcolor.setRgbF(color.r, color.g, color.b);
+    return qcolor;
+  }
+
   void Api::render_scene() {
     w->camera_ptr->render_scene(w, get_rendered_image());
   }
 
-  const char *Api::get_rendered_image() {
+  const char* Api::get_rendered_image() {
     return "renderedImage.png";
   }
 

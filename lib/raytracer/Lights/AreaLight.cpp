@@ -1,101 +1,103 @@
 #include "AreaLight.h"
 
-AreaLight::AreaLight() :
-  Light()
-{}
+namespace Raytracer {
+  AreaLight::AreaLight() :
+    Light()
+  {}
 
 
-AreaLight::AreaLight(const AreaLight& al) :
-  Light(al)
-{
-  if(al.object_ptr)
-    object_ptr = al.object_ptr->clone();
-  else
-    object_ptr = NULL;
+  AreaLight::AreaLight(const AreaLight& al) :
+    Light(al)
+  {
+    if(al.object_ptr)
+      object_ptr = al.object_ptr->clone();
+    else
+      object_ptr = NULL;
 
-  if(al.material_ptr)
-    material_ptr = al.material_ptr->clone();
-  else
-    material_ptr = NULL;
-}
-
-
-Light* AreaLight::clone() const {
-  return new AreaLight(*this);
-}
-
-
-AreaLight::~AreaLight() {
-  if (object_ptr) {
-    delete object_ptr;
-    object_ptr = NULL;
+    if(al.material_ptr)
+      material_ptr = al.material_ptr->clone();
+    else
+      material_ptr = NULL;
   }
-  if (material_ptr) {
-    delete material_ptr;
-    material_ptr = NULL;
+
+
+  Light* AreaLight::clone() const {
+    return new AreaLight(*this);
   }
-}
 
 
-AreaLight& AreaLight::operator= (const AreaLight& rhs) {
-  if (this != &rhs) {
-    Light::operator=(rhs);
+  AreaLight::~AreaLight() {
     if (object_ptr) {
       delete object_ptr;
       object_ptr = NULL;
     }
-    if (rhs.object_ptr)
-      object_ptr = rhs.object_ptr->clone();
     if (material_ptr) {
       delete material_ptr;
       material_ptr = NULL;
     }
-    if (rhs.material_ptr)
-      material_ptr = rhs.material_ptr->clone();
   }
-  return *this;
-}
 
 
-Vector3d AreaLight::get_direction(ShadeRec& sr) {
-  sample_point = object_ptr->sample(); // used in the G function
-  light_normal = object_ptr->get_normal(sample_point);
-  wi = sample_point - sr.hit_point; // used in the G function
-  wi.normalize();
-  return wi;
-}
+  AreaLight& AreaLight::operator= (const AreaLight& rhs) {
+    if (this != &rhs) {
+      Light::operator=(rhs);
+      if (object_ptr) {
+        delete object_ptr;
+        object_ptr = NULL;
+      }
+      if (rhs.object_ptr)
+        object_ptr = rhs.object_ptr->clone();
+      if (material_ptr) {
+        delete material_ptr;
+        material_ptr = NULL;
+      }
+      if (rhs.material_ptr)
+        material_ptr = rhs.material_ptr->clone();
+    }
+    return *this;
+  }
 
 
-RGBColor AreaLight::L(ShadeRec& sr) {
-  double ndotd = -light_normal.dot(wi);
-  if (ndotd > 0.0)
-    return (material_ptr->get_Le(sr));
-  else
-    return black;
-}
+  Vector3d AreaLight::get_direction(ShadeRec& sr) {
+    sample_point = object_ptr->sample(); // used in the G function
+    light_normal = object_ptr->get_normal(sample_point);
+    wi = sample_point - sr.hit_point; // used in the G function
+    wi.normalize();
+    return wi;
+  }
 
 
-bool AreaLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
-  double t;
-  int num_objects = sr.w.objects.size();
-  double ts = (sample_point - ray.o).dot(ray.d);
-
-  for (int j = 0; j < num_objects; j++)
-    if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts)
-      return true;
-
-  return false;
-}
+  RGBColor AreaLight::L(ShadeRec& sr) {
+    double ndotd = -light_normal.dot(wi);
+    if (ndotd > 0.0)
+      return (material_ptr->get_Le(sr));
+    else
+      return black;
+  }
 
 
-/* G is part of the geometric factor */
-double AreaLight::G(const ShadeRec& sr) const {
-  double ndotd = -light_normal.dot(wi);
-  double d2 = (sample_point - sr.hit_point).squaredNorm();
-  return ndotd / d2;
-}
+  bool AreaLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
+    double t;
+    int num_objects = sr.w.objects.size();
+    double ts = (sample_point - ray.o).dot(ray.d);
+
+    for (int j = 0; j < num_objects; j++)
+      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts)
+        return true;
+
+    return false;
+  }
 
 
-double AreaLight::pdf(const ShadeRec& sr) const {
-  return object_ptr->pdf(sr);
+  /* G is part of the geometric factor */
+  double AreaLight::G(const ShadeRec& sr) const {
+    double ndotd = -light_normal.dot(wi);
+    double d2 = (sample_point - sr.hit_point).squaredNorm();
+    return ndotd / d2;
+  }
+
+
+  double AreaLight::pdf(const ShadeRec& sr) const {
+    return object_ptr->pdf(sr);
+  }
 }

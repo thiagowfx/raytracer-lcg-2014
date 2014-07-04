@@ -1,13 +1,13 @@
 #ifndef _CAMERA_MINE_
 #define _CAMERA_MINE_
 
-/* There is no view plane distance because the fisheye and panoramic cameras don't use it */
 #include <Eigen/Dense>
 using Eigen::Vector2d;
 using Eigen::Vector3d;
-class World;
 
 namespace Raytracer {
+  class World;
+  
   class Camera {
   public:
     Camera();

@@ -49,19 +49,31 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->samplerTypeComboBox->setCurrentText(tr(api->get_sampler_type()));
   QObject::connect(ui->numberOfSamplesSpinBox, SIGNAL(valueChanged(int)), this, SLOT(samplerCallback()));
   QObject::connect(ui->samplerTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(samplerCallback()));
+
+  ui->tracerTypeComboBox->setModel(api->get_tracer_type_model());
+  api->set_tracer_type(tr("Whitted"));
+  ui->tracerTypeComboBox->setCurrentText(api->get_tracer_type());
+  QObject::connect(ui->tracerTypeComboBox, SIGNAL(currentIndexChanged(QString)), api, SLOT(set_tracer_type(QString)));
+
+  api->set_background_color(QColor(Qt::white));
+  ui->backgroundColorPushButton->setPalette(api->get_background_color());
+  QObject::connect(ui->backgroundColorPushButton, SIGNAL(clicked()), this, SLOT(backgroundColorCallback()));
 }
 
 MainWindow::~MainWindow() {
   delete ui;
 }
 
-void MainWindow::printCallback() {
-  std::cout << "callback" << std::endl;
-  qDebug("debug\n");
-}
-
 void MainWindow::samplerCallback() {
   api->set_sampler(ui->samplerTypeComboBox->currentText(), ui->numberOfSamplesSpinBox->value());
+}
+
+void MainWindow::backgroundColorCallback() {
+  QColor color = QColorDialog::getColor(Qt::white, this);
+  if (color.isValid()) {
+    ui->backgroundColorPushButton->setPalette(QPalette(color));
+    api->set_background_color(color);
+  }
 }
 
 void MainWindow::on_actionQuit_triggered() {
@@ -75,4 +87,12 @@ void MainWindow::on_actionAbout_Qt_triggered() {
 void MainWindow::on_actionRender_scene_triggered() {
     api->render_scene();
     ui->renderedImage->setPixmap(QPixmap(api->get_rendered_image()));
+}
+
+void MainWindow::on_actionExport_Image_triggered() {
+  QString file = QFileDialog::getSaveFileName(this,
+                                              tr("Export Image"),
+                                              tr("."),
+                                              tr("Image Files (*.bmp *.gif *.png *.jpg *.jpeg)"));
+  ui->renderedImage->pixmap()->save(file);
 }

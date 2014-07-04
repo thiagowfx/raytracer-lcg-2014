@@ -62,6 +62,21 @@ namespace Raytracer {
     /** ViewPlane: get sampler type model */
     QStringListModel* get_sampler_type_model();
 
+    /** Tracer: set tracer type */
+    void set_tracer_type(QString);
+
+    /** Tracer: get tracer type */
+    const char* get_tracer_type();
+
+    /** Tracer: get tracer type model */
+    QStringListModel* get_tracer_type_model();
+
+    /** World: set background color */
+    void set_background_color(QColor);
+
+    /** World: get background color */
+    QColor get_background_color();
+
     /** Camera: render scene */
     // TODO
     void render_scene();

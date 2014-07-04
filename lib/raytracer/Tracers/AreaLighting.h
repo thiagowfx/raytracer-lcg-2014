@@ -1,16 +1,18 @@
-#ifndef __AREA_LIGHTING__
-#define __AREA_LIGHTING__
+#ifndef _AREALIGHTING_MINE_
+#define _AREALIGHTING_MINE_
 
 #include "Tracer.h"
 #include "World.h"
 
-class AreaLighting: public Tracer {
+namespace Raytracer {
+  class AreaLighting: public Tracer {
+  public:
+    AreaLighting();
+    AreaLighting(World*);
+    virtual ~AreaLighting();
+    virtual const char* to_string();
+    virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+  };
+}
 
- public:
-  AreaLighting();
-  AreaLighting(World*);
-  virtual ~AreaLighting();
-  virtual RGBColor trace_ray(const Ray ray, const int depth) const;
-};
-
-#endif
+#endif // _AREALIGHTING_MINE_

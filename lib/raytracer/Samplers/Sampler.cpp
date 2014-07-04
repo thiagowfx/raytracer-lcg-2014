@@ -1,4 +1,5 @@
 #include "Sampler.h"
+#include <iostream>
 
 Sampler::Sampler() {
   samples.reserve(num_samples * num_sets);

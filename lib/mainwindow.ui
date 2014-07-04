@@ -6,192 +6,228 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>442</height>
+    <width>538</width>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Raytracer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="renderedImage">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="text">
-       <string>renderedImage</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QToolBox" name="toolBox">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <widget class="QWidget" name="page">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>257</width>
-         <height>264</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Viewplane</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="3" column="0">
-         <widget class="QLabel" name="pixelSizeLabel">
-          <property name="text">
-           <string>Pixel size</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="horizontalResolutionLabel">
-          <property name="text">
-           <string>Horizontal resolution</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="pixelSizeDoubleSpinBox">
-          <property name="suffix">
-           <string>x</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="verticalResolution">
-          <property name="text">
-           <string>Vertical resolution</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="gammaLevelLabel">
-          <property name="text">
-           <string>Gamma level</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QDoubleSpinBox" name="gammaLevelDoubleSpinBox"/>
-        </item>
-        <item row="7" column="1">
-         <widget class="QCheckBox" name="outOfGamutCheckBox">
-          <property name="layoutDirection">
-           <enum>Qt::RightToLeft</enum>
-          </property>
-          <property name="text">
-           <string>Show?</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="maxDepthLabel">
-          <property name="text">
-           <string>Max depth</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QLabel" name="numberOfSamplesLabel">
-          <property name="text">
-           <string>Number of samples</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QSpinBox" name="maxDepthSpinBox">
-          <property name="suffix">
-           <string> reflection(s)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="samplerTypeLabel">
-          <property name="text">
-           <string>Sampler type</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="QComboBox" name="samplerTypeComboBox"/>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="outOfGamutLabel">
-          <property name="text">
-           <string>Out of gamut colors</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QSpinBox" name="verticalResolutionSpinBox">
-          <property name="suffix">
-           <string> pixels</string>
-          </property>
-          <property name="maximum">
-           <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QSpinBox" name="horizontalResolutionSpinBox">
-          <property name="suffix">
-           <string> pixels</string>
-          </property>
-          <property name="maximum">
-           <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QSpinBox" name="numberOfSamplesSpinBox"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="page_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>68</width>
-         <height>68</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Page 2</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QLabel" name="renderedImage">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>110</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="text">
+     <string>renderedImage</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QToolBox" name="toolBox">
+    <property name="geometry">
+     <rect>
+      <x>238</x>
+      <y>6</y>
+      <width>291</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <widget class="QWidget" name="page">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>291</width>
+       <height>279</height>
+      </rect>
+     </property>
+     <attribute name="label">
+      <string>Viewplane</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="0">
+       <widget class="QLabel" name="pixelSizeLabel">
+        <property name="text">
+         <string>Pixel size</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="horizontalResolutionLabel">
+        <property name="text">
+         <string>Horizontal resolution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="pixelSizeDoubleSpinBox">
+        <property name="suffix">
+         <string>x</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="verticalResolution">
+        <property name="text">
+         <string>Vertical resolution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="gammaLevelLabel">
+        <property name="text">
+         <string>Gamma level</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QDoubleSpinBox" name="gammaLevelDoubleSpinBox"/>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="outOfGamutCheckBox">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string>Show?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="maxDepthLabel">
+        <property name="text">
+         <string>Max depth</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="numberOfSamplesLabel">
+        <property name="text">
+         <string>Number of samples</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QSpinBox" name="maxDepthSpinBox">
+        <property name="suffix">
+         <string> reflection(s)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="samplerTypeLabel">
+        <property name="text">
+         <string>Sampler type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="samplerTypeComboBox"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="outOfGamutLabel">
+        <property name="text">
+         <string>Out of gamut colors</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="verticalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QSpinBox" name="numberOfSamplesSpinBox"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>291</width>
+       <height>279</height>
+      </rect>
+     </property>
+     <attribute name="label">
+      <string>Options</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="tracerTypeLabel">
+        <property name="text">
+         <string>Tracer type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="tracerTypeComboBox"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="backgroundColorLabel">
+        <property name="text">
+         <string>Background color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="backgroundColorPushButton">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>576</width>
+     <width>538</width>
      <height>22</height>
     </rect>
    </property>
@@ -216,6 +252,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionExport_Image"/>
    <addaction name="separator"/>
    <addaction name="actionRender_scene"/>
   </widget>
@@ -249,7 +286,19 @@
     <string>Render scene</string>
    </property>
    <property name="shortcut">
-    <string>F5, Space</string>
+    <string>F5, Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionExport_Image">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/document-save-as-32x32.png</normaloff>:/assets/assets/document-save-as-32x32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

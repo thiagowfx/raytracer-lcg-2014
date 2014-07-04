@@ -1,55 +1,57 @@
 #include "Directional.h"
 
-Directional::Directional() :
-  Light()
-{}
+namespace Raytracer {
+  Directional::Directional() :
+    Light()
+  {}
 
 
-Directional::Directional(const Directional& dl) :
-  Light(dl),
-  ls(dl.ls),
-  color(dl.color),
-  direction(dl.direction)
-{}
+  Directional::Directional(const Directional& dl) :
+    Light(dl),
+    ls(dl.ls),
+    color(dl.color),
+    direction(dl.direction)
+  {}
 
 
-Light* Directional::clone() const {
-  return new Directional(*this);
-}
-
-
-Directional& Directional::operator= (const Directional& rhs) {
-  if (this != &rhs) {
-    Light::operator= (rhs);
-    ls	  = rhs.ls;
-    color = rhs.color;
-    direction   = rhs.direction;
+  Light* Directional::clone() const {
+    return new Directional(*this);
   }
-  return *this;
-}
 
 
-Directional::~Directional() {}
+  Directional& Directional::operator= (const Directional& rhs) {
+    if (this != &rhs) {
+      Light::operator= (rhs);
+      ls          = rhs.ls;
+      color = rhs.color;
+      direction   = rhs.direction;
+    }
+    return *this;
+  }
 
 
-/* as this function is virtual, it shouldn't be inlined */
-Vector3d Directional::get_direction(ShadeRec& sr) {
-  return direction;
-}
+  Directional::~Directional() {}
 
 
-RGBColor Directional::L(ShadeRec& s) {
-  return ls * color;
-}
+  /* as this function is virtual, it shouldn't be inlined */
+  Vector3d Directional::get_direction(ShadeRec& sr) {
+    return direction;
+  }
 
 
-bool Directional::in_shadow(const Ray& ray, ShadeRec& sr) const {
-  double t;
-  const int num_objects = sr.w.objects.size();
+  RGBColor Directional::L(ShadeRec& s) {
+    return ls * color;
+  }
 
-  for (int j = 0; j < num_objects; j++)
-    if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
-      return true;
 
-  return false;
+  bool Directional::in_shadow(const Ray& ray, ShadeRec& sr) const {
+    double t;
+    const int num_objects = sr.w.objects.size();
+
+    for (int j = 0; j < num_objects; j++)
+      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
+        return true;
+
+    return false;
+  }
 }

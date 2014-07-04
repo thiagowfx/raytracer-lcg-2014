@@ -16,13 +16,14 @@ public:
   ~MainWindow();
 
 private slots:
-  void printCallback();
   void samplerCallback();
+  void backgroundColorCallback();
 
   /******************* Actions ******************/
   void on_actionQuit_triggered();
   void on_actionAbout_Qt_triggered();
   void on_actionRender_scene_triggered();
+  void on_actionExport_Image_triggered();
 
 private:
   Ui::MainWindow *ui;

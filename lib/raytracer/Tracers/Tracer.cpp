@@ -1,14 +1,17 @@
 #include "Tracer.h"
 
-Tracer::Tracer() {}
+namespace Raytracer {
+  Tracer::Tracer() {}
 
 
-Tracer::Tracer(World* _worldPtr) :
-  world_ptr(_worldPtr)
-{}
+  Tracer::Tracer(World* w) :
+    world_ptr(w)
+  {}
 
 
-Tracer::~Tracer() {
-  if (world_ptr)
-    world_ptr = NULL;
+  Tracer::~Tracer() {
+    if (world_ptr) {
+      world_ptr = NULL;
+    }
+  }
 }

@@ -8,21 +8,22 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-class Material {
-  
- public:	
-  Material();
-  virtual ~Material();
-  Material(const Material& material);
-  virtual Material* clone() const = 0; 
-  virtual RGBColor shade(ShadeRec& sr) = 0;
-  virtual RGBColor area_light_shade(ShadeRec& sr);
-  virtual RGBColor path_shade(ShadeRec& sr);
-  virtual RGBColor get_color() const = 0;
-  virtual RGBColor get_Le(ShadeRec& sr) const; /* for emissive materials */
-		
- protected:
-  Material& operator= (const Material& rhs);  
-};
+namespace Raytracer {
+  class Material {
+  public:
+    Material();
+    virtual ~Material();
+    Material(const Material& material);
+    virtual Material* clone() const = 0;
+    virtual RGBColor shade(ShadeRec& sr) = 0;
+    virtual RGBColor area_light_shade(ShadeRec& sr);
+    virtual RGBColor path_shade(ShadeRec& sr);
+    virtual RGBColor get_color() const = 0;
+    virtual RGBColor get_Le(ShadeRec& sr) const; /* for emissive materials */
+
+  protected:
+    Material& operator= (const Material& rhs);
+  };
+}
 
 #endif

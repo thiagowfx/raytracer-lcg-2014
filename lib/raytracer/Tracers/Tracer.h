@@ -6,24 +6,24 @@
 #include "Ray.h"
 #include "ShadeRec.h"
 #include "Utilities.h"
-class World;
 
-/** @brief Tracer
- *
- * The tracer classes have no copy constructor,assignment operator or
- * clone function because of the world pointer, which should not be
- * assigned or copy constructed.
- *
- */
-class Tracer {
- public:
-  Tracer();
-  Tracer(World*);
-  virtual ~Tracer();
-  virtual RGBColor trace_ray(const Ray ray, const int depth) const = 0;
+namespace Raytracer {
+  class World;
 
- protected:
-  World* world_ptr = NULL;
-};
+  /**
+   * Tracer classes should not be copied, because of the world pointer.
+   */
+  class Tracer {
+  public:
+    Tracer();
+    Tracer(World*);
+    virtual ~Tracer();
+    virtual const char* to_string() = 0;
+    virtual RGBColor trace_ray(const Ray ray, const int depth) const = 0;
+
+  protected:
+    World* world_ptr = NULL;
+  };
+}
 
 #endif // _TRACER_MINE_

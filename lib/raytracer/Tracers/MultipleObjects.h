@@ -1,17 +1,18 @@
-#ifndef __MULTIPLE_OBJECTS__
-#define __MULTIPLE_OBJECTS__
+#ifndef _MULTIPLE_OBJECTS_MINE_
+#define _MULTIPLE_OBJECTS_MINE_
 
 #include "Tracer.h"
 #include "World.h"
 
-class MultipleObjects: public Tracer {
-  
- public:		
-  MultipleObjects();
-  MultipleObjects(World*); 
-  virtual ~MultipleObjects();
-  virtual RGBColor trace_ray(const Ray ray, const int depth) const;
-};
+namespace Raytracer {
+  class MultipleObjects: public Tracer {
+  public:
+    MultipleObjects();
+    MultipleObjects(World*);
+    virtual ~MultipleObjects();
+    virtual const char* to_string();
+    virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+  };
+}
 
-
-#endif
+#endif // _MULTIPLE_OBJECTS_MINE_
