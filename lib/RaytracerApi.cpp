@@ -89,10 +89,17 @@ namespace Raytracer {
   }
 
   void Api::render_scene() {
-    w->camera_ptr->render_scene(w, renderedImage);
+    w->camera_ptr->render_scene(w, get_rendered_image());
+  }
+
+  const char *Api::get_rendered_image() {
+    return "renderedImage.png";
   }
 
   void Api::init() {
     w = new World();
+    w->set_tracer(new Whitted(w));
+    Raytracer::Pinhole* pinhole = new Pinhole();
+    w->set_camera(pinhole);
   }
 }

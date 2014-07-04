@@ -66,6 +66,8 @@ namespace Raytracer {
     // TODO
     void render_scene();
 
+    const char* get_rendered_image();
+
   public:
     // TODO
 
@@ -74,7 +76,6 @@ namespace Raytracer {
 
     /******************* Private Members *******************/
     World* w;
-    const char* renderedImage="renderedImage.png";
   };
 }
 

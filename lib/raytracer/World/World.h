@@ -22,24 +22,25 @@ class World {
   World();
   ~World();
 
-  Camera* camera_ptr = NULL; /**< Camera. */
-  void set_camera(Camera*);
+  Raytracer::Camera* camera_ptr = NULL; /**< Camera. */
+  void set_camera(Raytracer::Camera*);
 
   vector<Light*> lights;
-  void add_light(Light*); /**< Add a new light source */
-  void delete_lights(); /**< Delete all light sources */
+  void add_light(Light*); /**< Add a new light source. */
+  void delete_lights(); /**< Delete all light sources. */
 
   vector<GeometricObject*> objects;
-  void add_object(GeometricObject*); /**< Add a new object */
-  void delete_objects(); /**< Delete all objects */
+  void add_object(GeometricObject*); /**< Add a new object. */
+  void delete_objects(); /**< Delete all objects. */
 
   Ambient* ambient_ptr = new Ambient();
   void set_ambient_light(Ambient*);
 
+  Tracer* tracer_ptr = NULL; /**< Raytracer. */
+  void set_tracer(Tracer*);
+
   ViewPlane vp;
   RGBColor background_color = black; /**< Background color. */
-  Tracer* tracer_ptr = NULL; /**< Raytracer. */
-
   void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
   ShadeRec hit_bare_bones_objects(const Ray&);
   ShadeRec hit_objects(const Ray&);
@@ -65,8 +66,13 @@ inline void World::set_ambient_light(Ambient* light_ptr) {
 }
 
 
-inline void World::set_camera(Camera* camera) {
+inline void World::set_camera(Raytracer::Camera* camera) {
   camera_ptr = camera;
+}
+
+
+inline void World::set_tracer(Tracer* tracer) {
+  tracer_ptr = tracer;
 }
 
 #endif // _WORLD_MINE_

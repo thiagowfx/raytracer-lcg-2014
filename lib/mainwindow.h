@@ -22,6 +22,7 @@ private slots:
   /******************* Actions ******************/
   void on_actionQuit_triggered();
   void on_actionAbout_Qt_triggered();
+  void on_actionRender_scene_triggered();
 
 private:
   Ui::MainWindow *ui;

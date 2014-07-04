@@ -53,7 +53,7 @@ Material* Phong::clone() const {
 
 RGBColor Phong::shade (ShadeRec& sr) {
   Vector3d wo    = -sr.ray.d;
-  RGBColor L     = ambient_brdf->rho (sr,wo) * sr.w.ambient_ptr->L(sr);
+  RGBColor L = ambient_brdf->rho (sr,wo) * sr.w.ambient_ptr->L(sr);
   const int num_lights = sr.w.lights.size();
 
   for (int j = 0; j < num_lights; ++j) {

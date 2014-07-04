@@ -71,3 +71,8 @@ void MainWindow::on_actionQuit_triggered() {
 void MainWindow::on_actionAbout_Qt_triggered() {
     QMessageBox::aboutQt(this);
 }
+
+void MainWindow::on_actionRender_scene_triggered() {
+    api->render_scene();
+    ui->renderedImage->setPixmap(QPixmap(api->get_rendered_image()));
+}
