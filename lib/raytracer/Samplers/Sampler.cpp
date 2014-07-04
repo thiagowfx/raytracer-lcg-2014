@@ -80,7 +80,7 @@ void Sampler::setup_shuffled_indices() {
 void Sampler::map_samples_to_unit_disk() {
   unsigned size = samples.size();
   double r, phi;                 // polar coordinates
-  Vector2d sp; ///> sample point on unit disk
+  Vector2d sp; ///< sample point on unit disk
   disk_samples.reserve(size);
   for (unsigned j = 0; j < size; j++) {
     /* map sample point to [-1, 1] X [-1,1] */
