@@ -9,9 +9,9 @@ class NRooks: public Sampler {
   NRooks(const int num_samples);
   NRooks(const int num_samples, const int m);
   NRooks(const NRooks& nr);
+  virtual const char* to_string();
   virtual NRooks* clone() const;
   virtual ~NRooks();
-
  private:
   virtual void generate_samples();
 };

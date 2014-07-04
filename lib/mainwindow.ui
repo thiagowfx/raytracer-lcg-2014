@@ -86,44 +86,6 @@
         <property name="suffix">
          <string>x</string>
         </property>
-        <property name="minimum">
-         <double>0.010000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="verticalResolutionSpinBox">
-        <property name="suffix">
-         <string> pixels</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="singleStep">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
-        <property name="suffix">
-         <string> pixels</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="singleStep">
-         <number>10</number>
-        </property>
        </widget>
       </item>
       <item row="2" column="0">
@@ -141,14 +103,7 @@
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QDoubleSpinBox" name="gammaLevelDoubleSpinBox">
-        <property name="minimum">
-         <double>0.010000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-       </widget>
+       <widget class="QDoubleSpinBox" name="gammaLevelDoubleSpinBox"/>
       </item>
       <item row="7" column="1">
        <widget class="QCheckBox" name="outOfGamutCheckBox">
@@ -168,7 +123,7 @@
        </widget>
       </item>
       <item row="9" column="0">
-       <widget class="QLabel" name="numberofSamplesLabel">
+       <widget class="QLabel" name="numberOfSamplesLabel">
         <property name="text">
          <string>Number of samples</string>
         </property>
@@ -178,9 +133,6 @@
        <widget class="QSpinBox" name="maxDepthSpinBox">
         <property name="suffix">
          <string> reflection(s)</string>
-        </property>
-        <property name="maximum">
-         <number>10</number>
         </property>
        </widget>
       </item>
@@ -192,107 +144,7 @@
        </widget>
       </item>
       <item row="10" column="1">
-       <widget class="QComboBox" name="samplerTypeComboBox">
-        <item>
-         <property name="text">
-          <string>Hammersley</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Jittered</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>MultiJittered</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>NRooks</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>PureRandom</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Regular</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <widget class="QComboBox" name="numberofSamplesComboBox">
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>8</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>10</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>16</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>32</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>64</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>128</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>256</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>512</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QComboBox" name="samplerTypeComboBox"/>
       </item>
       <item row="7" column="0">
        <widget class="QLabel" name="outOfGamutLabel">
@@ -300,6 +152,29 @@
          <string>Out of gamut colors</string>
         </property>
        </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="verticalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="horizontalResolutionSpinBox">
+        <property name="suffix">
+         <string> pixels</string>
+        </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QSpinBox" name="numberOfSamplesSpinBox"/>
       </item>
      </layout>
     </widget>

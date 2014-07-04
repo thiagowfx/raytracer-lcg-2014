@@ -74,26 +74,25 @@ namespace Raytracer {
   }
 
   int Api::get_number_of_samples() {
-    return w->vp.sampler_ptr->get_num_samples();
+    return w->vp.sampler_ptr->get_number_of_samples();
   }
 
-  QString Api::get_sampler_type()   {
-    return w->vp.sampler_ptr;
+  const char* Api::get_sampler_type() {
+    return w->vp.sampler_ptr->to_string();
+  }
+
+  QStringListModel* Api::get_sampler_type_model() {
+    QStringListModel* q = new QStringListModel();
+    q->setStringList(QStringList() << "Hammersley" << "Jittered" << "MultiJittered" <<
+                            "NRooks" << "PureRandom" << "Regular");
+    return q;
   }
 
   void Api::render_scene() {
-    w->camera_ptr->render_scene(w, image);
+    w->camera_ptr->render_scene(w, renderedImage);
   }
 
   void Api::init() {
     w = new World();
-
-    /** Defaults */
-    set_hres(400);
-    set_vres(400);
-    set_pixel_size(1.0);
-    set_gamma(1.0);
-    set_out_of_gamut(true);
-    set_max_depth(1);
   }
 }

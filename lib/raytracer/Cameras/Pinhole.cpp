@@ -30,7 +30,7 @@ void Pinhole::render_scene(const World* w, const char* image_file) {
   Ray ray;                // primary ray
   Vector2d  sp;                 // sample point in [0,1] x [0,1]
   Vector2d  pp;                 // sample point on a pixel
-  const int n = vp.sampler_ptr->get_num_samples();
+  const int n = vp.sampler_ptr->get_number_of_samples();
 
   vp.pixel_size /= zoom;
   ray.o = eye;

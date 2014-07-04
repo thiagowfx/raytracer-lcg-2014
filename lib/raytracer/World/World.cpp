@@ -24,29 +24,21 @@ World::~World() {
   delete_lights();
 }
 
-/* raw_color is the pixel color computed by the ray tracer
-   its RGB doubleing point components can be arbitrarily large
-   mapped_color has all components in the range [0, 1], but still doubleing point
-   display color has integer components for computer display
-   the Mac's components are in the range [0, 65535]
-   a PC's components will probably be in the range [0, 255]
-   the system-dependent code is in the function convert_to_display_color
-   the function SetCPixel is a Mac OS function */
-void World::display_pixel(const int row, const int column, const RGBColor& raw_color, png::image<png::rgb_pixel>& image) const {
+void World::display_pixel(const int row, const int column,
+                          const RGBColor& raw_color /**< Pixel color computed by the raytracer */,
+                          png::image<png::rgb_pixel>& image) const {
   RGBColor mapped_color;
-
-  if (vp.out_of_gamut)
+  if (vp.out_of_gamut) {
     mapped_color = raw_color.clamp_to_red();
-  else
-    mapped_color = raw_color.max_to_one();
-
-  if (vp.gamma != 1.0)
+  }
+  else {
+    mapped_color = raw_color.normalize();
+  }
+  if (vp.gamma != 1.0) {
     mapped_color = mapped_color.powc(1.0 / vp.gamma);
-
-  //have to start from max y coordinate to convert to screen coordinates
+  }
   int x = column;
   int y = vp.vres - row - 1;
-
   image[y][x] = png::rgb_pixel(int(mapped_color.r * 255),
                                int(mapped_color.g * 255),
                                int(mapped_color.b * 255));

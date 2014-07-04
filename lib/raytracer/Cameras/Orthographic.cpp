@@ -24,7 +24,7 @@ void Orthographic::render_scene(const World* w, const char* image_file) {
   Ray      ray;
   Vector2d sp;                  // sample point in [0,1] x [0,1]
   Vector2d pp;
-  const int n = vp.sampler_ptr->get_num_samples();
+  const int n = vp.sampler_ptr->get_number_of_samples();
 
   vp.pixel_size /= zoom;
   ray.d = Vector3d(0.0, 0.0, -1.0);

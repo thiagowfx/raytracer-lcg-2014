@@ -9,9 +9,9 @@ class Jittered: public Sampler {
   Jittered(const int);
   Jittered(const int num_samples, const int m);
   Jittered(const Jittered&);
+  virtual const char* to_string();
   virtual Jittered* clone() const;
   virtual ~Jittered();
-
  private:
   virtual void generate_samples();
 };

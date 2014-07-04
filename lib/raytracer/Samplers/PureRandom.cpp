@@ -6,16 +6,19 @@ PureRandom::PureRandom() :
 
 
 PureRandom::PureRandom(const int num) :
-  Sampler(num)
-{
+  Sampler(num) {
   generate_samples();
 }
 
 
 PureRandom::PureRandom(const PureRandom& r)  :
-  Sampler(r)
-{
+  Sampler(r) {
   generate_samples();
+}
+
+
+const char* PureRandom::to_string() {
+  return "PureRandom";
 }
 
 

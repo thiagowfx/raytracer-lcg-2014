@@ -5,17 +5,20 @@ Regular::Regular() :
 {}
 
 
-Regular::Regular(const int num) :
-  Sampler(num)
-{
+Regular::Regular(const int num_samples) :
+  Sampler(num_samples) {
   generate_samples();
 }
 
 
 Regular::Regular(const Regular& u) :
-  Sampler(u)
-{
+  Sampler(u) {
   generate_samples();
+}
+
+
+const char* Regular::to_string() {
+  return "Regular";
 }
 
 

@@ -6,22 +6,24 @@ NRooks::NRooks()
 
 
 NRooks::NRooks(const int num_samples) :
-  Sampler(num_samples)
-{
+  Sampler(num_samples) {
   generate_samples();
 }
 
 
 NRooks::NRooks(const int num_samples, const int m) :
-  Sampler(num_samples, m)
-{
+  Sampler(num_samples, m) {
   generate_samples();
 }
 
 
+const char* NRooks::to_string() {
+  return "NRooks";
+}
+
+
 NRooks::NRooks(const NRooks& nr) :
-  Sampler(nr)
-{
+  Sampler(nr) {
   generate_samples();
 }
 

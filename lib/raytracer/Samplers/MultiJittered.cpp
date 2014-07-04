@@ -7,25 +7,25 @@ MultiJittered::MultiJittered() :
 
 
 MultiJittered::MultiJittered(const int num_samples) :
-  Sampler(num_samples)
-{
-  //    count = 0;
-  //    jump = 0;
+  Sampler(num_samples) {
   generate_samples();
 }
 
 
 MultiJittered::MultiJittered(const int num_samples, const int m) :
-  Sampler(num_samples, m)
-{
+  Sampler(num_samples, m) {
   generate_samples();
 }
 
 
-MultiJittered::MultiJittered(const MultiJittered& mjs) :
-  Sampler(mjs)
-{
+MultiJittered::MultiJittered(const MultiJittered& m) :
+  Sampler(m) {
   generate_samples();
+}
+
+
+const char* MultiJittered::to_string() {
+  return "MultiJittered";
 }
 
 
@@ -64,7 +64,6 @@ void MultiJittered::generate_samples() {
       }
 
   // shuffle x coordinates
-
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++) {
@@ -75,7 +74,6 @@ void MultiJittered::generate_samples() {
       }
 
   // shuffle y coordinates
-
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++) {

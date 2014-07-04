@@ -5,7 +5,7 @@
 #include "Regular.h"
 
 /**
- * @brief View plane.
+ * @brief Viewplane.
  */
 class ViewPlane {
  public:
@@ -19,7 +19,7 @@ class ViewPlane {
   double gamma = 1.0; /**< Gamma correction factor. */
   bool out_of_gamut = false; /**< If true, out of gamut colors will be displayed as red. */
   int max_depth = 1; /**< For reflective rays, the maximum number of bounces. */
-  Sampler* sampler_ptr = NULL; /**< Sampler used in each pixel */
+  Sampler* sampler_ptr = NULL; /**< Sampler used for pixels. */
 
   void set_hres(const int);
   void set_vres(const int);
@@ -27,7 +27,7 @@ class ViewPlane {
   void set_gamma(const double);
   void set_out_of_gamut(const bool);
   void set_max_depth(const int);
-  void set_samples(const int);
+  void set_samples(int);
   void set_sampler(Sampler*);
 };
 
@@ -62,20 +62,22 @@ inline void ViewPlane::set_max_depth(const int depth) {
 }
 
 
+inline void ViewPlane::set_samples(int n) {
+  if (n > 1) {
+    set_sampler(new MultiJittered(n));
+  }
+  else {
+    set_sampler(new Regular(1));
+  }
+}
+
+
 inline void ViewPlane::set_sampler(Sampler* sp) {
   if (this->sampler_ptr) {
     delete this->sampler_ptr;
     this->sampler_ptr = NULL;
   }
   this->sampler_ptr = sp;
-}
-
-
-inline void ViewPlane::set_samples(const int num_samples) {
-  if (num_samples > 1)
-    set_sampler(new MultiJittered(num_samples));
-  else
-    set_sampler(new Regular(1));
 }
 
 #endif // _VIEWPLANE_MINE_

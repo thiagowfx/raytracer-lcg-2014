@@ -28,8 +28,8 @@ public:
   bool operator!= (const RGBColor& c) const;
   RGBColor powc(double p) const;
   double average() const;
-  RGBColor max_to_one() const;
-  RGBColor clamp_to_red() const; /**< Set color to red if any component is greater than one. */
+  RGBColor normalize() const;
+  RGBColor clamp_to_red() const; /**< Return red if any component is greater than one. */
 };
 
 
@@ -96,5 +96,29 @@ inline double RGBColor::average() const {
 inline RGBColor operator* (const double a, const RGBColor& c) {
   return RGBColor (a * c.r, a * c.g, a * c.b);
 }
+
+const RGBColor black(0.0, 0.0, 0.0);
+const RGBColor dark_grey(0.25, 0.25, 0.25);
+const RGBColor dark_gray(dark_grey);
+const RGBColor grey(0.50, 0.50, 0.50);
+const RGBColor gray(grey);
+const RGBColor light_grey(0.75, 0.75, 0.75);
+const RGBColor light_gray(light_grey);
+const RGBColor white(1.0, 1.0, 1.0);
+
+const RGBColor brown(0.71, 0.40, 0.16);
+const RGBColor red(1.0, 0.0, 0.0);
+
+const RGBColor green(0.0, 1.0, 0.0);
+const RGBColor light_green(0.65, 1.0, 0.30);
+const RGBColor dark_green(0.0, 0.41, 0.41);
+
+const RGBColor blue(0.0, 0.0, 1.0);
+const RGBColor light_purple(0.65, 0.3, 1.0);
+const RGBColor dark_purple(0.5, 0.0, 1);
+
+const RGBColor yellow(1.0, 1.0, 0.0);
+const RGBColor dark_yellow(0.61, 0.61, 0.0);
+const RGBColor orange(1.0, 0.75, 0.0);
 
 #endif

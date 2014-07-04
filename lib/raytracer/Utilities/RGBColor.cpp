@@ -36,7 +36,7 @@ RGBColor RGBColor::powc(double p) const {
 }
 
 
-RGBColor RGBColor::max_to_one() const {
+RGBColor RGBColor::normalize() const {
   double max_value = max(r, max(g, b));
   return (max_value > 1.0) ? (*this / max_value) : *this;
 }

@@ -9,9 +9,9 @@ class MultiJittered: public Sampler {
   MultiJittered(const int);
   MultiJittered(const int num_samples, const int m);
   MultiJittered(const MultiJittered&);
+  virtual const char* to_string();
   virtual MultiJittered* clone() const;
   virtual ~MultiJittered();
-
  private:
   virtual void generate_samples();
 };

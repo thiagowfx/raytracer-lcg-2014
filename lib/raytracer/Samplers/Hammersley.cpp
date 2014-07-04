@@ -6,21 +6,24 @@ Hammersley::Hammersley() :
 
 
 Hammersley::Hammersley(const int num) :
-  Sampler(num)
-{
+  Sampler(num) {
   generate_samples();
 }
 
 
 Hammersley::Hammersley(const Hammersley& h) :
-  Sampler(h)
-{
+  Sampler(h) {
   generate_samples();
 }
 
 
 Hammersley* Hammersley::clone() const {
   return new Hammersley(*this);
+}
+
+
+const char* Hammersley::to_string() {
+  return "Hammersley";
 }
 
 

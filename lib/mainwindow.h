@@ -17,10 +17,10 @@ public:
 
 private slots:
   void printCallback();
+  void samplerCallback();
 
   /******************* Actions ******************/
   void on_actionQuit_triggered();
-
   void on_actionAbout_Qt_triggered();
 
 private:

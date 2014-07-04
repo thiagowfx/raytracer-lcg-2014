@@ -57,7 +57,10 @@ namespace Raytracer {
     int get_number_of_samples();
 
     /** ViewPlane: get sampler type name */
-    QString get_sampler_type();
+    const char* get_sampler_type();
+
+    /** ViewPlane: get sampler type model */
+    QStringListModel* get_sampler_type_model();
 
     /** Camera: render scene */
     // TODO
@@ -65,14 +68,13 @@ namespace Raytracer {
 
   public:
     // TODO
-    const char* image="raytraced_image.png";
 
   private:
     void init();
 
     /******************* Private Members *******************/
     World* w;
-
+    const char* renderedImage="renderedImage.png";
   };
 }
 

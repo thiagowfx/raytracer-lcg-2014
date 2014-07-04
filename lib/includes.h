@@ -68,5 +68,6 @@ using Eigen::Vector3d;
 #include <QPalette>
 #include <QSpinBox>
 #include <QString>
+#include <QStringListModel>
 
 #endif

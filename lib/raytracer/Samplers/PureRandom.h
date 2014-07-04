@@ -8,9 +8,9 @@ class PureRandom: public Sampler {
   PureRandom();
   PureRandom(const int);
   PureRandom(const PureRandom&);
+  virtual const char* to_string();
   virtual PureRandom* clone() const;
   virtual ~PureRandom();
-
  private:
   virtual void generate_samples();
 };

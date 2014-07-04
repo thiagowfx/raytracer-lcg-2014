@@ -9,8 +9,10 @@ class Regular: public Sampler {
   Regular();
   Regular(const int);
   Regular(const Regular&);
+  virtual const char* to_string();
   virtual Regular* clone() const;
   virtual ~Regular();
+ private:
   virtual void generate_samples();
 };
 
