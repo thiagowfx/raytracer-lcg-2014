@@ -34,7 +34,7 @@ namespace Raytracer {
     const int n = vp.sampler_ptr->get_number_of_samples();
 
     vp.pixel_size /= zoom;
-    ray.o = eye;
+    ray.origin = eye;
 
     png::image< png::rgb_pixel > image(vp.hres, vp.vres);
 
@@ -46,7 +46,7 @@ namespace Raytracer {
           sp = vp.sampler_ptr->sample_unit_square();
           pp(0) = vp.pixel_size * (c - 0.5 * vp.hres + sp(0));
           pp(1) = vp.pixel_size * (r - 0.5 * vp.vres + sp(1));
-          ray.d = get_direction(pp);
+          ray.direction = get_direction(pp);
           L += w->tracer_ptr->trace_ray(ray, 0);
         }
         L /= n;

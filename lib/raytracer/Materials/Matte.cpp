@@ -63,7 +63,7 @@ namespace Raytracer {
 
   RGBColor Matte::shade(ShadeRec& sr) {
     /** wo = contrário da direção de onde o raio primário da câmera vem (para o olho) */
-    Vector3d wo = -sr.ray.d;
+    Vector3d wo = -sr.ray.direction;
 
     /** Luz ambiente. Criada para simular, de maneira global, a iluminação difusa indireta.
      * Suposta constante para todos os objetos da cena. Modelo de campo isotrópico 3D.
@@ -98,7 +98,7 @@ namespace Raytracer {
   }
 
   RGBColor Matte::area_light_shade(ShadeRec &sr) {
-    Vector3d    wo                      = -sr.ray.d;
+    Vector3d    wo                      = -sr.ray.direction;
     RGBColor    L                       = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
     const int num_lights        = sr.w.lights.size();
 

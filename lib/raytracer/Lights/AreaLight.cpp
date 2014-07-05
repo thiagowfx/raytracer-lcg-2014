@@ -79,7 +79,7 @@ namespace Raytracer {
   bool AreaLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
     double t;
     int num_objects = sr.w.objects.size();
-    double ts = (sample_point - ray.o).dot(ray.d);
+    double ts = (sample_point - ray.origin).dot(ray.direction);
 
     for (int j = 0; j < num_objects; j++)
       if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts)

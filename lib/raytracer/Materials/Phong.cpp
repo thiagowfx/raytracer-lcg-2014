@@ -53,7 +53,7 @@ namespace Raytracer {
 
 
   RGBColor Phong::shade (ShadeRec& sr) {
-    Vector3d wo    = -sr.ray.d;
+    Vector3d wo    = -sr.ray.direction;
     RGBColor L = ambient_brdf->rho (sr,wo) * sr.w.ambient_ptr->L(sr);
     const int num_lights = sr.w.lights.size();
 
@@ -77,7 +77,7 @@ namespace Raytracer {
   }
 
   RGBColor Phong::area_light_shade(ShadeRec &sr) {
-    Vector3d wo    = -sr.ray.d;
+    Vector3d wo    = -sr.ray.direction;
     RGBColor L     = ambient_brdf->rho (sr,wo) * sr.w.ambient_ptr->L(sr);
     const int num_lights = sr.w.lights.size();
 

@@ -28,9 +28,9 @@ namespace Raytracer {
       return false;
 
     double   t;
-    Vector3d temp = ray.o - center;
-    double   a    = ray.d.dot(ray.d);
-    double   b    = 2.0 * temp.dot(ray.d);
+    Vector3d temp = ray.origin - center;
+    double   a    = ray.direction.dot(ray.direction);
+    double   b    = 2.0 * temp.dot(ray.direction);
     double   c    = temp.dot(temp) - radius * radius;
     double   disc = b * b - 4.0 * a * c;
 
@@ -46,8 +46,8 @@ namespace Raytracer {
       if (t > kEpsilonShadows) {
 	tmin = t;
 	if (type == PRIMARY_RAY) {
-	  sr.normal 	 = (temp + t * ray.d) / radius;
-	  sr.local_hit_point = ray.o + t * ray.d;
+    sr.normal = (temp + t * ray.direction) / radius;
+    sr.local_hit_point = ray.origin + t * ray.direction;
 	}
 	return true;
       }
@@ -57,8 +57,8 @@ namespace Raytracer {
       if (t > kEpsilonShadows) {
 	tmin = t;
 	if (type == PRIMARY_RAY) {
-	  sr.normal   = (temp + t * ray.d) / radius;
-	  sr.local_hit_point = ray.o + t * ray.d;
+    sr.normal   = (temp + t * ray.direction) / radius;
+    sr.local_hit_point = ray.origin + t * ray.direction;
 	}
 	return true;
       }

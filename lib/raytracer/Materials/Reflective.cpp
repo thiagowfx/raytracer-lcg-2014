@@ -47,7 +47,7 @@ namespace Raytracer {
   RGBColor Reflective::shade(ShadeRec& sr) {
     RGBColor L(Phong::shade(sr)); // direct illumination
 
-    Vector3d wo = -sr.ray.d;
+    Vector3d wo = -sr.ray.direction;
     Vector3d wi;
     RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
     Ray reflected_ray(sr.hit_point, wi);

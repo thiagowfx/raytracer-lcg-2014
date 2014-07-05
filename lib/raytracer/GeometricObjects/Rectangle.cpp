@@ -76,12 +76,12 @@ namespace Raytracer {
     if (type == SHADOW_RAY && !shadows)
       return false;
 
-    double t = (p0 - ray.o).dot(normal) / (ray.d.dot(normal));
+    double t = (p0 - ray.origin).dot(normal) / (ray.direction.dot(normal));
 
     if (t <= kEpsilonShadows)
       return false;
 
-    Vector3d p = ray.o + t * ray.d;
+    Vector3d p = ray.origin + t * ray.direction;
     Vector3d d = p - p0;
     double ddota = d.dot(a);
 

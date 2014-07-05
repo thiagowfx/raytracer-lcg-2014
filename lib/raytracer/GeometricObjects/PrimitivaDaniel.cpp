@@ -34,8 +34,8 @@ namespace Raytracer {
     Vector3d intersectionPoint;
     Vector3d intersectionNormal;
 
-    if ( primitive->rayIntersection(ray.o, ray.d, intersectionPoint, intersectionNormal) ) {
-      tmin = (intersectionPoint - ray.o).norm();
+    if ( primitive->rayIntersection(ray.origin, ray.direction, intersectionPoint, intersectionNormal) ) {
+      tmin = (intersectionPoint - ray.origin).norm();
 
       if (tmin > kEpsilonShadows) {
         if (type == PRIMARY_RAY) {

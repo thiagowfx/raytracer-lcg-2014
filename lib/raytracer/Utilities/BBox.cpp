@@ -40,9 +40,12 @@ BBox::~BBox () {}
 
 
 bool BBox::hit(const Ray& ray) const {
-  double ox = ray.o(0); double oy = ray.o(1); double oz = ray.o(2);
-  double dx = ray.d(0); double dy = ray.d(1); double dz = ray.d(2);
-
+  double ox = ray.origin(0);
+  double oy = ray.origin(1);
+  double oz = ray.origin(2);
+  double dx = ray.direction(0);
+  double dy = ray.direction(1);
+  double dz = ray.direction(2);
   double tx_min, ty_min, tz_min;
   double tx_max, ty_max, tz_max;
 

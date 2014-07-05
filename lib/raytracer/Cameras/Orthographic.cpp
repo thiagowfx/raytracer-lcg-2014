@@ -28,7 +28,7 @@ namespace Raytracer {
     const int n = vp.sampler_ptr->get_number_of_samples();
 
     vp.pixel_size /= zoom;
-    ray.d = Vector3d(0.0, 0.0, -1.0);
+    ray.direction = Vector3d(0.0, 0.0, -1.0);
 
     png::image< png::rgb_pixel > image(vp.hres, vp.vres);
 
@@ -40,7 +40,7 @@ namespace Raytracer {
           sp = vp.sampler_ptr->sample_unit_square();
           pp(0) = vp.pixel_size * (c - 0.5 * vp.hres + sp(0));
           pp(1) = vp.pixel_size * (r - 0.5 * vp.vres + sp(1));
-          ray.o = Vector3d(pp(0), pp(1), d);
+          ray.origin = Vector3d(pp(0), pp(1), d);
           L += w->tracer_ptr->trace_ray(ray, 0);
         }
         L /= n;                   // average the colors

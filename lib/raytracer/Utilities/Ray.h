@@ -22,10 +22,10 @@ class Ray {
   ~Ray();
   
   /** Origin point. */
-  Vector3d o = Vector3d::Zero();
+  Vector3d origin = Vector3d::Zero();
 
   /** Direction vector. */
-  Vector3d d = Vector3d::Zero();
+  Vector3d direction = Vector3d::Zero();
 };
 
 /** Ray type. */

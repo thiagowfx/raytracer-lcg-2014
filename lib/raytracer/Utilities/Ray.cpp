@@ -7,12 +7,12 @@ Ray::~Ray () {}
 
 
 Ray::Ray (const Vector3d& origin, const Vector3d& direction) :
-  o(origin),
-  d(direction)
+  origin(origin),
+  direction(direction)
 {}
 
 
 Ray::Ray (const Ray& ray) :
-  o(ray.o),
-  d(ray.d)
+  origin(ray.origin),
+  direction(ray.direction)
 {}

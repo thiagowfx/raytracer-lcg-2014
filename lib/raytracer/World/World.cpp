@@ -34,7 +34,7 @@ namespace Raytracer {
         sr.hit_an_object = true;
         tmin             = t;
         sr.material_ptr  = objects[j]->get_material();
-        sr.hit_point     = ray.o + (t * ray.d);
+        sr.hit_point     = ray.origin + (t * ray.direction);
         normal           = sr.normal;
         local_hit_point  = sr.local_hit_point;
       }

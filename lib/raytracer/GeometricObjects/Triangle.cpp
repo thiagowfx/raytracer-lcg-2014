@@ -43,9 +43,9 @@ namespace Raytracer {
     if (type == SHADOW_RAY && !shadows)
       return false;
 
-    double a = v0(0) - v1(0), b = v0(0) - v2(0), c = ray.d(0), d = v0(0) - ray.o(0);
-    double e = v0(1) - v1(1), f = v0(1) - v2(1), g = ray.d(1), h = v0(1) - ray.o(1);
-    double i = v0(2) - v1(2), j = v0(2) - v2(2), k = ray.d(2), l = v0(2) - ray.o(2);
+    double a = v0(0) - v1(0), b = v0(0) - v2(0), c = ray.direction(0), d = v0(0) - ray.origin(0);
+    double e = v0(1) - v1(1), f = v0(1) - v2(1), g = ray.direction(1), h = v0(1) - ray.origin(1);
+    double i = v0(2) - v1(2), j = v0(2) - v2(2), k = ray.direction(2), l = v0(2) - ray.origin(2);
 
     double m = f * k - g * j, n = h * k - g * l, p = f * l - h * j;
     double q = g * i - e * k, s = e * j - f * i;
@@ -77,7 +77,7 @@ namespace Raytracer {
 
     if (type == PRIMARY_RAY) {
       sr.normal = normal;
-      sr.local_hit_point = ray.o + t * ray.d;
+      sr.local_hit_point = ray.origin + t * ray.direction;
     }
 
     return true;

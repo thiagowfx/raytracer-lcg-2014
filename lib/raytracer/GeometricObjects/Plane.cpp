@@ -28,13 +28,13 @@ namespace Raytracer {
     if (type == SHADOW_RAY && !shadows)
       return false;
 
-    double t = (point - ray.o).dot(normal) / ray.d.dot(normal);
+    double t = (point - ray.origin).dot(normal) / ray.direction.dot(normal);
 
     if (t > kEpsilonShadows) {
       tmin = t;
       if (type == PRIMARY_RAY) {
 	sr.normal = normal;
-	sr.local_hit_point = ray.o + t * ray.d;
+  sr.local_hit_point = ray.origin + t * ray.direction;
       }
       return true;
     }
