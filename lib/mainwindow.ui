@@ -30,7 +30,7 @@
        <number>2</number>
       </property>
       <property name="text">
-       <string>renderedImage</string>
+       <string>Rendered Image</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -43,7 +43,7 @@
     <item>
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -53,8 +53,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>257</width>
-         <height>264</height>
+         <width>345</width>
+         <height>279</height>
         </rect>
        </property>
        <attribute name="label">
@@ -177,8 +177,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>195</width>
-         <height>74</height>
+         <width>345</width>
+         <height>279</height>
         </rect>
        </property>
        <attribute name="label">
@@ -248,6 +248,7 @@
    <addaction name="actionExport_Image"/>
    <addaction name="separator"/>
    <addaction name="actionRender_scene"/>
+   <addaction name="actionUnfocus"/>
   </widget>
   <action name="actionQuit">
    <property name="icon">
@@ -292,6 +293,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionUnfocus">
+   <property name="text">
+    <string>Unfocus</string>
+   </property>
+   <property name="toolTip">
+    <string>Unfocus</string>
    </property>
   </action>
  </widget>

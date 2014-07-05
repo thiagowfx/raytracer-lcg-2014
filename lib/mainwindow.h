@@ -18,6 +18,7 @@ public:
 private slots:
   void samplerCallback();
   void backgroundColorCallback();
+  void autoRenderCallback();
 
   /******************* Actions ******************/
 
@@ -47,6 +48,9 @@ private:
 
   /** Is the rendering process in progress? */
   QLabel *statusInProgressLabel;
+
+  /** Auto render image after changing any option? */
+  QCheckBox *autoRenderCheckBox;
 
   /** Carthesian coordinates label. */
   QLabel *statusEyeCarthesianLabel;
