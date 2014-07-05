@@ -4,11 +4,11 @@
 #include <cstring> /* for png++ streerror */
 #include <png++/png.hpp>
 #include <Eigen/Dense>
-#include "World.h"
 using Eigen::Vector2d;
 using Eigen::Vector3d;
 
 namespace Raytracer {
+  class World;
   class Camera {
   public:
     Camera();
@@ -28,7 +28,6 @@ namespace Raytracer {
     void compute_uvw();
     Vector3d get_eye() const;
     double get_view_distance() const;
-
   protected:
     Vector3d eye; /**< Camera position. */
     Vector3d lookat = Vector3d::Zero(); /**< Point where the camera is looking at. */
@@ -37,7 +36,6 @@ namespace Raytracer {
     double exposure_time = 1.0; /**< Exposure time. */
     double zoom = 1.0; /**< Zoom factor. More is nearer. */
     double d = 250.0; /**< View plane distance. */
-    void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image, const World* w) const;
   };
 
 

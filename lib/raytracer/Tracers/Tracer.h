@@ -17,9 +17,9 @@ namespace Raytracer {
   public:
     Tracer(World*);
     virtual ~Tracer();
+    /** Return the class name. */
     virtual const char* to_string() = 0;
     virtual RGBColor trace_ray(const Ray ray, const int depth) const = 0;
-
   protected:
     World* world_ptr = NULL;
   };

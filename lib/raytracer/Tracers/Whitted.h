@@ -6,7 +6,11 @@
 
 namespace Raytracer {
   /**
-   * @brief Tracer which uses the Phong Model: ambient + diffuse + reflective radiance, plus (optionally) reflected rays.
+   * @brief Tracer which uses the Phong Model.
+   *
+   * Tracer which uses the Phong Model: ambient + diffuse + reflective radiance,
+   * plus (optionally) reflected rays. To get a RayCast tracer, just set the
+   * maximum depth in the ViewPlane to 0.
    */
   class Whitted: public Tracer {
   public:

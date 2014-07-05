@@ -1,8 +1,23 @@
 #include "RaytracerApi.h"
 
 namespace Raytracer {
-  Api::Api() {
-    init();
+  Api::Api() :
+    w(new World)
+  {
+    Raytracer::Pinhole* pinhole = new Pinhole();
+    pinhole->set_eye(Vector3d(150.0, 150.0, 150.0));
+    pinhole->compute_uvw();
+    w->set_camera(pinhole);
+
+    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
+    sp0->set_color(red);
+    sp0->set_material(Matte::dummy(red));
+    w->add_object(sp0);
+
+    Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
+    pl0->set_color(gray);
+    pl0->set_material(Matte::dummy(gray));
+    w->add_object(pl0);
   }
 
   Api::~Api() {
@@ -125,17 +140,5 @@ namespace Raytracer {
 
   const char* Api::get_rendered_image() {
     return "renderedImage.png";
-  }
-
-  void Api::init() {
-    w = new World();
-    Raytracer::Pinhole* pinhole = new Pinhole();
-    pinhole->set_eye(Vector3d(150.0, 0, 150.0));
-    pinhole->compute_uvw();
-    w->set_camera(pinhole);
-    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
-    sp0->set_color(red);
-    sp0->set_material(Matte::dummy(red));
-    w->add_object(sp0);
   }
 }

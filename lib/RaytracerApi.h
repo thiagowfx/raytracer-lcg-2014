@@ -1,15 +1,91 @@
 #ifndef _RAYTRACERAPI_MINE_
 #define _RAYTRACERAPI_MINE_
 
-#include "includes.h"
+/* EIGEN */
+#include <Eigen/Dense>
+using Eigen::Vector3d;
+
+/* RAYTRACER */
+#include "Ambient.h"
+#include "AmbientOccluder.h"
+#include "AreaLight.h"
+#include "Directional.h"
+#include "Emissive.h"
+#include "Jittered.h"
+#include "Light.h"
+#include "Material.h"
+#include "Matte.h"
+#include "MultiJittered.h"
+#include "Phong.h"
+#include "PointLight.h"
+#include "RGBColor.h"
+#include "Ray.h"
+#include "RaytracerApi.h"
+#include "Reflective.h"
+#include "Regular.h"
+#include "ShadeRec.h"
+#include "ViewPlane.h"
+#include "World.h"
+
+/* Geometric Objects */
+#include "Plane.h"
+#include "Rectangle.h"
+#include "Sphere.h"
+#include "Triangle.h"
+
+/* Cameras */
+#include "Orthographic.h"
+#include "Pinhole.h"
+
+/* Tracers */
+#include "AreaLighting.h"
+#include "MultipleObjects.h"
+#include "Whitted.h"
+
+/* Samplers */
+#include "Hammersley.h"
+#include "Jittered.h"
+#include "MultiJittered.h"
+#include "NRooks.h"
+#include "PureRandom.h"
+#include "Regular.h"
+
+/* STL */
+#include <cstdio>
+#include <cmath>
+
+/* PCS_DETECTION */
+#include "PrimitivaDaniel.h"
+#include "pc-shape-detection.h"
+
+/* QT */
+#include <QColor>
+#include <QColorDialog>
+#include <QDebug>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QMutex>
+#include <QPalette>
+#include <QSpinBox>
+#include <QString>
+#include <QStringListModel>
 
 namespace Raytracer {
 
+  /**
+   * @brief Interface between QT GUI and Raytracer library. Provides getters and setters.
+   */
   class Api : public QObject {
       Q_OBJECT
 
   public:
+    /** Constructor. */
     Api();
+
+    /** Destructor. */
     ~Api();
 
   public slots:
@@ -78,18 +154,12 @@ namespace Raytracer {
     QColor get_background_color();
 
     /** Camera: render scene */
-    // TODO
     void render_scene();
 
+    /** Get image file path. */
     const char* get_rendered_image();
 
-  public:
-    // TODO
-
   private:
-    void init();
-
-    /******************* Private Members *******************/
     World* w;
   };
 }

@@ -5,9 +5,10 @@
 #include "World.h"
 
 namespace Raytracer {
-  /* This uses ortographic viewing along the zw axis */
+  /**
+   * @brief Ortographic viewing along the zw axis.
+   */
   class Orthographic : public Camera {
-
   public:
     Orthographic();
     Orthographic(const Orthographic&);

@@ -2,6 +2,7 @@
 #define _WORLD_MINE_
 
 #include "Ambient.h"
+#include "Camera.h"
 #include "GeometricObject.h"
 #include "Light.h"
 #include "RGBColor.h"
@@ -12,7 +13,6 @@
 using namespace std;
 
 namespace Raytracer {
-  class Camera;
   /**
    * @brief Stores all objects and lights, and contains helper objects, such as camera, tracer and ambient light.
    */
@@ -68,6 +68,9 @@ namespace Raytracer {
 
     /** Viewplane. */
     ViewPlane vp;
+
+    void display_pixel(const int row, const int column,
+		       const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
     
     /** Try to hit objects with the ray, filling just bare bones information in the ShadeRec object. */
     ShadeRec hit_bare_bones_objects(const Ray&);

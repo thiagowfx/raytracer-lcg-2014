@@ -5,15 +5,19 @@
 #include <cmath>
 using namespace std;
 
+/**
+ * @brief Represents a color in the RGB format.
+ * Its components are from 0.0 to 1.0.
+ */
 class RGBColor {
  public:
   /** Red component, from 0.0 to 1.0. */
   double r = 0.0;
 
-  /** Green component. */
+  /** Green component, from 0.0 to 1.0. */
   double g = 0.0;
 
-  /** Blue component. */
+  /** Blue component, from 0.0 to 1.0. */
   double b = 0.0;
 
   RGBColor();

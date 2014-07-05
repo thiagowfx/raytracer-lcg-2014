@@ -45,7 +45,7 @@ namespace Raytracer {
         }
         L /= n;                   // average the colors
         L *= exposure_time;
-        display_pixel(r, c, L, image, w);
+        w->display_pixel(r, c, L, image);
       }
     }
     image.write(image_file);

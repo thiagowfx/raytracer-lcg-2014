@@ -3,7 +3,7 @@
 namespace Raytracer {
   World::World() {}
 
-  
+
   World::~World() {
     if(tracer_ptr) {
       delete tracer_ptr;
@@ -21,7 +21,7 @@ namespace Raytracer {
     delete_lights();
   }
 
-  
+
   ShadeRec World::hit_objects(const Ray& ray) {
     ShadeRec sr(*this);
     double t;
@@ -66,5 +66,27 @@ namespace Raytracer {
       lights[j] = NULL;
     }
     lights.erase(lights.begin(), lights.end());
+  }
+
+
+  void World::display_pixel(const int row,
+                            const int column,
+                            const RGBColor& raw_color /**< Pixel color computed by the raytracer */,
+                            png::image<png::rgb_pixel>& image) const {
+    RGBColor mapped_color;
+    if (vp.out_of_gamut) {
+      mapped_color = raw_color.clamp_to_red();
+    }
+    else {
+      mapped_color = raw_color.normalize();
+    }
+    if (vp.gamma != 1.0) {
+      mapped_color = mapped_color.powc(1.0 / vp.gamma);
+    }
+    int x = column;
+    int y = vp.vres - row - 1;
+    image[y][x] = png::rgb_pixel(int(mapped_color.r * 255),
+                                 int(mapped_color.g * 255),
+                                 int(mapped_color.b * 255));
   }
 }

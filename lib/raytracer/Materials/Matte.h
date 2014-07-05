@@ -25,7 +25,6 @@ namespace Raytracer {
   private:
     Lambertian* ambient_brdf;
     Lambertian* diffuse_brdf;
-
   };
 
   /* this sets Lambertian::kd,

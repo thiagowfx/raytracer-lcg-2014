@@ -3,6 +3,8 @@
 
 #include <cstdlib>
 #include <time.h>
+#include <Eigen/Dense>
+using Eigen::Vector3d;
 
 /** Small constant for shadows. */
 const double kEpsilonShadows = 1.0e-3;
@@ -36,5 +38,11 @@ int get_random_int(int begin = 0, int end = RAND_MAX);
 
 /** Return a random double from begin to end, or from 0.0 to 1.0. */
 double get_random_double(double begin = 0.0, double end = 1.0);
+
+/** Convert from absolute coordinates to spherical coordinates. */
+Vector3d absolute_to_spherical(Vector3d);
+
+/** Convert from spherical coordinates to absolute coordinates. */
+Vector3d spherical_to_absolute(Vector3d);
 
 #endif

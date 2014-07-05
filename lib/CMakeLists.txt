@@ -84,7 +84,6 @@ add_executable(
   mainwindow.cpp
   mainwindow.h
   main_qt.cpp
-  includes.h
   RaytracerApi.cpp
   RaytracerApi.h
   $<TARGET_OBJECTS:RAYTRACER_LIBRARY>

@@ -1,5 +1,5 @@
-#ifndef __RAY__
-#define __RAY__
+#ifndef _RAY_MINE_
+#define _RAY_MINE_
 
 #include <Eigen/Dense>
 using Eigen::Vector3d;
@@ -25,10 +25,10 @@ class Ray {
   Vector3d o = Vector3d::Zero();
 
   /** Direction vector. */
-  Vector3d d = Vector3d(0.0, 0.0, 1.0);
+  Vector3d d = Vector3d::Zero();
 };
 
 /** Ray type. */
 enum Ray_t { PRIMARY_RAY, SHADOW_RAY };
 
-#endif
+#endif // _RAY_MINE_

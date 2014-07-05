@@ -10,6 +10,7 @@ namespace Raytracer {
   class World;
 
   /**
+   * @brief Helper object to store information for shading.
    * There is no default constructor as the World reference always has to be initialized.
    * There is also no assignment operator as we don't want to assign the world.
    */
