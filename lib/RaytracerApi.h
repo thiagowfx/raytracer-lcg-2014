@@ -159,8 +159,24 @@ namespace Raytracer {
     /** Get image file path. */
     const char* get_rendered_image();
 
+    /** Camera: set carthesian coordinates for eye */
+    void set_eye_carthesian(Vector3d);
+
+    /** Camera: set carthesian coordinates for eye */
+    void set_eye_carthesian(double,double,double);
+
+    /** Camera: set spherical coordinates for eye, relatively */
+    void set_eye_spherical_relatively(double,double,double);
+
+    /** Get eye carthesian coordinates as (x, y, z) */
+    const char* get_eye_carthesian_coordinates();
+
+    /** Get eye spherical coordinates as (r, p, t) */
+    const char* get_eye_spherical_coordinates();
+
   private:
     World* w;
+    char buffer[50];
   };
 }
 

@@ -3,12 +3,19 @@
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
-  ui(new Ui::MainWindow),
-  api(new Raytracer::Api) {
+  ui(new Ui::MainWindow()),
+  api(new Raytracer::Api()),
+  statusInProgressLabel(new QLabel()),
+  statusEyeCarthesianLabel(new QLabel()),
+  statusEyeSphericalLabel(new QLabel()) {
 
   ui->setupUi(this);
   this->setFocus();
-  // this->installEventFilter(this);
+  this->installEventFilter(this);
+
+  statusBar()->addPermanentWidget(statusInProgressLabel);
+  statusBar()->addWidget(statusEyeCarthesianLabel);
+  statusBar()->addWidget(statusEyeSphericalLabel);
 
   ui->horizontalResolutionSpinBox->setMinimum(1);
   ui->horizontalResolutionSpinBox->setSingleStep(10);
@@ -62,6 +69,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
   delete ui;
+  delete api;
+  delete statusInProgressLabel;
+  delete statusEyeCarthesianLabel;
+  delete statusEyeSphericalLabel;
 }
 
 void MainWindow::samplerCallback() {
@@ -85,8 +96,25 @@ void MainWindow::on_actionAbout_Qt_triggered() {
 }
 
 void MainWindow::on_actionRender_scene_triggered() {
+    if (!inProgressMutex.tryLock())
+      return;
+
+    /* Statusbar. */
+    statusInProgressLabel->setText("Rendering...");
+    statusEyeCarthesianLabel->setText(tr(api->get_eye_carthesian_coordinates()));
+    statusEyeSphericalLabel->setText(tr(api->get_eye_spherical_coordinates()));
+
+    QCoreApplication::processEvents();
+
+    /* Rendering. */
     api->render_scene();
     ui->renderedImage->setPixmap(QPixmap(api->get_rendered_image()));
+
+    statusInProgressLabel->setText("Idle.");
+
+    QCoreApplication::processEvents();
+
+    inProgressMutex.unlock();
 }
 
 void MainWindow::on_actionExport_Image_triggered() {
@@ -95,4 +123,35 @@ void MainWindow::on_actionExport_Image_triggered() {
                                               tr("."),
                                               tr("Image Files (*.bmp *.gif *.png *.jpg *.jpeg)"));
   ui->renderedImage->pixmap()->save(file);
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+  double drotation = M_PI / 30.0;
+  double dradius = 10.0;
+
+  if (event->type() == QEvent::KeyPress) {
+    QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+    switch(keyEvent->key()){
+    case Qt::Key_Left:
+      api->set_eye_spherical_relatively(0.0, -drotation, 0.0);
+      break;
+    case Qt::Key_Right:
+      api->set_eye_spherical_relatively(0.0, +drotation, 0.0);
+      break;
+    case Qt::Key_Up:
+      api->set_eye_spherical_relatively(0.0, 0.0, -drotation);
+      break;
+    case Qt::Key_Down:
+      api->set_eye_spherical_relatively(0.0, 0.0, +drotation);
+      break;
+    case Qt::Key_PageUp:
+      api->set_eye_spherical_relatively(-dradius, 0.0, 0.0);
+      break;
+    case Qt::Key_PageDown:
+      api->set_eye_spherical_relatively(+dradius, 0.0, 0.0);
+      break;
+    }
+    on_actionRender_scene_triggered();
+  }
+  return false;
 }

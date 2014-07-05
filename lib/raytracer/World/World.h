@@ -9,6 +9,8 @@
 #include "ShadeRec.h"
 #include "Tracer.h"
 #include "ViewPlane.h"
+#include <cstring> /* for png++ streerror */
+#include <png++/png.hpp>
 #include <vector>
 using namespace std;
 

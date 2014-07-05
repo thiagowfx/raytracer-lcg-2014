@@ -43,7 +43,7 @@ namespace Raytracer {
   }
 
 
-  /** Chapter 16 */
+  /* Chapter 16 */
   bool PointLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
     double t = 0;
     const unsigned num_objects = sr.w.objects.size();

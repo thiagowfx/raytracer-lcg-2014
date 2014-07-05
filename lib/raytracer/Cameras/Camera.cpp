@@ -1,13 +1,9 @@
 #include "Camera.h"
 
 namespace Raytracer {
-  Camera::Camera() :
-    eye(0.0, 0.0, 250.0),
-    u(1.0, 0.0, 0.0),
-    v(0.0, 1.0, 0.0),
-    w(0.0, 0.0, 1.0),
-    up(0.0, 1.0, 0.0)
-  {}
+  Camera::Camera() {
+    compute_uvw();
+  }
 
 
   Camera::Camera(const Camera& c) :
@@ -26,7 +22,7 @@ namespace Raytracer {
   Camera::~Camera() {}
 
 
-  /* This computes an orthornormal basis given the view point, lookat point, and up vector */
+  /* This computes an orthornormal basis given the eye, lookat point, and up vector */
   void Camera::compute_uvw() {
     w = eye - lookat;
     w.normalize();

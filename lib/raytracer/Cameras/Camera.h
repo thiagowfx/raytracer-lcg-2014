@@ -1,8 +1,6 @@
 #ifndef _CAMERA_MINE_
 #define _CAMERA_MINE_
 
-#include <cstring> /* for png++ streerror */
-#include <png++/png.hpp>
 #include <Eigen/Dense>
 using Eigen::Vector2d;
 using Eigen::Vector3d;
@@ -11,61 +9,71 @@ namespace Raytracer {
   class World;
   class Camera {
   public:
+    /** Constructor. */
     Camera();
+
+    /** Copy constructor. */
     Camera(const Camera& camera);
+    
     virtual Camera* clone() const = 0;
     virtual ~Camera();
     virtual void render_scene(const World* w, const char* image_file) = 0;
     void set_eye(const Vector3d&);
-    void set_eye(double, double, double);
     void set_lookat(const Vector3d&);
-    void set_lookat(double,double,double);
     void set_up_vector(const Vector3d&);
-    void set_up_vector(double,double,double);
     void set_exposure_time(double exposure);
     void set_zoom(double zoom);
     void set_view_distance(double d);
-    void compute_uvw();
     Vector3d get_eye() const;
     double get_view_distance() const;
   protected:
-    Vector3d eye; /**< Camera position. */
-    Vector3d lookat = Vector3d::Zero(); /**< Point where the camera is looking at. */
-    Vector3d u, v, w; // orthonormal basis vectors
-    Vector3d up; // up vector
-    double exposure_time = 1.0; /**< Exposure time. */
-    double zoom = 1.0; /**< Zoom factor. More is nearer. */
-    double d = 250.0; /**< View plane distance. */
+    /** Camera position. */
+    Vector3d eye = Vector3d(0.0, 0.0, 250.0);
+
+    /** Point where the camera is looking at. */
+    Vector3d lookat = Vector3d::Zero();
+
+    /** Up vector. */
+    Vector3d up = Vector3d(0.0, 1.0, 0.0);
+
+    /** Orthonormal basis vector. */
+    Vector3d u = Vector3d(1.0, 0.0, 0.0);
+
+    /** Orthonormal basis vector. */
+    Vector3d v = Vector3d(0.0, 1.0, 0.0);
+
+    /** Orthonormal basis vector. */
+    Vector3d w = Vector3d(0.0, 0.0, 1.0);
+
+    /** Exposure time. */
+    double exposure_time = 1.0;
+
+    /** Zoom factor. More is nearer. */
+    double zoom = 1.0;
+
+    /** View plane distance. */
+    double d = 250.0;
+
+    /** Compute orthonormal basis vectors. Should be called every time when eye, lookat or up vectors are changed. */
+    void compute_uvw();
   };
 
 
-  inline void Camera::set_eye(const Vector3d& p) {
-    eye = p;
-  }
-
-
-  inline void Camera::set_eye(double x, double y, double z) {
-    eye = Vector3d(x,y,z);
+  inline void Camera::set_eye(const Vector3d& eye) {
+    this->eye = eye;
+    compute_uvw();
   }
 
 
   inline void Camera::set_lookat(const Vector3d& p) {
     lookat = p;
-  }
-
-
-  inline void Camera::set_lookat(double x, double y, double z) {
-    lookat = Vector3d(x,y,z);
+    compute_uvw();
   }
 
 
   inline void Camera::set_up_vector(const Vector3d& u) {
     up = u;
-  }
-
-
-  inline void Camera::set_up_vector(double x, double y, double z) {
-    up = Vector3d(x,y,z);
+    compute_uvw();
   }
 
 
