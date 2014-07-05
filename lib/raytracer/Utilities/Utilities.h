@@ -4,20 +4,37 @@
 #include <cstdlib>
 #include <time.h>
 
-const double kEpsilonShadows = 1.0e-3; /**< Small constant for shadows. */
-const double kEpsilon        = 1.0e-5; /**< Small constant. */
-const double kHugeValue      = 1.0e10; /**< Huge constant. */
+/** Small constant for shadows. */
+const double kEpsilonShadows = 1.0e-3;
 
-const double kKa = 0.20;  /**< Ambient Constant. */
-const double kKd = 0.80;  /**< Diffuse Constant. */
-const double kKs = 0.12;  /**< Specular Constant. */
-const double kExp = 10.0; /**< Specular Exponent. */
-const double kKr = 0.75;  /**< Reflective Constant. */
+/** Small constant. */
+const double kEpsilon = 1.0e-5;
 
-enum Ray_t { PRIMARY_RAY, SHADOW_RAY };
+/** Huge constant. */
+const double kHugeValue = 1.0e10;
 
-void generate_random_seed(); /**< Generate a new seed for randomness. */
-int get_random_int(int begin = 0, int end = RAND_MAX); /**< Return a random integer from begin to end, or from 0 to RAND_MAX. */
-double get_random_double(double begin = 0.0, double end = 1.0); /**< Return a random double from begin to end, or from 0.0 to 1.0. */
+/** Ambient Constant. Should be from 0.0 to 1.0. */
+const double kKa = 0.20;
+
+/** Diffuse Constant. Should be from 0.0 to 1.0. */
+const double kKd = 0.70;
+
+/** Specular Constant. Should be from 0.0 to 1.0. */
+const double kKs = 0.10;
+
+/** Specular Exponent from cosine. A reasonable number is from 1.0 to 20.0. */
+const double kExp = 10.0;
+
+/** Reflective Constant. */
+const double kKr = 0.75; 
+
+/** Generate a new seed for randomness. */
+void generate_random_seed();
+
+/** Return a random integer from begin to end, or from 0 to RAND_MAX. */
+int get_random_int(int begin = 0, int end = RAND_MAX);
+
+/** Return a random double from begin to end, or from 0.0 to 1.0. */
+double get_random_double(double begin = 0.0, double end = 1.0);
 
 #endif

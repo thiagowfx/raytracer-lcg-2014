@@ -7,8 +7,9 @@ RGBColor::RGBColor() {}
 RGBColor::RGBColor(double r, double g, double b) :
   r(r),
   g(g),
-  b(b)
-{}
+  b(b) {
+  normalize();
+}
 
 
 RGBColor::RGBColor(const RGBColor& c) :
@@ -46,6 +47,7 @@ RGBColor RGBColor::clamp_to_red() const {
   if (r > 1.0 || g > 1.0 || b > 1.0) {
     return RGBColor(1.0, 0.0, 0.0);
   }
-  else
+  else {
     return *this;
+  }
 }

@@ -1,9 +1,3 @@
-/* there is no default constructor as the World reference always has to be initialised
-   there is also no assignment operator as we don't want to assign the world
-   the copy constructor only copies the world reference
-   the ray tracer is written so that new ShadeRec objects are always constructed
-   using the first constructor or the copy constructor */
-
 #include "ShadeRec.h"
 
 namespace Raytracer {

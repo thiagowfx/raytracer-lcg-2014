@@ -9,8 +9,13 @@ namespace Raytracer {
    */
   class ViewPlane {
   public:
+    /** Constructor. */
     ViewPlane();
+
+    /** Destructor. */
     ~ViewPlane();
+
+    /** Copy constructor. */
     ViewPlane(const ViewPlane&);
 
     /** Horizontal Image Resolution. */

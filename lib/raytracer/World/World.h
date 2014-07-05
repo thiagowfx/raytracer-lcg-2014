@@ -18,15 +18,22 @@ namespace Raytracer {
    */
   class World {
   public:
+    /** Constructor. */
     World();
+
+    /** Destructor. */
     ~World();
 
     /** Camera. */
     Camera* camera_ptr = NULL;
+
+    /** Setter for camera. */
     void set_camera(Camera*);
 
     /** Tracer. */
     Tracer* tracer_ptr = NULL;
+
+    /** Setter for tracer. */
     void set_tracer(Tracer*);
 
     /** Light sources. */
@@ -49,16 +56,23 @@ namespace Raytracer {
     
     /** Background ambient light. */
     Ambient* ambient_ptr = new Ambient();
+
+    /** Setter for ambient light. */
     void set_ambient_light(Ambient*);
 
     /** Background color. */
     RGBColor background_color = black;
+
+    /** Setter for background color. */
     void set_background_color(RGBColor);
 
     /** Viewplane. */
     ViewPlane vp;
     
+    /** Try to hit objects with the ray, filling just bare bones information in the ShadeRec object. */
     ShadeRec hit_bare_bones_objects(const Ray&);
+
+    /** Try to hit objects with the ray, filling information in the ShadeRec object. */
     ShadeRec hit_objects(const Ray&);
   };
 

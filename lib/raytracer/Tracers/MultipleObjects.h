@@ -5,6 +5,9 @@
 #include "World.h"
 
 namespace Raytracer {
+  /**
+   * @brief Tracer which only shades the color of objects, using no lighting information at all.
+   */
   class MultipleObjects: public Tracer {
   public:
     MultipleObjects(World*);

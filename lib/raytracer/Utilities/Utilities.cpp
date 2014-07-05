@@ -1,6 +1,5 @@
 #include "Utilities.h"
 
-
 void generate_random_seed() {
   srand(time(NULL));
 }

@@ -6,12 +6,16 @@
 using namespace std;
 
 class RGBColor {
-public:
-  double r = 0.0; /**< Red component. */
-  double g = 0.0; /**< Green component. */
-  double b = 0.0; /**< Blue component. */
+ public:
+  /** Red component, from 0.0 to 1.0. */
+  double r = 0.0;
 
-public:
+  /** Green component. */
+  double g = 0.0;
+
+  /** Blue component. */
+  double b = 0.0;
+
   RGBColor();
   ~RGBColor();
   RGBColor(double, double, double);
@@ -24,12 +28,22 @@ public:
   RGBColor operator/ (const double a) const;
   RGBColor& operator/= (const double a);
   RGBColor operator* (const RGBColor& c) const;
-  bool operator== (const RGBColor& c) const;
-  bool operator!= (const RGBColor& c) const;
+
+  /** Return true if colors are equal. */
+  bool operator== (const RGBColor&) const;
+
+  /** Return true if colors are different. */
+  bool operator!= (const RGBColor&) const;
+
   RGBColor powc(double p) const;
+
+  /** Return the average of the color components. */
   double average() const;
+
   RGBColor normalize() const;
-  RGBColor clamp_to_red() const; /**< Return red if any component is greater than one. */
+
+  /** Return red if any component is greater than one. */
+  RGBColor clamp_to_red() const;
 };
 
 
@@ -78,7 +92,7 @@ inline RGBColor RGBColor::operator* (const RGBColor& c) const {
 
 
 inline bool RGBColor::operator== (const RGBColor& c) const {
-  const double kEpsilon = 1.0e-6;
+  const double kEpsilon = 1.0e-7;
   return fabs(r - c.r) < kEpsilon && fabs(g - c.g) < kEpsilon && fabs(b - c.b) < kEpsilon;
 }
 

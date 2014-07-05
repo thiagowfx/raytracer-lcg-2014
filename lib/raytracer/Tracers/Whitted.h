@@ -5,6 +5,9 @@
 #include "World.h"
 
 namespace Raytracer {
+  /**
+   * @brief Tracer which uses the Phong Model: ambient + diffuse + reflective radiance, plus (optionally) reflected rays.
+   */
   class Whitted: public Tracer {
   public:
     Whitted(World*);
