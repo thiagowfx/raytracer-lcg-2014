@@ -1,10 +1,6 @@
-/**
-
-\mainpage Raytracer Documentation
-
-# To developers
+# To developers {#mainpage}
 ## Overview
-This project uses [http://www.cmake.org/](CMake) as its management tool. Its directory tree is
+This project uses [CMake](http://www.cmake.org/) as its management tool. Its directory tree is
 organized as follows:
 
 - /
@@ -18,7 +14,7 @@ organized as follows:
 The main **build** file is `lib/CMakeLists.txt`. Previously we
 maintained several of those, however this led to duplication of
 information. **Documentation** is maintained as a single main
-[http://www.doxygen.org/](Doxyfile), plus source comments.
+[Doxyfile](http://www.doxygen.org/), plus source comments.
 
 The `lib/` folder contains project source files, as well as some
 assets for the UI. To build the project, create a `build/` folder,
@@ -26,8 +22,8 @@ assets for the UI. To build the project, create a `build/` folder,
 `lib/qtRaytracer`.
 
 It is recommended to develop this project either in
-[https://www.archlinux.org/](Arch Linux) or
-[http://www.ubuntu.com/](Ubuntu) -- non-LTS, if possible. However,
+[Arch Linux](https://www.archlinux.org/) or
+[Ubuntu](http://www.ubuntu.com/) -- non-LTS, if possible. However,
 if you choose Ubuntu, pay attention to the version of its packages, as
 they quickly become out-of-date.
 
@@ -41,10 +37,10 @@ they quickly become out-of-date.
 - vcglib - Visualization and Computer Graphics library for dealing with triangle meshes
 - Doxygen 1.8.x+ - Documentation Generator
 
-It is recommended to use [http://qt-project.org/](Qt Creator) as your
+It is recommended to use [Qt Creator](http://qt-project.org/) as your
 main IDE together with your favorite text editor, and
-[https://ccache.samba.org/](ccache) to speed up successive
-compilations. [http://feh.finalrewind.org/](feh) is a simple image
+[ccache](https://ccache.samba.org/) to speed up successive
+compilations. [feh](http://feh.finalrewind.org/) is a simple image
 viewer.
 
 # To final users
@@ -60,5 +56,3 @@ viewer.
   - https://code.google.com/p/openglfun/
   - https://github.com/stefanoborini/python-raytracer
   - https://code.google.com/p/grounduptracer/
-
-*/
