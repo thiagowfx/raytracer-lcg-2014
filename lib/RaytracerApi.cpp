@@ -129,8 +129,13 @@ namespace Raytracer {
 
   void Api::init() {
     w = new World();
-    w->set_tracer(new Whitted(w));
     Raytracer::Pinhole* pinhole = new Pinhole();
+    pinhole->set_eye(Vector3d(150.0, 0, 150.0));
+    pinhole->compute_uvw();
     w->set_camera(pinhole);
+    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
+    sp0->set_color(red);
+    sp0->set_material(Matte::dummy(red));
+    w->add_object(sp0);
   }
 }

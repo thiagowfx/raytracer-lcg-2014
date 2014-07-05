@@ -7,7 +7,6 @@
 namespace Raytracer {
   class AreaLighting: public Tracer {
   public:
-    AreaLighting();
     AreaLighting(World*);
     virtual ~AreaLighting();
     virtual const char* to_string();

@@ -1,13 +1,14 @@
 #ifndef _CAMERA_MINE_
 #define _CAMERA_MINE_
 
+#include <cstring> /* for png++ streerror */
+#include <png++/png.hpp>
 #include <Eigen/Dense>
+#include "World.h"
 using Eigen::Vector2d;
 using Eigen::Vector3d;
 
 namespace Raytracer {
-  class World;
-  
   class Camera {
   public:
     Camera();
@@ -36,6 +37,7 @@ namespace Raytracer {
     double exposure_time = 1.0; /**< Exposure time. */
     double zoom = 1.0; /**< Zoom factor. More is nearer. */
     double d = 250.0; /**< View plane distance. */
+    void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image, const World* w) const;
   };
 
 

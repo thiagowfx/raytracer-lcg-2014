@@ -51,7 +51,7 @@ namespace Raytracer {
         }
         L /= n;
         L *= exposure_time;
-        w->display_pixel(r, c, L, image);
+        display_pixel(r, c, L, image, w);
       }
     }
     image.write(image_file);

@@ -7,7 +7,6 @@
 namespace Raytracer {
   class Whitted: public Tracer {
   public:
-    Whitted();
     Whitted(World*);
     virtual ~Whitted();
     virtual const char* to_string();

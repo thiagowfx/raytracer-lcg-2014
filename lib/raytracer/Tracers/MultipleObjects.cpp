@@ -1,11 +1,6 @@
 #include "MultipleObjects.h"
 
 namespace Raytracer {
-  MultipleObjects::MultipleObjects() :
-    Tracer()
-  {}
-
-
   MultipleObjects::MultipleObjects(World* w) :
     Tracer(w)
   {}

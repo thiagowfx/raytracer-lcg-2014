@@ -7,7 +7,6 @@
 namespace Raytracer {
   class MultipleObjects: public Tracer {
   public:
-    MultipleObjects();
     MultipleObjects(World*);
     virtual ~MultipleObjects();
     virtual const char* to_string();

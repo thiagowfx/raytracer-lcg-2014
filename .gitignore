@@ -12,10 +12,11 @@ CMakeLists.txt.user
 \#*
 
 # documentation
-docs/doc.html
 docs/html/
 
-# gnu global tags
+# tags
+CTAGS
+ETAGS
 GTAGS
 GRTAGS
 GPATH

@@ -49,4 +49,26 @@ namespace Raytracer {
       w = Vector3d(0.0, -1.0, 0.0);
     }
   }
+
+
+  void Camera::display_pixel(const int row, const int column,
+                             const RGBColor& raw_color /**< Pixel color computed by the raytracer */,
+                             png::image<png::rgb_pixel>& image,
+                             const World* w) const {
+    RGBColor mapped_color;
+    if (w->vp.out_of_gamut) {
+      mapped_color = raw_color.clamp_to_red();
+    }
+    else {
+      mapped_color = raw_color.normalize();
+    }
+    if (w->vp.gamma != 1.0) {
+      mapped_color = mapped_color.powc(1.0 / w->vp.gamma);
+    }
+    int x = column;
+    int y = w->vp.vres - row - 1;
+    image[y][x] = png::rgb_pixel(int(mapped_color.r * 255),
+                                 int(mapped_color.g * 255),
+                                 int(mapped_color.b * 255));
+  }
 }

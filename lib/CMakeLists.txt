@@ -102,3 +102,9 @@ target_link_libraries(
   ${QT_RAYTRACER}
   ${PNG_LIBRARY}
   )
+
+########## DOCUMENTATION ##########
+add_custom_target(doc
+  COMMAND doxygen "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile"
+  COMMENT "Generate documentation."
+  )

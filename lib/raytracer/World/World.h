@@ -2,19 +2,20 @@
 #define _WORLD_MINE_
 
 #include "Ambient.h"
-#include "Camera.h"
 #include "GeometricObject.h"
 #include "Light.h"
 #include "RGBColor.h"
 #include "ShadeRec.h"
 #include "Tracer.h"
 #include "ViewPlane.h"
-#include <cstring> /* for png++ streerror */
-#include <png++/png.hpp>
 #include <vector>
 using namespace std;
 
 namespace Raytracer {
+  class Camera;
+  /**
+   * @brief Stores all objects and lights, and contains helper objects, such as camera, tracer and ambient light.
+   */
   class World {
   public:
     World();
@@ -30,14 +31,22 @@ namespace Raytracer {
 
     /** Light sources. */
     vector<Light*> lights;
-    void add_light(Light*); /**< Add a new light source. */
-    void delete_lights(); /**< Delete all light sources. */
 
+    /** Add a new light source. */
+    void add_light(Light*);
+
+    /** Delete all light sources. */
+    void delete_lights();
+    
     /** Geometric Objects. */
     vector<GeometricObject*> objects;
-    void add_object(GeometricObject*); /**< Add a new object. */
-    void delete_objects(); /**< Delete all objects. */
 
+    /** Add a new object. */
+    void add_object(GeometricObject*);
+
+    /** Delete all objects. */
+    void delete_objects();
+    
     /** Background ambient light. */
     Ambient* ambient_ptr = new Ambient();
     void set_ambient_light(Ambient*);
@@ -46,9 +55,9 @@ namespace Raytracer {
     RGBColor background_color = black;
     void set_background_color(RGBColor);
 
+    /** Viewplane. */
     ViewPlane vp;
-
-    void display_pixel(const int row, const int column, const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
+    
     ShadeRec hit_bare_bones_objects(const Ray&);
     ShadeRec hit_objects(const Ray&);
   };

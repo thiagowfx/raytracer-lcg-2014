@@ -1,0 +1,64 @@
+/**
+
+\mainpage Raytracer Documentation
+
+# To developers
+## Overview
+This project uses [http://www.cmake.org/](CMake) as its management tool. Its directory tree is
+organized as follows:
+
+- /
+  - CMakeLists.txt
+  - lib/
+    - assets/
+    - pcs-detection/
+    - raytracer/
+    - CMakeLists.txt
+
+The main **build** file is `lib/CMakeLists.txt`. Previously we
+maintained several of those, however this led to duplication of
+information. **Documentation** is maintained as a single main
+[http://www.doxygen.org/](Doxyfile), plus source comments.
+
+The `lib/` folder contains project source files, as well as some
+assets for the UI. To build the project, create a `build/` folder,
+`cd` into it, then run `cmake ../ && make`. Compiled binary will be
+`lib/qtRaytracer`.
+
+It is recommended to develop this project either in
+[https://www.archlinux.org/](Arch Linux) or
+[http://www.ubuntu.com/](Ubuntu) -- non-LTS, if possible. However,
+if you choose Ubuntu, pay attention to the version of its packages, as
+they quickly become out-of-date.
+
+## Build Dependencies
+- AntTweakBar
+- Eigen 3.x+ - C++ linear algebra library
+- Glew - OpenGL extension wrangler library
+- Qt 5.x+ - GUI Toolkit
+- cmake 2.6.x+ - Build management tool
+- g++ 4.6+ - C/C++ compiler
+- vcglib - Visualization and Computer Graphics library for dealing with triangle meshes
+- Doxygen 1.8.x+ - Documentation Generator
+
+It is recommended to use [http://qt-project.org/](Qt Creator) as your
+main IDE together with your favorite text editor, and
+[https://ccache.samba.org/](ccache) to speed up successive
+compilations. [http://feh.finalrewind.org/](feh) is a simple image
+viewer.
+
+# To final users
+
+# See also / Resources
+- book companion page - http://www.raytracegroundup.com/
+- cmake manual - http://cmake.org/cmake/help/v2.8.8/cmake.html
+- Repositories
+  - https://github.com/mikestaub/Ray-Tracer/
+  - https://github.com/danoli3/Multithreaded-Ray-Tracer
+  - https://code.google.com/p/pwsraytracer/
+  - https://code.google.com/p/vcraytracer/
+  - https://code.google.com/p/openglfun/
+  - https://github.com/stefanoborini/python-raytracer
+  - https://code.google.com/p/grounduptracer/
+
+*/

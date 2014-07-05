@@ -15,7 +15,6 @@ namespace Raytracer {
    */
   class Tracer {
   public:
-    Tracer();
     Tracer(World*);
     virtual ~Tracer();
     virtual const char* to_string() = 0;

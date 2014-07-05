@@ -1,9 +1,6 @@
 #include "Tracer.h"
 
 namespace Raytracer {
-  Tracer::Tracer() {}
-
-
   Tracer::Tracer(World* w) :
     world_ptr(w)
   {}

@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->pixelSizeDoubleSpinBox->setSingleStep(0.1);
   api->set_pixel_size(1.0);
   ui->pixelSizeDoubleSpinBox->setValue(api->get_pixel_size());
-  QObject::connect(ui->pixelSizeDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_pixel_size(int)));
+  QObject::connect(ui->pixelSizeDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_pixel_size(double)));
 
   ui->gammaLevelDoubleSpinBox->setMinimum(0.01);
   ui->gammaLevelDoubleSpinBox->setSingleStep(0.1);
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QObject::connect(ui->samplerTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(samplerCallback()));
 
   ui->tracerTypeComboBox->setModel(api->get_tracer_type_model());
-  api->set_tracer_type(tr("Whitted"));
+  api->set_tracer_type(tr("MultipleObjects"));
   ui->tracerTypeComboBox->setCurrentText(api->get_tracer_type());
   QObject::connect(ui->tracerTypeComboBox, SIGNAL(currentIndexChanged(QString)), api, SLOT(set_tracer_type(QString)));
 

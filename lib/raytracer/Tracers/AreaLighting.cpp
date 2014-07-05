@@ -1,11 +1,6 @@
 #include "AreaLighting.h"
 
 namespace Raytracer {
-  AreaLighting::AreaLighting() :
-    Tracer()
-  {}
-
-
   AreaLighting::AreaLighting(World* w) :
     Tracer(w)
   {}

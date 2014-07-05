@@ -1,11 +1,6 @@
 #include "Whitted.h"
 
 namespace Raytracer {
-  Whitted::Whitted() :
-    Tracer()
-  {}
-
-
   Whitted::Whitted(World* w) :
     Tracer(w)
   {}
