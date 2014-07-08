@@ -1,26 +1,35 @@
-#ifndef __AMBIENT__
-#define __AMBIENT__
+#ifndef _AMBIENT_MINE_
+#define _AMBIENT_MINE_
 
 #include "Light.h"
 
 namespace Raytracer {
+  /**
+   * @brief Light that is present everywhere.
+   */
   class Ambient: public Light {
   public:
     Ambient();
     Ambient(const Ambient& a);
     virtual ~Ambient();
     virtual Light* clone() const;
-    Ambient& operator= (const Ambient& rhs);
-    virtual void scale_radiance(const double b);
-    virtual void set_color(const RGBColor&);
-    virtual void set_color(double,double,double);
     virtual Vector3d get_direction(ShadeRec& s);
     virtual RGBColor L(ShadeRec& s);
+    void scale_radiance(const double b);
+    void set_color(const RGBColor);
+    double get_radiance() const;
+    RGBColor get_color() const;
+    virtual const char* to_string() const;
+    
+    /** Chapter 16: Always false. */
     virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
 
   protected:
-    double ls = 1.0; /**< Radiance of light. */
-    RGBColor color = white; /**< Color of light. */
+    /** Radiance of light. */
+    double ls = 1.0;
+
+    /** Color of light. */
+    RGBColor color = white;
   };
 
 
@@ -29,16 +38,19 @@ namespace Raytracer {
   }
 
 
-  inline void Ambient::set_color(const RGBColor& color) {
+  inline void Ambient::set_color(const RGBColor color) {
     this->color = color;
   }
 
 
-  inline void Ambient::set_color(double r, double g, double b) {
-    color.r = r;
-    color.g = g;
-    color.b = b;
+  inline double Ambient::get_radiance() const {
+    return ls;
+  }
+
+
+  inline RGBColor Ambient::get_color() const {
+    return color;
   }
 }
 
-#endif
+#endif // _AMBIENT_MINE_

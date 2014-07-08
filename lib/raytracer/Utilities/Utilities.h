@@ -1,9 +1,10 @@
-#ifndef __UTILITIES__
-#define __UTILITIES__
+#ifndef _UTILITIES_MINE_
+#define _UTILITIES_MINE_
 
 #include <cstdlib>
 #include <time.h>
 #include <Eigen/Dense>
+
 using Eigen::Vector3d;
 
 /** Small constant for shadows. */
@@ -25,7 +26,7 @@ const double kKd = 0.70;
 const double kKs = 0.10;
 
 /** Specular Exponent from cosine. A reasonable number is from 1.0 to 20.0. */
-const double kExp = 10.0;
+const double kExp = 12.0;
 
 /** Reflective Constant. */
 const double kKr = 0.75; 
@@ -39,10 +40,4 @@ int get_random_int(int begin = 0, int end = RAND_MAX);
 /** Return a random double from begin to end, or from 0.0 to 1.0. */
 double get_random_double(double begin = 0.0, double end = 1.0);
 
-/** Convert from carthesian coordinates to spherical coordinates. */
-Vector3d carthesian_to_spherical(Vector3d);
-
-/** Convert from spherical coordinates to carthesian coordinates. */
-Vector3d spherical_to_carthesian(Vector3d);
-
-#endif
+#endif // _UTILITIES_MINE_

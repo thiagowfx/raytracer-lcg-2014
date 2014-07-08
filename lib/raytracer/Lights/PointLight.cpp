@@ -19,17 +19,6 @@ namespace Raytracer {
   }
 
 
-  PointLight& PointLight::operator= (const PointLight& rhs) {
-    if (this != &rhs) {
-      Light::operator= (rhs);
-      ls = rhs.ls;
-      color = rhs.color;
-      location = rhs.location;
-    }
-    return *this;
-  }
-
-
   PointLight::~PointLight () {}
 
 
@@ -49,7 +38,7 @@ namespace Raytracer {
     const unsigned num_objects = sr.w.objects.size();
     const double distance = (location - ray.origin).norm();
     for (unsigned j = 0; j < num_objects; ++j)
-      /** t < d means: an object only blocks a point light if it is before the light */
+      /* t < d means: an object only blocks a point light if it is before the light */
       if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < distance)
         return true;
     return false;

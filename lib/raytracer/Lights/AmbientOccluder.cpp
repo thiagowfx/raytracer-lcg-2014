@@ -9,12 +9,11 @@ namespace Raytracer {
 
   AmbientOccluder::AmbientOccluder(const AmbientOccluder& a) :
     Ambient(a),
-    min_amount(a.min_amount),
+    minimum_amount(a.minimum_amount),
     u(a.u),
     v(a.v),
     w(a.w)
   {
-    // need to do a deep copy of the sampler
     if(a.sampler_ptr)
       sampler_ptr = a.sampler_ptr->clone();
   }
@@ -22,22 +21,6 @@ namespace Raytracer {
 
   Ambient* AmbientOccluder::clone() const {
     return new AmbientOccluder(*this);
-  }
-
-
-  AmbientOccluder& AmbientOccluder::operator=(const AmbientOccluder& rhs) {
-    if (this != &rhs) {
-      Light::operator= (rhs);
-      min_amount = rhs.min_amount;
-      u = rhs.u;
-      v = rhs.v;
-      w = rhs.w;
-      // need to do a deep copy of the sampler
-      if(rhs.sampler_ptr != NULL) {
-        sampler_ptr = rhs.sampler_ptr->clone();
-      }
-    }
-    return *this;
   }
 
 
@@ -60,17 +43,23 @@ namespace Raytracer {
   }
 
 
+  const char *AmbientOccluder::to_string() const {
+    return "AmbientOccluder";
+  }
+
+
   RGBColor AmbientOccluder::L(ShadeRec& sr) {
     w = sr.normal;
     v = w.cross(Vector3d(0.0072, 1.0, 0.0034)); // jitter the up vector in case normal is vertical
     v.normalize();
     u = v.cross(w);
     Ray shadow_ray(sr.hit_point, get_direction(sr));
-
-    if (in_shadow(shadow_ray, sr))
-      return min_amount * ls * color;
-    else
+    if (in_shadow(shadow_ray, sr)) {
+      return minimum_amount * ls * color;
+    }
+    else {
       return ls * color;
+    }
   }
 
 

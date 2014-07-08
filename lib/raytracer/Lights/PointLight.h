@@ -6,30 +6,31 @@
 #include "World.h"
 
 namespace Raytracer {
-  /** @brief Point Light.
-   *
-   *  Represents a point light, having a position, a color and an intensity.
+  /**
+   * @brief Represents a point light, having a position, a color and an intensity.
    */
   class PointLight: public Light {
   public:
     PointLight();
     PointLight(const PointLight& a);
     virtual Light* clone() const;
-    PointLight& operator= (const PointLight& rhs);
     virtual ~PointLight();
     void scale_radiance(double);
     void set_color(const RGBColor&);
-    void set_color(double,double,double);
     void set_location(Vector3d);
-    void set_location(double,double,double);
     virtual Vector3d get_direction(ShadeRec& sr);
     virtual RGBColor L(ShadeRec& sr);
-    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+    virtual bool in_shadow(const Ray&, ShadeRec&) const;
 
   private:
-    double ls = 1.0; /**< Radiance of light. */
-    RGBColor color = white; /**< Color of light. */
-    Vector3d location = Vector3d::Zero(); /**< Location of light. */
+    /** Radiance of light. */
+    double ls = 1.0;
+
+    /** Color of light. */
+    RGBColor color = white;
+
+    /** Location of light. */
+    Vector3d location = Vector3d::Zero();
   };
 
 
@@ -38,20 +39,8 @@ namespace Raytracer {
   }
 
 
-  inline void PointLight::set_color(double r, double g, double b) {
-    color.r = r;
-    color.g = g;
-    color.b = b;
-  }
-
-
   inline void PointLight::set_location(Vector3d location) {
     this->location = location;
-  }
-
-
-  inline void PointLight::set_location(double x, double y, double z) {
-    this->location = Vector3d(x,y,z);
   }
 
 

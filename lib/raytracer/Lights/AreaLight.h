@@ -12,7 +12,6 @@ namespace Raytracer {
     AreaLight(const AreaLight& al);
     virtual Light* clone() const;
     virtual ~AreaLight();
-    AreaLight& operator= (const AreaLight& rhs);
     void set_object(GeometricObject* obj_ptr);
     virtual Vector3d get_direction(ShadeRec& s);
     virtual RGBColor L(ShadeRec& sr);
@@ -27,6 +26,7 @@ namespace Raytracer {
     Vector3d wi; // unit direction from hit point being shaded to sample point on light surface
   };
 
+  
   inline void AreaLight::set_object(GeometricObject* obj_ptr) {
     object_ptr = obj_ptr;
     material_ptr = object_ptr->get_material();

@@ -14,7 +14,6 @@ namespace Raytracer {
   public:
     Light();
     Light(const Light& ls);
-    Light& operator= (const Light& rhs);
     virtual Light* clone() const = 0;
     virtual ~Light();
     virtual Vector3d get_direction(ShadeRec&) = 0;

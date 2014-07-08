@@ -38,26 +38,6 @@ namespace Raytracer {
   }
 
 
-  AreaLight& AreaLight::operator= (const AreaLight& rhs) {
-    if (this != &rhs) {
-      Light::operator=(rhs);
-      if (object_ptr) {
-        delete object_ptr;
-        object_ptr = NULL;
-      }
-      if (rhs.object_ptr)
-        object_ptr = rhs.object_ptr->clone();
-      if (material_ptr) {
-        delete material_ptr;
-        material_ptr = NULL;
-      }
-      if (rhs.material_ptr)
-        material_ptr = rhs.material_ptr->clone();
-    }
-    return *this;
-  }
-
-
   Vector3d AreaLight::get_direction(ShadeRec& sr) {
     sample_point = object_ptr->sample(); // used in the G function
     light_normal = object_ptr->get_normal(sample_point);
@@ -69,22 +49,22 @@ namespace Raytracer {
 
   RGBColor AreaLight::L(ShadeRec& sr) {
     double ndotd = -light_normal.dot(wi);
-    if (ndotd > 0.0)
+    if (ndotd > 0.0) {
       return (material_ptr->get_Le(sr));
-    else
+    }
+    else {
       return black;
+    }
   }
 
 
   bool AreaLight::in_shadow(const Ray& ray, ShadeRec& sr) const {
     double t;
-    int num_objects = sr.w.objects.size();
+    const unsigned num_objects = sr.w.objects.size();
     double ts = (sample_point - ray.origin).dot(ray.direction);
-
-    for (int j = 0; j < num_objects; j++)
+    for (unsigned j = 0; j < num_objects; j++)
       if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts)
         return true;
-
     return false;
   }
 

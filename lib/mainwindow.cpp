@@ -78,6 +78,19 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->backgroundColorPushButton->setPalette(api->get_background_color());
   QObject::connect(ui->backgroundColorPushButton, SIGNAL(clicked()), this, SLOT(backgroundColorCallback()));
   QObject::connect(ui->backgroundColorPushButton, SIGNAL(clicked()), this, SLOT(autoRenderCallback()));
+
+  ui->ambientLightRadianceDoubleSpinBox->setSingleStep(0.1);
+  ui->ambientLightTypeComboBox->setModel(api->get_ambient_light_type_model());
+  api->set_ambient_light("Ambient", QColor(Qt::white), 1.0);
+  ui->ambientLightColorPushButton->setPalette(api->get_ambient_light_color());
+  ui->ambientLightRadianceDoubleSpinBox->setValue(api->get_ambient_light_radiance());
+  ui->ambientLightTypeComboBox->setCurrentText(api->get_ambient_light_type());
+  QObject::connect(ui->ambientLightColorPushButton, SIGNAL(clicked()), this, SLOT(ambientLightColorCallback()));
+  QObject::connect(ui->ambientLightColorPushButton, SIGNAL(clicked()), this, SLOT(autoRenderCallback()));
+  QObject::connect(ui->ambientLightRadianceDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(ambientLightCallback()));
+  QObject::connect(ui->ambientLightRadianceDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
+  QObject::connect(ui->ambientLightTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ambientLightCallback()));
+  QObject::connect(ui->ambientLightTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(autoRenderCallback()));
 }
 
 MainWindow::~MainWindow() {
@@ -99,6 +112,20 @@ void MainWindow::backgroundColorCallback() {
     ui->backgroundColorPushButton->setPalette(QPalette(color));
     api->set_background_color(color);
   }
+}
+
+void MainWindow::ambientLightColorCallback() {
+  QColor color = QColorDialog::getColor(Qt::white, this);
+  if (color.isValid()) {
+    ui->ambientLightColorPushButton->setPalette(QPalette(color));
+    ambientLightCallback();
+  }
+}
+
+void MainWindow::ambientLightCallback() {
+  api->set_ambient_light(ui->ambientLightTypeComboBox->currentText(),
+                         ui->ambientLightColorPushButton->palette().color(QPalette::Button),
+                         ui->ambientLightRadianceDoubleSpinBox->value());
 }
 
 void MainWindow::autoRenderCallback() {
@@ -145,9 +172,8 @@ void MainWindow::on_actionExport_Image_triggered() {
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
-  double drotation = M_PI / 30.0;
-  double dradius = 10.0;
-
+  const double drotation = M_PI / 30.0;
+  const double dradius = 10.0;
   if (event->type() == QEvent::KeyPress) {
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     switch(keyEvent->key()){

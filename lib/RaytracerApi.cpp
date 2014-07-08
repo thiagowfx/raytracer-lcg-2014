@@ -23,6 +23,53 @@ namespace Raytracer {
     delete w;
   }
 
+  Vector3d Api::carthesian_to_spherical(const Vector3d& c) {
+    /* Carthesian coordinates: c(0) = x, c(1) = y, c(2) = z. */
+
+    /* Spherical coordinates. */
+    Vector3d s;
+
+    /* Radius (r). Between zero and +infinity. */
+    s(0) = c.norm();
+
+    /* phi */
+    s(1) = atan2(c(2), c(0)); // y -> z
+
+    /* theta */
+    s(2) = acos(c(1) / s(0)); // z -> y
+
+    return s;
+  }
+
+  Vector3d Api::spherical_to_carthesian(const Vector3d& s) {
+    /* Spherical coordinates: s(0) = r, s(1) = phi, s(2) = theta. */
+
+    /* Carthesian coordinates. */
+    Vector3d c;
+
+    /* x */
+    c(0) = s(0) * sin(s(2)) * cos(s(1));
+
+    /* z */
+    c(2) = s(0) * sin(s(2)) * sin(s(1)); // c(2) --> c(1)
+
+    /* y */
+    c(1) = s(0) * cos(s(2));  // c(1) --> c(2)
+
+    return c;
+  }
+
+
+  QColor Api::rgbcolor_to_qcolor(const RGBColor& color) {
+    QColor qcolor;
+    qcolor.setRgbF(color.r, color.g, color.b);
+    return qcolor;
+  }
+
+  RGBColor Api::qcolor_to_rgbcolor(const QColor& color) {
+    return RGBColor(color.redF(), color.greenF(), color.blueF());
+  }
+
   void Api::set_hres(int hres) {
     w->vp.set_hres(hres);
   }
@@ -96,10 +143,13 @@ namespace Raytracer {
   }
 
   QStringListModel* Api::get_sampler_type_model() {
-    QStringListModel* q = new QStringListModel();
-    q->setStringList(QStringList() << "Hammersley" << "Jittered" << "MultiJittered" <<
-                            "NRooks" << "PureRandom" << "Regular");
-    return q;
+    return new QStringListModel(QStringList() <<
+                                "Hammersley" <<
+                                "Jittered" <<
+                                "MultiJittered" <<
+                                "NRooks" <<
+                                "PureRandom" <<
+                                "Regular");
   }
 
   void Api::set_tracer_type(QString name) {
@@ -117,20 +167,18 @@ namespace Raytracer {
   }
 
   QStringListModel* Api::get_tracer_type_model() {
-    QStringListModel* q = new QStringListModel();
-    q->setStringList(QStringList() << "AreaLighting" << "MultipleObjects" << "Whitted");
-    return q;
+    return new QStringListModel(QStringList() <<
+                                "AreaLighting" <<
+                                "MultipleObjects" <<
+                                "Whitted");
   }
 
   void Api::set_background_color(QColor color) {
-    w->set_background_color(RGBColor(color.redF(), color.greenF(), color.blueF()));
+    w->set_background_color(qcolor_to_rgbcolor(color));
   }
 
   QColor Api::get_background_color() {
-    QColor qcolor;
-    RGBColor color = w->background_color;
-    qcolor.setRgbF(color.r, color.g, color.b);
-    return qcolor;
+    return rgbcolor_to_qcolor(w->background_color);
   }
 
   void Api::render_scene() {
@@ -167,6 +215,37 @@ namespace Raytracer {
     Vector3d v = carthesian_to_spherical(w->camera_ptr->get_eye());
     sprintf(buffer, "(%.2lf, %.2lfº, %.2lfº)", v(0), v(1) * (180.0 / M_PI), v(2) * (180.0 / M_PI));
     return buffer;
+  }
+
+  void Api::set_ambient_light(QString name, QColor color, double radiance) {
+    Ambient* ambient;
+    if (name == "Ambient") {
+      ambient = new Ambient();
+    }
+    else { // if (name == "AmbientOccluder")
+      ambient = new AmbientOccluder();
+    }
+    ambient->set_color(qcolor_to_rgbcolor(color));
+    ambient->scale_radiance(radiance);
+    w->set_ambient_light(ambient);
+  }
+
+  const char *Api::get_ambient_light_type() {
+    return w->ambient_ptr->to_string();
+  }
+
+  QStringListModel *Api::get_ambient_light_type_model() {
+    return new QStringListModel(QStringList() <<
+                                "Ambient" <<
+                                "AmbientOccluder");
+  }
+
+  QColor Api::get_ambient_light_color() {
+    return rgbcolor_to_qcolor(w->ambient_ptr->get_color());
+  }
+
+  double Api::get_ambient_light_radiance() {
+    return w->ambient_ptr->get_radiance();
   }
 
 }

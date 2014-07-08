@@ -9,11 +9,6 @@ namespace Raytracer {
   {}
 
 
-  Light& Light::operator= (const Light& rhs) {
-    return *this;
-  }
-
-
   Light::~Light() {}
 
 

@@ -18,6 +18,8 @@ public:
 private slots:
   void samplerCallback();
   void backgroundColorCallback();
+  void ambientLightColorCallback();
+  void ambientLightCallback();
   void autoRenderCallback();
 
   /******************* Actions ******************/

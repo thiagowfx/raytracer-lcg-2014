@@ -12,16 +12,16 @@ namespace Raytracer {
     AmbientOccluder();
     AmbientOccluder(const AmbientOccluder& a);
     virtual Ambient* clone() const;
-    AmbientOccluder& operator=(const AmbientOccluder& rhs);
     virtual ~AmbientOccluder();
     virtual Vector3d get_direction(ShadeRec& sr);
     virtual RGBColor L(ShadeRec& s);
     bool in_shadow(const Ray& ray, ShadeRec& sr) const;
     void set_sampler(Sampler* s_ptr);
-    void set_min_amount(int n);
+    void set_minimum_amount(int n);
+    virtual const char* to_string() const;
 
   private:
-    double min_amount = 0.25;
+    double minimum_amount = 0.30;
     Vector3d u = Vector3d::Zero();
     Vector3d v = Vector3d::Zero();
     Vector3d w = Vector3d::Zero();
@@ -29,8 +29,8 @@ namespace Raytracer {
   };
 
 
-  inline void AmbientOccluder::set_min_amount(int n) {
-    min_amount = n;
+  inline void AmbientOccluder::set_minimum_amount(int minimum_amount) {
+    this->minimum_amount = minimum_amount;
   }
 }
 

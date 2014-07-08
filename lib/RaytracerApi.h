@@ -88,6 +88,19 @@ namespace Raytracer {
     /** Destructor. */
     ~Api();
 
+    /******************* Utilities *******************/
+    /** Convert from carthesian coordinates to spherical coordinates. */
+    Vector3d carthesian_to_spherical(const Vector3d&);
+
+    /** Convert from spherical coordinates to carthesian coordinates. */
+    Vector3d spherical_to_carthesian(const Vector3d&);
+
+    /** Convert from RGBColor to QColor. */
+    QColor rgbcolor_to_qcolor(const RGBColor&);
+
+    /** Convert from QColor to RGBColor. */
+    RGBColor qcolor_to_rgbcolor(const QColor&);
+
   public slots:
     /******************* API *******************/
     /** ViewPlane: set horizontal resolution */
@@ -173,6 +186,21 @@ namespace Raytracer {
 
     /** Get eye spherical coordinates as (r, p, t) */
     const char* get_eye_spherical_coordinates();
+
+    /** World: set ambient light type, color and radiance. */
+    void set_ambient_light(QString, QColor, double);
+
+    /** World: get ambient light type. */
+    const char* get_ambient_light_type();
+
+    /** World: get ambient light type model. */
+    QStringListModel* get_ambient_light_type_model();
+
+    /** World: get ambient light color. */
+    QColor get_ambient_light_color();
+
+    /** World: get ambient light radiance. */
+    double get_ambient_light_radiance();
 
   private:
     World* w;

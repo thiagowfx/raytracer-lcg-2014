@@ -18,16 +18,6 @@ namespace Raytracer {
   }
 
 
-  Ambient& Ambient::operator=(const Ambient& rhs) {
-    if (this != &rhs) {
-      Light::operator= (rhs);
-      ls          = rhs.ls;
-      color = rhs.color;
-    }
-    return *this;
-  }
-
-
   Ambient::~Ambient () {}
 
 
@@ -41,7 +31,11 @@ namespace Raytracer {
   }
 
 
-  /** Chapter 16: Always false */
+  const char* Ambient::to_string() const {
+    return "Ambient";
+  }
+
+  
   bool Ambient::in_shadow(const Ray& ray, ShadeRec& sr) const {
     return false;
   }

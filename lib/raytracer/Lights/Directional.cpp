@@ -19,21 +19,9 @@ namespace Raytracer {
   }
 
 
-  Directional& Directional::operator= (const Directional& rhs) {
-    if (this != &rhs) {
-      Light::operator= (rhs);
-      ls          = rhs.ls;
-      color = rhs.color;
-      direction   = rhs.direction;
-    }
-    return *this;
-  }
-
-
   Directional::~Directional() {}
 
 
-  /* as this function is virtual, it shouldn't be inlined */
   Vector3d Directional::get_direction(ShadeRec& sr) {
     return direction;
   }
@@ -46,12 +34,10 @@ namespace Raytracer {
 
   bool Directional::in_shadow(const Ray& ray, ShadeRec& sr) const {
     double t;
-    const int num_objects = sr.w.objects.size();
-
-    for (int j = 0; j < num_objects; j++)
+    const unsigned num_objects = sr.w.objects.size();
+    for (unsigned j = 0; j < num_objects; j++)
       if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr))
         return true;
-
     return false;
   }
 }

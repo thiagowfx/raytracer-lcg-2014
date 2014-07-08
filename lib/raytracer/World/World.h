@@ -102,11 +102,19 @@ namespace Raytracer {
 
 
   inline void World::set_camera(Camera* camera) {
+    if (camera_ptr != NULL) {
+      delete camera_ptr;
+      camera_ptr = NULL;
+    }
     camera_ptr = camera;
   }
 
 
   inline void World::set_tracer(Tracer* tracer) {
+    if (tracer_ptr != NULL) {
+      delete tracer_ptr;
+      tracer_ptr = NULL;
+    }
     tracer_ptr = tracer;
   }
 
