@@ -28,21 +28,19 @@ namespace Raytracer {
 
 
   void Camera::compute_uvw() {
-    w = eye - lookat;
-    w.normalize();
-    u = up.cross(w);
-    u.normalize();
+    w = (eye - lookat).normalized();
+    u = (up.cross(w)).normalized();
     v = w.cross(u);
 
-    /* take care of the singularity by hardwiring in specific camera orientations */
-    /* camera looking vertically down */
+    /* Take care of the singularity by hardwiring in specific camera orientations. */
+    /* Camera looking vertically down. */
     if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) > lookat(1)) {
       u = Vector3d(0.0, 0.0, 1.0);
       v = Vector3d(1.0, 0.0, 0.0);
       w = Vector3d(0.0, 1.0, 0.0);
     }
 
-    /* camera looking vertically up */
+    /* Camera looking vertically up. */
     if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) < lookat(1)) {
       u = Vector3d(1.0, 0.0, 0.0);
       v = Vector3d(0.0, 0.0, 1.0);

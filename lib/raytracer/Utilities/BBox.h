@@ -16,10 +16,18 @@ class BBox {
   BBox(const Vector3d p0, const Vector3d p1);
   BBox(const BBox&);
   ~BBox();
+
+  /** Return true if the ray hits the box. */
   bool hit(const Ray&) const;
+
+  /** Return true if the given point is inside the box. */
   bool inside(const Vector3d&) const;
- private:
-  double x0, x1, y0, y1, z0, z1;
+
+  /* Vertex coordinates. */
+  double x0, y0, z0;
+
+  /* Opposite vertex coordinates. */
+  double x1, y1, z1;
 };
 
 #endif // _BBOX_MINE_
