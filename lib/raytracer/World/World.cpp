@@ -24,9 +24,9 @@ namespace Raytracer {
 
   ShadeRec World::hit_objects(const Ray& ray) {
     ShadeRec sr(*this);
-    double t;
     Vector3d normal;
     Vector3d local_hit_point;
+    double t;
     double tmin = kHugeValue;
     const unsigned num_objects = objects.size();
     for (unsigned j = 0; j < num_objects; ++j) {
@@ -39,7 +39,7 @@ namespace Raytracer {
         local_hit_point  = sr.local_hit_point;
       }
     }
-    /** Needed because the hit function may overwrite these */
+    /* Needed because the hit function may overwrite those. */
     if(sr.hit_an_object) {
       sr.t = tmin;
       sr.normal = normal;

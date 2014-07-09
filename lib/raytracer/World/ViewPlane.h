@@ -9,14 +9,18 @@ namespace Raytracer {
    */
   class ViewPlane {
   public:
-    /** Constructor. */
     ViewPlane();
-
-    /** Destructor. */
     ~ViewPlane();
-
-    /** Copy constructor. */
     ViewPlane(const ViewPlane&);
+
+    /* Setters. */
+    void set_hres(const int);
+    void set_vres(const int);
+    void set_pixel_size(const double);
+    void set_gamma(const double);
+    void set_out_of_gamut(const bool);
+    void set_max_depth(const int);
+    void set_sampler(Sampler*);
 
     /** Horizontal Image Resolution. */
     int hres = 0; 
@@ -38,15 +42,6 @@ namespace Raytracer {
 
     /** Sampler for pixels. */
     Sampler* sampler_ptr = new Regular(1);
-
-    /* Setters. */
-    void set_hres(const int);
-    void set_vres(const int);
-    void set_pixel_size(const double);
-    void set_gamma(const double);
-    void set_out_of_gamut(const bool);
-    void set_max_depth(const int);
-    void set_sampler(Sampler*);
   };
 
 

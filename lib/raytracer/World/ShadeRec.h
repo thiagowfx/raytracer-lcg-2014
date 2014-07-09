@@ -11,19 +11,12 @@ namespace Raytracer {
 
   /**
    * @brief Helper object to store information for shading.
-   * There is no default constructor as the World reference always has to be initialized.
-   * There is also no assignment operator as we don't want to assign the world.
    */
   class ShadeRec {
   public:
-    /** Constructor. */
     ShadeRec(World& wr);
-
-    /** Copy constructor. */
-    ShadeRec(const ShadeRec& sr);
-
-    /** Destructor. */
     ~ShadeRec();
+    ShadeRec(const ShadeRec& sr);
 
     /** Did the ray hit any object? */
     bool hit_an_object = false;

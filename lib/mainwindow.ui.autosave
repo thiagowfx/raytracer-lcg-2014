@@ -362,9 +362,6 @@ from View plane</string>
    <property name="text">
     <string>Reset</string>
    </property>
-   <property name="shortcut">
-    <string>Esc</string>
-   </property>
   </action>
  </widget>
  <resources>

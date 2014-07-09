@@ -44,9 +44,8 @@ set(RAYTRACER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/raytracer")
 file(
   GLOB
   RAYTRACER_INCLUDE_DIRS
-  "${RAYTRACER_DIR}"
+  #  "${RAYTRACER_DIR}"
   "${RAYTRACER_DIR}/BRDFs"
-  "${RAYTRACER_DIR}/Cameras"
   "${RAYTRACER_DIR}/GeometricObjects"
   "${RAYTRACER_DIR}/Lights"
   "${RAYTRACER_DIR}/Materials"

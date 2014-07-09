@@ -2,7 +2,6 @@
 #define _WORLD_MINE_
 
 #include "Ambient.h"
-#include "Camera.h"
 #include "GeometricObject.h"
 #include "Light.h"
 #include "RGBColor.h"
@@ -18,31 +17,28 @@ namespace Raytracer {
   /**
    * @brief Stores all objects and lights, and contains helper objects, such as camera, tracer and ambient light.
    */
+  class Camera;
   class World {
   public:
-    /** Constructor. */
     World();
-
-    /** Destructor. */
     ~World();
+
+    /* Setters. */
+    void set_camera(Camera*);
+    void set_tracer(Tracer*);
+    void set_ambient_light(Ambient*);
+    void set_background_color(RGBColor);
+    void add_light(Light*);
+    void add_object(GeometricObject*);
 
     /** Camera. */
     Camera* camera_ptr = NULL;
 
-    /** Setter for camera. */
-    void set_camera(Camera*);
-
     /** Tracer. */
     Tracer* tracer_ptr = NULL;
 
-    /** Setter for tracer. */
-    void set_tracer(Tracer*);
-
     /** Light sources. */
     vector<Light*> lights;
-
-    /** Add a new light source. */
-    void add_light(Light*);
 
     /** Delete all light sources. */
     void delete_lights();
@@ -50,29 +46,23 @@ namespace Raytracer {
     /** Geometric Objects. */
     vector<GeometricObject*> objects;
 
-    /** Add a new object. */
-    void add_object(GeometricObject*);
-
     /** Delete all objects. */
     void delete_objects();
     
     /** Background ambient light. */
     Ambient* ambient_ptr = new Ambient();
 
-    /** Setter for ambient light. */
-    void set_ambient_light(Ambient*);
-
     /** Background color. */
     RGBColor background_color = black;
-
-    /** Setter for background color. */
-    void set_background_color(RGBColor);
 
     /** Viewplane. */
     ViewPlane vp;
 
-    void display_pixel(const int row, const int column,
-		       const RGBColor& pixel_color, png::image<png::rgb_pixel>& image) const;
+    /** Update image pixel with the given color. */
+    void display_pixel(const int row,
+                       const int column,
+                       const RGBColor& pixel_color,
+                       png::image<png::rgb_pixel>& image) const;
     
     /** Try to hit objects with the ray, filling just bare bones information in the ShadeRec object. */
     ShadeRec hit_bare_bones_objects(const Ray&);
@@ -102,10 +92,6 @@ namespace Raytracer {
 
 
   inline void World::set_camera(Camera* camera) {
-    if (camera_ptr != NULL) {
-      delete camera_ptr;
-      camera_ptr = NULL;
-    }
     camera_ptr = camera;
   }
 

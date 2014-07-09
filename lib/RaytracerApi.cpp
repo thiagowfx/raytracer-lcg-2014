@@ -2,11 +2,9 @@
 
 namespace Raytracer {
   Api::Api() :
-    w(new World)
-  {
-    Raytracer::Camera* camera = new Pinhole();
-    camera->set_eye(Vector3d(150.0, 150.0, 150.0));
-    w->set_camera(camera);
+    w(new World) {
+    w->set_camera(new Camera());
+    w->camera_ptr->set_eye_position(Vector3d(150.0, 150.0, 150.0));
 
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
     sp0->set_color(red);
@@ -190,7 +188,7 @@ namespace Raytracer {
   }
 
   void Api::set_eye_carthesian(Vector3d v) {
-    w->camera_ptr->set_eye(v);
+    w->camera_ptr->set_eye_position(v);
   }
 
   void Api::set_eye_carthesian(double x, double y, double z) {
@@ -198,7 +196,7 @@ namespace Raytracer {
   }
 
   void Api::set_eye_spherical_relatively(double dr, double dphi, double dtheta) {
-    Vector3d s = carthesian_to_spherical(w->camera_ptr->get_eye());
+    Vector3d s = carthesian_to_spherical(w->camera_ptr->get_eye_position());
     s(0) += dr;
     s(1) += dphi;
     s(2) += dtheta;
@@ -206,13 +204,13 @@ namespace Raytracer {
   }
 
   const char* Api::get_eye_carthesian_coordinates() {
-    Vector3d v = w->camera_ptr->get_eye();
+    Vector3d v = w->camera_ptr->get_eye_position();
     sprintf(buffer, "(%.2lf, %.2lf, %.2lf)", v(0), v(1), v(2));
     return buffer;
   }
 
   const char *Api::get_eye_spherical_coordinates() {
-    Vector3d v = carthesian_to_spherical(w->camera_ptr->get_eye());
+    Vector3d v = carthesian_to_spherical(w->camera_ptr->get_eye_position());
     sprintf(buffer, "(%.2lf, %.2lfº, %.2lfº)", v(0), v(1) * (180.0 / M_PI), v(2) * (180.0 / M_PI));
     return buffer;
   }
@@ -246,6 +244,22 @@ namespace Raytracer {
 
   double Api::get_ambient_light_radiance() {
     return w->ambient_ptr->get_radiance();
+  }
+
+  void Api::set_camera_zoom(double z) {
+    w->camera_ptr->set_zoom(z);
+  }
+  
+  double Api::get_camera_zoom() const {
+    return w->camera_ptr->get_zoom();
+  }
+  
+  void Api::set_camera_distance(double d) {
+    w->camera_ptr->set_distance(d);
+  }
+
+  double Api::get_camera_distance() const {
+    return w->camera_ptr->get_distance();
   }
 
 }

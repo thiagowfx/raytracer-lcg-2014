@@ -9,6 +9,7 @@ using Eigen::Vector3d;
 #include "Ambient.h"
 #include "AmbientOccluder.h"
 #include "AreaLight.h"
+#include "Camera.h"
 #include "Directional.h"
 #include "Emissive.h"
 #include "Jittered.h"
@@ -32,10 +33,6 @@ using Eigen::Vector3d;
 #include "Rectangle.h"
 #include "Sphere.h"
 #include "Triangle.h"
-
-/* Cameras */
-#include "Orthographic.h"
-#include "Pinhole.h"
 
 /* Tracers */
 #include "AreaLighting.h"
@@ -201,6 +198,18 @@ namespace Raytracer {
 
     /** World: get ambient light radiance. */
     double get_ambient_light_radiance();
+
+    /** World: set camera zoom. */
+    void set_camera_zoom(double);
+
+    /** World: get camera zoom. */
+    double get_camera_zoom() const;
+
+    /** World: set camera distance. */
+    void set_camera_distance(double);
+
+    /** World: get camera distance. */
+    double get_camera_distance() const;
 
   private:
     World* w;

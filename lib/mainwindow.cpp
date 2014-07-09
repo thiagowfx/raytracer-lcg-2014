@@ -91,6 +91,20 @@ MainWindow::MainWindow(QWidget *parent) :
   QObject::connect(ui->ambientLightRadianceDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
   QObject::connect(ui->ambientLightTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ambientLightCallback()));
   QObject::connect(ui->ambientLightTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(autoRenderCallback()));
+
+  ui->cameraDistanceDoubleSpinBox->setSingleStep(5.0);
+  ui->cameraDistanceDoubleSpinBox->setMaximum(1000.0);
+  api->set_camera_distance(100.0);
+  ui->cameraDistanceDoubleSpinBox->setValue(api->get_camera_distance());
+  QObject::connect(ui->cameraDistanceDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_camera_distance(double)));
+  QObject::connect(ui->cameraDistanceDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
+
+  ui->cameraZoomDoubleSpinBox->setMinimum(0.01);
+  ui->cameraZoomDoubleSpinBox->setSingleStep(0.1);
+  api->set_camera_zoom(1.0);
+  ui->cameraZoomDoubleSpinBox->setValue(api->get_camera_zoom());
+  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_camera_zoom(double)));
+  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
 }
 
 MainWindow::~MainWindow() {
@@ -171,6 +185,10 @@ void MainWindow::on_actionExport_Image_triggered() {
   ui->renderedImage->pixmap()->save(file);
 }
 
+void MainWindow::on_actionUnfocus_triggered() {
+  this->setFocus();
+}
+
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   const double drotation = M_PI / 30.0;
   const double dradius = 10.0;
@@ -198,6 +216,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     default:
       return false;
     }
+    autoRenderCheckBox->setChecked(true);
     on_actionRender_scene_triggered();
   }
   return false;
