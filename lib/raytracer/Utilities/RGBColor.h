@@ -1,13 +1,12 @@
-#ifndef __RGB_COLOR__
-#define __RGB_COLOR__
+#ifndef _RGBCOLOR_MINE_
+#define _RGBCOLOR_MINE_
 
 #include <algorithm>
 #include <cmath>
 using namespace std;
 
 /**
- * @brief Represents a color in the RGB format.
- * Its components are from 0.0 to 1.0.
+ * @brief Represents a color in the RGB format, components from 0.0 to 1.0.
  */
 class RGBColor {
  public:
@@ -23,15 +22,15 @@ class RGBColor {
   RGBColor();
   ~RGBColor();
   RGBColor(double, double, double);
-  RGBColor(const RGBColor& c);
-  RGBColor& operator= (const RGBColor& rhs);
-  RGBColor operator+ (const RGBColor& c) const;
-  RGBColor& operator+= (const RGBColor& c);
-  RGBColor operator* (const double a) const;
-  RGBColor& operator*= (const double a);
-  RGBColor operator/ (const double a) const;
-  RGBColor& operator/= (const double a);
-  RGBColor operator* (const RGBColor& c) const;
+  RGBColor(const RGBColor&);
+  RGBColor& operator= (const RGBColor&);
+  RGBColor operator+ (const RGBColor&) const;
+  RGBColor& operator+= (const RGBColor&);
+  RGBColor operator* (const double) const;
+  RGBColor& operator*= (const double);
+  RGBColor operator/ (const double) const;
+  RGBColor& operator/= (const double);
+  RGBColor operator* (const RGBColor&) const;
 
   /** Return true if colors are equal. */
   bool operator== (const RGBColor&) const;
@@ -39,11 +38,13 @@ class RGBColor {
   /** Return true if colors are different. */
   bool operator!= (const RGBColor&) const;
 
-  RGBColor powc(double p) const;
+  /** Color components are raised to the specified power. */
+  RGBColor powc(double) const;
 
-  /** Return the average of the color components. */
+  /** Return the average of components. */
   double average() const;
 
+  /** If any component is greater than one, then all components are divided by the maximum one. */
   RGBColor normalize() const;
 
   /** Return red if any component is greater than one. */
@@ -115,6 +116,7 @@ inline RGBColor operator* (const double a, const RGBColor& c) {
   return RGBColor (a * c.r, a * c.g, a * c.b);
 }
 
+/* Color constants. */
 const RGBColor black(0.0, 0.0, 0.0);
 const RGBColor dark_grey(0.25, 0.25, 0.25);
 const RGBColor dark_gray(dark_grey);
@@ -139,4 +141,4 @@ const RGBColor yellow(1.0, 1.0, 0.0);
 const RGBColor dark_yellow(0.61, 0.61, 0.0);
 const RGBColor orange(1.0, 0.75, 0.0);
 
-#endif
+#endif // _RGBCOLOR_MINE_

@@ -11,18 +11,18 @@ namespace Raytracer {
 
   public:
     Phong();
-    Phong(const Phong& m);
+    Phong(const Phong&);
     virtual Material* clone() const;
     virtual ~Phong();
-    void set_ka(double ka);
-    void set_cd(const RGBColor& color);
-    void set_kd(double kd);
-    void set_cs(const RGBColor& color);
-    void set_ks(double ks);
-    void set_exp(double exp);
-    virtual RGBColor shade (ShadeRec& s);
-    virtual RGBColor area_light_shade(ShadeRec& sr);
-    static Phong* dummy(RGBColor);
+    void set_ka(double);
+    void set_cd(const RGBColor&);
+    void set_kd(double);
+    void set_cs(const RGBColor&);
+    void set_ks(double);
+    void set_exp(double);
+    virtual RGBColor shade (ShadeRec&);
+    virtual RGBColor area_light_shade(ShadeRec&);
+    static Phong* generic(RGBColor);
     virtual RGBColor get_color() const;
 
   private:

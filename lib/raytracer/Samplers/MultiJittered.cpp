@@ -12,12 +12,6 @@ MultiJittered::MultiJittered(const int num_samples) :
 }
 
 
-MultiJittered::MultiJittered(const int num_samples, const int m) :
-  Sampler(num_samples, m) {
-  generate_samples();
-}
-
-
 MultiJittered::MultiJittered(const MultiJittered& m) :
   Sampler(m) {
   generate_samples();

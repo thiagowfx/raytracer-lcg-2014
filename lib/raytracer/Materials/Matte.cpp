@@ -122,7 +122,7 @@ namespace Raytracer {
   }
 
 
-  Matte* Matte::dummy(RGBColor color) {
+  Matte* Matte::generic(RGBColor color) {
     Matte* m = new Matte();
     m->set_ka(kKa);
     m->set_kd(kKd);

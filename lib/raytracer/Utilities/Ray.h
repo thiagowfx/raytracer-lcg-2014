@@ -9,16 +9,9 @@ using Eigen::Vector3d;
  */
 class Ray {
  public:
-  /** Constrcutor. */
   Ray();
-
-  /** Constructor. */
   Ray(const Vector3d& origin, const Vector3d& direction);
-
-  /** Copy constructor. */
   Ray(const Ray& ray);
-  
-  /** Destructor. */
   ~Ray();
   
   /** Origin point. */

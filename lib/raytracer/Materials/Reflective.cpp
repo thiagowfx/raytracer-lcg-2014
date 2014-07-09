@@ -57,7 +57,7 @@ namespace Raytracer {
   }
 
   /** Has direct illumination */
-  Reflective *Reflective::dummy(RGBColor color) {
+  Reflective *Reflective::generic(RGBColor color) {
     Reflective* r = new Reflective();
     r->set_ka(kKa);
     r->set_kd(kKd);
@@ -72,7 +72,7 @@ namespace Raytracer {
 
 
   /** Doesn't have direct illumination */
-  Reflective *Reflective::nodirect(RGBColor color) {
+  Reflective *Reflective::generic_nodirect(RGBColor color) {
     Reflective* r = new Reflective();
     r->set_ka(0.0);
     r->set_kd(0.0);
@@ -87,7 +87,7 @@ namespace Raytracer {
 
 
   /** Black-ish, just the reflections */
-  Reflective *Reflective::uncolored() {
+  Reflective *Reflective::generic_uncolored() {
     Reflective* r = new Reflective();
     r->set_ka(0.0);
     r->set_kd(0.0);

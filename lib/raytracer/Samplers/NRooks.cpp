@@ -11,12 +11,6 @@ NRooks::NRooks(const int num_samples) :
 }
 
 
-NRooks::NRooks(const int num_samples, const int m) :
-  Sampler(num_samples, m) {
-  generate_samples();
-}
-
-
 const char* NRooks::to_string() {
   return "NRooks";
 }

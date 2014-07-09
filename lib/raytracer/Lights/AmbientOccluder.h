@@ -10,14 +10,14 @@ namespace Raytracer {
   class AmbientOccluder: public Ambient {
   public:
     AmbientOccluder();
-    AmbientOccluder(const AmbientOccluder& a);
+    AmbientOccluder(const AmbientOccluder&);
     virtual Ambient* clone() const;
     virtual ~AmbientOccluder();
-    virtual Vector3d get_direction(ShadeRec& sr);
-    virtual RGBColor L(ShadeRec& s);
-    bool in_shadow(const Ray& ray, ShadeRec& sr) const;
-    void set_sampler(Sampler* s_ptr);
-    void set_minimum_amount(int n);
+    virtual Vector3d get_direction(ShadeRec&);
+    virtual RGBColor L(ShadeRec&);
+    bool in_shadow(const Ray& ray, ShadeRec&) const;
+    void set_sampler(Sampler*);
+    void set_minimum_amount(const int);
     virtual const char* to_string() const;
 
   private:
@@ -29,7 +29,7 @@ namespace Raytracer {
   };
 
 
-  inline void AmbientOccluder::set_minimum_amount(int minimum_amount) {
+  inline void AmbientOccluder::set_minimum_amount(const int) {
     this->minimum_amount = minimum_amount;
   }
 }

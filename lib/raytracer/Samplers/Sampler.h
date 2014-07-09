@@ -13,16 +13,14 @@ using namespace std;
 class Sampler {
  public:
   Sampler();
-  Sampler(const int num);
+  Sampler(const int);
   Sampler(const int num, const int num_sets);
-  Sampler(const Sampler& s);
+  Sampler(const Sampler&);
   virtual Sampler* clone() const = 0;
+  virtual ~Sampler();
   
   /** Return a string with the class name */
   virtual const char* to_string() = 0;
-
-  /** Destructor. */
-  virtual ~Sampler();
 
   /** Return the number of samples. */
   int get_number_of_samples();
@@ -68,7 +66,7 @@ class Sampler {
   unsigned num_samples = 1;
   
   /** Number of sample sets */
-  unsigned num_sets = 83;
+  unsigned num_sets = 100;
   
   /** Current number of sample points used */
   unsigned long count = 0;

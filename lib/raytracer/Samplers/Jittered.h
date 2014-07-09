@@ -7,7 +7,6 @@ class Jittered: public Sampler {
  public:
   Jittered();
   Jittered(const int);
-  Jittered(const int num_samples, const int m);
   Jittered(const Jittered&);
   virtual const char* to_string();
   virtual Jittered* clone() const;

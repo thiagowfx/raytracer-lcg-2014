@@ -15,7 +15,7 @@ namespace Raytracer {
     ~PrimitivaDaniel();
     virtual PrimitivaDaniel* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-    static vector<PrimitivaDaniel*> dummy(const char* path_to_shape);
+    static vector<PrimitivaDaniel*> generic(const char* path_to_shape);
 
   private:
     Primitive* primitive;

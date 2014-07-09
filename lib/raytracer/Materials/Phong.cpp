@@ -100,7 +100,7 @@ namespace Raytracer {
   }
 
 
-  Phong* Phong::dummy(RGBColor color) {
+  Phong* Phong::generic(RGBColor color) {
     Phong* p = new Phong();
     p->set_ka(kKa);
     p->set_kd(kKd);

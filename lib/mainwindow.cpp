@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
   statusEyeCarthesianLabel(new QLabel()),
   statusEyeSphericalLabel(new QLabel()) {
 
+  autoRenderCheckBox->setChecked(true);
+
   ui->setupUi(this);
   this->setFocus();
   this->installEventFilter(this);
@@ -190,8 +192,8 @@ void MainWindow::on_actionUnfocus_triggered() {
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
-  const double drotation = M_PI / 30.0;
-  const double dradius = 10.0;
+  const double drotation = M_PI / 45.0;
+  const double dradius = 8.0;
   if (event->type() == QEvent::KeyPress) {
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     switch(keyEvent->key()){
@@ -217,7 +219,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
       return false;
     }
     autoRenderCheckBox->setChecked(true);
-    on_actionRender_scene_triggered();
+    autoRenderCallback();
   }
   return false;
 }

@@ -11,12 +11,6 @@ Jittered::Jittered(const int num_samples) :
 }
 
 
-Jittered::Jittered(const int num_samples, const int m) :
-  Sampler(num_samples, m) {
-  generate_samples();
-}
-
-
 Jittered::Jittered(const Jittered& js) :
   Sampler(js) {
   generate_samples();

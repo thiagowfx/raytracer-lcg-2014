@@ -3,7 +3,7 @@
 namespace Raytracer {
   AmbientOccluder::AmbientOccluder() :
     Ambient() {
-    this->set_sampler(new MultiJittered(4));
+    this->set_sampler(new MultiJittered(5));
   }
 
 
@@ -12,8 +12,7 @@ namespace Raytracer {
     minimum_amount(a.minimum_amount),
     u(a.u),
     v(a.v),
-    w(a.w)
-  {
+    w(a.w) {
     if(a.sampler_ptr)
       sampler_ptr = a.sampler_ptr->clone();
   }

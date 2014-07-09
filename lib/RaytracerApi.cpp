@@ -8,12 +8,12 @@ namespace Raytracer {
 
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
     sp0->set_color(red);
-    sp0->set_material(Matte::dummy(red));
+    sp0->set_material(Matte::generic(red));
     w->add_object(sp0);
 
     Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
     pl0->set_color(gray);
-    pl0->set_material(Matte::dummy(gray));
+    pl0->set_material(Matte::generic(gray));
     w->add_object(pl0);
   }
 

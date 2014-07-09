@@ -12,15 +12,15 @@ namespace Raytracer {
   class Directional: public Light {
   public:
     Directional();
-    Directional(const Directional& dl);
+    Directional(const Directional&);
     virtual Light* clone() const;
     virtual ~Directional();
-    void scale_radiance(const double b);
+    void scale_radiance(const double);
     void set_color(const RGBColor&);
     void set_direction(Vector3d);
-    virtual Vector3d get_direction(ShadeRec& sr);
-    virtual RGBColor L(ShadeRec& sr);
-    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+    virtual Vector3d get_direction(ShadeRec&);
+    virtual RGBColor L(ShadeRec&);
+    virtual bool in_shadow(const Ray&, ShadeRec&) const;
   private:
     /** Radiance of light. */
     double ls = 1.0;
@@ -44,8 +44,7 @@ namespace Raytracer {
 
   
   inline void Directional::set_direction(Vector3d d) {
-    direction = d;
-    direction.normalize();
+    direction = d.normalized();
   }
 }
 

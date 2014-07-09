@@ -1,7 +1,7 @@
 #include "BBox.h"
 
 BBox::BBox () :
-  x0(-1), x1(1), y0(-1), y1(1), z0(-1), z1(1)
+  x0(-1.0), x1(1.0), y0(-1.0), y1(1.0), z0(-1.0), z1(1.0)
 {}
 
 
@@ -20,20 +20,6 @@ BBox::BBox (const Vector3d p0, const Vector3d p1) :
 BBox::BBox (const BBox& bbox) :
   x0(bbox.x0), x1(bbox.x1), y0(bbox.y0), y1(bbox.y1), z0(bbox.z0), z1(bbox.z1)
 {}
-
-
-BBox& BBox::operator= (const BBox& rhs) {
-  if (this != &rhs) {
-    x0  = rhs.x0;
-    x1  = rhs.x1;
-    y0  = rhs.y0;
-    y1  = rhs.y1;
-    z0  = rhs.z0;
-    z1  = rhs.z1;
-  }
-
-  return *this;
-}
 
 
 BBox::~BBox () {}
@@ -81,7 +67,7 @@ bool BBox::hit(const Ray& ray) const {
 
   double t0, t1;
 
-  // find largest entering t value
+  /* Find largest entering t value. */
   if (tx_min > ty_min)
     t0 = tx_min;
   else
@@ -90,7 +76,7 @@ bool BBox::hit(const Ray& ray) const {
   if (tz_min > t0)
     t0 = tz_min;
 
-  // find smallest exiting t value
+  /* Find smallest exiting t value; */
   if (tx_max < ty_max)
     t1 = tx_max;
   else

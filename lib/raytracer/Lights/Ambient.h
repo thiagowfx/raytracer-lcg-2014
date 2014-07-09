@@ -10,12 +10,12 @@ namespace Raytracer {
   class Ambient: public Light {
   public:
     Ambient();
-    Ambient(const Ambient& a);
+    Ambient(const Ambient&);
     virtual ~Ambient();
     virtual Light* clone() const;
-    virtual Vector3d get_direction(ShadeRec& s);
+    virtual Vector3d get_direction(ShadeRec&);
     virtual RGBColor L(ShadeRec& s);
-    void scale_radiance(const double b);
+    void scale_radiance(const double);
     void set_color(const RGBColor);
     double get_radiance() const;
     RGBColor get_color() const;

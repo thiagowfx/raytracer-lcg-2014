@@ -49,7 +49,7 @@ namespace Raytracer {
   }
 
 
-  vector<PrimitivaDaniel*> PrimitivaDaniel::dummy(const char *path_to_shape) {
+  vector<PrimitivaDaniel*> PrimitivaDaniel::generic(const char *path_to_shape) {
     vector<PrimitivaDaniel*> pds;
 
     puts("INFO: begin build PrimitivaDaniel::dummy");

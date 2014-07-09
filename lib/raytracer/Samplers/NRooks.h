@@ -6,9 +6,8 @@
 class NRooks: public Sampler {
  public:
   NRooks();
-  NRooks(const int num_samples);
-  NRooks(const int num_samples, const int m);
-  NRooks(const NRooks& nr);
+  NRooks(const int);
+  NRooks(const NRooks&);
   virtual const char* to_string();
   virtual NRooks* clone() const;
   virtual ~NRooks();

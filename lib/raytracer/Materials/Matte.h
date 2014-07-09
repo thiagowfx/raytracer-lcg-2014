@@ -1,5 +1,5 @@
-#ifndef __MATTE__
-#define __MATTE__
+#ifndef _MATTE_MINE_
+#define _MATTE_MINE_
 
 #include "Material.h"
 #include "Lambertian.h"
@@ -7,19 +7,18 @@
 
 namespace Raytracer {
   class Matte: public Material {
-
   public:
     Matte();
-    Matte(const Matte& m);
+    Matte(const Matte&);
     virtual Material* clone() const;
-    Matte& operator= (const Matte& rhs);
+    Matte& operator= (const Matte&);
     ~Matte();
-    void set_ka(const double k);
-    void set_kd(const double k);
-    void set_cd(const RGBColor& c);
-    virtual RGBColor shade(ShadeRec& sr);
-    virtual RGBColor area_light_shade(ShadeRec& sr);
-    static Matte* dummy(RGBColor);
+    void set_ka(const double);
+    void set_kd(const double);
+    void set_cd(const RGBColor&);
+    virtual RGBColor shade(ShadeRec&);
+    virtual RGBColor area_light_shade(ShadeRec&);
+    static Matte* generic(RGBColor);
     virtual RGBColor get_color() const;
 
   private:
@@ -46,4 +45,4 @@ namespace Raytracer {
   }
 }
 
-#endif
+#endif // _MATTE_MINE_

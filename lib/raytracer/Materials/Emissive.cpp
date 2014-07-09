@@ -50,7 +50,7 @@ namespace Raytracer {
     return ls * ce;
   }
 
-  Emissive *Emissive::dummy(RGBColor c, double radiance = 1.0) {
+  Emissive *Emissive::generic(RGBColor c, double radiance = 1.0) {
     Emissive* em = new Emissive();
     em->set_ce(c);
     em->scale_radiance(radiance);

@@ -9,17 +9,17 @@ namespace Raytracer {
 
   public:
     Reflective();
-    Reflective(const Reflective& rm);
-    Reflective& operator= (const Reflective& rhs);
+    Reflective(const Reflective&);
+    Reflective& operator= (const Reflective&);
     virtual Reflective* clone() const;
     ~Reflective();
-    void set_kr(const double k);
+    void set_kr(const double);
     void set_cr(const RGBColor&);
     void set_cr(double,double,double);
-    virtual RGBColor shade(ShadeRec& s);
-    static Reflective* dummy(RGBColor);
-    static Reflective* nodirect(RGBColor);
-    static Reflective* uncolored();
+    virtual RGBColor shade(ShadeRec&);
+    static Reflective* generic(RGBColor);
+    static Reflective* generic_nodirect(RGBColor);
+    static Reflective* generic_uncolored();
 
   private:
     PerfectSpecular* reflective_brdf;

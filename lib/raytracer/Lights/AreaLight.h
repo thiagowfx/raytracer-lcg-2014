@@ -9,15 +9,15 @@ namespace Raytracer {
   class AreaLight: public Light {
   public:
     AreaLight();
-    AreaLight(const AreaLight& al);
+    AreaLight(const AreaLight&);
     virtual Light* clone() const;
     virtual ~AreaLight();
-    void set_object(GeometricObject* obj_ptr);
-    virtual Vector3d get_direction(ShadeRec& s);
+    void set_object(GeometricObject*);
+    virtual Vector3d get_direction(ShadeRec&);
     virtual RGBColor L(ShadeRec& sr);
-    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
-    virtual double G(const ShadeRec& sr) const;
-    virtual double pdf(const ShadeRec& sr) const;
+    virtual bool in_shadow(const Ray&, ShadeRec&) const;
+    virtual double G(const ShadeRec&) const;
+    virtual double pdf(const ShadeRec&) const;
   private:
     GeometricObject* object_ptr = NULL;
     Material* material_ptr = NULL; // will be an emissive material

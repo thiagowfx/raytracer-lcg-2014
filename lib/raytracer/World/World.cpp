@@ -13,10 +13,6 @@ namespace Raytracer {
       delete ambient_ptr;
       ambient_ptr = NULL;
     }
-    if (camera_ptr) {
-      delete camera_ptr;
-      camera_ptr = NULL;
-    }
     delete_objects();
     delete_lights();
   }

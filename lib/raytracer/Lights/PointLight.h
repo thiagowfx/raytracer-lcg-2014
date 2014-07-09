@@ -12,14 +12,14 @@ namespace Raytracer {
   class PointLight: public Light {
   public:
     PointLight();
-    PointLight(const PointLight& a);
+    PointLight(const PointLight&);
     virtual Light* clone() const;
     virtual ~PointLight();
     void scale_radiance(double);
     void set_color(const RGBColor&);
     void set_location(Vector3d);
-    virtual Vector3d get_direction(ShadeRec& sr);
-    virtual RGBColor L(ShadeRec& sr);
+    virtual Vector3d get_direction(ShadeRec&);
+    virtual RGBColor L(ShadeRec&);
     virtual bool in_shadow(const Ray&, ShadeRec&) const;
 
   private:
