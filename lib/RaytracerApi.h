@@ -5,30 +5,38 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-/* RAYTRACER */
-#include "Ambient.h"
-#include "AmbientOccluder.h"
-#include "AreaLight.h"
-#include "Camera.h"
-#include "Directional.h"
-#include "Emissive.h"
-#include "Jittered.h"
-#include "Light.h"
-#include "Material.h"
-#include "Matte.h"
-#include "MultiJittered.h"
-#include "Phong.h"
-#include "PointLight.h"
 #include "RGBColor.h"
 #include "Ray.h"
 #include "RaytracerApi.h"
-#include "Reflective.h"
+
+/* Lights */
+#include "Ambient.h"
+#include "AmbientOccluder.h"
+#include "AreaLight.h"
+#include "Directional.h"
+#include "Light.h"
+#include "PointLight.h"
+
+/* Samplers */
+#include "Jittered.h"
+#include "MultiJittered.h"
 #include "Regular.h"
+
+/* Materials */
+#include "Emissive.h"
+#include "Material.h"
+#include "Matte.h"
+#include "Phong.h"
+#include "Reflective.h"
+
+/* World */
+#include "Camera.h"
 #include "ShadeRec.h"
 #include "ViewPlane.h"
 #include "World.h"
 
 /* Geometric Objects */
+#include "Box.h"
 #include "Plane.h"
 #include "Rectangle.h"
 #include "Sphere.h"

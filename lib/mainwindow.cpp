@@ -107,6 +107,9 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->cameraZoomDoubleSpinBox->setValue(api->get_camera_zoom());
   QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_camera_zoom(double)));
   QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
+
+  autoRenderCheckBox->setChecked(true);
+  autoRenderCallback();
 }
 
 MainWindow::~MainWindow() {

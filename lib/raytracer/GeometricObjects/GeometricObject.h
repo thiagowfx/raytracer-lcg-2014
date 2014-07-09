@@ -21,7 +21,7 @@ namespace Raytracer {
     Material* get_material() const;
     RGBColor get_color() const;
     bool casts_shadows() const;
-    virtual BBox get_bounding_box() const;
+    // virtual BBox get_bounding_box() const;
 
     /* Setters. */
     virtual void set_material(Material*);

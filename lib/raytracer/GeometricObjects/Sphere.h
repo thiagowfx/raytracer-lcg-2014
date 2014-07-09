@@ -8,7 +8,7 @@ namespace Raytracer {
 
   public:
     Sphere(Vector3d center, double r);
-    Sphere(const Sphere& sphere);
+    Sphere(const Sphere&);
     ~Sphere();
     virtual Sphere* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;

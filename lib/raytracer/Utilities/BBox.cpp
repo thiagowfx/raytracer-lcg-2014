@@ -5,10 +5,10 @@ BBox::BBox () :
 {}
 
 
-BBox::BBox (const double _x0, const double _x1,
-            const double _y0, const double _y1,
-            const double _z0, const double _z1) :
-  x0(_x0), x1(_x1), y0(_y0), y1(_y1), z0(_z0), z1(_z1)
+BBox::BBox (const double x0, const double x1,
+            const double y0, const double y1,
+            const double z0, const double z1) :
+  x0(x0), x1(x1), y0(y0), y1(y1), z0(z0), z1(z1)
 {}
 
 

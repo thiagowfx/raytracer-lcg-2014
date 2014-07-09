@@ -44,23 +44,23 @@ namespace Raytracer {
       t = (-b - e) / denom; /* smaller root */
 
       if (t > kEpsilonShadows) {
-	tmin = t;
-	if (type == PRIMARY_RAY) {
-    sr.normal = (temp + t * ray.direction) / radius;
-    sr.local_hit_point = ray.origin + t * ray.direction;
-	}
-	return true;
+        tmin = t;
+        if (type == PRIMARY_RAY) {
+          sr.normal = (temp + t * ray.direction) / radius;
+          sr.local_hit_point = ray.origin + t * ray.direction;
+        }
+        return true;
       }
 
       t = (-b + e) / denom; /* larger root */
 
       if (t > kEpsilonShadows) {
-	tmin = t;
-	if (type == PRIMARY_RAY) {
-    sr.normal   = (temp + t * ray.direction) / radius;
-    sr.local_hit_point = ray.origin + t * ray.direction;
-	}
-	return true;
+        tmin = t;
+        if (type == PRIMARY_RAY) {
+          sr.normal   = (temp + t * ray.direction) / radius;
+          sr.local_hit_point = ray.origin + t * ray.direction;
+        }
+        return true;
       }
     }
     return false;
