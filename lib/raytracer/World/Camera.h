@@ -26,6 +26,7 @@ namespace Raytracer {
 
     /* Getters. */
     Vector3d get_eye_position() const;
+    Vector3d get_lookat() const;
     double get_distance() const;
     double get_zoom() const;
 
@@ -71,6 +72,11 @@ namespace Raytracer {
   inline void Camera::set_eye_position(const Vector3d& eye) {
     this->eye = eye;
     compute_uvw();
+  }
+
+
+  inline Vector3d Camera::get_lookat() const {
+    return this->lookat;
   }
 
 

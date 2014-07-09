@@ -198,10 +198,10 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     switch(keyEvent->key()){
     case Qt::Key_Left:
-      api->set_eye_spherical_relatively(0.0, -drotation, 0.0);
+      api->set_eye_spherical_relatively(0.0, +drotation, 0.0);
       break;
     case Qt::Key_Right:
-      api->set_eye_spherical_relatively(0.0, +drotation, 0.0);
+      api->set_eye_spherical_relatively(0.0, -drotation, 0.0);
       break;
     case Qt::Key_Up:
       api->set_eye_spherical_relatively(0.0, 0.0, -drotation);
