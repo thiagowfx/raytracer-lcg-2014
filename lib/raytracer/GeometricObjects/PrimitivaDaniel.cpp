@@ -6,12 +6,13 @@ namespace Raytracer {
     primitive(p)
   {}
 
-  PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& pd) :
-    GeometricObject(pd),
+  
+  PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& p) :
+    GeometricObject(p),
     primitive(NULL) {
     /*
       if(primitive)
-      primitive = pd.primitive->clone();
+      	primitive = pd.primitive->clone();
     */
   }
 
@@ -23,10 +24,12 @@ namespace Raytracer {
     }
   }
 
+  
   PrimitivaDaniel *PrimitivaDaniel::clone() const {
     return new PrimitivaDaniel(*this);
   }
 
+  
   bool PrimitivaDaniel::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
     if (type == SHADOW_RAY && !shadows)
       return false;
@@ -51,8 +54,6 @@ namespace Raytracer {
 
   vector<PrimitivaDaniel*> PrimitivaDaniel::generic(const char *path_to_shape) {
     vector<PrimitivaDaniel*> pds;
-
-    puts("INFO: begin build PrimitivaDaniel::dummy");
     vector<Primitive*> primitives;
     vector<Shape*> candidates;
     double epsilon = 0.05;
@@ -71,7 +72,7 @@ namespace Raytracer {
       exit(1);
     }
     ifstream data(path_to_shape);
-    double x,y,z;
+    double x, y, z;
     double nx, ny, nz;
     vector<Point> points;
     vector<Point> normals;
@@ -86,15 +87,14 @@ namespace Raytracer {
       newElement.normal = newNormal;
     }
     littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha,r, maxElements,maxLevel);
-    littlePCSD.detect(true); // let this be TRUE
+    littlePCSD.detect(true);
     primitives = littlePCSD.getPrimitives();
     candidates = littlePCSD.getCandidates();
     cout << "Number of primitives: " << primitives.size() << endl;
     cout << "Number of candidates: " << candidates.size() << endl;
-    for (unsigned int i = 0; i < primitives.size(); ++i)
+    for (unsigned int i = 0; i < primitives.size(); ++i) {
       pds.push_back(new PrimitivaDaniel(primitives[i]));
-    puts("INFO: end build PrimitivaDaniel::dummy");
-
+    }
     return pds;
   }
 }

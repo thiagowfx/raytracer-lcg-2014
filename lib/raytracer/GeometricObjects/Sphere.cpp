@@ -27,12 +27,12 @@ namespace Raytracer {
     if (type == SHADOW_RAY && !shadows)
       return false;
 
-    double   t;
+    double t;
     Vector3d temp = ray.origin - center;
-    double   a    = ray.direction.dot(ray.direction);
-    double   b    = 2.0 * temp.dot(ray.direction);
-    double   c    = temp.dot(temp) - radius * radius;
-    double   disc = b * b - 4.0 * a * c;
+    double a = ray.direction.dot(ray.direction);
+    double b = 2.0 * temp.dot(ray.direction);
+    double c = temp.dot(temp) - radius * radius;
+    double disc = b * b - 4.0 * a * c;
 
     if (disc < 0.0) {
       return false;

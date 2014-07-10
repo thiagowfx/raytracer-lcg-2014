@@ -12,9 +12,11 @@ namespace Raytracer {
     ~Sphere();
     virtual Sphere* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-
   private:
+    /** Center point of sphere. */
     Vector3d center;
+
+    /** Radius. */
     double radius;
   };
 }

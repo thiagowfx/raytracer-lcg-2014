@@ -7,13 +7,11 @@
 namespace Raytracer {
   class Rectangle: public GeometricObject {
   public:
-
     Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b);
     Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b, const Vector3d& n);
     virtual Rectangle* clone() const;
-    Rectangle(const Rectangle& r);
+    Rectangle(const Rectangle&);
     ~Rectangle();
-    Rectangle& operator= (const Rectangle& rhs);
     // BBox get_bounding_box();
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
 

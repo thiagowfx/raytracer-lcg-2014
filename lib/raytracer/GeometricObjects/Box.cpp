@@ -4,6 +4,7 @@ namespace Raytracer {
   Box::Box (const double x0, const double x1,
             const double y0, const double y1,
             const double z0, const double z1) :
+    GeometricObject(),
     x0(x0),
     x1(x1),
     y0(y0),
@@ -14,6 +15,7 @@ namespace Raytracer {
 
 
   Box::Box (const Vector3d p0, const Vector3d p1) :
+    GeometricObject(),
     x0(p0(0)),
     x1(p1(0)),
     y0(p0(1)),
@@ -22,6 +24,7 @@ namespace Raytracer {
     z1(p1(2))
   {}
 
+  
   Box* Box::clone() const {
     return (new Box(*this));
   }

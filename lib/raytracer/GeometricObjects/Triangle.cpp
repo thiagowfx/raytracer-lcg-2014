@@ -28,8 +28,7 @@ namespace Raytracer {
 
 
   void Triangle::compute_normal() {
-    normal = (v1 - v0).cross(v2 - v0);
-    normal.normalize();
+    normal = (v1 - v0).cross(v2 - v0).normalized();
   }
 
   // BBox Triangle::get_bounding_box() {
@@ -40,6 +39,8 @@ namespace Raytracer {
   // }
 
   bool Triangle::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
+    /* Property: alpha + beta + gamma == 1.0, and each of them are between 0.0 and 1.0. */
+    
     if (type == SHADOW_RAY && !shadows)
       return false;
 

@@ -2,34 +2,31 @@
 
 namespace Raytracer {
   // this constructs the normal
-  Rectangle::Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b) :
+  Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b) :
     GeometricObject(),
-    p0(_p0),
-    a(_a),
-    b(_b),
-    a_len_squared(_a.norm() * _a.norm()),
-    b_len_squared(_b.norm() * _b.norm()),
+    p0(p0),
+    a(a),
+    b(b),
+    a_len_squared(a.norm() * a.norm()),
+    b_len_squared(b.norm() * b.norm()),
     area(a.norm() * b.norm()),
     inv_area(1.0 / area),
-    sampler_ptr(NULL)
-  {
-    normal = -a.cross(b);
-    normal.normalize();
+    sampler_ptr(NULL) {
+    normal = -a.cross(b).normalized();
   }
 
   // this has the normal as an argument
-  Rectangle::Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b, const Vector3d& n) :
+  Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b, const Vector3d& n) :
     GeometricObject(),
-    p0(_p0),
-    a(_a),
-    b(_b),
-    a_len_squared(_a.norm() * _a.norm()),
-    b_len_squared(_b.norm() * _b.norm()),
+    p0(p0),
+    a(a),
+    b(b),
+    a_len_squared(a.norm() * a.norm()),
+    b_len_squared(b.norm() * b.norm()),
     area(a.norm() * b.norm()),
     inv_area(1.0 / area),
     normal(n),
-    sampler_ptr(NULL)
-  {
+    sampler_ptr(NULL) {
     normal.normalize();
   }
 
@@ -48,8 +45,7 @@ namespace Raytracer {
     b_len_squared(r.b_len_squared),
     area(r.area),
     inv_area(r.inv_area),
-    normal(r.normal)
-  {
+    normal(r.normal) {
     if(r.sampler_ptr)
       sampler_ptr = r.sampler_ptr->clone();
     else

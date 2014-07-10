@@ -32,9 +32,10 @@ namespace Raytracer {
 
     if (t > kEpsilonShadows) {
       tmin = t;
+
       if (type == PRIMARY_RAY) {
-	sr.normal = normal;
-  sr.local_hit_point = ray.origin + t * ray.direction;
+        sr.normal = normal;
+        sr.local_hit_point = ray.origin + t * ray.direction;
       }
       return true;
     }
