@@ -36,8 +36,8 @@ namespace Raytracer {
 
 
   /* this sets up multi-jittered sampling using the number of samples */
-  void GlossySpecular::set_samples(const int num_samples, const double exp) {
-    sampler_ptr = new MultiJittered(num_samples);
+  void GlossySpecular::set_samples(const int number_of_samples, const double exp) {
+    sampler_ptr = new MultiJittered(number_of_samples);
     sampler_ptr->map_samples_to_hemisphere(exp);
   }
 

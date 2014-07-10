@@ -2,29 +2,29 @@
 #include <iostream>
 
 Sampler::Sampler() {
-  samples.reserve(num_samples * num_sets);
+  samples.reserve(number_of_samples * number_of_sets);
   setup_shuffled_indices();
 }
 
 
-Sampler::Sampler(const int num_samples) :
-  num_samples(num_samples) {
-  samples.reserve(num_samples * num_sets);
+Sampler::Sampler(const int number_of_samples) :
+  number_of_samples(number_of_samples) {
+  samples.reserve(number_of_samples * number_of_sets);
   setup_shuffled_indices();
 }
 
 
-Sampler::Sampler(const int num_samples, const int num_sets) :
-  num_samples(num_samples),
-  num_sets(num_sets) {
-  samples.reserve(num_samples * num_sets);
+Sampler::Sampler(const int number_of_samples, const int number_of_sets) :
+  number_of_samples(number_of_samples),
+  number_of_sets(number_of_sets) {
+  samples.reserve(number_of_samples * number_of_sets);
   setup_shuffled_indices();
 }
 
 
 Sampler::Sampler(const Sampler& s) :
-  num_samples(s.num_samples),
-  num_sets(s.num_sets),
+  number_of_samples(s.number_of_samples),
+  number_of_sets(s.number_of_sets),
   samples(s.samples),
   shuffled_indices(s.shuffled_indices),
   disk_samples(s.disk_samples),
@@ -39,40 +39,40 @@ Sampler::~Sampler() {}
 
 
 int Sampler::get_number_of_samples() {
-  return num_samples;
+  return number_of_samples;
 }
 
 
 void Sampler::shuffle_x_coordinates() {
-  for (unsigned p = 0; p < num_sets; p++)
-    for (unsigned i = 0; i < num_samples - 1; i++) {
-      int target = get_random_int() % num_samples + p * num_samples;
-      double temp = samples[i + p * num_samples + 1](0);
-      samples[i + p * num_samples + 1](0) = samples[target](0);
+  for (unsigned p = 0; p < number_of_sets; p++)
+    for (unsigned i = 0; i < number_of_samples - 1; i++) {
+      int target = get_random_int() % number_of_samples + p * number_of_samples;
+      double temp = samples[i + p * number_of_samples + 1](0);
+      samples[i + p * number_of_samples + 1](0) = samples[target](0);
       samples[target](0) = temp;
     }
 }
 
 
 void Sampler::shuffle_y_coordinates() {
-  for (unsigned p = 0; p < num_sets; p++)
-    for (unsigned i = 0; i <  num_samples - 1; i++) {
-      int target = get_random_int() % num_samples + p * num_samples;
-      double temp = samples[i + p * num_samples + 1](1);
-      samples[i + p * num_samples + 1](1) = samples[target](1);
+  for (unsigned p = 0; p < number_of_sets; p++)
+    for (unsigned i = 0; i <  number_of_samples - 1; i++) {
+      int target = get_random_int() % number_of_samples + p * number_of_samples;
+      double temp = samples[i + p * number_of_samples + 1](1);
+      samples[i + p * number_of_samples + 1](1) = samples[target](1);
       samples[target](1) = temp;
     }
 }
 
 
 void Sampler::setup_shuffled_indices() {
-  shuffled_indices.reserve(num_samples * num_sets);
+  shuffled_indices.reserve(number_of_samples * number_of_sets);
   vector<int> indices;
-  for (unsigned j = 0; j < num_samples; j++)
+  for (unsigned j = 0; j < number_of_samples; j++)
     indices.push_back(j);
-  for (unsigned p = 0; p < num_sets; p++) {
+  for (unsigned p = 0; p < number_of_sets; p++) {
     random_shuffle(indices.begin(), indices.end());
-    for (unsigned j = 0; j < num_samples; j++)
+    for (unsigned j = 0; j < number_of_samples; j++)
       shuffled_indices.push_back(indices[j]);
   }
 }
@@ -120,7 +120,7 @@ void Sampler::map_samples_to_unit_disk() {
 
 void Sampler::map_samples_to_hemisphere(const double exp) {
   unsigned size = samples.size();
-  hemisphere_samples.reserve(num_samples * num_sets);
+  hemisphere_samples.reserve(number_of_samples * number_of_sets);
   for (int j = 0; j < size; j++) {
     double cos_phi = cos(2.0 * M_PI * samples[j](0));
     double sin_phi = sin(2.0 * M_PI * samples[j](0));
@@ -138,8 +138,8 @@ void Sampler::map_samples_to_sphere() {
   double r1, r2;
   double x, y, z;
   double r, phi;
-  sphere_samples.reserve(num_samples * num_sets);
-  for (int j = 0; j < num_samples * num_sets; j++) {
+  sphere_samples.reserve(number_of_samples * number_of_sets);
+  for (int j = 0; j < number_of_samples * number_of_sets; j++) {
     r1 	= samples[j](0);
     r2 	= samples[j](1);
     z 	= 1.0 - 2.0 * r1;
@@ -153,33 +153,33 @@ void Sampler::map_samples_to_sphere() {
 
 
 Vector2d Sampler::sample_unit_square() {
-  if (count % num_samples == 0) // start of a new pixel
-    jump = (get_random_int() % num_sets) * num_samples; // random index jump initialised to zero in constructor
-  return (samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+  if (count % number_of_samples == 0) // start of a new pixel
+    jump = (get_random_int() % number_of_sets) * number_of_samples; // random index jump initialised to zero in constructor
+  return (samples[jump + shuffled_indices[jump + count++ % number_of_samples]]);
 }
 
 
 Vector2d Sampler::sample_unit_disk() {
-  if (count % num_samples == 0) // start of a new pixel
-    jump = (get_random_int() % num_sets) * num_samples;
-  return (disk_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+  if (count % number_of_samples == 0) // start of a new pixel
+    jump = (get_random_int() % number_of_sets) * number_of_samples;
+  return (disk_samples[jump + shuffled_indices[jump + count++ % number_of_samples]]);
 }
 
 
 Vector3d Sampler::sample_hemisphere() {
-  if (count % num_samples == 0) // start of a new pixel
-    jump = (get_random_int() % num_sets) * num_samples;
-  return (hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+  if (count % number_of_samples == 0) // start of a new pixel
+    jump = (get_random_int() % number_of_sets) * number_of_samples;
+  return (hemisphere_samples[jump + shuffled_indices[jump + count++ % number_of_samples]]);
 }
 
 
 Vector3d Sampler::sample_sphere() {
-  if (count % num_samples == 0) // start of a new pixel
-    jump = (get_random_int() % num_sets) * num_samples;
-  return (sphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+  if (count % number_of_samples == 0) // start of a new pixel
+    jump = (get_random_int() % number_of_sets) * number_of_samples;
+  return (sphere_samples[jump + shuffled_indices[jump + count++ % number_of_samples]]);
 }
 
 
 Vector2d Sampler::sample_one_set() {
-  return(samples[count++ % num_samples]);
+  return(samples[count++ % number_of_samples]);
 }

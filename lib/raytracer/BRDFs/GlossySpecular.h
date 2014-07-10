@@ -20,7 +20,7 @@ namespace Raytracer {
     void set_cs(const RGBColor&);
     void set_cs(double,double,double);
     void set_sampler(Sampler* sp, const double exp); // any type of sampling
-    void set_samples(const int num_samples, const double exp); // multi jittered sampling
+    void set_samples(const int number_of_samples, const double exp); // multi jittered sampling
     void set_normal(const Vector3d& n);
 
   private:
