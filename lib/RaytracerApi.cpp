@@ -30,6 +30,11 @@ namespace Raytracer {
     tri0->set_color(yellow);
     tri0->set_material(Matte::generic(yellow));
     w->add_object(tri0);
+
+    Raytracer::OpenCylinder *opc0 = new Raytracer::OpenCylinder(-60.0, -30.0, 15.0);
+    opc0->set_color(dark_gray);
+    opc0->set_material(Matte::generic(dark_gray));
+    w->add_object(opc0);
   }
 
   Api::~Api() {

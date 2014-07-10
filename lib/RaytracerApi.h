@@ -38,6 +38,7 @@ using Eigen::Vector3d;
 /* Geometric Objects */
 #include "Box.h"
 #include "Disk.h"
+#include "OpenCylinder.h"
 #include "Plane.h"
 #include "Rectangle.h"
 #include "Sphere.h"
