@@ -1,5 +1,5 @@
-#ifndef _OPENCYLINDER_MINE
-#define _OPENCYLINDER_MINE
+#ifndef _OPENCYLINDER_MINE_
+#define _OPENCYLINDER_MINE_
 
 #include "GeometricObject.h"
 
@@ -15,9 +15,9 @@ namespace Raytracer {
     virtual ~OpenCylinder();
     virtual OpenCylinder* clone () const;
     /** The code reverses the normal when the ray hits the inside surface, allows both
-	sides to be shaded, but completely messes up transparency. */
+        sides to be shaded, but completely messes up transparency. */
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-    
+
   protected:
     /** Bottom y value. */
     double ybottom;
@@ -30,4 +30,4 @@ namespace Raytracer {
   };
 }
 
-#endif // _OPENCYLINDER_MINE
+#endif // _OPENCYLINDER_MINE_

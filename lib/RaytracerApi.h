@@ -5,10 +5,6 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-#include "RGBColor.h"
-#include "Ray.h"
-#include "RaytracerApi.h"
-
 /* Lights */
 #include "Ambient.h"
 #include "AmbientOccluder.h"
@@ -31,6 +27,8 @@ using Eigen::Vector3d;
 
 /* World */
 #include "Camera.h"
+#include "Ray.h"
+#include "RGBColor.h"
 #include "ShadeRec.h"
 #include "ViewPlane.h"
 #include "World.h"
@@ -40,6 +38,7 @@ using Eigen::Vector3d;
 #include "Box.h"
 #include "Disk.h"
 #include "OpenCylinder.h"
+#include "PartOpenCylinder.h"
 #include "Plane.h"
 #include "Rectangle.h"
 #include "Sphere.h"
@@ -83,7 +82,6 @@ using Eigen::Vector3d;
 #include <QStringListModel>
 
 namespace Raytracer {
-
   /**
    * @brief Interface between QT GUI and Raytracer library. Provides getters and setters.
    */
