@@ -7,8 +7,8 @@
 namespace Raytracer {
   class Rectangle: public GeometricObject {
   public:
-    Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b);
-    Rectangle(const Vector3d& _p0, const Vector3d& _a, const Vector3d& _b, const Vector3d& n);
+    Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b);
+    Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b, const Vector3d& n);
     virtual Rectangle* clone() const;
     Rectangle(const Rectangle&);
     ~Rectangle();

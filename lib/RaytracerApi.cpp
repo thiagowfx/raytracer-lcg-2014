@@ -9,17 +9,22 @@ namespace Raytracer {
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 50);
     sp0->set_color(red);
     sp0->set_material(Matte::generic(red));
-    w->add_object(sp0);
+    // w->add_object(sp0);
 
     Raytracer::Sphere* sp1 = new Raytracer::Sphere(Vector3d(50.0, 0.0, 0.0), 50);
     sp1->set_color(yellow);
     sp1->set_material(Matte::generic(yellow));
-    w->add_object(sp1);
+    // w->add_object(sp1);
 
     Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
     pl0->set_color(gray);
     pl0->set_material(Matte::generic(gray));
-    w->add_object(pl0);
+    // w->add_object(pl0);
+
+    Raytracer::Disk *disk0 = new Raytracer::Disk(Vector3d::Zero(), 50.0, Vector3d(0.0, 0.0, 1.0));
+    disk0->set_color(green);
+    disk0->set_material(Matte::generic(green));
+    w->add_object(disk0);
   }
 
   Api::~Api() {

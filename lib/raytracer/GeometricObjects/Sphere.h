@@ -5,15 +5,14 @@
 
 namespace Raytracer {
   class Sphere: public GeometricObject {
-
   public:
-    Sphere(Vector3d center, double r);
+    Sphere(const Vector3d& center, const double radius);
     Sphere(const Sphere&);
     ~Sphere();
     virtual Sphere* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
   private:
-    /** Center point of sphere. */
+    /** Center point. */
     Vector3d center;
 
     /** Radius. */

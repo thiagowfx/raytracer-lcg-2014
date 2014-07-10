@@ -1,11 +1,11 @@
 #include "Plane.h"
 
 namespace Raytracer {
-  Plane::Plane(const Vector3d& point, Vector3d normal) :
+  Plane::Plane(const Vector3d& point, const Vector3d& normal) :
     GeometricObject(),
     point(point),
     normal(normal) {
-    normal.normalize();
+    this->normal.normalize();
   }
 
 

@@ -7,7 +7,7 @@ namespace Raytracer {
   class Plane : public GeometricObject {
   public:
     /** Construct a plane at a given point, with the given normal. */
-    Plane(const Vector3d& point, Vector3d normal);
+    Plane(const Vector3d& point, const Vector3d& normal);
     Plane(const Plane&);
     ~Plane();
     virtual Plane* clone() const;

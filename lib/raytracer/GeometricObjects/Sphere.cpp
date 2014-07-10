@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
 namespace Raytracer {
-  Sphere::Sphere(Vector3d c, double r) :
+  Sphere::Sphere(const Vector3d& c, double r) :
     GeometricObject(),
     center(c),
     radius(r)
