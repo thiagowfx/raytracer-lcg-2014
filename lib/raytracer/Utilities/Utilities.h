@@ -16,6 +16,9 @@ const double kEpsilon = 1.0e-5;
 /** Huge constant. */
 const double kHugeValue = 1.0e10;
 
+/** Super small constant. */
+const double EQN_EPS = 1e-90;
+
 /** Ambient Constant. Should be from 0.0 to 1.0. */
 const double kKa = 0.20;
 
@@ -39,5 +42,47 @@ int get_random_int(int begin = 0, int end = RAND_MAX);
 
 /** Return a random double from begin to end, or from 0.0 to 1.0. */
 double get_random_double(double begin = 0.0, double end = 1.0);
+
+/** Return true if the argument is sufficiently near zero. */
+bool IsZero(const double);
+
+/**
+ *  Utility function to find quadric roots. Coefficients are passed
+ *  like this:
+ *
+ *  c[0] + c[1]*x + c[2]*x^2 = 0
+ *
+ *  The function return the number of non-complex roots and
+ *  put the values into the s array.
+ *
+ *  Author: Jochen Schwarze <schwarze@isa.de>
+ */
+int SolveQuadric(double c[3], double s[2]);
+
+/**
+ *  Utility function to find cubic roots. Coefficients are passed
+ *  like this:
+ *
+ *  c[0] + c[1]*x + c[2]*x^2 + c[3]*x^3 = 0
+ *
+ *  The function return the number of non-complex roots and
+ *  put the values into the s array.
+ *
+ *  Author: Jochen Schwarze <schwarze@isa.de>
+ */
+int SolveCubic(double c[4], double s[3]);
+
+/**
+ *  Utility function to find quartic roots. Coefficients are passed
+ *  like this:
+ *
+ *  c[0] + c[1]*x + c[2]*x^2 + c[3]*x^3 + c[4]*x^4 = 0
+ *
+ *  The function return the number of non-complex roots and
+ *  put the values into the s array.
+ *
+ *  Author: Jochen Schwarze <schwarze@isa.de>
+ */
+int SolveQuartic(double c[5], double s[4]);
 
 #endif // _UTILITIES_MINE_

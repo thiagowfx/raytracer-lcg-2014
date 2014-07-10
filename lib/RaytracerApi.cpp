@@ -40,6 +40,11 @@ namespace Raytracer {
     opc0->set_color(dark_gray);
     opc0->set_material(Matte::generic(dark_gray));
     w->add_object(opc0);
+
+    Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
+    tor0->set_color(light_gray);
+    tor0->set_material(Matte::generic(light_gray));
+    w->add_object(tor0);
   }
 
   Api::~Api() {

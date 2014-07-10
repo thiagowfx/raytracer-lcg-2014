@@ -44,6 +44,7 @@ using Eigen::Vector3d;
 #include "Rectangle.h"
 #include "Sphere.h"
 #include "Triangle.h"
+#include "Torus.h"
 
 /* Tracers */
 #include "AreaLighting.h"
