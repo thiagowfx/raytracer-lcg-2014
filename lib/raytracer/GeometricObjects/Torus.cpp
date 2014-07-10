@@ -40,6 +40,11 @@ namespace Raytracer {
   }
 
 
+  BBox Torus::get_bounding_box() const {
+    return bbox;
+  }
+
+
   bool Torus::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
     if (type == SHADOW_RAY && !shadows)
       return false;

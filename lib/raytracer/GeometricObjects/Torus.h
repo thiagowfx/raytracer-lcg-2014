@@ -1,5 +1,5 @@
-#ifndef _TORUS_MINE
-#define _TORUS_MINE
+#ifndef _TORUS_MINE_
+#define _TORUS_MINE_
 
 #include "GeometricObject.h"
 
@@ -13,6 +13,7 @@ namespace Raytracer {
     /** Find the normal vector at the specified position. This works
 	because the torus is defined by a single implicit equation. */
     Vector3d compute_normal(const Vector3d& point) const;
+    virtual BBox get_bounding_box() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
 
   private:

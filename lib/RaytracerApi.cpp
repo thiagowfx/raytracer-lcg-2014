@@ -45,6 +45,11 @@ namespace Raytracer {
     tor0->set_color(light_gray);
     tor0->set_material(Matte::generic(light_gray));
     w->add_object(tor0);
+
+    // Raytracer::Box *box0 = new Raytracer::Box(Vector3d(50.0, 0.0, 0.0), Vector3d(50.0, 50.0, 0.0));
+    // box0->set_color(red);
+    // box0->set_material(Matte::generic(red));
+    // w->add_object(box0);
   }
 
   Api::~Api() {

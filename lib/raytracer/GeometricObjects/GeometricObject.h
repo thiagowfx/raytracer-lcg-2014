@@ -1,5 +1,5 @@
-#ifndef __GEOMETRIC_OBJECT__
-#define __GEOMETRIC_OBJECT__
+#ifndef _GEOMETRICOBJECT_MINE_
+#define _GEOMETRICOBJECT_MINE_
 
 #include "BBox.h"
 #include "Material.h"
@@ -61,4 +61,4 @@ namespace Raytracer {
   }
 }
 
-#endif
+#endif // _GEOMETRICOBJECT_MINE_
