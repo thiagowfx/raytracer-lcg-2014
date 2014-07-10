@@ -42,11 +42,9 @@ main IDE together with your favorite text editor, and
 compilations.
 
 # To final users
-## Materials
-## Objects
 
 # See also / Resources
-- main boox
+- main book
   - companion page - http://www.raytracegroundup.com/
   - errata - http://www.raytracegroundup.com/downloads/errata.pdf
 - cmake manual - http://cmake.org/cmake/help/v2.8.8/cmake.html
