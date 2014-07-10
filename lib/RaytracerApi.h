@@ -36,6 +36,7 @@ using Eigen::Vector3d;
 #include "World.h"
 
 /* Geometric Objects */
+#include "Annulus.h"
 #include "Box.h"
 #include "Disk.h"
 #include "OpenCylinder.h"

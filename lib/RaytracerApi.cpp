@@ -21,6 +21,11 @@ namespace Raytracer {
     disk0->set_material(Matte::generic(green));
     w->add_object(disk0);
 
+    Raytracer::Annulus *ann0 = new Raytracer::Annulus(Vector3d(50.0, -30.0, 0.0), 10.0, 30.0, Vector3d(0.0, 1.0, 0.0));
+    ann0->set_color(light_green);
+    ann0->set_material(Matte::generic(light_green));
+    w->add_object(ann0);
+
     Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 0.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
     rec0->set_color(brown);
     rec0->set_material(Matte::generic(brown));
@@ -269,11 +274,11 @@ namespace Raytracer {
   void Api::set_camera_zoom(double z) {
     w->camera_ptr->set_zoom(z);
   }
-  
+
   double Api::get_camera_zoom() const {
     return w->camera_ptr->get_zoom();
   }
-  
+
   void Api::set_camera_distance(double d) {
     w->camera_ptr->set_distance(d);
   }
