@@ -1,33 +1,25 @@
 #include "Rectangle.h"
 
 namespace Raytracer {
-  // this constructs the normal
   Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b) :
     GeometricObject(),
     p0(p0),
     a(a),
     b(b),
-    a_len_squared(a.norm() * a.norm()),
-    b_len_squared(b.norm() * b.norm()),
     area(a.norm() * b.norm()),
-    inv_area(1.0 / area),
     sampler_ptr(NULL) {
     normal = -a.cross(b).normalized();
   }
 
-  // this has the normal as an argument
-  Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b, const Vector3d& n) :
+  Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b, const Vector3d& normal) :
     GeometricObject(),
     p0(p0),
     a(a),
     b(b),
-    a_len_squared(a.norm() * a.norm()),
-    b_len_squared(b.norm() * b.norm()),
+    normal(normal),
     area(a.norm() * b.norm()),
-    inv_area(1.0 / area),
-    normal(n),
     sampler_ptr(NULL) {
-    normal.normalize();
+    this->normal.normalize();
   }
 
 
@@ -41,11 +33,8 @@ namespace Raytracer {
     p0(r.p0),
     a(r.a),
     b(r.b),
-    a_len_squared(r.a_len_squared),
-    b_len_squared(r.b_len_squared),
-    area(r.area),
-    inv_area(r.inv_area),
-    normal(r.normal) {
+    normal(r.normal),
+    area(r.area) {
     if(r.sampler_ptr)
       sampler_ptr = r.sampler_ptr->clone();
     else
@@ -81,12 +70,12 @@ namespace Raytracer {
     Vector3d d = p - p0;
     double ddota = d.dot(a);
 
-    if (ddota < 0.0 || ddota > a_len_squared)
+    if (ddota < 0.0 || ddota > a.squaredNorm())
       return false;
 
     double ddotb = d.dot(b);
 
-    if (ddotb < 0.0 || ddotb > b_len_squared)
+    if (ddotb < 0.0 || ddotb > b.squaredNorm())
       return false;
 
     tmin = t;
@@ -115,6 +104,6 @@ namespace Raytracer {
 
 
   double Rectangle::pdf(ShadeRec& sr) {
-    return inv_area;
+    return 1.0 / area;
   }
 }

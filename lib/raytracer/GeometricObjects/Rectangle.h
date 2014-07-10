@@ -22,12 +22,16 @@ namespace Raytracer {
     virtual Vector3d get_normal(const Vector3d& p);
 
   private:
-    Vector3d p0;                // corner vertex
-    Vector3d a, b; /** sides */
-    double a_len_squared, b_len_squared; /** square of length of sides */
+    /** A corner vertex. */
+    Vector3d p0;
+
+    /* Vectors with p0 as their origin. */
+    Vector3d a, b;
+
+    /* Normal. */
     Vector3d normal;
+    
     double area;             // for rectangular lights
-    double inv_area;         // for rectangular lights
     Sampler* sampler_ptr;    // for rectangular lights
   };
 }

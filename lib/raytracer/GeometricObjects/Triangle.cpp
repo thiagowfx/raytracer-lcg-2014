@@ -1,11 +1,11 @@
 #include "Triangle.h"
 
 namespace Raytracer {
-  Triangle::Triangle (const Vector3d& a, const Vector3d& b, const Vector3d& c) :
+  Triangle::Triangle (const Vector3d& v0, const Vector3d& v1, const Vector3d& v2) :
     GeometricObject(),
-    v0(a),
-    v1(b),
-    v2(c) {
+    v0(v0),
+    v1(v1),
+    v2(v2) {
     compute_normal();
   }
 

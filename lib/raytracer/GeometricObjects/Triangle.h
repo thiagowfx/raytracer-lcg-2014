@@ -7,7 +7,7 @@ namespace Raytracer {
   class Triangle: public GeometricObject {
 
   public:
-    /** Construct a triangle with the given vertexes. */
+    /** Construct a triangle with the given vertexes. Normal is defined by counter-clockwise vertexes. */
     Triangle(const Vector3d&, const Vector3d&, const Vector3d&);
     Triangle(const Triangle&);
     ~Triangle();
