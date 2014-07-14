@@ -2,9 +2,7 @@
 
 namespace Raytracer {
   Emissive::Emissive() :
-    Material(),
-    ls(1.0),
-    ce(white)
+    Material()
   {}
 
 
@@ -17,14 +15,6 @@ namespace Raytracer {
 
   Material* Emissive::clone() const {
     return new Emissive(*this);
-  }
-
-
-  Emissive& Emissive::operator= (const Emissive& rhs) {
-    if (this != &rhs) {
-      Material::operator=(rhs);
-    }
-    return *this;
   }
 
 
@@ -53,7 +43,7 @@ namespace Raytracer {
   Emissive *Emissive::generic(RGBColor c, double radiance = 1.0) {
     Emissive* em = new Emissive();
     em->set_ce(c);
-    em->scale_radiance(radiance);
+    em->set_radiance(radiance);
     return em;
   }
 

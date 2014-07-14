@@ -11,9 +11,8 @@ namespace Raytracer {
     Emissive();
     Emissive(const Emissive&);
     virtual Material* clone() const;
-    Emissive& operator= (const Emissive&);
     ~Emissive();
-    void scale_radiance(const float);
+    void set_radiance(const double);
     void set_ce(const RGBColor&);
     virtual RGBColor get_Le(ShadeRec&) const;
     virtual RGBColor shade(ShadeRec&);
@@ -22,12 +21,12 @@ namespace Raytracer {
     static Emissive* generic(RGBColor,double radiance);
   private:
     /* these are an analogy to lights */
-    float ls;                   // radiance scaling facor
-    RGBColor ce;                // color
+    double ls = 1.0; // radiance scaling facor
+    RGBColor ce = white; // color
   };
 
 
-  inline void Emissive::scale_radiance(const float ls) {
+  inline void Emissive::set_radiance(const double ls) {
     this->ls = ls;
   }
 

@@ -78,7 +78,7 @@ namespace Raytracer {
     coeffs[4] = sum_d_sqrd * sum_d_sqrd;
 
     /* Find roots of the quartic equation. */
-    int num_real_roots = SolveQuartic(coeffs, roots);
+    int num_real_roots = solve_quartic(coeffs, roots);
     bool  intersected = false;
     double t = kHugeValue;
 

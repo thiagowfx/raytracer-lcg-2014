@@ -6,6 +6,14 @@ namespace Raytracer {
     w->set_camera(new Camera());
     w->camera_ptr->set_eye_position(Vector3d(150.0, 150.0, 0.0));
 
+    // DirectionalLight* dl0 = new DirectionalLight();
+    // dl0->set_direction(Vector3d(10.0,0.0,0.0));
+    // w->add_light(dl0);
+
+    Raytracer::PointLight *pointl0 = new Raytracer::PointLight();
+    pointl0->set_location(Vector3d(100.0, 100.0, 100.0));
+    w->add_light(pointl0);
+
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 10);
     sp0->set_color(red);
     sp0->set_material(Matte::generic(red));
@@ -26,7 +34,7 @@ namespace Raytracer {
     ann0->set_material(Matte::generic(light_green));
     w->add_object(ann0);
 
-    Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 0.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
+    Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 30.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
     rec0->set_color(brown);
     rec0->set_material(Matte::generic(brown));
     w->add_object(rec0);
@@ -259,7 +267,7 @@ namespace Raytracer {
       ambient = new AmbientOccluder();
     }
     ambient->set_color(qcolor_to_rgbcolor(color));
-    ambient->scale_radiance(radiance);
+    ambient->set_radiance(radiance);
     w->set_ambient_light(ambient);
   }
 

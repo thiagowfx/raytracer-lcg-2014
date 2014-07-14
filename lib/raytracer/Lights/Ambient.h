@@ -15,7 +15,7 @@ namespace Raytracer {
     virtual Light* clone() const;
     virtual Vector3d get_direction(ShadeRec&);
     virtual RGBColor L(ShadeRec& s);
-    void scale_radiance(const double);
+    void set_radiance(const double);
     void set_color(const RGBColor);
     double get_radiance() const;
     RGBColor get_color() const;
@@ -33,7 +33,7 @@ namespace Raytracer {
   };
 
 
-  inline void Ambient::scale_radiance(const double ls) {
+  inline void Ambient::set_radiance(const double ls) {
     this->ls = ls;
   }
 

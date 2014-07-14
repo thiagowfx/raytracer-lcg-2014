@@ -1,7 +1,6 @@
-#ifndef __MATERIAL__
-#define __MATERIAL__
+#ifndef _MATERIAL_MINE_
+#define _MATERIAL_MINE_
 
-// #include "World.h" // required for the shade function in all derived classes
 #include "Utilities.h"
 #include "RGBColor.h"
 #include "ShadeRec.h"
@@ -9,21 +8,22 @@
 using Eigen::Vector3d;
 
 namespace Raytracer {
+  /**
+   * @brief A material for a geometric object. Its shade function is different for each type of material.
+   */
   class Material {
   public:
     Material();
     virtual ~Material();
-    Material(const Material& material);
+    Material(const Material&);
     virtual Material* clone() const = 0;
-    virtual RGBColor shade(ShadeRec& sr) = 0;
-    virtual RGBColor area_light_shade(ShadeRec& sr);
-    virtual RGBColor path_shade(ShadeRec& sr);
     virtual RGBColor get_color() const = 0;
-    virtual RGBColor get_Le(ShadeRec& sr) const; /* for emissive materials */
+    virtual RGBColor shade(ShadeRec& sr) = 0;
 
-  protected:
-    Material& operator= (const Material& rhs);
+    virtual RGBColor path_shade(ShadeRec& sr);
+    virtual RGBColor area_light_shade(ShadeRec& sr);
+    virtual RGBColor get_Le(ShadeRec& sr) const; /* for emissive materials */
   };
 }
 
-#endif
+#endif // _MATERIAL_MINE_

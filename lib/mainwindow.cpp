@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QObject::connect(ui->samplerTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(autoRenderCallback()));
 
   ui->tracerTypeComboBox->setModel(api->get_tracer_type_model());
-  api->set_tracer_type(tr("MultipleObjects"));
+  api->set_tracer_type(tr("Whitted"));
   ui->tracerTypeComboBox->setCurrentText(api->get_tracer_type());
   QObject::connect(ui->tracerTypeComboBox, SIGNAL(currentIndexChanged(QString)), api, SLOT(set_tracer_type(QString)));
   QObject::connect(ui->tracerTypeComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(autoRenderCallback()));

@@ -15,12 +15,13 @@ double get_random_double(double begin, double end) {
 }
 
 
-bool IsZero(const double x) {
+bool is_zero(const double x) {
+  const double EQN_EPS = 1e-90;
   return x > -EQN_EPS && x < EQN_EPS;
 }
 
 
-int SolveQuadric(double c[3], double s[2]) {
+int solve_quadric(double c[3], double s[2]) {
   double p, q, D;
 
   /* normal form: x^2 + px + q = 0 */
@@ -29,7 +30,7 @@ int SolveQuadric(double c[3], double s[2]) {
 
   D = p * p - q;
 
-  if (IsZero(D)) {
+  if (is_zero(D)) {
     s[0] = - p;
     return 1;
   }
@@ -45,7 +46,7 @@ int SolveQuadric(double c[3], double s[2]) {
 }
 
 
-int SolveCubic(double c[4], double s[3]) {
+int solve_cubic(double c[4], double s[3]) {
   int i, num;
   double sub;
   double A, B, C;
@@ -67,8 +68,8 @@ int SolveCubic(double c[4], double s[3]) {
   cb_p = p * p * p;
   D = q * q + cb_p;
 
-  if (IsZero(D)) {
-    if (IsZero(q)) { /* one triple solution */
+  if (is_zero(D)) {
+    if (is_zero(q)) { /* one triple solution */
       s[0] = 0;
       num = 1;
     }
@@ -106,7 +107,7 @@ int SolveCubic(double c[4], double s[3]) {
 }
 
 
-int SolveQuartic(double c[5], double s[4]) {
+int solve_quartic(double c[5], double s[4]) {
   double  coeffs[4];
   double  z, u, v, sub;
   double  A, B, C, D;
@@ -128,7 +129,7 @@ int SolveQuartic(double c[5], double s[4]) {
   q = 1.0/8 * sq_A * A - 1.0/2 * A * B + C;
   r = - 3.0/256*sq_A*sq_A + 1.0/16*sq_A*B - 1.0/4*A*C + D;
 
-  if (IsZero(r)) {
+  if (is_zero(r)) {
     /* no absolute term: y(y^3 + py + q) = 0 */
 
     coeffs[0] = q;
@@ -136,7 +137,7 @@ int SolveQuartic(double c[5], double s[4]) {
     coeffs[2] = 0;
     coeffs[3] = 1;
 
-    num = SolveCubic(coeffs, s);
+    num = solve_cubic(coeffs, s);
 
     s[num++] = 0;
   }
@@ -148,7 +149,7 @@ int SolveQuartic(double c[5], double s[4]) {
     coeffs[2] = - 1.0/2 * p;
     coeffs[3] = 1;
 
-    (void) SolveCubic(coeffs, s);
+    (void) solve_cubic(coeffs, s);
 
     /* ... and take the one real solution ... */
 
@@ -159,14 +160,14 @@ int SolveQuartic(double c[5], double s[4]) {
     u = z * z - r;
     v = 2 * z - p;
 
-    if (IsZero(u))
+    if (is_zero(u))
       u = 0;
     else if (u > 0)
       u = sqrt(u);
     else
       return 0;
 
-    if (IsZero(v))
+    if (is_zero(v))
       v = 0;
     else if (v > 0)
       v = sqrt(v);
@@ -177,13 +178,13 @@ int SolveQuartic(double c[5], double s[4]) {
     coeffs[1] = q < 0 ? -v : v;
     coeffs[2] = 1;
 
-    num = SolveQuadric(coeffs, s);
+    num = solve_quadric(coeffs, s);
 
     coeffs[0]= z + u;
     coeffs[1] = q < 0 ? v : -v;
     coeffs[2] = 1;
 
-    num += SolveQuadric(coeffs, s + num);
+    num += solve_quadric(coeffs, s + num);
   }
 
   /* resubstitute */

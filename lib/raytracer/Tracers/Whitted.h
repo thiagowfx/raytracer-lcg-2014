@@ -17,7 +17,7 @@ namespace Raytracer {
     Whitted(World*);
     virtual ~Whitted();
     virtual const char* to_string();
-    virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+    virtual RGBColor trace_ray(const Ray, const int depth) const;
   };
 }
 

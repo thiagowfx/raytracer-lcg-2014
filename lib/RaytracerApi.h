@@ -9,8 +9,7 @@ using Eigen::Vector3d;
 #include "Ambient.h"
 #include "AmbientOccluder.h"
 #include "AreaLight.h"
-#include "Directional.h"
-#include "Light.h"
+#include "DirectionalLight.h"
 #include "PointLight.h"
 
 /* Samplers */
@@ -20,7 +19,6 @@ using Eigen::Vector3d;
 
 /* Materials */
 #include "Emissive.h"
-#include "Material.h"
 #include "Matte.h"
 #include "Phong.h"
 #include "Reflective.h"

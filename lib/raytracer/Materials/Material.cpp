@@ -4,28 +4,23 @@ namespace Raytracer {
   Material::Material() {}
 
 
+  Material::~Material() {}
+
+  
   Material::Material(const Material& m) {}
 
 
   RGBColor Material::area_light_shade(ShadeRec &sr) {
-    return black;
+    return RGBColor(0.0,0.0,0.0);
   }
 
 
   RGBColor Material::path_shade(ShadeRec &sr) {
-    return black;
+    return RGBColor(0.0,0.0,0.0);
   }
 
 
   RGBColor Material::get_Le(ShadeRec &sr) const {
-    return black;
+    return RGBColor(0.0,0.0,0.0);
   }
-
-
-  Material& Material::operator= (const Material& rhs) {
-    return *this;
-  }
-
-
-  Material::~Material() {}
 }

@@ -15,7 +15,7 @@ namespace Raytracer {
     DirectionalLight(const DirectionalLight&);
     virtual Light* clone() const;
     virtual ~DirectionalLight();
-    void scale_radiance(const double);
+    void set_radiance(const double);
     void set_color(const RGBColor&);
     void set_direction(Vector3d);
     virtual Vector3d get_direction(ShadeRec&);
@@ -33,7 +33,7 @@ namespace Raytracer {
   };
 
 
-  inline void DirectionalLight::scale_radiance(const double ls) {
+  inline void DirectionalLight::set_radiance(const double ls) {
     this->ls = ls;
   }
 

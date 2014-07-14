@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <time.h>
 #include <Eigen/Dense>
-
 using Eigen::Vector3d;
 
 /** Small constant for shadows. */
@@ -15,9 +14,6 @@ const double kEpsilon = 1.0e-5;
 
 /** Huge constant. */
 const double kHugeValue = 1.0e10;
-
-/** Super small constant. */
-const double EQN_EPS = 1e-90;
 
 /** Ambient Constant. Should be from 0.0 to 1.0. */
 const double kKa = 0.20;
@@ -44,7 +40,7 @@ int get_random_int(int begin = 0, int end = RAND_MAX);
 double get_random_double(double begin = 0.0, double end = 1.0);
 
 /** Return true if the argument is sufficiently near zero. */
-bool IsZero(const double);
+bool is_zero(const double);
 
 /**
  *  Utility function to find quadric roots. Coefficients are passed
@@ -57,7 +53,7 @@ bool IsZero(const double);
  *
  *  Author: Jochen Schwarze <schwarze@isa.de>
  */
-int SolveQuadric(double c[3], double s[2]);
+int solve_quadric(double c[3], double s[2]);
 
 /**
  *  Utility function to find cubic roots. Coefficients are passed
@@ -70,7 +66,7 @@ int SolveQuadric(double c[3], double s[2]);
  *
  *  Author: Jochen Schwarze <schwarze@isa.de>
  */
-int SolveCubic(double c[4], double s[3]);
+int solve_cubic(double c[4], double s[3]);
 
 /**
  *  Utility function to find quartic roots. Coefficients are passed
@@ -83,6 +79,6 @@ int SolveCubic(double c[4], double s[3]);
  *
  *  Author: Jochen Schwarze <schwarze@isa.de>
  */
-int SolveQuartic(double c[5], double s[4]);
+int solve_quartic(double c[5], double s[4]);
 
 #endif // _UTILITIES_MINE_

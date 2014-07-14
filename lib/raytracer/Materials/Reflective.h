@@ -10,19 +10,17 @@ namespace Raytracer {
   public:
     Reflective();
     Reflective(const Reflective&);
-    Reflective& operator= (const Reflective&);
     virtual Reflective* clone() const;
     ~Reflective();
     void set_kr(const double);
     void set_cr(const RGBColor&);
-    void set_cr(double,double,double);
     virtual RGBColor shade(ShadeRec&);
+    /** Direct illumination + reflective illumination + reflections. */
     static Reflective* generic(RGBColor);
-    static Reflective* generic_nodirect(RGBColor);
+    /** Black-ish, just reflections. */
     static Reflective* generic_uncolored();
-
   private:
-    PerfectSpecular* reflective_brdf;
+    PerfectSpecular* reflective_brdf = new PerfectSpecular();
   };
 
 
@@ -33,11 +31,6 @@ namespace Raytracer {
 
   inline void Reflective::set_cr(const RGBColor& c) {
     reflective_brdf->set_cr(c);
-  }
-
-
-  inline void Reflective::set_cr(double r, double g, double b) {
-    reflective_brdf->set_cr(r, g, b);
   }
 }
 

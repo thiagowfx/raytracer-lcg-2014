@@ -1,5 +1,5 @@
-#ifndef __PHONG__
-#define __PHONG__
+#ifndef _PHONG_MINE_
+#define _PHONG_MINE_
 
 #include "Material.h"
 #include "GlossySpecular.h"
@@ -8,7 +8,6 @@
 
 namespace Raytracer {
   class Phong : public Material {
-
   public:
     Phong();
     Phong(const Phong&);
@@ -20,15 +19,14 @@ namespace Raytracer {
     void set_cs(const RGBColor&);
     void set_ks(double);
     void set_exp(double);
-    virtual RGBColor shade (ShadeRec&);
+    virtual RGBColor shade(ShadeRec&);
     virtual RGBColor area_light_shade(ShadeRec&);
     static Phong* generic(RGBColor);
     virtual RGBColor get_color() const;
-
   private:
-    Lambertian *ambient_brdf;
-    Lambertian *diffuse_brdf;
-    GlossySpecular *specular_brdf;
+    Lambertian *ambient_brdf = new Lambertian();
+    Lambertian *diffuse_brdf = new Lambertian();
+    GlossySpecular *specular_brdf = new GlossySpecular();
   };
 
   inline void Phong::set_ka (double ka) {
@@ -58,4 +56,4 @@ namespace Raytracer {
   }
 }
 
-#endif
+#endif // _PHONG_MINE_

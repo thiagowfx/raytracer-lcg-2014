@@ -9,10 +9,9 @@ namespace Raytracer {
   class Matte: public Material {
   public:
     Matte();
+    ~Matte();
     Matte(const Matte&);
     virtual Material* clone() const;
-    Matte& operator= (const Matte&);
-    ~Matte();
     void set_ka(const double);
     void set_kd(const double);
     void set_cd(const RGBColor&);
@@ -22,8 +21,8 @@ namespace Raytracer {
     virtual RGBColor get_color() const;
 
   private:
-    Lambertian* ambient_brdf;
-    Lambertian* diffuse_brdf;
+    Lambertian* ambient_brdf = new Lambertian();
+    Lambertian* diffuse_brdf = new Lambertian();
   };
 
   /* this sets Lambertian::kd,

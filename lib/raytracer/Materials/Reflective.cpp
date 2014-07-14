@@ -2,32 +2,16 @@
 
 namespace Raytracer {
   Reflective::Reflective () :
-    Phong(),
-    reflective_brdf(new PerfectSpecular)
+    Phong()
   {}
 
 
   Reflective::Reflective(const Reflective& rm) :
-    Phong(rm),
-    reflective_brdf(NULL)
-  {
+    Phong(rm) {
     if(rm.reflective_brdf)
       reflective_brdf = rm.reflective_brdf->clone();
-  }
-
-
-  Reflective& Reflective::operator= (const Reflective& rhs) {
-    if (this != &rhs) {
-      Phong::operator=(rhs);
-      if (reflective_brdf) {
-        delete reflective_brdf;
-        reflective_brdf = NULL;
-      }
-
-      if (rhs.reflective_brdf)
-        reflective_brdf = rhs.reflective_brdf->clone();
-    }
-    return *this;
+    else
+      reflective_brdf = NULL;
   }
 
 
@@ -45,18 +29,17 @@ namespace Raytracer {
 
 
   RGBColor Reflective::shade(ShadeRec& sr) {
-    RGBColor L(Phong::shade(sr)); // direct illumination
-
+    /* Direct illumination. */
+    RGBColor L(Phong::shade(sr));
+    
     Vector3d wo = -sr.ray.direction;
     Vector3d wi;
     RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
     Ray reflected_ray(sr.hit_point, wi);
     L += fr * sr.w.tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal.dot(wi));
-
     return L;
   }
 
-  /** Has direct illumination */
   Reflective *Reflective::generic(RGBColor color) {
     Reflective* r = new Reflective();
     r->set_ka(kKa);
@@ -71,22 +54,6 @@ namespace Raytracer {
   }
 
 
-  /** Doesn't have direct illumination */
-  Reflective *Reflective::generic_nodirect(RGBColor color) {
-    Reflective* r = new Reflective();
-    r->set_ka(0.0);
-    r->set_kd(0.0);
-    r->set_cd(color);
-    r->set_ks(0.0);
-    r->set_cs(color);
-    r->set_exp(kExp);
-    r->set_kr(kKr);
-    r->set_cr(color);
-    return r;
-  }
-
-
-  /** Black-ish, just the reflections */
   Reflective *Reflective::generic_uncolored() {
     Reflective* r = new Reflective();
     r->set_ka(0.0);

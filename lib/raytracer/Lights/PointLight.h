@@ -15,7 +15,7 @@ namespace Raytracer {
     PointLight(const PointLight&);
     virtual Light* clone() const;
     virtual ~PointLight();
-    void scale_radiance(double);
+    void set_radiance(double);
     void set_color(const RGBColor&);
     void set_location(Vector3d);
     virtual Vector3d get_direction(ShadeRec&);
@@ -44,7 +44,7 @@ namespace Raytracer {
   }
 
 
-  inline void PointLight::scale_radiance(double ls) {
+  inline void PointLight::set_radiance(double ls) {
     this->ls = ls;
   }
 }

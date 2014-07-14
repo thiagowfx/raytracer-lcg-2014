@@ -8,7 +8,7 @@ namespace Raytracer {
     b(b),
     area(a.norm() * b.norm()),
     sampler_ptr(NULL) {
-    normal = -a.cross(b).normalized();
+    this->normal = -a.cross(b).normalized();
   }
 
   Rectangle::Rectangle(const Vector3d& p0, const Vector3d& a, const Vector3d& b, const Vector3d& normal) :
@@ -68,13 +68,12 @@ namespace Raytracer {
 
     Vector3d p = ray.origin + t * ray.direction;
     Vector3d d = p - p0;
-    double ddota = d.dot(a);
 
+    double ddota = d.dot(a);
     if (ddota < 0.0 || ddota > a.squaredNorm())
       return false;
 
     double ddotb = d.dot(b);
-
     if (ddotb < 0.0 || ddotb > b.squaredNorm())
       return false;
 
