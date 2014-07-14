@@ -9,12 +9,12 @@ namespace Raytracer {
   /**
    * @brief Represents a directional light, having a direction, a color and an intensity.
    */
-  class Directional: public Light {
+  class DirectionalLight: public Light {
   public:
-    Directional();
-    Directional(const Directional&);
+    DirectionalLight();
+    DirectionalLight(const DirectionalLight&);
     virtual Light* clone() const;
-    virtual ~Directional();
+    virtual ~DirectionalLight();
     void scale_radiance(const double);
     void set_color(const RGBColor&);
     void set_direction(Vector3d);
@@ -33,17 +33,17 @@ namespace Raytracer {
   };
 
 
-  inline void Directional::scale_radiance(const double ls) {
+  inline void DirectionalLight::scale_radiance(const double ls) {
     this->ls = ls;
   }
 
 
-  inline void Directional::set_color(const RGBColor& color) {
+  inline void DirectionalLight::set_color(const RGBColor& color) {
     this->color = color;
   }
 
   
-  inline void Directional::set_direction(Vector3d d) {
+  inline void DirectionalLight::set_direction(Vector3d d) {
     direction = d.normalized();
   }
 }
