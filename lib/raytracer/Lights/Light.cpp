@@ -5,7 +5,7 @@ namespace Raytracer {
 
 
   Light::Light(const Light& ls) :
-    shadows(ls.casts_shadows())
+    shadows(ls.get_shadows())
   {}
 
 
@@ -22,7 +22,7 @@ namespace Raytracer {
   }
 
 
-  bool Light::casts_shadows() const {
+  bool Light::get_shadows() const {
     return shadows;
   }
 

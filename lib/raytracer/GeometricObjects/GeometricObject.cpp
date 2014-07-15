@@ -47,7 +47,7 @@ namespace Raytracer {
   }
 
 
-  bool GeometricObject::casts_shadows() const {
+  bool GeometricObject::get_shadows() const {
     return shadows;
   }
 }

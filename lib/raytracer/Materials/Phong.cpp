@@ -60,7 +60,7 @@ namespace Raytracer {
       if (ndotwi > 0.0) {
         bool in_shadow = false;
 
-        if (sr.w.lights[j]->casts_shadows()) {
+        if (sr.w.lights[j]->get_shadows()) {
           Ray shadow_ray(sr.hit_point, wi);
           in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
         }
@@ -85,7 +85,7 @@ namespace Raytracer {
       if (ndotwi > 0.0) {
         bool in_shadow = false;
 
-        if (sr.w.lights[j]->casts_shadows()) {
+        if (sr.w.lights[j]->get_shadows()) {
           Ray shadow_ray(sr.hit_point, wi);
           in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
         }

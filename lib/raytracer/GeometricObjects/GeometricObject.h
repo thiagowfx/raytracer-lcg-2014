@@ -19,7 +19,7 @@ namespace Raytracer {
 
     /* Getters. */
     Material* get_material() const;
-    bool casts_shadows() const;
+    bool get_shadows() const;
 
     /* Setters. */
     virtual void set_material(Material*);
