@@ -15,49 +15,47 @@ namespace Raytracer {
     w->add_light(pointl0);
 
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 10);
-    sp0->set_color(red);
     sp0->set_material(Matte::generic(red));
     w->add_object(sp0);
 
     Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-    pl0->set_color(gray);
     pl0->set_material(Matte::generic(gray));
     w->add_object(pl0);
 
     Raytracer::Disk *disk0 = new Raytracer::Disk(Vector3d(0.0, -30.0, 0.0), 30.0, Vector3d(0.0, 1.0, 0.0));
-    disk0->set_color(green);
     disk0->set_material(Matte::generic(green));
     w->add_object(disk0);
 
     Raytracer::Annulus *ann0 = new Raytracer::Annulus(Vector3d(50.0, -30.0, 0.0), 10.0, 30.0, Vector3d(0.0, 1.0, 0.0));
-    ann0->set_color(light_green);
     ann0->set_material(Matte::generic(light_green));
     w->add_object(ann0);
 
     Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 30.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
-    rec0->set_color(brown);
     rec0->set_material(Matte::generic(brown));
     w->add_object(rec0);
 
     Raytracer::Triangle *tri0 = new Raytracer::Triangle(Vector3d(20.0, 0.0, 0.0), Vector3d(0.0,20.0, 0.0), Vector3d(0.0, 0.0, 20.0));
-    tri0->set_color(yellow);
     tri0->set_material(Matte::generic(yellow));
     w->add_object(tri0);
 
     Raytracer::PartOpenCylinder *opc0 = new Raytracer::PartOpenCylinder(-60.0, -30.0, 15.0, M_PI/4, 2 * M_PI/3);
-    opc0->set_color(dark_gray);
     opc0->set_material(Matte::generic(dark_gray));
     w->add_object(opc0);
 
     Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
-    tor0->set_color(light_gray);
     tor0->set_material(Matte::generic(light_gray));
     w->add_object(tor0);
 
     // Raytracer::Box *box0 = new Raytracer::Box(Vector3d(50.0, 0.0, 0.0), Vector3d(50.0, 50.0, 0.0));
-    // box0->set_color(red);
     // box0->set_material(Matte::generic(red));
     // w->add_object(box0);
+
+    Raytracer::Compound *cp0 = new Raytracer::Compound();
+    cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
+    cp0->add_object(new Raytracer::Sphere(Vector3d(0.0, 90.0, 0.0), 20.0));
+    cp0->set_material(Matte::generic(red));
+    cp0->set_shadows(true);
+    w->add_object(cp0);
   }
 
   Api::~Api() {

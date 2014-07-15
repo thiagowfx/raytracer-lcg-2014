@@ -22,18 +22,22 @@ namespace Raytracer {
 
 
   RGBColor Emissive::shade(ShadeRec& sr) {
-    if (-sr.normal.dot(sr.ray.direction) > 0.0)
+    if (-sr.normal.dot(sr.ray.direction) > 0.0) {
       return ls * ce;
-    else
+    }
+    else {
       return black;
+    }
   }
 
 
   RGBColor Emissive::area_light_shade(ShadeRec& sr) {
-    if (-sr.normal.dot(sr.ray.direction) > 0.0)
+    if (-sr.normal.dot(sr.ray.direction) > 0.0) {
       return ls * ce;
-    else
+    }
+    else {
       return black;
+    }
   }
 
   RGBColor Emissive::get_color() const {

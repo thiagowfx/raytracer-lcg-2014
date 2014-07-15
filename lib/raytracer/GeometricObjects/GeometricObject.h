@@ -19,17 +19,15 @@ namespace Raytracer {
 
     /* Getters. */
     Material* get_material() const;
-    RGBColor get_color() const;
     bool casts_shadows() const;
-    // virtual BBox get_bounding_box() const;
 
     /* Setters. */
     virtual void set_material(Material*);
-    void set_color(const RGBColor&);
-    void set_shadows(const bool);
+    virtual void set_shadows(const bool);
 
-    /** Return true if the given ray hit the object. In this case and if the ray is primary,
-     * shading information  is stored in tmin and in the ShadeRec object. */
+    /** Return true if the given ray hit the object. In this case and
+     * if the ray is primary, shading information is stored in tmin
+     * and in the ShadeRec object. */
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
 
     /* The following three functions are needed for objects which are area lights. */
@@ -39,25 +37,17 @@ namespace Raytracer {
     virtual Vector3d get_normal(const Vector3d&);
 
   protected:
-    /* mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const */
+    /* mutable allows Compound::hit, Instance::hit and Grid::hit to
+       assign to material_ptr. hit functions are const */
     mutable Material* material_ptr = NULL;
 
-    /** Color for MultipleObjects tracer. */
-    RGBColor color = black;
+    /** Does this object cast shadows? */
     bool shadows = true;
   };
 
 
   inline Material* GeometricObject::get_material() const {
     return material_ptr;
-  }
-
-  inline void GeometricObject::set_color(const RGBColor& color) {
-    this->color = color;
-  }
-
-  inline RGBColor GeometricObject::get_color() const {
-    return color;
   }
 }
 

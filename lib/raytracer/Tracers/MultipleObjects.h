@@ -1,5 +1,5 @@
-#ifndef _MULTIPLE_OBJECTS_MINE_
-#define _MULTIPLE_OBJECTS_MINE_
+#ifndef _MULTIPLEOBJECTS_MINE_
+#define _MULTIPLEOBJECTS_MINE_
 
 #include "Tracer.h"
 #include "World.h"
@@ -17,4 +17,4 @@ namespace Raytracer {
   };
 }
 
-#endif // _MULTIPLE_OBJECTS_MINE_
+#endif // _MULTIPLEOBJECTS_MINE_

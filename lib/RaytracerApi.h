@@ -34,6 +34,7 @@ using Eigen::Vector3d;
 /* Geometric Objects */
 #include "Annulus.h"
 #include "Box.h"
+#include "Compound.h"
 #include "Disk.h"
 #include "OpenCylinder.h"
 #include "PartOpenCylinder.h"
