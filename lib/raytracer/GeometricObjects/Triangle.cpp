@@ -7,6 +7,9 @@ namespace Raytracer {
     v1(v1),
     v2(v2) {
     compute_normal();
+    bbox_ptr = new BBox(min(min(v0(0), v1(0)), v2(0)) - kEpsilon, max(max(v0(0), v1(0)), v2(0)) + kEpsilon,
+                    min(min(v0(1), v1(1)), v2(1)) - kEpsilon, max(max(v0(1), v1(1)), v2(1)) + kEpsilon,
+                    min(min(v0(2), v1(2)), v2(2)) - kEpsilon, max(max(v0(2), v1(2)), v2(2)) + kEpsilon);
   }
 
 
@@ -20,28 +23,32 @@ namespace Raytracer {
     v0(triangle.v0),
     v1(triangle.v1),
     v2(triangle.v2),
-    normal(triangle.normal)
-  {}
+    normal(triangle.normal) {
+    if (triangle.bbox_ptr)
+      bbox_ptr = triangle.bbox_ptr->clone();
+    else
+      bbox_ptr = NULL;
+  }
 
 
-  Triangle::~Triangle () {}
+  Triangle::~Triangle () {
+    if (bbox_ptr != NULL) {
+      delete bbox_ptr;
+      bbox_ptr = NULL;
+    }
+  }
 
 
   void Triangle::compute_normal() {
     normal = (v1 - v0).cross(v2 - v0).normalized();
   }
 
-  // BBox Triangle::get_bounding_box() {
-  //   const double delta = 0.000001;
-  //   return (BBox(min(min(v0(0), v1(0)), v2(0)) - delta, max(max(v0(0), v1(0)), v2(0)) + delta,
-  //                min(min(v0(1), v1(1)), v2(1)) - delta, max(max(v0(1), v1(1)), v2(1)) + delta,
-  //                min(min(v0(2), v1(2)), v2(2)) - delta, max(max(v0(2), v1(2)), v2(2)) + delta));
-  // }
 
   bool Triangle::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
-    /* Property: alpha + beta + gamma == 1.0, and each of them are between 0.0 and 1.0. */
-    
     if (type == SHADOW_RAY && !shadows)
+      return false;
+
+    if (!bbox_ptr->hit(ray))
       return false;
 
     double a = v0(0) - v1(0), b = v0(0) - v2(0), c = ray.direction(0), d = v0(0) - ray.origin(0);
@@ -52,6 +59,7 @@ namespace Raytracer {
     double q = g * i - e * k, s = e * j - f * i;
     double inv_denom  = 1.0 / (a * m + b * q + c * s);
 
+    /* Property: alpha + beta + gamma == 1.0, and each of them are between 0.0 and 1.0. */
     double e1 = d * m - b * n - c * p;
     double beta = e1 * inv_denom;
 

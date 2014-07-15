@@ -6,11 +6,11 @@
 #include <Eigen/Dense>
 using Eigen::Vector3d;
 
-/** Small constant for shadows. */
+/** Small constant, for shadows. */
 const double kEpsilonShadows = 1.0e-3;
 
 /** Small constant. */
-const double kEpsilon = 1.0e-5;
+const double kEpsilon = 1.0e-6;
 
 /** Huge constant. */
 const double kHugeValue = 1.0e10;

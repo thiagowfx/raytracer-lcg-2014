@@ -5,9 +5,9 @@ namespace Raytracer {
   Torus::Torus (const double a, const double b) :
     GeometricObject(),
     a(a),
-    b(b),
-    bbox(-a - b, a + b, -b, b, -a - b, a + b)
-  {}
+    b(b) {
+    bbox_ptr = new BBox(-a - b, a + b, -b, b, -a - b, a + b);
+  }
 
 
   Torus* Torus::clone() const {
@@ -18,30 +18,30 @@ namespace Raytracer {
   Torus::Torus (const Torus& torus) :
     GeometricObject(torus),
     a(torus.a),
-    b(torus.b),
-    bbox(torus.bbox)
-  {}
+    b(torus.b) {
+    if (torus.bbox_ptr)
+      bbox_ptr = torus.bbox_ptr->clone();
+    else
+      bbox_ptr = NULL;
+  }
 
 
-  Torus::~Torus(){}
+  Torus::~Torus(){
+    if (bbox_ptr != NULL) {
+      delete bbox_ptr;
+      bbox_ptr = NULL;
+    }
+  }
 
 
   Vector3d Torus::compute_normal(const Vector3d& p) const {
     Vector3d normal;
     double param_squared = a * a + b * b;
-    double x = p(0);
-    double y = p(1);
-    double z = p(2);
-    double sum_squared = x * x + y * y + z * z;
-    normal(0) = 4.0 * x * (sum_squared - param_squared);
-    normal(1) = 4.0 * y * (sum_squared - param_squared + 2.0 * a * a);
-    normal(2) = 4.0 * z * (sum_squared - param_squared);
+    double sum_squared = p(0) * p(0) + p(1) * p(1) + p(2) * p(2);
+    normal(0) = 4.0 * p(0) * (sum_squared - param_squared);
+    normal(1) = 4.0 * p(1) * (sum_squared - param_squared + 2.0 * a * a);
+    normal(2) = 4.0 * p(2) * (sum_squared - param_squared);
     return normal.normalized();
-  }
-
-
-  BBox Torus::get_bounding_box() const {
-    return bbox;
   }
 
 
@@ -49,7 +49,7 @@ namespace Raytracer {
     if (type == SHADOW_RAY && !shadows)
       return false;
 
-    if (!bbox.hit(ray))
+    if (!bbox_ptr->hit(ray))
       return false;
 
     double x1 = ray.origin(0);
@@ -87,13 +87,14 @@ namespace Raytracer {
       return false;
 
     /* Find the smallest root greater than kEpsilon, if any. The roots array is not sorted. */
-    for (unsigned j = 0; j < num_real_roots; ++j)
+    for (unsigned j = 0; j < num_real_roots; ++j) {
       if (roots[j] > kEpsilon) {
         intersected = true;
         if (roots[j] < t) {
           t = roots[j];
         }
       }
+    }
 
     if(!intersected)
       return false;

@@ -13,18 +13,14 @@ namespace Raytracer {
     /** Find the normal vector at the specified position. This works
 	because the torus is defined by a single implicit equation. */
     Vector3d compute_normal(const Vector3d& point) const;
-    virtual BBox get_bounding_box() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-
   private:
     /** Swept radius. */
     double a;
-
     /** Tube radius. */
     double b;
-
     /** Bounding box. */
-    BBox bbox;
+    BBox *bbox_ptr;
   };
 }
 

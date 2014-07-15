@@ -4,8 +4,12 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
+  /**
+   * @brief A Sphere is defined by its center point and its radius.
+   */
   class Sphere: public GeometricObject {
   public:
+    /** Construct a sphere with the given center point and radius. */
     Sphere(const Vector3d& center, const double radius);
     Sphere(const Sphere&);
     ~Sphere();
@@ -14,7 +18,6 @@ namespace Raytracer {
   private:
     /** Center point. */
     Vector3d center;
-
     /** Radius. */
     double radius;
   };

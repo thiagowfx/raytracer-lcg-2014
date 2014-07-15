@@ -1,9 +1,6 @@
 #include "World.h"
 
 namespace Raytracer {
-  World::World() {}
-
-
   World::~World() {
     if(tracer_ptr) {
       delete tracer_ptr;

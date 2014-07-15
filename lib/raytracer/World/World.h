@@ -20,7 +20,6 @@ namespace Raytracer {
   class Camera;
   class World {
   public:
-    World();
     ~World();
 
     /* Setters. */
