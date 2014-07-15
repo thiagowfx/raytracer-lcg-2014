@@ -112,7 +112,7 @@
         <item row="8" column="0">
          <widget class="QLabel" name="maxDepthLabel">
           <property name="text">
-           <string>Max depth</string>
+           <string>Maximum depth</string>
           </property>
          </widget>
         </item>
@@ -177,8 +177,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>226</width>
-         <height>239</height>
+         <width>316</width>
+         <height>264</height>
         </rect>
        </property>
        <attribute name="label">
@@ -254,12 +254,16 @@
          <widget class="QLabel" name="cameraDistanceLabel">
           <property name="text">
            <string>Camera distance
-from View plane</string>
+from Viewplane</string>
           </property>
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QDoubleSpinBox" name="cameraZoomDoubleSpinBox"/>
+         <widget class="QDoubleSpinBox" name="cameraZoomDoubleSpinBox">
+          <property name="suffix">
+           <string> x</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="3">
          <widget class="QDoubleSpinBox" name="cameraDistanceDoubleSpinBox"/>
