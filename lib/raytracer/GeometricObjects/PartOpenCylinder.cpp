@@ -1,17 +1,17 @@
 #include "PartOpenCylinder.h"
 
 namespace Raytracer {
-  PartOpenCylinder::PartOpenCylinder(const double ybottom, const double ytop, const double radius, const double min_angle, const double max_angle) :
+  PartOpenCylinder::PartOpenCylinder(const double ybottom, const double ytop, const double radius, const double min_azimuth_angle, const double max_azimuth_angle) :
     OpenCylinder(ybottom, ytop, radius),
-    min_angle(min_angle),
-    max_angle(max_angle)
+    min_azimuth_angle(min_azimuth_angle),
+    max_azimuth_angle(max_azimuth_angle)
   {}
 
 
   PartOpenCylinder::PartOpenCylinder(const PartOpenCylinder& p) :
     OpenCylinder(p),
-    min_angle(p.min_angle),
-    max_angle(p.max_angle)
+    min_azimuth_angle(p.min_azimuth_angle),
+    max_azimuth_angle(p.max_azimuth_angle)
   {}
 
 
@@ -39,7 +39,7 @@ namespace Raytracer {
     double c = ox * ox + oz * oz - radius * radius;
     double disc = b * b - 4.0 * a * c;
     Vector3d local_hit_point;
-    double phi_hit_point;
+    double azimuth_hit_angle;
 
     if (disc < 0.0)
       return false;
@@ -49,12 +49,12 @@ namespace Raytracer {
       /* Smaller root. */
       t = (-b - e) / denom;
 
-      if (t > kEpsilon) {
+      if (t > kEpsilonShadows) {
         double yhit = oy + t * dy;
         local_hit_point = ray.origin + t * ray.direction;
-        phi_hit_point = get_azimuth_angle(local_hit_point);
+        azimuth_hit_angle = get_azimuth_angle(local_hit_point);
 
-        if (yhit > ybottom && yhit < ytop && min_angle <= phi_hit_point && phi_hit_point <= max_angle) {
+        if (yhit > ybottom && yhit < ytop && min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle) {
           tmin = t;
 
           if (type == PRIMARY_RAY) {
@@ -72,12 +72,12 @@ namespace Raytracer {
       /* Larger root. */
       t = (-b + e) / denom;
 
-      if (t > kEpsilon) {
+      if (t > kEpsilonShadows) {
         double yhit = oy + t * dy;
         local_hit_point = ray.origin + t * ray.direction;
-        phi_hit_point = get_azimuth_angle(local_hit_point);
+        azimuth_hit_angle = get_azimuth_angle(local_hit_point);
 
-	if (yhit > ybottom && yhit < ytop && min_angle <= phi_hit_point && phi_hit_point <= max_angle) {
+	if (yhit > ybottom && yhit < ytop && min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle) {
           tmin = t;
 
           if (type == PRIMARY_RAY) {

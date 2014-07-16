@@ -14,9 +14,9 @@ namespace Raytracer {
     pointl0->set_location(Vector3d(100.0, 100.0, 100.0));
     w->add_light(pointl0);
 
-    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 10);
-    sp0->set_material(Matte::generic(red));
-    w->add_object(sp0);
+    // Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d::Zero(), 10);
+    // sp0->set_material(Matte::generic(red));
+    // w->add_object(sp0);
 
     Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
     pl0->set_material(Matte::generic(gray));
@@ -60,6 +60,10 @@ namespace Raytracer {
     cp0->set_material(Matte::generic(red));
     cp0->set_shadows(true);
     w->add_object(cp0);
+
+    Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI/4.0, 3.0 * M_PI/4.0, M_PI/3.0, 2.0 * M_PI/3.0);
+    ptsp0->set_material(Matte::generic(red));
+    w->add_object(ptsp0);
   }
 
   Api::~Api() {

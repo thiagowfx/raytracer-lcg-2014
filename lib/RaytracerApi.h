@@ -38,6 +38,7 @@ using Eigen::Vector3d;
 #include "Disk.h"
 #include "OpenCylinder.h"
 #include "PartOpenCylinder.h"
+#include "PartSphere.h"
 #include "Plane.h"
 #include "Rectangle.h"
 #include "Sphere.h"

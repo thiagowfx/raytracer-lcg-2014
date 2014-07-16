@@ -13,7 +13,7 @@ namespace Raytracer {
     center(sphere.center),
     radius(sphere.radius)
   {}
-
+ 
 
   Sphere::~Sphere() {}
 
