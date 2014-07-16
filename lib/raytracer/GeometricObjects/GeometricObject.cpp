@@ -5,7 +5,6 @@ namespace Raytracer {
 
 
   GeometricObject::GeometricObject (const GeometricObject& object) :
-    material_ptr(NULL),
     shadows(object.shadows) {
     if (object.material_ptr)
       material_ptr = object.material_ptr->clone();

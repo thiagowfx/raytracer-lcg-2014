@@ -10,15 +10,15 @@ namespace Raytracer {
   PrimitivaDaniel::PrimitivaDaniel(const PrimitivaDaniel& p) :
     GeometricObject(p),
     primitive(NULL) {
-    /*
-      if(primitive)
-      	primitive = pd.primitive->clone();
-    */
+    // if (p)
+    //   primitive = p->clone();
+    // else
+    //   primitive = NULL;
   }
 
 
   PrimitivaDaniel::~PrimitivaDaniel() {
-    if (primitive) {
+    if (primitive != NULL) {
       delete primitive;
       primitive = NULL;
     }

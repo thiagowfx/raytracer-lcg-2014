@@ -87,7 +87,6 @@ namespace Raytracer {
         }
       }
     }
-
     return false;
   }
 }

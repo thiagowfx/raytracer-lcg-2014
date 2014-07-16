@@ -42,13 +42,17 @@ namespace Raytracer {
     opc0->set_material(Matte::generic(dark_gray));
     w->add_object(opc0);
 
+    Raytracer::PartOpenCylinder *opc1 = new Raytracer::PartOpenCylinder(-100.0, -70.0, 15.0);
+    opc1->set_material(Matte::generic(gray));
+    w->add_object(opc1);
+
     Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
     tor0->set_material(Matte::generic(light_gray));
     w->add_object(tor0);
 
-    // Raytracer::Box *box0 = new Raytracer::Box(Vector3d(50.0, 0.0, 0.0), Vector3d(50.0, 50.0, 0.0));
-    // box0->set_material(Matte::generic(red));
-    // w->add_object(box0);
+    Raytracer::Box *box0 = new Raytracer::Box(Vector3d(70.0, 0.0, 0.0), Vector3d(95.0, 0.0, -30.0));
+    box0->set_material(Matte::generic(red));
+    w->add_object(box0);
 
     Raytracer::Compound *cp0 = new Raytracer::Compound();
     cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));

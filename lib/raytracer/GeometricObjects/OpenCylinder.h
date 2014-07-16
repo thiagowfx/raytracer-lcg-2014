@@ -4,7 +4,6 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
-
   /**
    * @brief An open cylinder is centered on the y axis and is defined by its extent in the y direction and its radius.
    */
@@ -14,17 +13,15 @@ namespace Raytracer {
     OpenCylinder(const OpenCylinder&);
     virtual ~OpenCylinder();
     virtual OpenCylinder* clone () const;
-    /** The code reverses the normal when the ray hits the inside surface, allows both
-        sides to be shaded, but completely messes up transparency. */
+    /** This code reverses the normal when the ray hits the inside
+        surface, which allows both sides to be shaded, but completely
+        messes up transparency. */
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-
   protected:
     /** Bottom y value. */
     double ybottom;
-
     /** Top y value. */
     double ytop;
-
     /** Radius. */
     double radius;
   };

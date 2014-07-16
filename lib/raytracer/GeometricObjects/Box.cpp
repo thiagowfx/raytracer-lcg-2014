@@ -26,27 +26,22 @@ namespace Raytracer {
 
   
   Box* Box::clone() const {
-    return (new Box(*this));
+    return new Box(*this);
   }
 
 
-  Box::Box (const Box& r) :
-    GeometricObject(r),
-    x0(r.x0),
-    y0(r.y0),
-    z0(r.z0),
-    x1(r.x1),
-    y1(r.y1),
-    z1(r.z1)
+  Box::Box (const Box& box) :
+    GeometricObject(box),
+    x0(box.x0),
+    y0(box.y0),
+    z0(box.z0),
+    x1(box.x1),
+    y1(box.y1),
+    z1(box.z1)
   {}
 
 
-  Box::~Box () {}
-
-
-  BBox Box::get_bounding_box() const {
-    return BBox(x0,x1,y0,y1,z0,z1);
-  }
+  Box::~Box() {}
 
 
   bool Box::hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const {
@@ -95,7 +90,7 @@ namespace Raytracer {
     double t0, t1;
     int face_in, face_out;
 
-    // find largest entering t value
+    /* Find largest entering t value. */
     if (tx_min > ty_min) {
       t0 = tx_min;
       face_in = (a >= 0.0) ? 0 : 3;

@@ -7,6 +7,7 @@
 #include "pc-shape-detection.h"
 
 namespace Raytracer {
+  /** An abstraction to the point cloud detection library. */
   class PrimitivaDaniel: public GeometricObject {
   public:
     PrimitivaDaniel(Primitive*);

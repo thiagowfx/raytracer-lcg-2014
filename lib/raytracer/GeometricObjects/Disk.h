@@ -4,8 +4,10 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
+  /** A disk is a filled circle, defined by its center and a radius, plus a normal (which defines a plane). It is like a 2D Sphere. */
   class Disk : public GeometricObject {
   public:
+    /** Construct a disk, with a center, radius and normal (which defines a plane). */
     Disk(const Vector3d& center, double radius, const Vector3d& normal);
     Disk(const Disk&);
     ~Disk();
@@ -14,10 +16,8 @@ namespace Raytracer {
   private:
     /** Center point. */
     Vector3d center;
-
     /** Radius. */
     double radius;
-
     /** Normal. */
     Vector3d normal;
   };

@@ -5,8 +5,10 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
+  /** A compound object represents a collection of objects. */
   class Compound: public GeometricObject {
   public:
+    /** Construct a empty compound object. Objects should be added later. */
     Compound();
     Compound(const Compound&);
     ~Compound();
@@ -23,7 +25,7 @@ namespace Raytracer {
     virtual void add_object(GeometricObject*);
 
     /* Getters. */
-    unsigned get_num_objects();
+    unsigned get_number_of_objects();
 
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
   protected:
@@ -37,7 +39,7 @@ namespace Raytracer {
   };
 
 
-  inline unsigned Compound::get_num_objects() {
+  inline unsigned Compound::get_number_of_objects() {
     return objects.size();
   }
 }

@@ -33,7 +33,7 @@ namespace Raytracer {
   {}
 
 
-  BBox::~BBox () {}
+  BBox::~BBox() {}
 
 
   BBox* BBox::clone() const {
@@ -84,22 +84,28 @@ namespace Raytracer {
     double t0, t1;
 
     /* Find largest entering t value. */
-    if (tx_min > ty_min)
+    if (tx_min > ty_min) {
       t0 = tx_min;
-    else
+    }
+    else {
       t0 = ty_min;
+    }
 
-    if (tz_min > t0)
+    if (tz_min > t0) {
       t0 = tz_min;
+    }
 
     /* Find smallest exiting t value; */
-    if (tx_max < ty_max)
+    if (tx_max < ty_max) {
       t1 = tx_max;
-    else
+    }
+    else {
       t1 = ty_max;
+    }
 
-    if (tz_max < t1)
+    if (tz_max < t1) {
       t1 = tz_max;
+    }
 
     return (t0 < t1 && t1 > kEpsilon);
   }

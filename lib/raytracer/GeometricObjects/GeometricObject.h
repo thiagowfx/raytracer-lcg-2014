@@ -10,6 +10,7 @@
 using Eigen::Vector3d;
 
 namespace Raytracer {
+  /** A geometric object, which must have a hit function, usually defined from an implicit equation. */
   class GeometricObject {
   public:
     GeometricObject();
@@ -18,7 +19,9 @@ namespace Raytracer {
     virtual GeometricObject* clone() const = 0;
 
     /* Getters. */
+    /** Get object material. */
     Material* get_material() const;
+    /** Does this object cast shadows? */
     bool get_shadows() const;
 
     /* Setters. */

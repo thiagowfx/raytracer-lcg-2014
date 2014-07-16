@@ -10,19 +10,17 @@ namespace Raytracer {
    */
   class PartOpenCylinder: public OpenCylinder {
   public:
-    PartOpenCylinder(const double ybottom, const double ytop, const double radius, double min_angle, double max_angle);
+    /** Y coordinate from bottom and from top, radius, and angle range (minimum then maximum). */
+    PartOpenCylinder(const double ybottom, const double ytop, const double radius, double min_angle = 0.0, double max_angle = 2 * M_PI);
     PartOpenCylinder(const PartOpenCylinder&);
     virtual ~PartOpenCylinder();
-    virtual PartOpenCylinder* clone () const;
+    virtual PartOpenCylinder* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-    
   private:
-    /** Get azimuth angle from the given point in the cylinder. */
-    double get_angle(const Vector3d& p) const;
-    
+    /** Get azimuth angle from the given point in cylinder. */
+    double get_azimuth_angle(const Vector3d& p) const;
     /** Minimum angle. */
     double min_angle;
-
     /** Maximum angle. */
     double max_angle;
   };

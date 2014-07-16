@@ -52,7 +52,7 @@ namespace Raytracer {
       if (t > kEpsilon) {
         double yhit = oy + t * dy;
         local_hit_point = ray.origin + t * ray.direction;
-        phi_hit_point = get_angle(local_hit_point);
+        phi_hit_point = get_azimuth_angle(local_hit_point);
 
         if (yhit > ybottom && yhit < ytop && min_angle <= phi_hit_point && phi_hit_point <= max_angle) {
           tmin = t;
@@ -75,7 +75,7 @@ namespace Raytracer {
       if (t > kEpsilon) {
         double yhit = oy + t * dy;
         local_hit_point = ray.origin + t * ray.direction;
-        phi_hit_point = get_angle(local_hit_point);
+        phi_hit_point = get_azimuth_angle(local_hit_point);
 
 	if (yhit > ybottom && yhit < ytop && min_angle <= phi_hit_point && phi_hit_point <= max_angle) {
           tmin = t;
@@ -96,7 +96,7 @@ namespace Raytracer {
   }
 
 
-  double PartOpenCylinder::get_angle(const Vector3d& p) const {
+  double PartOpenCylinder::get_azimuth_angle(const Vector3d& p) const {
     double phi = atan2(p(0),p(2));
     if (phi < 0.0) {
       phi += 2 * M_PI;
