@@ -6,19 +6,22 @@
 
 namespace Raytracer {
   class Reflective: public Phong {
-
   public:
     Reflective();
     Reflective(const Reflective&);
     virtual Reflective* clone() const;
     ~Reflective();
-    void set_kr(const double);
-    void set_cr(const RGBColor&);
-    virtual RGBColor shade(ShadeRec&);
     /** Direct illumination + reflective illumination + reflections. */
     static Reflective* generic(RGBColor);
     /** Black-ish, just reflections. */
     static Reflective* generic_uncolored();
+    
+    virtual RGBColor shade(ShadeRec&);
+    
+    /* Setters. */
+    void set_kr(const double);
+    void set_cr(const RGBColor&);
+    
   private:
     PerfectSpecular* reflective_brdf = new PerfectSpecular();
   };

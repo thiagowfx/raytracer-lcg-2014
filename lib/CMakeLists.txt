@@ -51,7 +51,6 @@ file(
   "${RAYTRACER_DIR}/Materials"
   "${RAYTRACER_DIR}/Samplers"
   "${RAYTRACER_DIR}/Tracers"
-  "${RAYTRACER_DIR}/Utilities"
   "${RAYTRACER_DIR}/World"
   )
 file(GLOB_RECURSE RAYTRACER_SOURCES "${RAYTRACER_DIR}/*.cpp")

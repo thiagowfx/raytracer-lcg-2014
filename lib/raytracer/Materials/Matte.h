@@ -12,27 +12,34 @@ namespace Raytracer {
     ~Matte();
     Matte(const Matte&);
     virtual Material* clone() const;
+    static Matte* generic(RGBColor);
+    
+    virtual RGBColor get_color() const;
+    virtual RGBColor shade(ShadeRec&);
+
+    /* Setters. */
     void set_ka(const double);
     void set_kd(const double);
     void set_cd(const RGBColor&);
-    virtual RGBColor shade(ShadeRec&);
+    
     virtual RGBColor area_light_shade(ShadeRec&);
-    static Matte* generic(RGBColor);
-    virtual RGBColor get_color() const;
 
   private:
+    /** Ambient color component. */
     Lambertian* ambient_brdf = new Lambertian();
+    /** Diffuse color component. */
     Lambertian* diffuse_brdf = new Lambertian();
   };
 
-  /* this sets Lambertian::kd,
-     there is no Lambertian::ka data member because ambient reflection is diffuse reflection */
+  /** This sets Lambertian::kd, there is no Lambertian::ka data member
+      because ambient reflection is diffuse reflection */
   inline void Matte::set_ka(const double ka) {
     ambient_brdf->set_kd(ka);
   }
 
-
-  /* this also sets Lambertian::kd, but for a different Lambertian object */
+  
+  /** This also sets Lambertian::kd, but for a different Lambertian
+     object */
   inline void Matte::set_kd(const double kd) {
     diffuse_brdf->set_kd(kd);
   }

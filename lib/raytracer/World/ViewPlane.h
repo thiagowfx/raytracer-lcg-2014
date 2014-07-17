@@ -14,8 +14,8 @@ namespace Raytracer {
     ViewPlane(const ViewPlane&);
 
     /* Setters. */
-    void set_hres(const int);
-    void set_vres(const int);
+    void set_hres(const unsigned);
+    void set_vres(const unsigned);
     void set_pixel_size(const double);
     void set_gamma(const double);
     void set_out_of_gamut(const bool);
@@ -23,10 +23,10 @@ namespace Raytracer {
     void set_sampler(Sampler*);
 
     /** Horizontal Image Resolution. */
-    int hres = 0; 
+    int hres = 100;
 
     /** Vertical Image Resolution. */
-    int vres = 0;
+    int vres = 100;
 
     /** Pixel size. Decreasing means to zoom into the image. */
     double pixel_size = 1.0;
@@ -45,12 +45,12 @@ namespace Raytracer {
   };
 
 
-  inline void ViewPlane::set_hres(const int hres) {
+  inline void ViewPlane::set_hres(const unsigned hres) {
     this->hres = hres;
   }
 
 
-  inline void ViewPlane::set_vres(const int vres) {
+  inline void ViewPlane::set_vres(const unsigned vres) {
     this->vres = vres;
   }
 

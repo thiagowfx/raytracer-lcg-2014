@@ -10,6 +10,14 @@ using namespace std;
  */
 class RGBColor {
  public:
+  /** Create a black RGBColor. */
+  RGBColor();
+  /** Create a RGBColor with the specified red, green and blue components. */
+  RGBColor(double r, double g, double b);
+  RGBColor(const RGBColor&);
+  RGBColor& operator=(const RGBColor&);
+  ~RGBColor();
+
   /** Red component, from 0.0 to 1.0. */
   double r = 0.0;
 
@@ -19,11 +27,7 @@ class RGBColor {
   /** Blue component, from 0.0 to 1.0. */
   double b = 0.0;
 
-  RGBColor();
-  ~RGBColor();
-  RGBColor(double, double, double);
-  RGBColor(const RGBColor&);
-  RGBColor& operator= (const RGBColor&);
+  /** C++ operators overloading. */
   RGBColor operator+ (const RGBColor&) const;
   RGBColor& operator+= (const RGBColor&);
   RGBColor operator* (const double) const;
@@ -32,11 +36,11 @@ class RGBColor {
   RGBColor& operator/= (const double);
   RGBColor operator* (const RGBColor&) const;
 
-  /** Return true if colors are equal. */
-  bool operator== (const RGBColor&) const;
+  /** Return true if the colors are equal. */
+  bool operator==(const RGBColor&) const;
 
-  /** Return true if colors are different. */
-  bool operator!= (const RGBColor&) const;
+  /** Return true if the colors are different. */
+  bool operator!=(const RGBColor&) const;
 
   /** Color components are raised to the specified power. */
   RGBColor powc(double) const;

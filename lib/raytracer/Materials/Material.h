@@ -17,12 +17,18 @@ namespace Raytracer {
     virtual ~Material();
     Material(const Material&);
     virtual Material* clone() const = 0;
+
+    /** Return the main color of this material, necessary for the
+	MultipleObjects tracer. Lights shouldn't be present in this
+	calculation. */
     virtual RGBColor get_color() const = 0;
+    /** How should the color of a point in a geometric object be computed? */
     virtual RGBColor shade(ShadeRec& sr) = 0;
 
+    /** Those functions are necessary for area light shading / emissive materials. */
     virtual RGBColor path_shade(ShadeRec& sr);
     virtual RGBColor area_light_shade(ShadeRec& sr);
-    virtual RGBColor get_Le(ShadeRec& sr) const; /* for emissive materials */
+    virtual RGBColor get_Le(ShadeRec& sr) const;
   };
 }
 

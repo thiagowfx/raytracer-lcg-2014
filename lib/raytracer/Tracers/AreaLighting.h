@@ -5,6 +5,9 @@
 #include "World.h"
 
 namespace Raytracer {
+  /**
+   * @brief It's like the Whitted tracer, but additionally there is support for emissive objects, which create area lights.
+   */
   class AreaLighting: public Tracer {
   public:
     AreaLighting(World*);

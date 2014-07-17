@@ -222,7 +222,10 @@ namespace Raytracer {
     double get_camera_distance() const;
 
   private:
+    /** World instance, the main raytracer component. */
     World* w;
+
+    /** Utility buffer to manipulate C strings. */
     char buffer[50];
   };
 }

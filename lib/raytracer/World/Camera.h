@@ -49,7 +49,7 @@ namespace Raytracer {
     /** Distance between the viewplane and the camera eye. More is nearer. */
     double distance = 100.0;
 
-    /** Up vector. */
+    /** Up vector -- in y direction. */
     Vector3d up = Vector3d(0.0, 1.0, 0.0);
 
     /** Orthonormal basis vector. */

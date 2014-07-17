@@ -13,6 +13,8 @@ namespace Raytracer {
     max_depth(vp.max_depth) {
     if (vp.sampler_ptr)
       sampler_ptr = vp.sampler_ptr->clone();
+    else
+      sampler_ptr = NULL;
   }
 
 

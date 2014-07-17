@@ -15,10 +15,14 @@ public:
   ~MainWindow();
 
 private slots:
+  /* Callbacks are a simple way to create QT events. */
   void samplerCallback();
   void backgroundColorCallback();
   void ambientLightColorCallback();
   void ambientLightCallback();
+
+  /** Auto render image after changing any option if the corresponding member
+   * variable is set. */
   void autoRenderCallback();
 
   /******************* Actions ******************/
@@ -39,6 +43,7 @@ private slots:
   void on_actionUnfocus_triggered();
 
 private:
+  /** QT GUI interface. */
   Ui::MainWindow *ui;
 
   /** Bind keys to events. */

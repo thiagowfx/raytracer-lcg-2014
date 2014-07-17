@@ -6,7 +6,10 @@
 
 namespace Raytracer {
   /**
-   * @brief A bounding box encloses a geometric object to speed up rendering times.
+   * @brief A bounding box encloses a geometric object to speed up
+   * rendering times of complex geometric objects, but it is not a
+   * geometric object itself, since it does not have a hit function
+   * complaint to it.
    */
   class BBox {
   public:

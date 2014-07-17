@@ -13,19 +13,26 @@ namespace Raytracer {
     Phong(const Phong&);
     virtual Material* clone() const;
     virtual ~Phong();
+    static Phong* generic(RGBColor);
+    
+    virtual RGBColor get_color() const;
+    virtual RGBColor shade(ShadeRec&);
+
+    /* Setters. */
     void set_ka(double);
     void set_cd(const RGBColor&);
     void set_kd(double);
     void set_cs(const RGBColor&);
     void set_ks(double);
     void set_exp(double);
-    virtual RGBColor shade(ShadeRec&);
+    
     virtual RGBColor area_light_shade(ShadeRec&);
-    static Phong* generic(RGBColor);
-    virtual RGBColor get_color() const;
   private:
+    /** Ambient color component. */
     Lambertian *ambient_brdf = new Lambertian();
+    /** Diffuse color component. */
     Lambertian *diffuse_brdf = new Lambertian();
+    /** Reflective color component. */
     GlossySpecular *specular_brdf = new GlossySpecular();
   };
 
