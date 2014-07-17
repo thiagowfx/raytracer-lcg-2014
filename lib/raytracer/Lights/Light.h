@@ -9,21 +9,36 @@ using Eigen::Vector3d;
 
 namespace Raytracer {
   class ShadeRec;
-
+  /**
+   * @brief A light gives illumination to world objects.
+   */
   class Light {
   public:
     Light();
     Light(const Light&);
     virtual Light* clone() const = 0;
     virtual ~Light();
+
+    /** Get the direction defined by two points: hit point and light point. */
     virtual Vector3d get_direction(ShadeRec&) = 0;
-    virtual RGBColor L(ShadeRec&) = 0; // radiance
-    bool get_shadows() const;
-    void set_shadows(const bool shadow);
+
+    /** Test if the given ray hits the light -- is there an object between the ray origin and the light? */
     virtual bool in_shadow(const Ray&, ShadeRec&) const = 0;
-    virtual double G(const ShadeRec&) const; /* for area lights */
-    virtual double pdf(const ShadeRec&) const; /* for area lights */
+
+    /** Radiance (color + intensity) that this light emits, affects shading of objects. */
+    virtual RGBColor L(ShadeRec&) = 0;
+
+    /** Does this light cast shadows? */
+    bool get_shadows() const;
+
+    /** Sets the shadow property of this light. */
+    void set_shadows(const bool);
+
+    /* For area lights. */
+    virtual double G(const ShadeRec&) const;
+    virtual double pdf(const ShadeRec&) const;
   protected:
+    /** Does this light cast shadows? */
     bool shadows = true;
   };
 }

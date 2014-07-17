@@ -15,20 +15,21 @@ namespace Raytracer {
     PointLight(const PointLight&);
     virtual Light* clone() const;
     virtual ~PointLight();
+
+    virtual Vector3d get_direction(ShadeRec&);
+    virtual bool in_shadow(const Ray&, ShadeRec&) const;
+    virtual RGBColor L(ShadeRec&);
+    
+    /* Setters. */
     void set_radiance(double);
     void set_color(const RGBColor&);
+    /** Set the location point of this light. */
     void set_location(Vector3d);
-    virtual Vector3d get_direction(ShadeRec&);
-    virtual RGBColor L(ShadeRec&);
-    virtual bool in_shadow(const Ray&, ShadeRec&) const;
-
   private:
     /** Radiance of light. */
     double ls = 1.0;
-
     /** Color of light. */
     RGBColor color = white;
-
     /** Location of light. */
     Vector3d location = Vector3d::Zero();
   };

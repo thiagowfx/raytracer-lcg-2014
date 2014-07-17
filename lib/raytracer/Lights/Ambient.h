@@ -5,7 +5,8 @@
 
 namespace Raytracer {
   /**
-   * @brief Light that is present everywhere.
+   * @brief A light that is present everywhere, adding a constant
+   * ammount illumination for every object.
    */
   class Ambient: public Light {
   public:
@@ -13,21 +14,24 @@ namespace Raytracer {
     Ambient(const Ambient&);
     virtual ~Ambient();
     virtual Light* clone() const;
+
+    /** Return the name of this class. */
+    virtual const char* to_string() const;
     virtual Vector3d get_direction(ShadeRec&);
     virtual RGBColor L(ShadeRec& s);
+    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+
+    /* Setters. */
     void set_radiance(const double);
     void set_color(const RGBColor);
+
+    /* Getters. */
     double get_radiance() const;
     RGBColor get_color() const;
-    virtual const char* to_string() const;
-    
-    /** Chapter 16: Always false. */
-    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
 
   protected:
     /** Radiance of light. */
     double ls = 1.0;
-
     /** Color of light. */
     RGBColor color = white;
   };

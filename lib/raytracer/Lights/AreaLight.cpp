@@ -7,8 +7,7 @@ namespace Raytracer {
 
 
   AreaLight::AreaLight(const AreaLight& al) :
-    Light(al)
-  {
+    Light(al) {
     if(al.object_ptr)
       object_ptr = al.object_ptr->clone();
     else
@@ -42,8 +41,7 @@ namespace Raytracer {
     sample_point = object_ptr->sample(); // used in the G function
     light_normal = object_ptr->get_normal(sample_point);
     wi = sample_point - sr.hit_point; // used in the G function
-    wi.normalize();
-    return wi;
+    return wi.normalized();
   }
 
 

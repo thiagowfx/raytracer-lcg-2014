@@ -7,6 +7,10 @@
 #include "World.h"
 
 namespace Raytracer {
+  /**
+   * @brief A material that models ambient + diffuse + reflective
+   * radiance (suitable for the Phong model of illumination).
+   */
   class Phong : public Material {
   public:
     Phong();

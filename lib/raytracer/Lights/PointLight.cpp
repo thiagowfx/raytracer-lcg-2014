@@ -37,10 +37,12 @@ namespace Raytracer {
     double t = 0;
     const unsigned num_objects = sr.w.objects.size();
     const double distance = (location - ray.origin).norm();
-    for (unsigned j = 0; j < num_objects; ++j)
+    for (unsigned j = 0; j < num_objects; ++j) {
       /* t < d means: an object only blocks a point light if it is before the light */
-      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < distance)
+      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < distance) {
         return true;
+      }
+    }
     return false;
   }
 }

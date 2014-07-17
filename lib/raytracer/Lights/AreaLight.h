@@ -12,15 +12,20 @@ namespace Raytracer {
     AreaLight(const AreaLight&);
     virtual Light* clone() const;
     virtual ~AreaLight();
-    void set_object(GeometricObject*);
-    virtual Vector3d get_direction(ShadeRec&);
-    virtual RGBColor L(ShadeRec& sr);
+
+    virtual RGBColor L(ShadeRec&);
     virtual bool in_shadow(const Ray&, ShadeRec&) const;
+    virtual Vector3d get_direction(ShadeRec&);
+    
+    /* Setters. */
+    void set_object(GeometricObject*);
+
     virtual double G(const ShadeRec&) const;
     virtual double pdf(const ShadeRec&) const;
   private:
     GeometricObject* object_ptr = NULL;
-    Material* material_ptr = NULL; // will be an emissive material
+    /** This will be an emissive material. */
+    Material* material_ptr = NULL;
     Vector3d sample_point;
     Vector3d light_normal; // assigned in get_direction - which therefore can't be const for any light
     Vector3d wi; // unit direction from hit point being shaded to sample point on light surface

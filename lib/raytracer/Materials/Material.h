@@ -9,7 +9,9 @@ using Eigen::Vector3d;
 
 namespace Raytracer {
   /**
-   * @brief A material for a geometric object. Its shade function is different for each type of material.
+   * @brief A material for a geometric object. Its shade function is
+   * responsible for shading the correct color given a ShadeRec object
+   * and it is different for each type of material.
    */
   class Material {
   public:

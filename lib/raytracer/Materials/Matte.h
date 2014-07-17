@@ -6,6 +6,9 @@
 #include "World.h"
 
 namespace Raytracer {
+  /**
+   * @brief A material that models ambient + diffuse radiance.
+   */
   class Matte: public Material {
   public:
     Matte();
