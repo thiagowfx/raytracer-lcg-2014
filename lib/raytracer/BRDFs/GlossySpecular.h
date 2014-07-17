@@ -1,33 +1,39 @@
-#ifndef __GLOSSY_SPECULAR__
-#define __GLOSSY_SPECULAR__
+#ifndef _GLOSSYSPECULAR_MINE_
+#define _GLOSSYSPECULAR_MINE_
 
-/* This implements glossy specular reflection for direct and indirect illumination */
 #include "BRDF.h"
 #include "MultiJittered.h"
 
 namespace Raytracer {
+  /**
+   * @brief Glossy specular reflection for direct and indirect illumination.
+   */
   class GlossySpecular: public BRDF {
-
   public:
     GlossySpecular();
-    GlossySpecular(const GlossySpecular& gloss);
+    GlossySpecular(const GlossySpecular&);
     ~GlossySpecular();
     virtual GlossySpecular* clone() const;
+    
     virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
-    void set_ks(const double ks);
-    void set_exp(const double exp);
+
+    /* Setters. */
+    void set_ks(const double);
+    void set_exp(const double);
     void set_cs(const RGBColor&);
-    void set_cs(double,double,double);
-    void set_sampler(Sampler* sp, const double exp); // any type of sampling
+    void set_sampler(Sampler*, const double exp); // any type of sampling
     void set_samples(const int number_of_samples, const double exp); // multi jittered sampling
-    void set_normal(const Vector3d& n);
+    void set_normal(const Vector3d&);
 
   private:
-    double ks;
-    RGBColor cs;               // specular color
-    double exp;                // specular exponent (e)
-    Sampler* sampler;          // for use in sample_f
+    /** Specular (reflective) coefficient constant. */
+    double ks = 0.0;
+    /** Specular (reflective) color. */
+    RGBColor cs = white;
+    /** Specular exponent constant. */
+    double exp = kExp;
+    Sampler* sampler = NULL;	// for use in sample_f
   };
 
 
@@ -44,13 +50,6 @@ namespace Raytracer {
   inline void GlossySpecular::set_cs(const RGBColor& c) {
     cs = c;
   }
-
-
-  inline void GlossySpecular::set_cs(double r, double g, double b) {
-    cs.r = r;
-    cs.g = g;
-    cs.b = b;
-  }
 }
 
-#endif
+#endif // _GLOSSYSPECULAR_MINE_

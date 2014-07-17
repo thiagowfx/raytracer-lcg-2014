@@ -2,9 +2,14 @@
 
 namespace Raytracer {
   PerfectSpecular::PerfectSpecular() :
-    BRDF(),
-    kr(0.0),
-    cr(1.0, 1.0, 1.0)
+    BRDF()
+  {}
+
+
+  PerfectSpecular::PerfectSpecular(const PerfectSpecular& ps) :
+    BRDF(ps),
+    kr(ps.kr),
+    cr(ps.cr)
   {}
 
 

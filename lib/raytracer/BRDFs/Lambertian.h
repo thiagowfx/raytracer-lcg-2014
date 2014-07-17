@@ -1,46 +1,42 @@
-#ifndef __LAMBERTIAN__
-#define __LAMBERTIAN__
+#ifndef _LAMBERTIAN_MINE
+#define _LAMBERTIAN_MINE
 
 #include "BRDF.h"
 
 namespace Raytracer {
   class Lambertian: public BRDF {
-
   public:
     Lambertian();
-    Lambertian(const Lambertian& lamb);
+    Lambertian(const Lambertian&);
     virtual Lambertian* clone() const;
     ~Lambertian();
-    Lambertian& operator= (const Lambertian& rhs);
+    
     virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
     virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
+
+    /* Setters. */
     void set_kd(double);
     void set_cd(const RGBColor&);
-    void set_cd(double,double,double);
+
+    /* Getters. */
     double get_kd() const;
     RGBColor get_cd() const;
-
   private:
-    double kd;
-    RGBColor cd;
+    /** Diffuse coefficient constant. */
+    double kd = 0.0;
+    /** Diffuse color. */
+    RGBColor cd = black;
   };
 
 
   inline void Lambertian::set_kd(double k) {
-    kd = k;
+    this->kd = k;
   }
 
 
   inline void Lambertian::set_cd(const RGBColor& color) {
-    cd = color;
-  }
-
-
-  inline void Lambertian::set_cd(double r, double g, double b) {
-    cd.r = r;
-    cd.g = g;
-    cd.b = b;
+    this->cd = color;
   }
 
 
@@ -54,4 +50,4 @@ namespace Raytracer {
   }
 }
 
-#endif
+#endif // _LAMBERTIAN_MINE

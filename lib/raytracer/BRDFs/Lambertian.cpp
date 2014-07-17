@@ -2,9 +2,7 @@
 
 namespace Raytracer {
   Lambertian::Lambertian() :
-    BRDF(),
-    kd(0.0),
-    cd(0.0, 0.0, 0.0)
+    BRDF()
   {}
 
 
@@ -21,16 +19,6 @@ namespace Raytracer {
 
 
   Lambertian::~Lambertian() {}
-
-
-  Lambertian& Lambertian::operator= (const Lambertian& rhs) {
-    if (this != &rhs) {
-      BRDF::operator= (rhs);
-      kd = rhs.kd;
-      cd = rhs.cd;
-    }
-    return *this;
-  }
 
 
   /* this generates a direction by sampling the hemisphere with a cosine distribution

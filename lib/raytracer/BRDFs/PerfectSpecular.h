@@ -1,26 +1,30 @@
 #ifndef __PERFECT_SPECULAR__
 #define __PERFECT_SPECULAR__
 
-/* this implements perfect specular reflection for indirect illumination with reflective materials */
-
 #include "BRDF.h"
 
 namespace Raytracer {
+  /**
+   * @brief Perfect specular reflection for indirect illumination with reflective materials.
+   */
   class PerfectSpecular: public BRDF {
-
   public:
     PerfectSpecular();
     ~PerfectSpecular();
+    PerfectSpecular(const PerfectSpecular&);
     virtual PerfectSpecular* clone() const;
-    void set_kr(const double k);
-    void set_cr(const RGBColor&);
-    void set_cr(double,double,double);
-    virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi) const;
-    virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
 
+    /* Setters. */
+    void set_kr(const double);
+    void set_cr(const RGBColor&);
+    
+    virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi) const;
+    virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   private:
-    double kr;                  // reflection coefficient
-    RGBColor cr;                        // the reflection colour
+    /** Reflection coefficient constant. */
+    double kr = 0.0;
+    /** Reflection color. */
+    RGBColor cr = white;
   };
 
 
@@ -31,13 +35,6 @@ namespace Raytracer {
 
   inline void PerfectSpecular::set_cr(const RGBColor& c) {
     cr = c;
-  }
-
-
-  inline void PerfectSpecular::set_cr(double r, double g, double b) {
-    cr.r = r;
-    cr.g = g;
-    cr.b = b;
   }
 }
 

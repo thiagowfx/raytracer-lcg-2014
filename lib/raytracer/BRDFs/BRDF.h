@@ -9,7 +9,7 @@ using Eigen::Vector3d;
 
 namespace Raytracer {
   /**
-   * @brief An abstraction of shading calculations.
+   * @brief An abstraction for shading calculations.
    */
   class BRDF {
   public:
@@ -17,7 +17,6 @@ namespace Raytracer {
     ~BRDF();
     BRDF(const BRDF& object);
     virtual BRDF* clone() const = 0;
-    BRDF& operator= (const BRDF& rhs);
 
     /* Setters. */
     void set_sampler(Sampler*);
