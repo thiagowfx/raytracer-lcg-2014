@@ -1,6 +1,7 @@
 #ifndef _CAMERA_MINE_
 #define _CAMERA_MINE_
 
+#include <ctime>
 #include "World.h"
 #include <Eigen/Dense>
 using Eigen::Vector2d;
@@ -30,8 +31,8 @@ namespace Raytracer {
     double get_distance() const;
     double get_zoom() const;
 
-    /** Render an image from world elements. */
-    void render_scene(const World*, const char* image_file);
+    /** Render an image from world elements, returns the time it took in milliseconds. */
+    unsigned render_scene(const World*, const char* image_file);
 
   private:
     /** Camera position. */

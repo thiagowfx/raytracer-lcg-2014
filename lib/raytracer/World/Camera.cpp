@@ -55,7 +55,9 @@ namespace Raytracer {
   }
 
 
-  void Camera::render_scene(const World* w, const char* image_file) {
+  unsigned Camera::render_scene(const World* w, const char* image_file) {
+    /* This should be the first declaration of this function, for precision purposes. */
+    std::clock_t time_begin = clock();
     RGBColor  L;
     ViewPlane vp(w->vp);
     png::image< png::rgb_pixel > image(vp.hres, vp.vres);
@@ -83,5 +85,10 @@ namespace Raytracer {
       }
     }
     image.write(image_file);
+
+    /* End of computation. */
+    clock_t time_end = clock();
+    double elapsed_secs = double(time_end - time_begin) / CLOCKS_PER_SEC * 1000;
+    return static_cast<unsigned>(elapsed_secs);
   }
 }
