@@ -61,7 +61,7 @@ namespace Raytracer {
     cp0->set_shadows(true);
     w->add_object(cp0);
 
-    Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI/4.0, 3.0 * M_PI/4.0, M_PI/3.0, 2.0 * M_PI/3.0);
+    Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI / 4.0, M_PI, 0.0, M_PI);
     ptsp0->set_material(Matte::generic(red));
     w->add_object(ptsp0);
   }

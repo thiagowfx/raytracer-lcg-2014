@@ -56,13 +56,14 @@ namespace Raytracer {
         azimuth_hit_angle = get_azimuth_angle(local_hit_point);
 
         if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle) {
-	  // if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle && (radius * cos(min_polar_angle)) <= local_hit_point(1) && local_hit_point(1) <= (radius * cos(max_polar_angle))) {
-          tmin = t;
-          if (type == PRIMARY_RAY) {
-            sr.normal = (ray.origin + t * ray.direction) / radius;
-            sr.local_hit_point = local_hit_point;
+          if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle && (radius * cos(max_polar_angle)) <= local_hit_point(1) && local_hit_point(1) <= (radius * cos(min_polar_angle))) {
+            tmin = t;
+            if (type == PRIMARY_RAY) {
+              sr.normal = (ray.origin + t * ray.direction) / radius;
+              sr.local_hit_point = local_hit_point;
+            }
+            return true;
           }
-          return true;
         }
       }
 
@@ -74,13 +75,14 @@ namespace Raytracer {
         azimuth_hit_angle = get_azimuth_angle(local_hit_point);
 
         if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle) {
-	  // if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle && (radius * cos(min_polar_angle)) <= local_hit_point(1) && local_hit_point(1) <= (radius * cos(max_polar_angle))) {
-          tmin = t;
-          if (type == PRIMARY_RAY) {
-            sr.normal = (ray.origin + t * ray.direction) / radius;
-            sr.local_hit_point = local_hit_point;
+          if (min_azimuth_angle <= azimuth_hit_angle && azimuth_hit_angle <= max_azimuth_angle && (radius * cos(max_polar_angle)) <= local_hit_point(1) && local_hit_point(1) <= (radius * cos(min_polar_angle))) {
+            tmin = t;
+            if (type == PRIMARY_RAY) {
+              sr.normal = (ray.origin + t * ray.direction) / radius;
+              sr.local_hit_point = local_hit_point;
+            }
+            return true;
           }
-          return true;
         }
       }
     }
