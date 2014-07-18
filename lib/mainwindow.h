@@ -58,6 +58,9 @@ private:
   /** Is the rendering process in progress? */
   QLabel *statusInProgressLabel;
 
+  /** Time spent to render the last scene. */
+  QLabel *statusRenderingTime;
+
   /** Auto render image after changing any option? */
   QCheckBox *autoRenderCheckBox;
 

@@ -61,6 +61,7 @@ using Eigen::Vector3d;
 /* STL */
 #include <cstdio>
 #include <cmath>
+#include <sstream>
 
 /* PCS_DETECTION */
 #include "PrimitivaDaniel.h"
@@ -173,8 +174,8 @@ namespace Raytracer {
     /** World: get background color */
     QColor get_background_color();
 
-    /** Camera: render scene */
-    void render_scene();
+    /** Camera: render scene. Return the time spent on it, in milliseconds. */
+    unsigned render_scene();
 
     /** Get image file path. */
     const char* get_rendered_image();

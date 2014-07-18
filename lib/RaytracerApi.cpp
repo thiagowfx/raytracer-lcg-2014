@@ -228,8 +228,8 @@ namespace Raytracer {
     return rgbcolor_to_qcolor(w->background_color);
   }
 
-  void Api::render_scene() {
-    w->camera_ptr->render_scene(w, get_rendered_image());
+  unsigned Api::render_scene() {
+    return w->camera_ptr->render_scene(w, get_rendered_image());
   }
 
   const char* Api::get_rendered_image() {

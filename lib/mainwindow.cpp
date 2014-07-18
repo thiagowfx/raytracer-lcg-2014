@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow()),
   api(new Raytracer::Api()),
   statusInProgressLabel(new QLabel()),
+  statusRenderingTime(new QLabel()),
   autoRenderCheckBox(new QCheckBox(tr("Auto-render?"), this->statusBar())),
   statusEyeCarthesianLabel(new QLabel()),
   statusEyeSphericalLabel(new QLabel()) {
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
   this->installEventFilter(this);
 
   statusBar()->addPermanentWidget(statusInProgressLabel);
+  statusBar()->addPermanentWidget(statusRenderingTime);
   statusBar()->addWidget(autoRenderCheckBox);
   statusBar()->addWidget(statusEyeCarthesianLabel);
   statusBar()->addWidget(statusEyeSphericalLabel);
@@ -116,6 +118,7 @@ MainWindow::~MainWindow() {
   delete ui;
   delete api;
   delete statusInProgressLabel;
+  delete statusRenderingTime;
   delete statusEyeCarthesianLabel;
   delete statusEyeSphericalLabel;
   delete autoRenderCheckBox;
@@ -172,7 +175,9 @@ void MainWindow::on_actionRender_scene_triggered() {
     QCoreApplication::processEvents();
 
     /* Rendering. */
-    api->render_scene();
+    stringstream ss;
+    ss << api->render_scene() << " ms";
+    statusRenderingTime->setText(ss.str().c_str());
     ui->renderedImage->setPixmap(QPixmap(api->get_rendered_image()));
 
     statusInProgressLabel->setText("Idle.");
