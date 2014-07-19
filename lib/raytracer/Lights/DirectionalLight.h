@@ -1,5 +1,5 @@
-#ifndef __DIRECTIONAL__
-#define __DIRECTIONAL__
+#ifndef _DIRECTIONAL_LIGHT_
+#define _DIRECTIONAL_LIGHT_
 
 #include "Light.h"
 #include "World.h"
@@ -11,7 +11,8 @@ namespace Raytracer {
    */
   class DirectionalLight: public Light {
   public:
-    DirectionalLight();
+    /** Create a Directional Light with the specified direction. */
+    DirectionalLight(const Vector3d);
     DirectionalLight(const DirectionalLight&);
     virtual Light* clone() const;
     virtual ~DirectionalLight();
@@ -22,8 +23,8 @@ namespace Raytracer {
     
     /* Setters. */
     void set_radiance(const double);
-    void set_color(const RGBColor&);
-    void set_direction(Vector3d);
+    void set_color(const RGBColor);
+    void set_direction(const Vector3d);
   private:
     /** Radiance of light. */
     double ls = 1.0;
@@ -39,14 +40,9 @@ namespace Raytracer {
   }
 
 
-  inline void DirectionalLight::set_color(const RGBColor& color) {
+  inline void DirectionalLight::set_color(const RGBColor color) {
     this->color = color;
-  }
-
-  
-  inline void DirectionalLight::set_direction(Vector3d d) {
-    direction = d.normalized();
   }
 }
 
-#endif
+#endif // _DIRECTIONAL_LIGHT_

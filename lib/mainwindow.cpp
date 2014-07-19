@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
   ui->numberOfSamplesSpinBox->setMinimum(1);
   ui->samplerTypeComboBox->setModel(api->get_sampler_type_model());
-  api->set_sampler(tr("Regular"), 3);
+  api->set_sampler(tr("MultiJittered"), 3);
   ui->numberOfSamplesSpinBox->setValue(api->get_number_of_samples());
   ui->samplerTypeComboBox->setCurrentText(tr(api->get_sampler_type()));
   QObject::connect(ui->numberOfSamplesSpinBox, SIGNAL(valueChanged(int)), this, SLOT(samplerCallback()));

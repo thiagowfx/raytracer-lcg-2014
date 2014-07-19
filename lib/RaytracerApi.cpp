@@ -4,85 +4,83 @@ namespace Raytracer {
   Api::Api() :
     w(new World) {
     w->set_camera(new Camera());
-    w->camera_ptr->set_eye_position(Vector3d(150.0, 150.0, 0.0));
+    w->camera_ptr->set_eye_position(Vector3d(0.0, 150.0, 150.0));
 
-    // DirectionalLight* dl0 = new DirectionalLight();
-    // dl0->set_direction(Vector3d(10.0,0.0,0.0));
-    // w->add_light(dl0);
-
-    Raytracer::PointLight *pointl0 = new Raytracer::PointLight();
-    pointl0->set_location(Vector3d(100.0, 100.0, 100.0));
+    Raytracer::PointLight *pointl0 = new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0));
     w->add_light(pointl0);
+
+    // Raytracer::DirectionalLight *direc0 = new Raytracer::DirectionalLight(Vector3d(0.0, 1.0, 0.0));
+    // w->add_light(direc0);
 
     /********* GEOMETRIC OBJECTS TESTS */
 
-    // Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-    // pl0->set_material(Matte::generic(gray));
-    // w->add_object(pl0);
+    Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
+    pl0->set_material(Matte::generic(gray));
+    w->add_object(pl0);
 
     // Raytracer::Plane *pl1 = new Raytracer::Plane(Vector3d(-100.0, 0.0, 0.0), Vector3d(0.0, 0.0, 1.0));
     // pl0->set_material(Matte::generic(gray));
     // w->add_object(pl1);
 
-    // Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
-    // sp0->set_material(Matte::generic(red));
-    // w->add_object(sp0);
+    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
+    sp0->set_material(Matte::generic(red));
+    w->add_object(sp0);
 
-    // Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI / 4.0, M_PI, 0.0, M_PI);
-    // ptsp0->set_material(Matte::generic(red));
-    // w->add_object(ptsp0);
+    Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI / 4.0, M_PI, 0.0, M_PI);
+    ptsp0->set_material(Matte::generic(red));
+    w->add_object(ptsp0);
 
-    // Raytracer::Disk *disk0 = new Raytracer::Disk(Vector3d(0.0, -30.0, 0.0), 30.0, Vector3d(0.0, 1.0, 0.0));
-    // disk0->set_material(Matte::generic(green));
-    // w->add_object(disk0);
+    Raytracer::Disk *disk0 = new Raytracer::Disk(Vector3d(0.0, -30.0, 0.0), 30.0, Vector3d(0.0, 1.0, 0.0));
+    disk0->set_material(Matte::generic(green));
+    w->add_object(disk0);
 
-    // Raytracer::Annulus *ann0 = new Raytracer::Annulus(Vector3d(50.0, -30.0, 0.0), 10.0, 30.0, Vector3d(0.0, 1.0, 0.0));
-    // ann0->set_material(Matte::generic(light_green));
-    // w->add_object(ann0);
+    Raytracer::Annulus *ann0 = new Raytracer::Annulus(Vector3d(50.0, -30.0, 0.0), 10.0, 30.0, Vector3d(0.0, 1.0, 0.0));
+    ann0->set_material(Matte::generic(light_green));
+    w->add_object(ann0);
 
-    // Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 30.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
-    // rec0->set_material(Matte::generic(brown));
-    // w->add_object(rec0);
+    Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 30.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
+    rec0->set_material(Matte::generic(brown));
+    w->add_object(rec0);
 
-    // Raytracer::Triangle *tri0 = new Raytracer::Triangle(Vector3d(20.0, 0.0, 0.0), Vector3d(0.0,20.0, 0.0), Vector3d(0.0, 0.0, 20.0));
-    // tri0->set_material(Matte::generic(yellow));
-    // w->add_object(tri0);
+    Raytracer::Triangle *tri0 = new Raytracer::Triangle(Vector3d(20.0, 0.0, 0.0), Vector3d(0.0,20.0, 0.0), Vector3d(0.0, 0.0, 20.0));
+    tri0->set_material(Matte::generic(yellow));
+    w->add_object(tri0);
 
-    // Raytracer::PartOpenCylinder *opc0 = new Raytracer::PartOpenCylinder(-60.0, -30.0, 15.0, M_PI/4, 2 * M_PI/3);
-    // opc0->set_material(Matte::generic(dark_gray));
-    // w->add_object(opc0);
+    Raytracer::PartOpenCylinder *opc0 = new Raytracer::PartOpenCylinder(-60.0, -30.0, 15.0, M_PI/4, 2 * M_PI/3);
+    opc0->set_material(Matte::generic(dark_gray));
+    w->add_object(opc0);
 
-    // Raytracer::PartOpenCylinder *opc1 = new Raytracer::PartOpenCylinder(-100.0, -70.0, 15.0);
-    // opc1->set_material(Matte::generic(gray));
-    // w->add_object(opc1);
+    Raytracer::PartOpenCylinder *opc1 = new Raytracer::PartOpenCylinder(-100.0, -70.0, 15.0);
+    opc1->set_material(Matte::generic(gray));
+    w->add_object(opc1);
 
-    // Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
-    // tor0->set_material(Matte::generic(light_gray));
-    // w->add_object(tor0);
+    Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
+    tor0->set_material(Matte::generic(light_gray));
+    w->add_object(tor0);
 
-    // Raytracer::Box *box0 = new Raytracer::Box(Vector3d(70.0, 0.0, 0.0), Vector3d(95.0, 0.0, -30.0));
-    // box0->set_material(Matte::generic(red));
-    // w->add_object(box0);
+    Raytracer::Box *box0 = new Raytracer::Box(Vector3d(70.0, 0.0, 0.0), Vector3d(95.0, 0.0, -30.0));
+    box0->set_material(Matte::generic(red));
+    w->add_object(box0);
 
-    // Raytracer::Compound *cp0 = new Raytracer::Compound();
-    // cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
-    // cp0->add_object(new Raytracer::Sphere(Vector3d(0.0, 90.0, 0.0), 20.0));
-    // cp0->set_material(Matte::generic(red));
-    // cp0->set_shadows(true);
-    // w->add_object(cp0);
+    Raytracer::Compound *cp0 = new Raytracer::Compound();
+    cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
+    cp0->add_object(new Raytracer::Sphere(Vector3d(0.0, 90.0, 0.0), 20.0));
+    cp0->set_material(Matte::generic(red));
+    cp0->set_shadows(true);
+    w->add_object(cp0);
 
-    vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/airplane.ply");
+    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/airplane.ply");
     // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/SHAPES2");
-    printf("Tamanho: %d\n", vp.size());
-    for (unsigned i = 0; i < vp.size(); ++i) {
-      if (i & 1) {
-        vp[i]->set_material(Matte::generic(red));
-      }
-      else {
-        vp[i]->set_material(Matte::generic(blue));
-      }
-      w->add_object(vp[i]);
-    }
+    // for (unsigned i = 0; i < vp.size(); ++i) {
+    //   if (i & 1) {
+    //     vp[i]->set_material(Matte::generic(red));
+    //   }
+    //   else {
+    //     vp[i]->set_material(Matte::generic(blue));
+    //   }
+    //   w->add_object(vp[i]);
+    // }
+    
   }
 
   Api::~Api() {

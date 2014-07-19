@@ -1,8 +1,9 @@
 #include "PointLight.h"
 
 namespace Raytracer {
-  PointLight::PointLight () :
-    Light()
+  PointLight::PointLight (const Vector3d location) :
+    Light(),
+    location(location)
   {}
 
 
