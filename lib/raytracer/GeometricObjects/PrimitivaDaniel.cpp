@@ -149,7 +149,7 @@ namespace Raytracer {
       normals.push_back(newNormal);
     }
     littlePCSD.set(points, normals, k, epsilon, tao, pt, alpha, r, maxElements,maxLevel);
-    littlePCSD.detect(true);
+    littlePCSD.detect(false);
     primitives = littlePCSD.getPrimitives();
     candidates = littlePCSD.getCandidates();
     cout << "Number of primitives: " << primitives.size() << endl;

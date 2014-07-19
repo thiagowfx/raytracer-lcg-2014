@@ -71,6 +71,9 @@ namespace Raytracer {
 
     for (unsigned r = 0; r < vp.vres; r++) {      // up
       for (unsigned c = 0; c < vp.hres; c++) {    // across
+#ifdef DEBUG
+        printf("Rendering %d x %d pixel...\n", r, c);
+#endif
         L = RGBColor(0.0, 0.0, 0.0);
         for (unsigned j = 0; j < number_of_samples; ++j) {
           sp = vp.sampler_ptr->sample_unit_square();
