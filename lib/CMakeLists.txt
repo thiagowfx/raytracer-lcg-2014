@@ -1,9 +1,15 @@
-find_package(PNG REQUIRED)
+# Dependencies
+
+find_package(PNG REQUIRED) # png++
+find_package(Qt5Widgets REQUIRED)
 include_directories(/usr/include/eigen3)
+set(PCS_DETECTION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/pcs-detection/pcs-detection")
+set(VCG_DIR "${PCS_DETECTION_DIR}/../vcglib")
+set(RAYTRACER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/raytracer")
 
 ########## PCS_DETECTION ##########
-set(PCS_DETECTION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/pcs-detection/pcs-detection")
-set(PCS_DETECTION_INCLUDE_DIRS "${PCS_DETECTION_DIR}")
+include_directories(${PCS_DETECTION_DIR})
+include_directories(${VCG_DIR})
 file(
   GLOB
   PCS_DETECTION_SOURCES
@@ -33,18 +39,18 @@ file(
   "${PCS_DETECTION_DIR}/torus.h"
   "${PCS_DETECTION_DIR}/tree.h"
   )
+file(
+  GLOB
+  VCG_SOURCES
+  "${VCG_DIR}/wrap/ply/plylib.cpp"
+  )
 
-include_directories(${PCS_DETECTION_INCLUDE_DIRS})
-include_directories(${PCS_DETECTION_INCLUDE_DIRS}/../vcglib)
 add_library(PCS_DETECTION_LIBRARY OBJECT ${PCS_DETECTION_SOURCES})
 
-
 ########## RAYTRACER ##########
-set(RAYTRACER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/raytracer")
 file(
   GLOB
   RAYTRACER_INCLUDE_DIRS
-  #  "${RAYTRACER_DIR}"
   "${RAYTRACER_DIR}/BRDFs"
   "${RAYTRACER_DIR}/GeometricObjects"
   "${RAYTRACER_DIR}/Lights"
@@ -53,17 +59,15 @@ file(
   "${RAYTRACER_DIR}/Tracers"
   "${RAYTRACER_DIR}/World"
   )
+include_directories(${RAYTRACER_INCLUDE_DIRS})
+
 file(GLOB_RECURSE RAYTRACER_SOURCES "${RAYTRACER_DIR}/*.cpp")
 file(GLOB_RECURSE RAYTRACER_HEADERS "${RAYTRACER_DIR}/*.h")
 
-include_directories(${RAYTRACER_INCLUDE_DIRS})
 add_library(RAYTRACER_LIBRARY OBJECT ${RAYTRACER_SOURCES})
 
-
 ########## MAIN ##########
-
-set(QT_RAYTRACER qtRaytracer)
-find_package(Qt5Widgets REQUIRED)
+set(QT_RAYTRACER qtraytracer)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
@@ -77,17 +81,24 @@ qt5_add_resources(
   resources.qrc
   )
 
+file(
+  GLOB
+  QT_RAYTRACER_SOURCES
+  "mainwindow.cpp"
+  "mainwindow.h"
+  "main_qt.cpp"
+  "RaytracerApi.cpp"
+  "RaytracerApi.h"
+  )
+
 add_executable(
   ${QT_RAYTRACER}
-  mainwindow.cpp
-  mainwindow.h
-  main_qt.cpp
-  RaytracerApi.cpp
-  RaytracerApi.h
-  $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
-  $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
+  ${QT_RAYTRACER_SOURCES}
   ${QT_UIS}
   ${QT_RCCS}
+  $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
+  $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
+  ${VCG_SOURCES}
   )
 
 qt5_use_modules(

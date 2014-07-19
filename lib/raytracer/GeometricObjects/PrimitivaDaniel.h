@@ -5,6 +5,7 @@
 #include <GL/glut.h>
 #include "GeometricObject.h"
 #include "pc-shape-detection.h"
+#include <wrap/io_trimesh/import.h> // for PLY files
 
 namespace Raytracer {
   /** An abstraction to the point cloud detection library. */
@@ -15,7 +16,8 @@ namespace Raytracer {
     ~PrimitivaDaniel();
     virtual PrimitivaDaniel* clone() const;
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const;
-    static vector<PrimitivaDaniel*> generic(const char* path_to_shape);
+    static vector<PrimitivaDaniel*> generic(const char* filename);
+    static vector<PrimitivaDaniel*> loadPly(const char* filename);
   private:
     Primitive* primitive;
   };
