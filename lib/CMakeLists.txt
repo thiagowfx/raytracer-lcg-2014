@@ -1,8 +1,16 @@
-# Dependencies
+########## Dependencies ##########
 
 find_package(PNG REQUIRED) # png++
+
 find_package(Qt5Widgets REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON) # out-of-the-box configs
+set(CMAKE_AUTOMOC ON)
+
+find_package(OpenGL) # mesa3d on Intel, nvidia driver on Nvidia graphic cards
+include_directories(${OPENGL_INCLUDE_DIRS})
+
 include_directories(/usr/include/eigen3)
+
 set(PCS_DETECTION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/pcs-detection/pcs-detection")
 set(VCG_DIR "${PCS_DETECTION_DIR}/../vcglib")
 set(RAYTRACER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/raytracer")
@@ -16,6 +24,7 @@ file(
   "${PCS_DETECTION_DIR}/cone.cpp"
   "${PCS_DETECTION_DIR}/cylinder.cpp"
   "${PCS_DETECTION_DIR}/kdtree.cpp"
+  "${PCS_DETECTION_DIR}/invertedcylinder.cpp"
   "${PCS_DETECTION_DIR}/pcsmath.cpp"
   "${PCS_DETECTION_DIR}/plane.cpp"
   "${PCS_DETECTION_DIR}/primitive.cpp"
@@ -30,6 +39,7 @@ file(
   "${PCS_DETECTION_DIR}/cone.h"
   "${PCS_DETECTION_DIR}/cylinder.h"
   "${PCS_DETECTION_DIR}/kdtree.h"
+  "${PCS_DETECTION_DIR}/invertedcylinder.h"
   "${PCS_DETECTION_DIR}/pc-shape-detection.h"
   "${PCS_DETECTION_DIR}/pcsmath.h"
   "${PCS_DETECTION_DIR}/plane.h"
@@ -68,8 +78,6 @@ add_library(RAYTRACER_LIBRARY OBJECT ${RAYTRACER_SOURCES})
 
 ########## MAIN ##########
 set(QT_RAYTRACER qtraytracer)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
 
 qt5_wrap_ui(
   QT_UIS
@@ -109,6 +117,7 @@ qt5_use_modules(
 target_link_libraries(
   ${QT_RAYTRACER}
   ${PNG_LIBRARY}
+  ${OPENGL_LIBRARIES} 
   )
 
 ########## DOCUMENTATION ##########

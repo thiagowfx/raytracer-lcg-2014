@@ -226,7 +226,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     default:
       return false;
     }
-    autoRenderCheckBox->setChecked(true);
     autoRenderCallback();
   }
   return false;

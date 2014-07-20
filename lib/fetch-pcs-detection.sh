@@ -52,8 +52,8 @@ cd $WORKING_DIR
 
 ########## pcs-detection ##########
 if [[ ! -d pcs-detection ]]; then
-#    git clone git://git.lcg.ufrj.br/daniel-coutinho/pcs-detection.git pcs-detection
-    git clone git@git.lcg.ufrj.br:thiago-perrotta/pcs-detection.git pcs-detection
+    git clone git://git.lcg.ufrj.br/daniel-coutinho/pcs-detection.git pcs-detection
+#    git clone git@git.lcg.ufrj.br:thiago-perrotta/pcs-detection.git pcs-detection
 fi
 cd pcs-detection/
 git pull origin master

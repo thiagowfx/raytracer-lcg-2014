@@ -61,6 +61,7 @@ using Eigen::Vector3d;
 /* STL */
 #include <cstdio>
 #include <cmath>
+#include <ctime>
 #include <sstream>
 
 /* PCS_DETECTION */
