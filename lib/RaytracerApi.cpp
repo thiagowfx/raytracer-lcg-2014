@@ -4,8 +4,7 @@ namespace Raytracer {
   Api::Api() :
     w(new World) {
     w->set_camera(new Camera());
-    w->camera_ptr->set_eye_position(Vector3d(0.0, 150.0, 150.0));
-
+    w->camera_ptr->set_eye_position(Vector3d(0.0, 50.0, 50.0));
     Raytracer::PointLight *pointl0 = new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0));
     w->add_light(pointl0);
 
@@ -73,8 +72,8 @@ namespace Raytracer {
     // w->add_object(cp0);
 
     std::clock_t time_begin = clock();
-    vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/camera.ply");
-    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/CUBE");
+    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/camera.ply");
+    vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/CUBE");
     double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
     printf("INFO: Extraction took %.2lf ms\n", elapsed_secs);
 

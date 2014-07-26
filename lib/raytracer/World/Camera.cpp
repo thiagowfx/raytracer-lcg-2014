@@ -59,23 +59,18 @@ namespace Raytracer {
     /* This should be the first declaration of this function, for
        precision purposes. Beginning of computation. */
     std::clock_t time_begin = clock();
-    RGBColor  L;
     ViewPlane vp(w->vp);
     png::image< png::rgb_pixel > image(vp.hres, vp.vres);
     Ray ray;
     Vector2d sp;               // sample point in [0,1] x [0,1]
     Vector2d pp;               // sample point on a pixel
     const unsigned number_of_samples = vp.sampler_ptr->get_number_of_samples();
-
     vp.pixel_size /= zoom;
     ray.origin = eye;
 
-    for (unsigned r = 0; r < vp.vres; r++) {      // up
-      for (unsigned c = 0; c < vp.hres; c++) {    // across
-#ifdef DEBUG
-        printf("Rendering %d x %d pixel...\n", r, c);
-#endif
-        L = RGBColor(0.0, 0.0, 0.0);
+    for (unsigned r = 0; r < vp.vres; r++) {   // up
+      for (unsigned c = 0; c < vp.hres; c++) { // across
+        RGBColor  L = RGBColor(0.0, 0.0, 0.0);
         for (unsigned j = 0; j < number_of_samples; ++j) {
           sp = vp.sampler_ptr->sample_unit_square();
           pp(0) = vp.pixel_size * (c - 0.5 * vp.hres + sp(0));
