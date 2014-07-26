@@ -1,13 +1,19 @@
 ########## Dependencies ##########
+find_package(PNG REQUIRED) # libpng++-dev on Ubuntu, png++ on Arch
 
-find_package(PNG REQUIRED) # png++
+find_package(OpenMP REQUIRED) # bundled with modern gnu compilers
+if (OPENMP_FOUND)
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
 
 find_package(Qt5Widgets REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON) # out-of-the-box configs
 set(CMAKE_AUTOMOC ON)
 
-find_package(OpenGL) # mesa3d on Intel, nvidia driver on Nvidia graphic cards
-include_directories(${OPENGL_INCLUDE_DIRS})
+find_package(OpenGL) # mesa3d on Intel and nvidia driver on Nvidia graphic cards
+if (OPENGL_FOUND)
+  include_directories(${OPENGL_INCLUDE_DIRS})
+endif()
 
 include_directories(/usr/include/eigen3)
 
@@ -117,7 +123,7 @@ qt5_use_modules(
 target_link_libraries(
   ${QT_RAYTRACER}
   ${PNG_LIBRARY}
-  ${OPENGL_LIBRARIES} 
+  ${OPENGL_LIBRARIES}
   )
 
 ########## DOCUMENTATION ##########
