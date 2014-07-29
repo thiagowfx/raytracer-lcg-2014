@@ -7,8 +7,9 @@ organized as follows:
   - CMakeLists.txt
   - lib/
     - assets/
-    - pcs-detection/
     - raytracer/
+    - pcs-detection/
+    - fetch-pcs-detection.sh
     - CMakeLists.txt
 
 The main **build** file is `lib/CMakeLists.txt`. Previously we
@@ -17,10 +18,12 @@ information. **Documentation** is maintained as a single main
 [Doxyfile](http://www.doxygen.org/), plus source comments.
 
 The `lib/` folder contains project source files, as well as some
-assets for the UI. To build the project, create a `build/` folder in
-the top level directory of the project, `cd` into it, then run `cmake
-../ && make`. Compiled binary is `qtRaytracer`. To generate
-documentation viewable in the web browser, do a `make doc`.
+assets for the UI. To build the project, firstly execute the
+`fetch-pcs-detection.sh` script. It will download the pcs-detection
+library (a required dependency) to its correct place. Then create a
+`build/` folder in the top level directory of the project, `cd` into
+it, then run `cmake ../ && make`. Compiled binary is `qtRaytracer`. To
+generate documentation viewable in the web browser, do a `make doc`.
 
 It is recommended to develop this project either in
 [Arch Linux](https://www.archlinux.org/) or in
