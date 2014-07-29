@@ -1,14 +1,18 @@
 #include "BRDF.h"
 
 namespace Raytracer {
-  BRDF::BRDF() {}
+  BRDF::BRDF() {
+    set_sampler(new MultiJittered(25), 15.0);
+  }
 
 
   BRDF::BRDF(const BRDF& brdf) {
-    if(brdf.sampler_ptr)
+    if(brdf.sampler_ptr) {
       sampler_ptr = brdf.sampler_ptr->clone();
-    else
+    }
+    else {
       sampler_ptr = NULL;
+    }
   }
 
 
@@ -20,10 +24,9 @@ namespace Raytracer {
   }
 
 
-  void BRDF::set_sampler(Sampler* sampler) {
-    this->sampler_ptr = sampler;
-    /* For perfect diffuse. */
-    sampler_ptr->map_samples_to_hemisphere(1);
+  void BRDF::set_sampler(Sampler* sp, const double exp) {
+    sampler_ptr = sp;
+    sampler_ptr->map_samples_to_hemisphere(exp);
   }
 
 

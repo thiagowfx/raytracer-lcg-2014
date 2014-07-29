@@ -10,13 +10,7 @@ namespace Raytracer {
     BRDF(gloss),
     ks(gloss.ks),
     cs(gloss.cs),
-    exp(gloss.exp) {
-    if (gloss.sampler_ptr != NULL)
-      sampler_ptr = gloss.sampler_ptr->clone();
-    else
-      sampler_ptr = NULL;
-  }
-
+    exp(gloss.exp) {}
 
   GlossySpecular* GlossySpecular::clone () const {
     return new GlossySpecular(*this);
@@ -26,38 +20,18 @@ namespace Raytracer {
   GlossySpecular::~GlossySpecular() {}
 
 
-  /* this allows any type of sampling to be specified in the build functions */
-  void GlossySpecular::set_sampler(Sampler* sp, const double exp) {
-    sampler_ptr = sp;
-    sampler_ptr->map_samples_to_hemisphere(exp);
-  }
-
-
-  /* this sets up multi-jittered sampling using the number of samples */
-  void GlossySpecular::set_samples(const int number_of_samples, const double exp) {
-    sampler_ptr = new MultiJittered(number_of_samples);
-    sampler_ptr->map_samples_to_hemisphere(exp);
-  }
-
-
-  /* no sampling here: just use the Phong formula
-     this is used for direct illumination only */
-  /** Chapter 15: this is correct (page 229) */
   RGBColor GlossySpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
     RGBColor L;
     double ndotwi = sr.normal.dot(wi);
     Vector3d r(-wi + 2.0 * sr.normal * ndotwi); // mirror reflection direction
     double rdotwo = r.dot(wo);
-
     if (rdotwo > 0.0) {
       L = ks * cs * pow(rdotwo, exp);
     }
-
     return L;
   }
 
 
-  /* this is used for indirect illumination */
   RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const {
     double ndotwo = sr.normal.dot(wo);
     Vector3d r = -wo + (2.0 * sr.normal * ndotwo); // direction of mirror reflection
@@ -73,7 +47,6 @@ namespace Raytracer {
 
     double phong_lobe = pow(r.dot(wi), exp);
     pdf = phong_lobe * (sr.normal.dot(wi));
-
     return ks * cs * phong_lobe;
   }
 }

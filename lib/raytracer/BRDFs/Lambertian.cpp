@@ -21,9 +21,6 @@ namespace Raytracer {
   Lambertian::~Lambertian() {}
 
 
-  /* this generates a direction by sampling the hemisphere with a cosine distribution
-     this is called in path_shade for any material with a diffuse shading component
-     the samples have to be stored with a cosine distribution */
   RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const {
     Vector3d w = sr.normal;
     Vector3d v = Vector3d(0.0034, 1.0, 0.0071).cross(w);
@@ -39,13 +36,11 @@ namespace Raytracer {
   }
 
 
-  /** Chapter 14 */
   RGBColor Lambertian::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
     return kd * cd * (1 / M_PI);
   }
 
 
-  /** Chapter 14: overall color = constant * hue */
   RGBColor Lambertian::rho(const ShadeRec& sr, const Vector3d& wo) const {
     return kd * cd;
   }

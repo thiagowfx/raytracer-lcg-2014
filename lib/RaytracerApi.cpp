@@ -16,17 +16,17 @@ namespace Raytracer {
 
     /********* GEOMETRIC OBJECTS TESTS */
 
-    // Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-    // pl0->set_material(Matte::generic(gray));
-    // w->add_object(pl0);
+    Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
+    pl0->set_material(Matte::generic(gray));
+    w->add_object(pl0);
 
     // Raytracer::Plane *pl1 = new Raytracer::Plane(Vector3d(-100.0, 0.0, 0.0), Vector3d(0.0, 0.0, 1.0));
     // pl0->set_material(Matte::generic(gray));
     // w->add_object(pl1);
 
-    // Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
-    // sp0->set_material(Matte::generic(red));
-    // w->add_object(sp0);
+    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
+    sp0->set_material(Matte::generic(red));
+    w->add_object(sp0);
 
     // Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI / 4.0, M_PI, 0.0, M_PI);
     // ptsp0->set_material(Matte::generic(red));
@@ -71,21 +71,21 @@ namespace Raytracer {
     // cp0->set_shadows(true);
     // w->add_object(cp0);
 
-    std::clock_t time_begin = clock();
+    // std::clock_t time_begin = clock();
     // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/camera.ply");
-    vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/CUBE");
-    double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
-    printf("INFO: Extraction took %.2lf ms\n", elapsed_secs);
+    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/CUBE");
+    // double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
+    // printf("INFO: Extraction took %.2lf ms\n", elapsed_secs);
 
-    for (unsigned i = 0; i < vp.size(); ++i) {
-      if (i & 1) {
-        vp[i]->set_material(Matte::generic(red));
-      }
-      else {
-        vp[i]->set_material(Matte::generic(blue));
-      }
-      w->add_object(vp[i]);
-    }
+    // for (unsigned i = 0; i < vp.size(); ++i) {
+    //   if (i & 1) {
+    //     vp[i]->set_material(Matte::generic(red));
+    //   }
+    //   else {
+    //     vp[i]->set_material(Matte::generic(blue));
+    //   }
+    //   w->add_object(vp[i]);
+    // }
 
   }
 

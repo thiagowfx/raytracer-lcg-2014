@@ -14,16 +14,17 @@ namespace Raytracer {
     GlossySpecular(const GlossySpecular&);
     ~GlossySpecular();
     virtual GlossySpecular* clone() const;
-    
+
+    /** No sampling here: just the Phong formula. This is used for
+	direct illumination only */
     virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
+    /** This is used for indirect illumination. */
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
 
     /* Setters. */
     void set_ks(const double);
     void set_exp(const double);
     void set_cs(const RGBColor&);
-    void set_sampler(Sampler*, const double exp); // any type of sampling
-    void set_samples(const int number_of_samples, const double exp); // multi jittered sampling
     void set_normal(const Vector3d&);
 
   private:
@@ -33,7 +34,6 @@ namespace Raytracer {
     RGBColor cs = white;
     /** Specular exponent constant. */
     double exp = kExp;
-    Sampler* sampler = NULL;	// for use in sample_f
   };
 
 

@@ -17,13 +17,15 @@ information. **Documentation** is maintained as a single main
 [Doxyfile](http://www.doxygen.org/), plus source comments.
 
 The `lib/` folder contains project source files, as well as some
-assets for the UI. To build the project, create a `build/` folder,
-`cd` into it, then run `cmake ../ && make`. Compiled binary is `qtRaytracer`.
+assets for the UI. To build the project, create a `build/` folder in
+the top level directory of the project, `cd` into it, then run `cmake
+../ && make`. Compiled binary is `qtRaytracer`. To generate
+documentation viewable in the web browser, do a `make doc`.
 
 It is recommended to develop this project either in
-[Arch Linux](https://www.archlinux.org/) or
-[Ubuntu](http://www.ubuntu.com/) -- non-LTS, if possible. However,
-if you choose Ubuntu, pay attention to the version of its packages, as
+[Arch Linux](https://www.archlinux.org/) or in
+[Ubuntu](http://www.ubuntu.com/) -- non-LTS, preferably. However, if
+you choose Ubuntu, pay attention to the version of its packages, as
 they quickly become out-of-date.
 
 ## Build Dependencies
@@ -42,13 +44,14 @@ main IDE together with your favorite text editor, and
 compilations.
 
 # To final users
+<To be created.>
 
 # See also / Resources
 - main book
   - companion page - http://www.raytracegroundup.com/
   - errata - http://www.raytracegroundup.com/downloads/errata.pdf
 - cmake manual - http://cmake.org/cmake/help/v2.8.8/cmake.html
-- repositories (ordered by relevance)
+- other raytracer repositories (ordered by their relevance)
   - https://github.com/mikestaub/Ray-Tracer/
   - https://code.google.com/p/grounduptracer/
   - https://code.google.com/p/vcraytracer/

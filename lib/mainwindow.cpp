@@ -201,7 +201,7 @@ void MainWindow::on_actionUnfocus_triggered() {
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   const double drotation = M_PI / 45.0;
-  const double dradius = 0.5;
+  const double dradius = 8.0;
   if (event->type() == QEvent::KeyPress) {
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     switch(keyEvent->key()){

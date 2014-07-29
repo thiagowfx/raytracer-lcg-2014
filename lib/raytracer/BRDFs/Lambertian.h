@@ -1,5 +1,5 @@
-#ifndef _LAMBERTIAN_MINE
-#define _LAMBERTIAN_MINE
+#ifndef _LAMBERTIAN_MINE_
+#define _LAMBERTIAN_MINE_
 
 #include "BRDF.h"
 
@@ -12,7 +12,11 @@ namespace Raytracer {
     ~Lambertian();
     
     virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
+    /** This generates a direction by sampling the hemisphere with a cosine distribution
+     * this is called in path_shade for any material with a diffuse shading component
+     * the samples have to be stored with a cosine distribution. */
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
+    /** Overall color = constant * hue */
     virtual RGBColor rho(const ShadeRec& sr, const Vector3d& wo) const;
 
     /* Setters. */
@@ -50,4 +54,4 @@ namespace Raytracer {
   }
 }
 
-#endif // _LAMBERTIAN_MINE
+#endif // _LAMBERTIAN_MINE_

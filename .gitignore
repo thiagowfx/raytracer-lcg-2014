@@ -1,5 +1,8 @@
 lib/pcs-detection/
 
+# ply files
+lib/ply/bunny.ply
+
 # Vagrant
 .vagrant
 
