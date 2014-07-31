@@ -1,11 +1,6 @@
 ########## Dependencies ##########
 find_package(PNG REQUIRED) # libpng++-dev on Ubuntu, png++ on Arch
 
-find_package(OpenMP REQUIRED) # bundled with modern gnu compilers
-if (OPENMP_FOUND)
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-endif()
-
 find_package(Qt5Widgets REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON) # out-of-the-box configs
 set(CMAKE_AUTOMOC ON)
