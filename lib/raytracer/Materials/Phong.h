@@ -21,6 +21,7 @@ namespace Raytracer {
     
     virtual RGBColor get_color() const;
     virtual RGBColor shade(ShadeRec&);
+    virtual RGBColor area_light_shade(ShadeRec&);
 
     /* Setters. */
     void set_ka(double);
@@ -30,7 +31,6 @@ namespace Raytracer {
     void set_ks(double);
     void set_exp(double);
     
-    virtual RGBColor area_light_shade(ShadeRec&);
   private:
     /** Ambient color component. */
     Lambertian *ambient_brdf = new Lambertian();

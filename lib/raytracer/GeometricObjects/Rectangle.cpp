@@ -6,7 +6,7 @@ namespace Raytracer {
     p0(p0),
     a(a),
     b(b),
-    area(a.norm() * b.norm()),
+    inv_area(1.0 / (a.norm() * b.norm())),
     sampler_ptr(NULL) {
     this->normal = -a.cross(b).normalized();
   }
@@ -17,7 +17,7 @@ namespace Raytracer {
     a(a),
     b(b),
     normal(normal),
-    area(a.norm() * b.norm()),
+    inv_area(1.0 / (a.norm() * b.norm())),
     sampler_ptr(NULL) {
     this->normal.normalize();
   }
@@ -34,7 +34,7 @@ namespace Raytracer {
     a(r.a),
     b(r.b),
     normal(r.normal),
-    area(r.area) {
+    inv_area(r.inv_area) {
     if(r.sampler_ptr)
       sampler_ptr = r.sampler_ptr->clone();
     else
@@ -103,6 +103,6 @@ namespace Raytracer {
 
 
   double Rectangle::pdf(ShadeRec& sr) {
-    return 1.0 / area;
+    return inv_area;
   }
 }

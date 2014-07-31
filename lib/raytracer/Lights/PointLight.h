@@ -1,5 +1,5 @@
-#ifndef _POINTLIGHT_MINE
-#define _POINTLIGHT_MINE
+#ifndef _POINTLIGHT_MINE_
+#define _POINTLIGHT_MINE_
 
 #include "Light.h"
 #include "ShadeRec.h"
@@ -44,4 +44,4 @@ namespace Raytracer {
   }
 }
 
-#endif // _POINTLIGHT_MINE
+#endif // _POINTLIGHT_MINE_

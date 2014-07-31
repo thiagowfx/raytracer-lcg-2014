@@ -38,10 +38,9 @@ namespace Raytracer {
 
 
   Vector3d AreaLight::get_direction(ShadeRec& sr) {
-    sample_point = object_ptr->sample(); // used in the G function
+    sample_point = object_ptr->sample();
     light_normal = object_ptr->get_normal(sample_point);
-    wi = sample_point - sr.hit_point; // used in the G function
-    return wi.normalized();
+    return wi = (sample_point - sr.hit_point).normalized();
   }
 
 
@@ -60,14 +59,15 @@ namespace Raytracer {
     double t;
     const unsigned num_objects = sr.w.objects.size();
     double ts = (sample_point - ray.origin).dot(ray.direction);
-    for (unsigned j = 0; j < num_objects; j++)
-      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts)
+    for (unsigned j = 0; j < num_objects; ++j) {
+      if (sr.w.objects[j]->hit(SHADOW_RAY, ray, t, sr) && t < ts) {
         return true;
+      }
+    }
     return false;
   }
 
 
-  /* G is part of the geometric factor */
   double AreaLight::G(const ShadeRec& sr) const {
     double ndotd = -light_normal.dot(wi);
     double d2 = (sample_point - sr.hit_point).squaredNorm();

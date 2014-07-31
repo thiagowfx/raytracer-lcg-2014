@@ -29,7 +29,8 @@ namespace Raytracer {
 
     /** Those functions are necessary for area light shading / emissive materials. */
     virtual RGBColor path_shade(ShadeRec& sr);
-    virtual RGBColor area_light_shade(ShadeRec& sr);
+    /** Required for area lights. */
+    virtual RGBColor area_light_shade(ShadeRec& sr) = 0;
     virtual RGBColor get_Le(ShadeRec& sr) const;
   };
 }

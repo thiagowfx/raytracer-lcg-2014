@@ -41,7 +41,7 @@ namespace Raytracer {
     /* Contrário da direção de onde o raio primário da câmera vem; para o olho. */
     Vector3d wo = -sr.ray.direction;
 
-    /** Luz ambiente. Criada para simular, de maneira global, a
+    /* Luz ambiente. Criada para simular, de maneira global, a
      * iluminação difusa indireta. Constante para todos os objetos da
      * cena. Modelo de campo isotrópico 3D.  rho = kd * cd, significa:
      * o quanto o material reflete (entre 0 e 1) vezes a cor do
@@ -51,7 +51,7 @@ namespace Raytracer {
     RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
     const int num_lights = sr.w.lights.size();
 
-    for (int j = 0; j < num_lights; ++j) {
+    for (unsigned j = 0; j < num_lights; ++j) {
       /* Direção da onde a luz vem (tendência: apontar para *fora* do objeto!). Isso explica a convenção da luz direcional de especificar o contrário. */
       Vector3d wi = sr.w.lights[j]->get_direction(sr);
       double ndotwi = sr.normal.dot(wi);
@@ -81,7 +81,7 @@ namespace Raytracer {
     RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
     const int num_lights = sr.w.lights.size();
 
-    for (int j = 0; j < num_lights; ++j) {
+    for (unsigned j = 0; j < num_lights; ++j) {
       Vector3d  wi = sr.w.lights[j]->get_direction(sr);
       double ndotwi = sr.normal.dot(wi);
 
@@ -94,7 +94,7 @@ namespace Raytracer {
         }
 
         if (!in_shadow) {
-          L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * sr.w.lights[j]->G(sr) * ndotwi / sr.w.lights[j]->pdf(sr);
+          L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi * sr.w.lights[j]->G(sr) / sr.w.lights[j]->pdf(sr);
 	}
       }
     }

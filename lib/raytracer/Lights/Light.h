@@ -1,5 +1,5 @@
-#ifndef __LIGHT__
-#define __LIGHT__
+#ifndef _LIGHT_MINE_
+#define _LIGHT_MINE_
 
 #include "Utilities.h"
 #include "Ray.h"
@@ -34,7 +34,9 @@ namespace Raytracer {
     /** Sets the shadow property of this light. */
     void set_shadows(const bool);
 
-    /* For area lights. */
+    /* For area lights.  Default value for both of them is 1.0, allowing
+       us to add point and directional lights to scenes with area
+       lights. */
     virtual double G(const ShadeRec&) const;
     virtual double pdf(const ShadeRec&) const;
   protected:
@@ -43,4 +45,4 @@ namespace Raytracer {
   };
 }
 
-#endif
+#endif // _LIGHT_MINE_

@@ -1,5 +1,5 @@
-#ifndef __AREA_LIGHT__
-#define __AREA_LIGHT__
+#ifndef _AREALIGHT_MINE_
+#define _AREALIGHT_MINE_
 
 #include "Light.h"
 #include "World.h"
@@ -20,22 +20,29 @@ namespace Raytracer {
     /* Setters. */
     void set_object(GeometricObject*);
 
+    /** Part of the geometric factor of the object. */
     virtual double G(const ShadeRec&) const;
     virtual double pdf(const ShadeRec&) const;
+    
   private:
+    /** Form of this area light. */
     GeometricObject* object_ptr = NULL;
-    /** This will be an emissive material. */
+    /** An emissive material. */
     Material* material_ptr = NULL;
+    /** Sample point on the surface. */
     Vector3d sample_point;
-    Vector3d light_normal; // assigned in get_direction - which therefore can't be const for any light
-    Vector3d wi; // unit direction from hit point being shaded to sample point on light surface
+    /** Normal at sample point. */
+    Vector3d light_normal;
+    /** Unit vector from hit point (being shaded) to sample point. (on
+	light surface) */
+    Vector3d wi;
   };
 
   
-  inline void AreaLight::set_object(GeometricObject* obj_ptr) {
-    object_ptr = obj_ptr;
-    material_ptr = object_ptr->get_material();
+  inline void AreaLight::set_object(GeometricObject* o) {
+    this->object_ptr = o;
+    this->material_ptr = this->object_ptr->get_material();
   }
 }
 
-#endif
+#endif // _AREALIGHT_MINE_

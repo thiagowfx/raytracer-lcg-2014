@@ -31,7 +31,7 @@ namespace Raytracer {
   RGBColor Reflective::shade(ShadeRec& sr) {
     /* Direct illumination. */
     RGBColor L(Phong::shade(sr));
-    
+
     Vector3d wo = -sr.ray.direction;
     Vector3d wi;
     RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
@@ -39,6 +39,20 @@ namespace Raytracer {
     L += fr * sr.w.tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal.dot(wi));
     return L;
   }
+
+  
+  RGBColor Reflective::area_light_shade(ShadeRec& sr) {
+    /* Direct illumination. Area light included here. */
+    RGBColor L(Phong::area_light_shade(sr));
+
+    Vector3d wo = -sr.ray.direction;
+    Vector3d wi;
+    RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
+    Ray reflected_ray(sr.hit_point, wi);
+    L += fr * sr.w.tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal.dot(wi));
+    return L;
+  }
+
 
   Reflective *Reflective::generic(RGBColor color) {
     Reflective* r = new Reflective();

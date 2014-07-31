@@ -90,7 +90,7 @@ namespace Raytracer {
           in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
         }
         if (!in_shadow) {
-          L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * sr.w.lights[j]->G(sr) * ndotwi / sr.w.lights[j]->pdf(sr);
+          L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi * sr.w.lights[j]->G(sr) / sr.w.lights[j]->pdf(sr);
 	}
       }
     }

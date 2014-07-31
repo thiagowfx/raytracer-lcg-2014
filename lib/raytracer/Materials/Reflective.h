@@ -17,6 +17,7 @@ namespace Raytracer {
     static Reflective* generic_uncolored();
     
     virtual RGBColor shade(ShadeRec&);
+    virtual RGBColor area_light_shade(ShadeRec&);
     
     /* Setters. */
     void set_kr(const double);

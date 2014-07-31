@@ -19,13 +19,12 @@ namespace Raytracer {
     
     virtual RGBColor get_color() const;
     virtual RGBColor shade(ShadeRec&);
+    virtual RGBColor area_light_shade(ShadeRec&);
 
     /* Setters. */
     void set_ka(const double);
     void set_kd(const double);
-    void set_cd(const RGBColor&);
-    
-    virtual RGBColor area_light_shade(ShadeRec&);
+    void set_cd(const RGBColor&); 
 
   private:
     /** Ambient color component. */

@@ -33,15 +33,18 @@ namespace Raytracer {
      * and in the ShadeRec object. */
     virtual bool hit(const Ray_t& type, const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
 
-    /* The following three functions are needed for objects which are area lights. */
     /** Return a sample point on the object for area light shading. */
     virtual Vector3d sample();
+    /** For area light shading. */
     virtual double pdf(const ShadeRec&);
+    /** Return the normal of a sample point on the object, required for
+	area light shading. Works for planar objects and for objects
+	that are defined by a single implicit function. */
     virtual Vector3d get_normal(const Vector3d&);
 
   protected:
     /* mutable allows Compound::hit, Instance::hit and Grid::hit to
-       assign to material_ptr. hit functions are const */
+       assign to material_ptr; hit functions are const */
     mutable Material* material_ptr = NULL;
 
     /** Does this object cast shadows? */
