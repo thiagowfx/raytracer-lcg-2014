@@ -4,7 +4,9 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
-  /** A plane is defined by a point and a normal. */
+  /**
+   * @brief A plane is defined by a point and a normal.
+   */
   class Plane : public GeometricObject {
   public:
     /** Construct a plane which passes at the given point, with the given normal. */

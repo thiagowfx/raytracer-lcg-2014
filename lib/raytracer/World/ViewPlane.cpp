@@ -8,7 +8,7 @@ namespace Raytracer {
     hres(vp.hres),
     vres(vp.vres),
     pixel_size(vp.pixel_size),
-    gamma(vp.gamma),
+    inv_gamma(vp.inv_gamma),
     out_of_gamut(vp.out_of_gamut),
     max_depth(vp.max_depth) {
     if (vp.sampler_ptr)

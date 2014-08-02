@@ -11,13 +11,12 @@
 #include <cstring> /* for png++ streerror */
 #include <png++/png.hpp>
 #include <vector>
-using namespace std;
 
 namespace Raytracer {
+  class Camera;
   /**
    * @brief Stores all objects and lights, and contains helper objects, such as camera, tracer and ambient light.
    */
-  class Camera;
   class World {
   public:
     World();

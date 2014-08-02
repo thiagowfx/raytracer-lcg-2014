@@ -5,7 +5,9 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
-  /** A compound object represents a collection of objects. */
+  /**
+   * @brief A compound object represents a collection of objects.
+   */
   class Compound: public GeometricObject {
   public:
     /** Construct a empty compound object. Objects should be added later. */

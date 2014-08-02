@@ -62,3 +62,4 @@ compilations.
   - https://code.google.com/p/pwsraytracer/
   - https://code.google.com/p/openglfun/
   - https://github.com/stefanoborini/python-raytracer
+  - https://github.com/russellsmith/Ray-Tracer

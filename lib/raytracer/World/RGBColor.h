@@ -14,27 +14,27 @@ namespace Raytracer {
     /** Create a black RGBColor object. */
     RGBColor();
     /** Create a RGBColor with the specified red, green and blue components. */
-    RGBColor(double r, double g, double b);
+    RGBColor(float r, float g, float b);
     RGBColor(const RGBColor&);
     RGBColor& operator=(const RGBColor&);
     ~RGBColor();
 
     /** Red component, from 0.0 to 1.0. */
-    double r = 0.0;
+    float r = 0.0;
 
     /** Green component, from 0.0 to 1.0. */
-    double g = 0.0;
+    float g = 0.0;
 
     /** Blue component, from 0.0 to 1.0. */
-    double b = 0.0;
+    float b = 0.0;
 
     /** C++ operators overloading. */
     RGBColor operator+ (const RGBColor&) const;
     RGBColor& operator+= (const RGBColor&);
-    RGBColor operator* (const double) const;
-    RGBColor& operator*= (const double);
-    RGBColor operator/ (const double) const;
-    RGBColor& operator/= (const double);
+    RGBColor operator* (const float) const;
+    RGBColor& operator*= (const float);
+    RGBColor operator/ (const float) const;
+    RGBColor& operator/= (const float);
     RGBColor operator* (const RGBColor&) const;
 
     /** Return true if the colors are equal. */
@@ -44,10 +44,10 @@ namespace Raytracer {
     bool operator!=(const RGBColor&) const;
 
     /** Color components are raised to the specified power. */
-    RGBColor powc(double) const;
+    RGBColor powc(float) const;
 
     /** Return the average of components. */
-    double average() const;
+    float average() const;
 
     /** If any component is greater than one, then all components are divided by the maximum one. */
     RGBColor normalize() const;
@@ -70,12 +70,12 @@ namespace Raytracer {
   }
 
 
-  inline RGBColor RGBColor::operator* (const double a) const {
+  inline RGBColor RGBColor::operator* (const float a) const {
     return RGBColor (r * a, g * a, b * a);
   }
 
 
-  inline RGBColor& RGBColor::operator*= (const double a) {
+  inline RGBColor& RGBColor::operator*= (const float a) {
     r *= a;
     g *= a;
     b *= a;
@@ -83,12 +83,12 @@ namespace Raytracer {
   }
 
 
-  inline RGBColor RGBColor::operator/ (const double a) const {
+  inline RGBColor RGBColor::operator/ (const float a) const {
     return RGBColor (r / a, g / a, b / a);
   }
 
 
-  inline RGBColor& RGBColor::operator/= (const double a) {
+  inline RGBColor& RGBColor::operator/= (const float a) {
     r /= a;
     g /= a;
     b /= a;
@@ -102,7 +102,7 @@ namespace Raytracer {
 
 
   inline bool RGBColor::operator== (const RGBColor& c) const {
-    const double kEpsilon = 1.0e-7;
+    const float kEpsilon = 1.0e-7;
     return fabs(r - c.r) < kEpsilon && fabs(g - c.g) < kEpsilon && fabs(b - c.b) < kEpsilon;
   }
 
@@ -112,12 +112,12 @@ namespace Raytracer {
   }
 
 
-  inline double RGBColor::average() const {
+  inline float RGBColor::average() const {
     return (r + g + b)/3.0;
   }
 
 
-  inline RGBColor operator* (const double a, const RGBColor& c) {
+  inline RGBColor operator* (const float a, const RGBColor& c) {
     return RGBColor (a * c.r, a * c.g, a * c.b);
   }
 

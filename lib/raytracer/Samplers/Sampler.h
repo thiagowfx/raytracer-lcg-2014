@@ -11,6 +11,9 @@ using Eigen::Vector3d;
 using namespace std;
 
 namespace Raytracer {
+  /**
+   * @brief A Sampler is responsible for generating sample points according to a pattern, which might be random or well distributed. 
+   */
   class Sampler {
   public:
     Sampler();

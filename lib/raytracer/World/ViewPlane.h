@@ -31,8 +31,8 @@ namespace Raytracer {
     /** Pixel size. Decreasing means to zoom into the image. */
     double pixel_size = 1.0;
     
-    /** Gamma correction factor. */
-    double gamma = 1.0;
+    /** Inverse of the gamma correction factor. */
+    double inv_gamma = 1.0;
     
     /** If true, out of gamut colors will be displayed as red. */
     bool out_of_gamut = false;
@@ -61,7 +61,7 @@ namespace Raytracer {
 
 
   inline void ViewPlane::set_gamma(const double gamma) {
-    this->gamma = gamma;
+    this->inv_gamma = 1.0 / gamma;
   }
 
 

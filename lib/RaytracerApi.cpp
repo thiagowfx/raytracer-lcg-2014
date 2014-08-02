@@ -37,7 +37,6 @@ namespace Raytracer {
     // cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
     // cp0->add_object(new Raytracer::Sphere(Vector3d(0.0, 90.0, 0.0), 20.0));
     // cp0->set_material(new Matte(red));
-    // cp0->set_shadows(true);
     // w->add_object(cp0);
 
     std::clock_t time_begin = clock();
@@ -137,7 +136,7 @@ namespace Raytracer {
   }
 
   double Api::get_gamma() {
-    return w->vp.gamma;
+    return 1.0 / w->vp.inv_gamma;
   }
 
   void Api::set_out_of_gamut(bool gamut) {

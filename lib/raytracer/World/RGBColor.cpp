@@ -5,7 +5,7 @@ namespace Raytracer {
   RGBColor::RGBColor() {}
 
 
-  RGBColor::RGBColor(double r, double g, double b) :
+  RGBColor::RGBColor(float r, float g, float b) :
     r(r),
     g(g),
     b(b) {
@@ -23,7 +23,7 @@ namespace Raytracer {
   RGBColor::~RGBColor() {}
 
 
-  RGBColor& RGBColor::operator= (const RGBColor& rhs) {
+  RGBColor& RGBColor::operator=(const RGBColor& rhs) {
     if (this != &rhs) {
       r = rhs.r;
       g = rhs.g;
@@ -33,13 +33,13 @@ namespace Raytracer {
   }
 
 
-  RGBColor RGBColor::powc(double p) const {
+  RGBColor RGBColor::powc(float p) const {
     return RGBColor(pow(r, p), pow(g, p), pow(b, p));
   }
 
 
   RGBColor RGBColor::normalize() const {
-    double max_value = max(r, max(g, b));
+    float max_value = std::max(r, std::max(g, b));
     return (max_value > 1.0) ? (*this / max_value) : *this;
   }
 

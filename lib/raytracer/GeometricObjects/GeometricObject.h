@@ -10,7 +10,10 @@
 using Eigen::Vector3d;
 
 namespace Raytracer {
-  /** A geometric object, which must have a hit function, usually defined from an implicit equation. */
+  /**
+   * @brief A geometric object, which must have a hit function, usually
+   * defined from an implicit equation.
+   */
   class GeometricObject {
   public:
     GeometricObject();

@@ -76,8 +76,8 @@ namespace Raytracer {
     else {
       mapped_color = raw_color.normalize();
     }
-    if (vp.gamma != 1.0) {
-      mapped_color = mapped_color.powc(1.0 / vp.gamma);
+    if (vp.inv_gamma != 1.0) {
+      mapped_color = mapped_color.powc(vp.inv_gamma);
     }
     int x = column;
     int y = vp.vres - row - 1;

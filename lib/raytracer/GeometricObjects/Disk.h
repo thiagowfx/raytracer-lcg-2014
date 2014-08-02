@@ -4,7 +4,9 @@
 #include "GeometricObject.h"
 
 namespace Raytracer {
-  /** A disk is a filled circle, defined by its center and a radius, plus a normal (which defines a plane). It is like a 2D Sphere. */
+  /**
+   * @brief A disk is a filled circle, defined by its center and a radius, plus a normal (which defines a plane). It is like a 2D Sphere.
+   */
   class Disk : public GeometricObject {
   public:
     /** Construct a disk, with a center, radius and normal (which defines a plane). */
