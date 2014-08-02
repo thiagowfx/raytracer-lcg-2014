@@ -9,29 +9,29 @@ namespace Raytracer {
     w->add_light(new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0)));
     w->add_light(new Raytracer::PointLight(Vector3d(-50.0, 30.0, -20.0)));
 
-    Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-    w->add_object(pl0);
-    pl0->set_material(new Phong(light_gray));
+    // Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
+    // w->add_object(pl0);
+    // pl0->set_material(new Phong(light_gray));
 
-    Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
-    w->add_object(sp0);
-    sp0->set_material(new Phong(red));
+    // Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
+    // w->add_object(sp0);
+    // sp0->set_material(new Phong(red));
 
-    Raytracer::Sphere* sp1 = new Raytracer::Sphere(Vector3d(40.0, 0.0, 0.0), 10);
-    w->add_object(sp1);
-    sp1->set_material(new Phong(blue));
+    // Raytracer::Sphere* sp1 = new Raytracer::Sphere(Vector3d(40.0, 0.0, 0.0), 10);
+    // w->add_object(sp1);
+    // sp1->set_material(new Phong(blue));
 
-    Raytracer::Sphere* sp2 = new Raytracer::Sphere(Vector3d(0.0, 0.0, -40.0), 10);
-    w->add_object(sp2);
-    sp2->set_material(new Phong(green));
+    // Raytracer::Sphere* sp2 = new Raytracer::Sphere(Vector3d(0.0, 0.0, -40.0), 10);
+    // w->add_object(sp2);
+    // sp2->set_material(new Phong(green));
 
-    Raytracer::Sphere* sp3 = new Raytracer::Sphere(Vector3d(0.0, 0.0, 40.0), 10);
-    w->add_object(sp3);
-    sp3->set_material(new Phong(yellow));
+    // Raytracer::Sphere* sp3 = new Raytracer::Sphere(Vector3d(0.0, 0.0, 40.0), 10);
+    // w->add_object(sp3);
+    // sp3->set_material(new Phong(yellow));
 
-    Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
-    w->add_object(tor0);
-    tor0->set_material(new Phong(light_gray));
+    // Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
+    // w->add_object(tor0);
+    // tor0->set_material(new Phong(light_gray));
     
     // Raytracer::Compound *cp0 = new Raytracer::Compound();
     // cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
@@ -40,21 +40,20 @@ namespace Raytracer {
     // cp0->set_shadows(true);
     // w->add_object(cp0);
 
-    // std::clock_t time_begin = clock();
-    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("/home/thiago/mygit/raytracer-lcg/lib/ply/camera.ply");
-    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("/home/thiago/mygit/raytracer-lcg/lib/ply/CUBE");
-    // double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
-    // printf("INFO: Extraction took %.2lf ms\n", elapsed_secs);
-
-    // for (unsigned i = 0; i < vp.size(); ++i) {
-    //   if (i & 1) {
-    //     vp[i]->set_material(Matte::generic(red));
-    //   }
-    //   else {
-    //     vp[i]->set_material(Matte::generic(blue));
-    //   }
-    //   w->add_object(vp[i]);
-    // }
+    std::clock_t time_begin = clock();
+    // vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::loadPly("../lib/ply/camera.ply");
+    vector<Raytracer::PrimitivaDaniel*> vp = Raytracer::PrimitivaDaniel::generic("../lib/ply/CUBE");
+    double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
+    printf("INFO: Extraction took %.2lf ms\n", elapsed_secs);
+    for (unsigned i = 0; i < vp.size(); ++i) {
+      if (i & 1) {
+        vp[i]->set_material(new Matte(red));
+      }
+      else {
+        vp[i]->set_material(new Matte(blue));
+      }
+      w->add_object(vp[i]);
+    }
 
   }
 
