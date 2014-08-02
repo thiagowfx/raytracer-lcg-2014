@@ -1,5 +1,5 @@
-#ifndef _DIRECTIONAL_LIGHT_
-#define _DIRECTIONAL_LIGHT_
+#ifndef _DIRECTIONALLIGHT_MINE_
+#define _DIRECTIONALLIGHT_MINE_
 
 #include "Light.h"
 #include "World.h"
@@ -45,4 +45,4 @@ namespace Raytracer {
   }
 }
 
-#endif // _DIRECTIONAL_LIGHT_
+#endif // _DIRECTIONALLIGHT_MINE_

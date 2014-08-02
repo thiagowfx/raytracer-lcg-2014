@@ -10,6 +10,7 @@ using Eigen::Vector3d;
 #include "AmbientOccluder.h"
 #include "AreaLight.h"
 #include "DirectionalLight.h"
+#include "EnvironmentLight.h"
 #include "PointLight.h"
 
 /* Samplers */
