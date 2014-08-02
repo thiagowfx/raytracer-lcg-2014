@@ -27,10 +27,9 @@ namespace Raytracer {
     /** How should the color of a point in a geometric object be computed? */
     virtual RGBColor shade(ShadeRec& sr) = 0;
 
-    /** Those functions are necessary for area light shading / emissive materials. */
-    virtual RGBColor path_shade(ShadeRec& sr);
     /** Required for area lights. */
     virtual RGBColor area_light_shade(ShadeRec& sr) = 0;
+    /** Effective color (radiance * hue) emitted by this material. */
     virtual RGBColor get_Le(ShadeRec& sr) const;
   };
 }

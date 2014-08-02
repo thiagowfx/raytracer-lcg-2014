@@ -8,7 +8,10 @@
 #include <wrap/io_trimesh/import.h> // for PLY files
 
 namespace Raytracer {
-  /** An abstraction to the point cloud detection library. */
+  /**
+   * @brief An abstraction to objects created with the point cloud
+   * detection library.
+   */
   class PrimitivaDaniel: public GeometricObject {
   public:
     PrimitivaDaniel(Primitive*);

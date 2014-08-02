@@ -5,10 +5,14 @@
 #include "PerfectSpecular.h"
 
 namespace Raytracer {
+  /**
+   * @brief A reflective material is like a Phong one, however it also
+   * supports light reflections.
+   */
   class Reflective: public Phong {
   public:
     /**
-     * @brief Construct a new Reflective material with the given color
+     * Construct a new Reflective material with the given color
      * (direct illumination + reflective illumination + reflections)
      */
     Reflective(const RGBColor&);

@@ -13,7 +13,6 @@ namespace Raytracer {
     v(c.v),
     w(c.w),
     up(c.up),
-    exposure_time(c.exposure_time),
     zoom(c.zoom),
     distance(c.distance)
   {}
@@ -50,8 +49,7 @@ namespace Raytracer {
 
 
   Vector3d Camera::get_direction(const Vector2d& p) const {
-    Vector3d dir = (p(0) * u) + (p(1) * v) - (distance * w);
-    return dir.normalized();
+    return ((p(0) * u) + (p(1) * v) - (distance * w)).normalized();
   }
 
 
@@ -79,7 +77,6 @@ namespace Raytracer {
           L += w->tracer_ptr->trace_ray(ray, 0);
         }
         L /= number_of_samples;
-        L *= exposure_time;
         w->display_pixel(r, c, L, image);
       }
     }

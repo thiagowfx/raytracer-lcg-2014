@@ -1,5 +1,5 @@
-#ifndef __AMBIENTOCCLUDER__
-#define __AMBIENTOCCLUDER__
+#ifndef _AMBIENTOCCLUDER_MINE_
+#define _AMBIENTOCCLUDER_MINE_
 
 #include "Ambient.h"
 #include "Sampler.h"
@@ -9,7 +9,7 @@
 namespace Raytracer {
   /**
    * @brief It is like an ambient light, but it doesn't always
-   * illuminates every object. This process depends on the sampling
+   * illuminate every object. This process depends on the sampling
    * technique used and the quantity of objects near the shaded
    * object.
    */
@@ -27,7 +27,8 @@ namespace Raytracer {
 
     /* Setters. */
     void set_sampler(Sampler*);
-    void set_minimum_amount(const int);
+    void set_minimum_amount(const double);
+    
   private:
     double minimum_amount = 0.30;
     Vector3d u = Vector3d::Zero();
@@ -37,9 +38,9 @@ namespace Raytracer {
   };
 
 
-  inline void AmbientOccluder::set_minimum_amount(const int) {
+  inline void AmbientOccluder::set_minimum_amount(const double) {
     this->minimum_amount = minimum_amount;
   }
 }
 
-#endif
+#endif // _AMBIENTOCCLUDER_MINE_

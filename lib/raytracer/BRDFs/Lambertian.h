@@ -4,6 +4,9 @@
 #include "BRDF.h"
 
 namespace Raytracer {
+  /**
+   * @brief Lambertian model for lights.
+   */
   class Lambertian: public BRDF {
   public:
     Lambertian();
@@ -12,9 +15,10 @@ namespace Raytracer {
     ~Lambertian();
     
     virtual RGBColor f(const ShadeRec&, const Vector3d& wo, const Vector3d& wi) const;
-    /** This generates a direction by sampling the hemisphere with a cosine distribution
-     * this is called in path_shade for any material with a diffuse shading component
-     * the samples have to be stored with a cosine distribution. */
+    /** This generates a direction by sampling the hemisphere with a
+     * cosine distribution this is called in path_shade for any material
+     * with a diffuse shading component the samples have to be stored
+     * with a cosine distribution. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
     /** Overall color = constant * hue */
     virtual RGBColor rho(const ShadeRec&, const Vector3d& wo) const;

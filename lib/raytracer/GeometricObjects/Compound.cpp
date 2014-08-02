@@ -51,7 +51,7 @@ namespace Raytracer {
   }
 
 
-  void Compound::copy_objects(const vector<GeometricObject*>& rhs_ojects) {
+  void Compound::copy_objects(const std::vector<GeometricObject*>& rhs_ojects) {
     delete_objects();
     const unsigned num_objects = rhs_ojects.size();
     for (unsigned j = 0; j < num_objects; ++j)

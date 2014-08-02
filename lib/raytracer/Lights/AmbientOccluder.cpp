@@ -3,7 +3,7 @@
 namespace Raytracer {
   AmbientOccluder::AmbientOccluder() :
     Ambient() {
-    this->set_sampler(new MultiJittered(5));
+    this->set_sampler(new MultiJittered(20));
   }
 
 
@@ -13,8 +13,12 @@ namespace Raytracer {
     u(a.u),
     v(a.v),
     w(a.w) {
-    if(a.sampler_ptr)
+    if(a.sampler_ptr) {
       sampler_ptr = a.sampler_ptr->clone();
+    }
+    else {
+      sampler_ptr = NULL;
+    }
   }
 
 
@@ -38,7 +42,7 @@ namespace Raytracer {
       sampler_ptr = NULL;
     }
     sampler_ptr = s_ptr;
-    sampler_ptr->map_samples_to_hemisphere(1);
+    sampler_ptr->map_samples_to_hemisphere(20);
   }
 
 

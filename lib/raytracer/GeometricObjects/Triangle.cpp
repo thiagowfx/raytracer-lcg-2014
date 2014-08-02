@@ -7,9 +7,10 @@ namespace Raytracer {
     v1(v1),
     v2(v2) {
     compute_normal();
-    bbox_ptr = new BBox(min(min(v0(0), v1(0)), v2(0)) - kEpsilon, max(max(v0(0), v1(0)), v2(0)) + kEpsilon,
-                    min(min(v0(1), v1(1)), v2(1)) - kEpsilon, max(max(v0(1), v1(1)), v2(1)) + kEpsilon,
-                    min(min(v0(2), v1(2)), v2(2)) - kEpsilon, max(max(v0(2), v1(2)), v2(2)) + kEpsilon);
+    bbox_ptr = new BBox(
+                        std::min(std::min(v0(0), v1(0)), v2(0)) - kEpsilon, std::max(std::max(v0(0), v1(0)), v2(0)) + kEpsilon,
+                        std::min(std::min(v0(1), v1(1)), v2(1)) - kEpsilon, std::max(std::max(v0(1), v1(1)), v2(1)) + kEpsilon,
+                        std::min(std::min(v0(2), v1(2)), v2(2)) - kEpsilon, std::max(std::max(v0(2), v1(2)), v2(2)) + kEpsilon);
   }
 
 
@@ -24,10 +25,12 @@ namespace Raytracer {
     v1(triangle.v1),
     v2(triangle.v2),
     normal(triangle.normal) {
-    if (triangle.bbox_ptr)
+    if (triangle.bbox_ptr) {
       bbox_ptr = triangle.bbox_ptr->clone();
-    else
+    }
+    else {
       bbox_ptr = NULL;
+    }
   }
 
 

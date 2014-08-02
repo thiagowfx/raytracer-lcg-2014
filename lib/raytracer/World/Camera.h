@@ -21,7 +21,6 @@ namespace Raytracer {
     void set_eye_position(const Vector3d&);
     void set_lookat(const Vector3d&);
     void set_up_vector(const Vector3d&);
-    void set_exposure_time(double);
     void set_zoom(double);
     void set_distance(double);
 
@@ -40,9 +39,6 @@ namespace Raytracer {
 
     /** Point where the camera is looking at. */
     Vector3d lookat = Vector3d::Zero();
-
-    /** Exposure time. */
-    double exposure_time = 1.0;
 
     /** Zoom factor. More is nearer. */
     double zoom = 1.0;
@@ -90,11 +86,6 @@ namespace Raytracer {
   inline void Camera::set_up_vector(const Vector3d& u) {
     up = u;
     compute_uvw();
-  }
-
-
-  inline void Camera::set_exposure_time(double exposure_time) {
-    this->exposure_time = exposure_time;
   }
 
 
