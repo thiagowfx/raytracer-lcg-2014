@@ -16,7 +16,7 @@ namespace Raytracer {
   public:
     BRDF();
     ~BRDF();
-    BRDF(const BRDF& object);
+    BRDF(const BRDF&);
     virtual BRDF* clone() const = 0;
 
     /* Setters. */
@@ -25,9 +25,12 @@ namespace Raytracer {
 	diffuse. */
     void set_sampler(Sampler*, const double exp);
    
-    /** Used to compute the direction of reflected rays for simulating reflective materials and diffuse-diffuse light transport. */
+    /** Used to compute the direction of reflected rays for simulating
+	reflective materials and diffuse-diffuse light transport. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi) const;
-    /** Used to compute the direction of reflected rays for simulating reflective materials and diffuse-diffuse light transport. Version for area lights. */
+    /** Used to compute the direction of reflected rays for simulating
+	reflective materials and diffuse-diffuse light
+	transport. This version is for area lights. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
     /** The BRDF itself. For example, this is /pi for a lambertian. */
     virtual RGBColor f(const ShadeRec&, const Vector3d& wo, const Vector3d& wi) const;

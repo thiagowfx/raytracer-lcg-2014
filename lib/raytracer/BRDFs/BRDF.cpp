@@ -2,7 +2,7 @@
 
 namespace Raytracer {
   BRDF::BRDF() {
-    set_sampler(new MultiJittered(25), 15.0);
+    set_sampler(new MultiJittered(20), 15.0);
   }
 
 

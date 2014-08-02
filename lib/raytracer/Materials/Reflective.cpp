@@ -1,9 +1,12 @@
 #include "Reflective.h"
 
 namespace Raytracer {
-  Reflective::Reflective () :
-    Phong()
-  {}
+  Reflective::Reflective (const RGBColor& color) :
+    Phong(color){
+    set_cd(color);
+    set_cs(color);
+    set_cr(color);
+  }
 
 
   Reflective::Reflective(const Reflective& rm) :
@@ -40,7 +43,7 @@ namespace Raytracer {
     return L;
   }
 
-  
+
   RGBColor Reflective::area_light_shade(ShadeRec& sr) {
     /* Direct illumination. Area light included here. */
     RGBColor L(Phong::area_light_shade(sr));
@@ -54,30 +57,12 @@ namespace Raytracer {
   }
 
 
-  Reflective *Reflective::generic(RGBColor color) {
-    Reflective* r = new Reflective();
-    r->set_ka(kKa);
-    r->set_kd(kKd);
-    r->set_cd(color);
-    r->set_ks(kKs);
-    r->set_cs(color);
-    r->set_exp(kExp);
-    r->set_kr(kKr);
-    r->set_cr(color);
-    return r;
-  }
-
-
-  Reflective *Reflective::generic_uncolored() {
-    Reflective* r = new Reflective();
-    r->set_ka(0.0);
-    r->set_kd(0.0);
-    r->set_cd(white);
-    r->set_ks(0.0);
-    r->set_cs(white);
-    r->set_exp(kExp);
-    r->set_kr(kKr);
-    r->set_cr(white);
-    return r;
+  void Reflective::make_uncolored() {
+    set_ka(0.0);
+    set_kd(0.0);
+    set_cd(white);
+    set_ks(0.0);
+    set_cs(white);
+    set_cr(white);
   }
 }

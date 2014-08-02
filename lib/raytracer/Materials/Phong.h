@@ -13,11 +13,11 @@ namespace Raytracer {
    */
   class Phong : public Material {
   public:
-    Phong();
+    /** Construct a new Phong material with the given color. */
+    Phong(const RGBColor&);
     Phong(const Phong&);
     virtual Material* clone() const;
     virtual ~Phong();
-    static Phong* generic(RGBColor);
     
     virtual RGBColor get_color() const;
     virtual RGBColor shade(ShadeRec&);

@@ -41,7 +41,7 @@ namespace Raytracer {
     /** Inverse area of the rectangle; for area light shading. */
     double inv_area;
     /** Rectangle sampler; for area light shading. */
-    Sampler* sampler_ptr;
+    Sampler* sampler_ptr = NULL;
   };
 }
 

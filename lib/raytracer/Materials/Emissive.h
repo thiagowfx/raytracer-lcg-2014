@@ -12,11 +12,11 @@ namespace Raytracer {
    */
   class Emissive: public Material {
   public:
-    Emissive();
+    /** Construct a new Emissive material with the given color and radiance. */
+    Emissive(const RGBColor&, double radiance = 1.0);
     Emissive(const Emissive&);
     virtual Material* clone() const;
     ~Emissive();
-    static Emissive* generic(RGBColor,double radiance);
     
     virtual RGBColor get_color() const;
     /** Allow this object to be rendered with tracers other than

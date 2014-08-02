@@ -5,69 +5,38 @@ namespace Raytracer {
     w(new World) {
     w->set_camera(new Camera());
     w->camera_ptr->set_eye_position(Vector3d(0.0, 50.0, 50.0));
-    Raytracer::PointLight *pointl0 = new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0));
-    w->add_light(pointl0);
 
-    Raytracer::PointLight *pointl1 = new Raytracer::PointLight(Vector3d(-100.0, -50, -30.0));
-    w->add_light(pointl1);
-
-    // Raytracer::DirectionalLight *direc0 = new Raytracer::DirectionalLight(Vector3d(0.0, 1.0, 0.0));
-    // w->add_light(direc0);
-
-    /********* GEOMETRIC OBJECTS TESTS */
+    w->add_light(new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0)));
+    w->add_light(new Raytracer::PointLight(Vector3d(-50.0, 30.0, -20.0)));
 
     Raytracer::Plane *pl0 = new Raytracer::Plane(Vector3d::Zero(), Vector3d(0.0, 1.0, 0.0));
-    pl0->set_material(Matte::generic(gray));
     w->add_object(pl0);
-
-    // Raytracer::Plane *pl1 = new Raytracer::Plane(Vector3d(-100.0, 0.0, 0.0), Vector3d(0.0, 0.0, 1.0));
-    // pl0->set_material(Matte::generic(gray));
-    // w->add_object(pl1);
+    pl0->set_material(new Phong(light_gray));
 
     Raytracer::Sphere* sp0 = new Raytracer::Sphere(Vector3d(-40.0, 0.0, 0.0), 10);
-    sp0->set_material(Matte::generic(red));
     w->add_object(sp0);
+    sp0->set_material(new Phong(red));
 
-    // Raytracer::PartSphere *ptsp0 = new Raytracer::PartSphere(20.0, M_PI / 4.0, M_PI, 0.0, M_PI);
-    // ptsp0->set_material(Matte::generic(red));
-    // w->add_object(ptsp0);
+    Raytracer::Sphere* sp1 = new Raytracer::Sphere(Vector3d(40.0, 0.0, 0.0), 10);
+    w->add_object(sp1);
+    sp1->set_material(new Phong(blue));
 
-    // Raytracer::Disk *disk0 = new Raytracer::Disk(Vector3d(0.0, -30.0, 0.0), 30.0, Vector3d(0.0, 1.0, 0.0));
-    // disk0->set_material(Matte::generic(green));
-    // w->add_object(disk0);
+    Raytracer::Sphere* sp2 = new Raytracer::Sphere(Vector3d(0.0, 0.0, -40.0), 10);
+    w->add_object(sp2);
+    sp2->set_material(new Phong(green));
 
-    // Raytracer::Annulus *ann0 = new Raytracer::Annulus(Vector3d(50.0, -30.0, 0.0), 10.0, 30.0, Vector3d(0.0, 1.0, 0.0));
-    // ann0->set_material(Matte::generic(light_green));
-    // w->add_object(ann0);
+    Raytracer::Sphere* sp3 = new Raytracer::Sphere(Vector3d(0.0, 0.0, 40.0), 10);
+    w->add_object(sp3);
+    sp3->set_material(new Phong(yellow));
 
-    // Raytracer::Rectangle *rec0 = new Raytracer::Rectangle(Vector3d(0.0, 30.0, 30.0), Vector3d(30.0,0.0, 0.0), Vector3d(0.0, 30.0, 0.0));
-    // rec0->set_material(Matte::generic(brown));
-    // w->add_object(rec0);
-
-    // Raytracer::Triangle *tri0 = new Raytracer::Triangle(Vector3d(20.0, 0.0, 0.0), Vector3d(0.0,20.0, 0.0), Vector3d(0.0, 0.0, 20.0));
-    // tri0->set_material(Matte::generic(yellow));
-    // w->add_object(tri0);
-
-    // Raytracer::PartOpenCylinder *opc0 = new Raytracer::PartOpenCylinder(-60.0, -30.0, 15.0, M_PI/4, 2 * M_PI/3);
-    // opc0->set_material(Matte::generic(dark_gray));
-    // w->add_object(opc0);
-
-    // Raytracer::PartOpenCylinder *opc1 = new Raytracer::PartOpenCylinder(-100.0, -70.0, 15.0);
-    // opc1->set_material(Matte::generic(gray));
-    // w->add_object(opc1);
-
-    // Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
-    // tor0->set_material(Matte::generic(light_gray));
-    // w->add_object(tor0);
-
-    // Raytracer::Box *box0 = new Raytracer::Box(Vector3d(70.0, 0.0, 0.0), Vector3d(95.0, 0.0, -30.0));
-    // box0->set_material(Matte::generic(red));
-    // w->add_object(box0);
-
+    Raytracer::Torus *tor0 = new Raytracer::Torus(20.0, 10.0);
+    w->add_object(tor0);
+    tor0->set_material(new Phong(light_gray));
+    
     // Raytracer::Compound *cp0 = new Raytracer::Compound();
     // cp0->add_object(new Raytracer::OpenCylinder(60.0, 90.0, 20.0));
     // cp0->add_object(new Raytracer::Sphere(Vector3d(0.0, 90.0, 0.0), 20.0));
-    // cp0->set_material(Matte::generic(red));
+    // cp0->set_material(new Matte(red));
     // cp0->set_shadows(true);
     // w->add_object(cp0);
 

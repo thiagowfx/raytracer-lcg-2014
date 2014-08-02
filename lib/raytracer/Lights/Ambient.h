@@ -18,8 +18,8 @@ namespace Raytracer {
     /** Return the name of this class. */
     virtual const char* to_string() const;
     virtual Vector3d get_direction(ShadeRec&);
-    virtual RGBColor L(ShadeRec& s);
-    virtual bool in_shadow(const Ray& ray, ShadeRec& sr) const;
+    virtual RGBColor L(ShadeRec&);
+    virtual bool in_shadow(const Ray&, ShadeRec&) const;
 
     /* Setters. */
     void set_radiance(const double);

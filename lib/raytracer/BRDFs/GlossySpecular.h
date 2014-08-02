@@ -17,9 +17,9 @@ namespace Raytracer {
 
     /** No sampling here: just the Phong formula. This is used for
 	direct illumination only */
-    virtual RGBColor f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const;
+    virtual RGBColor f(const ShadeRec&, const Vector3d& wo, const Vector3d& wi) const;
     /** This is used for indirect illumination. */
-    virtual RGBColor sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const;
+    virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
 
     /* Setters. */
     void set_ks(const double);
@@ -29,7 +29,7 @@ namespace Raytracer {
 
   private:
     /** Specular (reflective) coefficient constant. */
-    double ks = 0.0;
+    double ks = kKs;
     /** Specular (reflective) color. */
     RGBColor cs = white;
     /** Specular exponent constant. */

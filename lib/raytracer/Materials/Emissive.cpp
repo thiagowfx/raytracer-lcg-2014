@@ -1,15 +1,17 @@
 #include "Emissive.h"
 
 namespace Raytracer {
-  Emissive::Emissive() :
-    Material()
-  {}
+  Emissive::Emissive(const RGBColor& color, double radiance) :
+    Material(){
+    set_ce(color);
+    set_radiance(radiance);
+  }
 
 
   Emissive::Emissive(const Emissive& m) :
     Material(m),
-    ls(m.ls),
-    ce(m.ce)
+    ce(m.ce),
+    ls(m.ls)
   {}
 
 
@@ -43,14 +45,6 @@ namespace Raytracer {
   RGBColor Emissive::get_color() const {
     return ls * ce;
   }
-
-  Emissive *Emissive::generic(RGBColor c, double radiance = 1.0) {
-    Emissive* em = new Emissive();
-    em->set_ce(c);
-    em->set_radiance(radiance);
-    return em;
-  }
-
 
   RGBColor Emissive::get_Le(ShadeRec& sr) const {
     return ls * ce;

@@ -31,13 +31,13 @@ namespace Raytracer {
     wi = (sp(0) * u) + (sp(1) * v) + (sp(2) * w);
     wi.normalize();
 
-    pdf = sr.normal.dot(wi) * (1 / M_PI);
-    return kd * cd * (1 / M_PI);
+    pdf = sr.normal.dot(wi) * INV_PI;
+    return kd * cd * INV_PI;
   }
 
 
   RGBColor Lambertian::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
-    return kd * cd * (1 / M_PI);
+    return kd * cd * INV_PI;
   }
 
 

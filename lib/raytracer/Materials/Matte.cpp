@@ -1,9 +1,10 @@
 #include "Matte.h"
 
 namespace Raytracer {
-  Matte::Matte () :
-    Material()
-  {}
+  Matte::Matte (const RGBColor& color) :
+    Material(){
+    set_cd(color);
+  }
 
 
   Matte::Matte(const Matte& m) :
@@ -38,7 +39,7 @@ namespace Raytracer {
 
 
   RGBColor Matte::shade(ShadeRec& sr) {
-    /* Contrário da direção de onde o raio primário da câmera vem; para o olho. */
+    /* Vector from the shaded point to the eye. */
     Vector3d wo = -sr.ray.direction;
 
     /* Luz ambiente. Criada para simular, de maneira global, a
@@ -63,10 +64,13 @@ namespace Raytracer {
           Ray shadow_ray(sr.hit_point, wi);
           in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
         }
-        /** f = (kd * cd) / pi: constante de reflexão do material * a cor do material sobre pi (componente lambertiana difusa, refletindo igualmente para todos os lados)
-         * L = cl * ls (intensidade da luz vezes a cor da luz)
-         * ndotwi = produto interno entre a normal e a direção de onde a luz vem, representando cos(theta)
-         * quanto menor for esse ângulo, maior é a intensidade absorvida da luz
+        /** f = (kd * cd) / pi: constante de reflexão do material * a
+         * cor do material sobre pi (componente lambertiana difusa,
+         * refletindo igualmente para todos os lados) L = cl * ls
+         * (intensidade da luz vezes a cor da luz) ndotwi = produto
+         * interno entre a normal e a direção de onde a luz vem,
+         * representando cos(theta) quanto menor for esse ângulo, maior
+         * é a intensidade absorvida da luz
          */
         if (!in_shadow) {
           L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
@@ -99,15 +103,6 @@ namespace Raytracer {
       }
     }
     return L;
-  }
-
-
-  Matte* Matte::generic(RGBColor color) {
-    Matte* m = new Matte();
-    m->set_ka(kKa);
-    m->set_kd(kKd);
-    m->set_cd(color);
-    return m;
   }
 
 

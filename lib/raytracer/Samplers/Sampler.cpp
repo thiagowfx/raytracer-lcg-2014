@@ -122,8 +122,8 @@ namespace Raytracer {
     unsigned size = samples.size();
     hemisphere_samples.reserve(number_of_samples * number_of_sets);
     for (int j = 0; j < size; j++) {
-      double cos_phi = cos(2.0 * M_PI * samples[j](0));
-      double sin_phi = sin(2.0 * M_PI * samples[j](0));
+      double cos_phi = cos(TWO_PI * samples[j](0));
+      double sin_phi = sin(TWO_PI * samples[j](0));
       double cos_theta = pow((1.0 - samples[j](1)), 1.0 / (exp + 1.0));
       double sin_theta = sqrt (1.0 - cos_theta * cos_theta);
       double pu = sin_theta * cos_phi;
@@ -144,7 +144,7 @@ namespace Raytracer {
       r2  = samples[j](1);
       z   = 1.0 - 2.0 * r1;
       r   = sqrt(1.0 - z * z);
-      phi = (2 * M_PI) * r2;
+      phi = TWO_PI * r2;
       x   = r * cos(phi);
       y   = r * sin(phi);
       sphere_samples.push_back(Vector3d(x, y, z));

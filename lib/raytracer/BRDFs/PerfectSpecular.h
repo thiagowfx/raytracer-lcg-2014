@@ -28,7 +28,7 @@ namespace Raytracer {
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
   private:
     /** Reflection coefficient constant. */
-    double kr = 0.0;
+    double kr = kKr;
     /** Reflection color. */
     RGBColor cr = white;
   };

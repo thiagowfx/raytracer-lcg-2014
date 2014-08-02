@@ -11,11 +11,11 @@ namespace Raytracer {
    */
   class Matte: public Material {
   public:
-    Matte();
+    /** Construct a new Matte material with the given color. */
+    Matte(const RGBColor&);
     ~Matte();
     Matte(const Matte&);
     virtual Material* clone() const;
-    static Matte* generic(RGBColor);
     
     virtual RGBColor get_color() const;
     virtual RGBColor shade(ShadeRec&);

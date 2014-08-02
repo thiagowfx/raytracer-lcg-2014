@@ -6,6 +6,9 @@
 #include "ShadeRec.h"
 
 namespace Raytracer {
+  /**
+   * @brief An AreaLight is an object (usually a disk or a rectangle) with an emissive material.
+   */
   class AreaLight: public Light {
   public:
     AreaLight();
@@ -39,8 +42,8 @@ namespace Raytracer {
   };
 
   
-  inline void AreaLight::set_object(GeometricObject* o) {
-    this->object_ptr = o;
+  inline void AreaLight::set_object(GeometricObject* object_ptr) {
+    this->object_ptr = object_ptr;
     this->material_ptr = this->object_ptr->get_material();
   }
 }

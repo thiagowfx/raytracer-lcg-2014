@@ -1,10 +1,11 @@
 #include "Phong.h"
 
 namespace Raytracer {
-  Phong::Phong():
-    Material ()
-  {}
-
+  Phong::Phong(const RGBColor& color):
+    Material(){
+    set_cd(color);
+    set_cs(color);
+  }
 
   Phong::~Phong() {
     if (ambient_brdf) {
@@ -66,7 +67,7 @@ namespace Raytracer {
         }
         if (!in_shadow) {
           L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi;
-	}
+        }
       }
     }
 
@@ -91,22 +92,10 @@ namespace Raytracer {
         }
         if (!in_shadow) {
           L+= (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[j]->L(sr) * ndotwi * sr.w.lights[j]->G(sr) / sr.w.lights[j]->pdf(sr);
-	}
+        }
       }
     }
     return L;
-  }
-
-
-  Phong* Phong::generic(RGBColor color) {
-    Phong* p = new Phong();
-    p->set_ka(kKa);
-    p->set_kd(kKd);
-    p->set_cd(color);
-    p->set_ks(kKs);
-    p->set_cs(color);
-    p->set_exp(kExp);
-    return p;
   }
 
 
