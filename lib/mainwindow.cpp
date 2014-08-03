@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
   autoRenderCheckBox->setChecked(true);
 
   ui->setupUi(this);
-  this->setFocus();
   this->installEventFilter(this);
+  ui->renderedImage->installEventFilter(this);
 
   statusBar()->addPermanentWidget(statusInProgressLabel);
   statusBar()->addPermanentWidget(statusRenderingTime);
@@ -105,9 +105,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
   ui->cameraZoomDoubleSpinBox->setMinimum(0.01);
   ui->cameraZoomDoubleSpinBox->setSingleStep(0.1);
-  api->set_camera_zoom(1.0);
+  api->zoom_set(1.0);
   ui->cameraZoomDoubleSpinBox->setValue(api->get_camera_zoom());
-  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_camera_zoom(double)));
+  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(zoom_set(double)));
   QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
 
   autoRenderCheckBox->setChecked(true);
@@ -195,16 +195,38 @@ void MainWindow::on_actionExport_Image_triggered() {
   ui->renderedImage->pixmap()->save(file);
 }
 
-void MainWindow::on_actionUnfocus_triggered() {
-  this->setFocus();
-}
-
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   const double drotation = M_PI / 45.0;
   const double dradius = 8.0;
-  if (event->type() == QEvent::KeyPress) {
+  const double ZOOM_FRICTION = 1000.0;
+  bool shouldRenderImage = false;
+
+  /* renderedImage widget. */
+  if (object == ui->renderedImage) {
+    if (event->type() == QEvent::Wheel) {
+      cout << "DEBUG: mouse wheel on rendered image" <<  endl;
+      shouldRenderImage = true;
+      QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+
+      const int delta = wheelEvent->delta();
+      if (delta > 0) {
+        api->zoom_increase(1.0 + (double(delta) / ZOOM_FRICTION));
+      }
+      else {
+        api->zoom_decrease(1.0 - (double(delta) / ZOOM_FRICTION));
+      }
+    }
+  }
+
+  else if (event->type() == QEvent::KeyPress) {
+    cout << "DEBUG: key press" << endl;
+    shouldRenderImage = true;
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+
     switch(keyEvent->key()){
+    case Qt::Key_Escape:
+      this->setFocus();
+      break;
     case Qt::Key_Left:
       api->set_eye_spherical_relatively(0.0, +drotation, 0.0);
       break;
@@ -223,10 +245,19 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     case Qt::Key_PageDown:
       api->set_eye_spherical_relatively(+dradius, 0.0, 0.0);
       break;
-    default:
-      return false;
+    case Qt::Key_Plus:
+      api->zoom_increase(1.05);
+      break;
+    case Qt::Key_Minus:
+      api->zoom_decrease(1.05);
+      break;
     }
-    autoRenderCallback();
   }
+
+  if (shouldRenderImage) {
+    autoRenderCallback();
+    return true;
+  }
+
   return false;
 }

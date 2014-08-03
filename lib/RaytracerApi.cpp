@@ -250,7 +250,7 @@ namespace Raytracer {
 
   const char *Api::get_eye_spherical_coordinates() {
     Vector3d v = carthesian_to_spherical(w->camera_ptr->get_eye_position());
-    sprintf(buffer, "(%.2lf, %.2lfº, %.2lfº)", v(0), v(1) * (180.0 / M_PI), v(2) * (180.0 / M_PI));
+    sprintf(buffer, "(%.2lf, %.2lfº, %.2lfº)", v(0), v(1) * (180.0 * INV_PI), v(2) * (180.0 * INV_PI));
     return buffer;
   }
 
@@ -285,8 +285,16 @@ namespace Raytracer {
     return w->ambient_ptr->get_radiance();
   }
 
-  void Api::set_camera_zoom(double z) {
+  void Api::zoom_set(double z) {
     w->camera_ptr->set_zoom(z);
+  }
+
+  void Api::zoom_increase(double d) {
+    w->camera_ptr->set_zoom(w->camera_ptr->get_zoom() * d);
+  }
+
+  void Api::zoom_decrease(double d) {
+    w->camera_ptr->set_zoom(w->camera_ptr->get_zoom() / d);
   }
 
   double Api::get_camera_zoom() const {

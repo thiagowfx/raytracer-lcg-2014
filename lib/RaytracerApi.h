@@ -212,7 +212,13 @@ namespace Raytracer {
     double get_ambient_light_radiance();
 
     /** World: set camera zoom. */
-    void set_camera_zoom(double);
+    void zoom_set(double);
+
+    /** World: increase camera zoom. */
+    void zoom_increase(double);
+
+    /** World: decrease camera zoom. */
+    void zoom_decrease(double);
 
     /** World: get camera zoom. */
     double get_camera_zoom() const;

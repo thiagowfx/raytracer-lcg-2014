@@ -39,9 +39,6 @@ private slots:
   /** Open a dialog to export the rendered image. */
   void on_actionExport_Image_triggered();
 
-  /** Unfocus from any input widgets, so hotkeys can be used. */
-  void on_actionUnfocus_triggered();
-
 private:
   /** QT GUI interface. */
   Ui::MainWindow *ui;

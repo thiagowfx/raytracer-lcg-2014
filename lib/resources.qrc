@@ -4,6 +4,6 @@
         <file>assets/view-refresh-32x32.png</file>
         <file>assets/document-save-as-32x32.png</file>
         <file>assets/help-about-32x32.png</file>
-        <file>assets/arrow-left-double-32x32.png</file>
+        <file>assets/target-32x32.png</file>
     </qresource>
 </RCC>
