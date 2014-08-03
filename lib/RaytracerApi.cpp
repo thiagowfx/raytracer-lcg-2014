@@ -297,7 +297,7 @@ namespace Raytracer {
     w->camera_ptr->set_zoom(w->camera_ptr->get_zoom() / d);
   }
 
-  double Api::get_camera_zoom() const {
+  double Api::zoom_get() const {
     return w->camera_ptr->get_zoom();
   }
 

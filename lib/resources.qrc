@@ -5,5 +5,8 @@
         <file>assets/document-save-as-32x32.png</file>
         <file>assets/help-about-32x32.png</file>
         <file>assets/target-32x32.png</file>
+        <file>assets/actions-zoom-in-icon-32x32.png</file>
+        <file>assets/actions-zoom-original-icon-32x32.png</file>
+        <file>assets/actions-zoom-out-icon-32x32.png</file>
     </qresource>
 </RCC>

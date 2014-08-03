@@ -59,10 +59,12 @@ using Eigen::Vector3d;
 #include "Regular.h"
 
 /* STL */
-#include <cstdio>
 #include <cmath>
+#include <cstdio>
+#include <cstring>
 #include <ctime>
 #include <sstream>
+#include <string>
 
 /* PCS_DETECTION */
 #include "PrimitivaDaniel.h"
@@ -221,7 +223,7 @@ namespace Raytracer {
     void zoom_decrease(double);
 
     /** World: get camera zoom. */
-    double get_camera_zoom() const;
+    double zoom_get() const;
 
     /** World: set camera distance. */
     void set_camera_distance(double);

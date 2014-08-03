@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
   this->installEventFilter(this);
   ui->renderedImage->installEventFilter(this);
 
+  updateZoomLevelLabel();
   statusBar()->addPermanentWidget(statusInProgressLabel);
   statusBar()->addPermanentWidget(statusRenderingTime);
   statusBar()->addWidget(autoRenderCheckBox);
@@ -103,13 +104,6 @@ MainWindow::MainWindow(QWidget *parent) :
   QObject::connect(ui->cameraDistanceDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_camera_distance(double)));
   QObject::connect(ui->cameraDistanceDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
 
-  ui->cameraZoomDoubleSpinBox->setMinimum(0.01);
-  ui->cameraZoomDoubleSpinBox->setSingleStep(0.1);
-  api->zoom_set(1.0);
-  ui->cameraZoomDoubleSpinBox->setValue(api->get_camera_zoom());
-  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(zoom_set(double)));
-  QObject::connect(ui->cameraZoomDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(autoRenderCallback()));
-
   autoRenderCheckBox->setChecked(true);
   autoRenderCallback();
 }
@@ -175,9 +169,8 @@ void MainWindow::on_actionRender_scene_triggered() {
     QCoreApplication::processEvents();
 
     /* Rendering. */
-    stringstream ss;
-    ss << api->render_scene() << " ms";
-    statusRenderingTime->setText(ss.str().c_str());
+    unsigned renderingTime = api->render_scene();
+    statusRenderingTime->setText("Rendering time: " + QString::number(renderingTime) + " ms");
     ui->renderedImage->setPixmap(QPixmap(api->get_rendered_image()));
 
     statusInProgressLabel->setText("Idle.");
@@ -215,6 +208,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
       else {
         api->zoom_decrease(1.0 - (double(delta) / ZOOM_FRICTION));
       }
+      updateZoomLevelLabel();
     }
   }
 
@@ -245,12 +239,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
     case Qt::Key_PageDown:
       api->set_eye_spherical_relatively(+dradius, 0.0, 0.0);
       break;
-    case Qt::Key_Plus:
-      api->zoom_increase(1.05);
-      break;
-    case Qt::Key_Minus:
-      api->zoom_decrease(1.05);
-      break;
     }
   }
 
@@ -260,4 +248,26 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   }
 
   return false;
+}
+
+void MainWindow::updateZoomLevelLabel() {
+  ui->zoomLevelLabel->setText(QString::number(api->zoom_get(), 'g', 2) + " x");
+}
+
+void MainWindow::on_actionZoom_In_triggered() {
+  api->zoom_increase(1.05);
+  autoRenderCallback();
+  updateZoomLevelLabel();
+}
+
+void MainWindow::on_actionZoom_Out_triggered() {
+  api->zoom_decrease(1.05);
+  autoRenderCallback();
+  updateZoomLevelLabel();
+}
+
+void MainWindow::on_actionZoom_Reset_triggered() {
+  api->zoom_set(1.0);
+  autoRenderCallback();
+  updateZoomLevelLabel();
 }

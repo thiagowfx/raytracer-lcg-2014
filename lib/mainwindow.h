@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef _MAINWINDOW_MINE_
+#define _MAINWINDOW_MINE_
 
 #include "RaytracerApi.h"
 
@@ -39,6 +39,15 @@ private slots:
   /** Open a dialog to export the rendered image. */
   void on_actionExport_Image_triggered();
 
+  /** Zoom into the image. */
+  void on_actionZoom_In_triggered();
+
+  /** Zoom out of the image. */
+  void on_actionZoom_Out_triggered();
+
+  /** Reset zoom of the image to 1.0x. */
+  void on_actionZoom_Reset_triggered();
+
 private:
   /** QT GUI interface. */
   Ui::MainWindow *ui;
@@ -51,6 +60,9 @@ private:
 
   /** Communication with the raytracer library. */
   Raytracer::Api *api;
+
+  /** Update zoom level label. */
+  void updateZoomLevelLabel();
 
   /** Is the rendering process in progress? */
   QLabel *statusInProgressLabel;
@@ -68,4 +80,4 @@ private:
   QLabel *statusEyeSphericalLabel;
 };
 
-#endif // MAINWINDOW_H
+#endif // _MAINWINDOW_MINE_

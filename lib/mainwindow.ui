@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>656</width>
-    <height>503</height>
+    <height>574</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -18,35 +18,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QLabel" name="renderedImage">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::WheelFocus</enum>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <property name="lineWidth">
-       <number>2</number>
-      </property>
-      <property name="text">
-       <string>Rendered Image</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="margin">
-       <number>5</number>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -58,8 +30,8 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-4</y>
-         <width>302</width>
+         <y>0</y>
+         <width>299</width>
          <height>264</height>
         </rect>
        </property>
@@ -183,80 +155,73 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>290</width>
-         <height>265</height>
+         <width>299</width>
+         <height>264</height>
         </rect>
        </property>
        <attribute name="label">
         <string>World</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="1">
-         <widget class="QLabel" name="cameraZoomLabel">
-          <property name="text">
-           <string>Camera zoom</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
+        <item row="5" column="3">
          <widget class="QComboBox" name="ambientLightTypeComboBox"/>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="QLabel" name="tracerTypeLabel">
           <property name="text">
            <string>Tracer type</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
+        <item row="1" column="3">
          <widget class="QComboBox" name="tracerTypeComboBox"/>
         </item>
-        <item row="4" column="1">
+        <item row="3" column="1">
          <widget class="QLabel" name="ambientLightColorLabel">
           <property name="text">
            <string>Ambient Light color</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="ambientLightTypeLabel">
-          <property name="text">
-           <string>Ambient Light type</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="backgroundColorLabel">
-          <property name="text">
-           <string>Background color</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
+        <item row="3" column="3">
          <widget class="QPushButton" name="ambientLightColorPushButton">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
-        <item row="3" column="3">
+        <item row="2" column="1">
+         <widget class="QLabel" name="backgroundColorLabel">
+          <property name="text">
+           <string>Background color</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="ambientLightTypeLabel">
+          <property name="text">
+           <string>Ambient Light type</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
          <widget class="QPushButton" name="backgroundColorPushButton">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="4" column="1">
          <widget class="QLabel" name="ambientLightRadianceLabel">
           <property name="text">
            <string>Ambient Light radiance</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="3">
+        <item row="4" column="3">
          <widget class="QDoubleSpinBox" name="ambientLightRadianceDoubleSpinBox"/>
         </item>
-        <item row="1" column="1">
+        <item row="0" column="1">
          <widget class="QLabel" name="cameraDistanceLabel">
           <property name="text">
            <string>Camera distance
@@ -265,20 +230,13 @@ from Viewplane</string>
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QDoubleSpinBox" name="cameraZoomDoubleSpinBox">
-          <property name="suffix">
-           <string> x</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
          <widget class="QDoubleSpinBox" name="cameraDistanceDoubleSpinBox"/>
         </item>
        </layout>
       </widget>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="2" column="0" colspan="2">
      <widget class="QLabel" name="label">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -292,6 +250,57 @@ p, li { white-space: pre-wrap; }
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 0;&quot;&gt;&lt;li style=&quot; margin-top:5px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Directional keys move along the trackball;&lt;/li&gt;
 &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;PageDown and PageUp change the radius of the trackball;&lt;/li&gt;
 &lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Plus(+), Minus(-) and mouse scroll wheel change the zoom level.&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="informationGroupBox">
+      <property name="title">
+       <string>Information:</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="zoomLevelInfoLabel">
+         <property name="text">
+          <string>Camera Zoom Level:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="zoomLevelLabel">
+         <property name="text">
+          <string>1.0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QLabel" name="renderedImage">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::WheelFocus</enum>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="text">
+       <string>Rendered Image</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="margin">
+       <number>5</number>
       </property>
      </widget>
     </item>
@@ -319,6 +328,23 @@ p, li { white-space: pre-wrap; }
    <addaction name="separator"/>
    <addaction name="actionAbout_Qt"/>
    <addaction name="actionQuit"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionZoom_Out"/>
+   <addaction name="actionZoom_Reset"/>
   </widget>
   <action name="actionQuit">
    <property name="icon">
@@ -371,6 +397,42 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="shortcut">
     <string>Esc</string>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/actions-zoom-in-icon-32x32.png</normaloff>:/assets/assets/actions-zoom-in-icon-32x32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/actions-zoom-out-icon-32x32.png</normaloff>:/assets/assets/actions-zoom-out-icon-32x32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+   <property name="shortcut">
+    <string>-</string>
+   </property>
+  </action>
+  <action name="actionZoom_Reset">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/assets/assets/actions-zoom-original-icon-32x32.png</normaloff>:/assets/assets/actions-zoom-original-icon-32x32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom Reset</string>
+   </property>
+   <property name="shortcut">
+    <string>=</string>
    </property>
   </action>
  </widget>
