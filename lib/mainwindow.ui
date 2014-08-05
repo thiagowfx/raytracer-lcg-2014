@@ -31,7 +31,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>299</width>
+         <width>282</width>
          <height>264</height>
         </rect>
        </property>
@@ -155,8 +155,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>299</width>
-         <height>264</height>
+         <width>296</width>
+         <height>218</height>
         </rect>
        </property>
        <attribute name="label">
@@ -262,16 +262,32 @@ p, li { white-space: pre-wrap; }
        <item row="0" column="0">
         <widget class="QLabel" name="zoomLevelInfoLabel">
          <property name="text">
-          <string>Camera Zoom Level:</string>
+          <string>Camera zoom level:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLabel" name="zoomLevelLabel">
+        <widget class="QLabel" name="zoomLevelLabel"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="eyeCarthesianInfoLabel">
          <property name="text">
-          <string>1.0</string>
+          <string>Eye carthesian coordinates:</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="eyeCarthesianLabel"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="eyeSphericalInfoLabel">
+         <property name="text">
+          <string>Eye spherical coordinates:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="eyeSphericalLabel"/>
        </item>
       </layout>
      </widget>

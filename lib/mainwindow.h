@@ -16,14 +16,14 @@ public:
 
 private slots:
   /* Callbacks are a simple way to create QT events. */
-  void samplerCallback();
-  void backgroundColorCallback();
-  void ambientLightColorCallback();
-  void ambientLightCallback();
+  void sampler_callback();
+  void background_color_callback();
+  void ambient_light_color_callback();
+  void ambient_light_callback();
 
   /** Auto render image after changing any option if the corresponding member
    * variable is set. */
-  void autoRenderCallback();
+  void auto_render_callback();
 
   /******************* Actions ******************/
 
@@ -53,31 +53,31 @@ private:
   Ui::MainWindow *ui;
 
   /** Bind keys to events. */
-  bool eventFilter(QObject *object, QEvent *event);
+  bool event_filter(QObject *object, QEvent *event);
 
   /** Is the rendering process in progress? */
-  QMutex inProgressMutex;
+  QMutex in_progress_mutex;
 
   /** Communication with the raytracer library. */
   Raytracer::Api *api;
 
   /** Update zoom level label. */
-  void updateZoomLevelLabel();
+  void update_zoom_level_label();
+
+  /** Update carthesian coordinates label from the eye position. */
+  void update_eye_carthesian_label();
+
+  /** Update spherical coordinates label from the eye position. */
+  void update_eye_spherical_label();
 
   /** Is the rendering process in progress? */
-  QLabel *statusInProgressLabel;
+  QLabel *status_in_progress_label;
 
   /** Time spent to render the last scene. */
-  QLabel *statusRenderingTime;
+  QLabel *status_rendering_time;
 
   /** Auto render image after changing any option? */
-  QCheckBox *autoRenderCheckBox;
-
-  /** Carthesian coordinates label. */
-  QLabel *statusEyeCarthesianLabel;
-
-  /** Spherical coordinates label. */
-  QLabel *statusEyeSphericalLabel;
+  QCheckBox *auto_render_checkbox;
 };
 
 #endif // _MAINWINDOW_MINE_
