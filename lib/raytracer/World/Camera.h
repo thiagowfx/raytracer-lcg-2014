@@ -9,23 +9,26 @@ using Eigen::Vector3d;
 
 namespace Raytracer {
   class World;
-  /** @brief A pinhole camera, with perspective viewing. */
+  /** @brief A pinhole camera, with a perspective view. */
   class Camera {
   public:
     Camera();
-    Camera(const Camera& camera);
+    Camera(const Camera&);
     ~Camera();
     Camera* clone() const;
 
     /* Setters. */
-    void set_eye_position(const Vector3d&);
+    void set_eye_carthesian(const Vector3d&);
+    void set_eye_spherical(const Vector3d&);
+    void set_eye_spherical_relatively(const double, const double, const double);
     void set_lookat(const Vector3d&);
     void set_up_vector(const Vector3d&);
     void set_zoom(double);
     void set_distance(double);
 
     /* Getters. */
-    Vector3d get_eye_position() const;
+    Vector3d get_eye_carthesian() const;
+    Vector3d get_eye_spherical() const;
     Vector3d get_lookat() const;
     double get_distance() const;
     double get_zoom() const;
@@ -34,8 +37,11 @@ namespace Raytracer {
     unsigned render_scene(const World*, const char* image_file);
 
   private:
-    /** Camera position. */
-    Vector3d eye = Vector3d(100.0, 100.0, 100.0);
+    /** Camera position in carthesian coordinates. */
+    Vector3d eye_carthesian;
+
+    /** Camera position in spherical coordinates. */
+    Vector3d eye_spherical;
 
     /** Point where the camera is looking at. */
     Vector3d lookat = Vector3d::Zero();
@@ -63,11 +69,25 @@ namespace Raytracer {
 
     /** Compute u, v and w vectors. They depend upon eye, up and lookat. */
     void compute_uvw();
+
+    /** Update spherical coordinates from carthesian ones. */
+    void update_spherical();
+
+    /** Update carthesian coordinates from spherical ones. */
+    void update_carthesian();
   };
 
   
-  inline void Camera::set_eye_position(const Vector3d& eye) {
-    this->eye = eye;
+  inline void Camera::set_eye_carthesian(const Vector3d& eye_carthesian) {
+    this->eye_carthesian = eye_carthesian;
+    update_spherical();
+    compute_uvw();
+  }
+
+
+  inline void Camera::set_eye_spherical(const Vector3d& eye_spherical) {
+    this->eye_spherical = eye_spherical;
+    update_carthesian();
     compute_uvw();
   }
 
@@ -77,20 +97,25 @@ namespace Raytracer {
   }
 
 
-  inline void Camera::set_lookat(const Vector3d& p) {
-    lookat = p;
+  inline void Camera::set_lookat(const Vector3d& lookat) {
+    this->lookat = lookat;
     compute_uvw();
   }
 
 
-  inline void Camera::set_up_vector(const Vector3d& u) {
-    up = u;
+  inline void Camera::set_up_vector(const Vector3d& up) {
+    this->up = up;
     compute_uvw();
   }
 
 
-  inline Vector3d Camera::get_eye_position() const {
-    return eye;
+  inline Vector3d Camera::get_eye_carthesian() const {
+    return this->eye_carthesian;
+  }
+
+
+  inline Vector3d Camera::get_eye_spherical() const {
+    return this->eye_spherical;
   }
 
 

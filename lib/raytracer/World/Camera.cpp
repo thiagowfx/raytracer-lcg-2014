@@ -2,12 +2,14 @@
 
 namespace Raytracer {
   Camera::Camera() {
+    set_eye_carthesian(Vector3d(100.0, 100.0, 100.0));
     compute_uvw();
   }
 
 
   Camera::Camera(const Camera& c) :
-    eye(c.eye),
+    eye_carthesian(c.eye_carthesian),
+    eye_spherical(c.eye_spherical),
     lookat(c.lookat),
     u(c.u),
     v(c.v),
@@ -26,21 +28,30 @@ namespace Raytracer {
   }
 
 
+  void Camera::set_eye_spherical_relatively(const double dr, const double dphi, const double dtheta) {
+    eye_spherical(0) += dr;
+    eye_spherical(1) += dphi;
+    eye_spherical(2) += dtheta;
+    update_carthesian();
+    compute_uvw();
+  }
+
+
   void Camera::compute_uvw() {
-    w = (eye - lookat).normalized();
+    w = (eye_carthesian - lookat).normalized();
     u = (up.cross(w)).normalized();
     v = w.cross(u);
 
     /* Take care of the singularity by hardwiring in specific camera orientations. */
     /* Camera looking vertically down. */
-    if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) > lookat(1)) {
+    if (eye_carthesian(0) == lookat(0) && eye_carthesian(2) == lookat(2) && eye_carthesian(1) > lookat(1)) {
       u = Vector3d(0.0, 0.0, 1.0);
       v = Vector3d(1.0, 0.0, 0.0);
       w = Vector3d(0.0, 1.0, 0.0);
     }
 
     /* Camera looking vertically up. */
-    if (eye(0) == lookat(0) && eye(2) == lookat(2) && eye(1) < lookat(1)) {
+    if (eye_carthesian(0) == lookat(0) && eye_carthesian(2) == lookat(2) && eye_carthesian(1) < lookat(1)) {
       u = Vector3d(1.0, 0.0, 0.0);
       v = Vector3d(0.0, 0.0, 1.0);
       w = Vector3d(0.0, -1.0, 0.0);
@@ -64,7 +75,7 @@ namespace Raytracer {
     Vector2d pp;               // sample point on a pixel
     const unsigned number_of_samples = vp.sampler_ptr->get_number_of_samples();
     vp.pixel_size /= zoom;
-    ray.origin = eye;
+    ray.origin = eye_carthesian;
 
     for (unsigned r = 0; r < vp.vres; r++) {   // up
       for (unsigned c = 0; c < vp.hres; c++) { // across
@@ -84,5 +95,33 @@ namespace Raytracer {
     /* End of computation. */
     double elapsed_secs = double(clock() - time_begin) / CLOCKS_PER_SEC * 1000;
     return static_cast<unsigned>(elapsed_secs);
+  }
+
+
+  void Camera::update_spherical() {
+    /* Carthesian coordinates: c(0) = x, c(1) = y, c(2) = z. */
+
+    /* Radius (r). Between zero and +infinity. */
+    eye_spherical(0) = eye_carthesian.norm();
+
+    /* phi */
+    eye_spherical(1) = atan2(eye_carthesian(2), eye_carthesian(0)); // y -> z
+
+    /* theta */
+    eye_spherical(2) = acos(eye_carthesian(1) / eye_spherical(0)); // z -> y
+  }
+
+
+  void Camera::update_carthesian() {
+    /* Spherical coordinates: s(0) = r, s(1) = phi, s(2) = theta. */
+
+    /* x */
+    eye_carthesian(0) = eye_spherical(0) * sin(eye_spherical(2)) * cos(eye_spherical(1));
+
+    /* z */
+    eye_carthesian(2) = eye_spherical(0) * sin(eye_spherical(2)) * sin(eye_spherical(1)); // c(2) --> c(1)
+
+    /* y */
+    eye_carthesian(1) = eye_spherical(0) * cos(eye_spherical(2));  // c(1) --> c(2)
   }
 }

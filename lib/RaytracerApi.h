@@ -100,12 +100,6 @@ namespace Raytracer {
     ~Api();
 
     /******************* Utilities *******************/
-    /** Convert from carthesian coordinates to spherical coordinates. */
-    Vector3d carthesian_to_spherical(const Vector3d&);
-
-    /** Convert from spherical coordinates to carthesian coordinates. */
-    Vector3d spherical_to_carthesian(const Vector3d&);
-
     /** Convert from RGBColor to QColor. */
     QColor rgbcolor_to_qcolor(const RGBColor&);
 
@@ -183,14 +177,8 @@ namespace Raytracer {
     /** Get image file path. */
     const char* get_rendered_image();
 
-    /** Camera: set carthesian coordinates for eye */
-    void set_eye_carthesian(Vector3d);
-
-    /** Camera: set carthesian coordinates for eye */
-    void set_eye_carthesian(double,double,double);
-
     /** Camera: set spherical coordinates for eye, relatively */
-    void set_eye_spherical_relatively(double,double,double);
+    void set_eye_spherical_relatively(const double, const double, const double);
 
     /** Get eye carthesian coordinates as (x, y, z) */
     const char* get_eye_carthesian_coordinates();

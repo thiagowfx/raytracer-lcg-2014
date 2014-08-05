@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
   auto_render_checkbox->setChecked(true);
 
   ui->setupUi(this);
+  this->setFocus();
   this->installEventFilter(this);
   ui->renderedImage->installEventFilter(this);
 
@@ -184,9 +185,9 @@ void MainWindow::on_actionExport_Image_triggered() {
   ui->renderedImage->pixmap()->save(file);
 }
 
-bool MainWindow::event_filter(QObject *object, QEvent *event) {
-  const double drotation = M_PI / 45.0;
-  const double dradius = 8.0;
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+  const double ROTATION_VARIATION = M_PI / 55.0;
+  const double RADIUS_VARIATION = 7.0;
   const double ZOOM_FRICTION = 1000.0;
   bool shouldRenderImage = false;
 
@@ -218,22 +219,22 @@ bool MainWindow::event_filter(QObject *object, QEvent *event) {
       this->setFocus();
       break;
     case Qt::Key_Left:
-      api->set_eye_spherical_relatively(0.0, +drotation, 0.0);
+      api->set_eye_spherical_relatively(0.0, +ROTATION_VARIATION, 0.0);
       break;
     case Qt::Key_Right:
-      api->set_eye_spherical_relatively(0.0, -drotation, 0.0);
+      api->set_eye_spherical_relatively(0.0, -ROTATION_VARIATION, 0.0);
       break;
     case Qt::Key_Up:
-      api->set_eye_spherical_relatively(0.0, 0.0, -drotation);
+      api->set_eye_spherical_relatively(0.0, 0.0, -ROTATION_VARIATION);
       break;
     case Qt::Key_Down:
-      api->set_eye_spherical_relatively(0.0, 0.0, +drotation);
+      api->set_eye_spherical_relatively(0.0, 0.0, +ROTATION_VARIATION);
       break;
     case Qt::Key_PageUp:
-      api->set_eye_spherical_relatively(-dradius, 0.0, 0.0);
+      api->set_eye_spherical_relatively(-RADIUS_VARIATION, 0.0, 0.0);
       break;
     case Qt::Key_PageDown:
-      api->set_eye_spherical_relatively(+dradius, 0.0, 0.0);
+      api->set_eye_spherical_relatively(+RADIUS_VARIATION, 0.0, 0.0);
       break;
     }
   }

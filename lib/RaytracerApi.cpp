@@ -4,7 +4,7 @@ namespace Raytracer {
   Api::Api() :
     w(new World) {
     w->set_camera(new Camera());
-    w->camera_ptr->set_eye_position(Vector3d(0.0, 50.0, 50.0));
+    w->camera_ptr->set_eye_carthesian(Vector3d(0.0, 50.0, 50.0));
 
     w->add_light(new Raytracer::PointLight(Vector3d(100.0, 100.0, 100.0)));
     w->add_light(new Raytracer::PointLight(Vector3d(-50.0, 30.0, -20.0)));
@@ -53,49 +53,11 @@ namespace Raytracer {
     //   }
     //   w->add_object(vp[i]);
     // }
-
   }
 
   Api::~Api() {
     delete w;
   }
-
-  Vector3d Api::carthesian_to_spherical(const Vector3d& c) {
-    /* Carthesian coordinates: c(0) = x, c(1) = y, c(2) = z. */
-
-    /* Spherical coordinates. */
-    Vector3d s;
-
-    /* Radius (r). Between zero and +infinity. */
-    s(0) = c.norm();
-
-    /* phi */
-    s(1) = atan2(c(2), c(0)); // y -> z
-
-    /* theta */
-    s(2) = acos(c(1) / s(0)); // z -> y
-
-    return s;
-  }
-
-  Vector3d Api::spherical_to_carthesian(const Vector3d& s) {
-    /* Spherical coordinates: s(0) = r, s(1) = phi, s(2) = theta. */
-
-    /* Carthesian coordinates. */
-    Vector3d c;
-
-    /* x */
-    c(0) = s(0) * sin(s(2)) * cos(s(1));
-
-    /* z */
-    c(2) = s(0) * sin(s(2)) * sin(s(1)); // c(2) --> c(1)
-
-    /* y */
-    c(1) = s(0) * cos(s(2));  // c(1) --> c(2)
-
-    return c;
-  }
-
 
   QColor Api::rgbcolor_to_qcolor(const RGBColor& color) {
     QColor qcolor;
@@ -226,30 +188,18 @@ namespace Raytracer {
     return "renderedImage.png";
   }
 
-  void Api::set_eye_carthesian(Vector3d v) {
-    w->camera_ptr->set_eye_position(v);
-  }
-
-  void Api::set_eye_carthesian(double x, double y, double z) {
-    set_eye_carthesian(Vector3d(x,y,z));
-  }
-
-  void Api::set_eye_spherical_relatively(double dr, double dphi, double dtheta) {
-    Vector3d s = carthesian_to_spherical(w->camera_ptr->get_eye_position());
-    s(0) += dr;
-    s(1) += dphi;
-    s(2) += dtheta;
-    set_eye_carthesian(spherical_to_carthesian(s));
+  void Api::set_eye_spherical_relatively(const double dr, const double dphi, const double dtheta) {
+    w->camera_ptr->set_eye_spherical_relatively(dr, dphi, dtheta);
   }
 
   const char* Api::get_eye_carthesian_coordinates() {
-    Vector3d v = w->camera_ptr->get_eye_position();
+    const Vector3d v = w->camera_ptr->get_eye_carthesian();
     sprintf(buffer, "(%.2lf, %.2lf, %.2lf)", v(0), v(1), v(2));
     return buffer;
   }
 
   const char *Api::get_eye_spherical_coordinates() {
-    Vector3d v = carthesian_to_spherical(w->camera_ptr->get_eye_position());
+    const Vector3d v = w->camera_ptr->get_eye_spherical();
     sprintf(buffer, "(%.2lf, %.2lfº, %.2lfº)", v(0), v(1) * (180.0 * INV_PI), v(2) * (180.0 * INV_PI));
     return buffer;
   }

@@ -53,7 +53,7 @@ private:
   Ui::MainWindow *ui;
 
   /** Bind keys to events. */
-  bool event_filter(QObject *object, QEvent *event);
+  bool eventFilter(QObject *object, QEvent *event);
 
   /** Is the rendering process in progress? */
   QMutex in_progress_mutex;
