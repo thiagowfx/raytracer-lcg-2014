@@ -1,7 +1,16 @@
 #include "Reflective.h"
 
 namespace Raytracer {
-  Reflective::Reflective (const RGBColor& color) :
+
+  Reflective::Reflective() :
+    Phong(white) {
+    set_ka(0.0);
+    set_kd(0.0);
+    set_ks(0.0);
+    set_cr(white);
+  }
+
+Reflective::Reflective (const RGBColor& color) :
     Phong(color){
     set_cd(color);
     set_cs(color);
@@ -54,15 +63,5 @@ namespace Raytracer {
     Ray reflected_ray(sr.hit_point, wi);
     L += fr * sr.w.tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal.dot(wi));
     return L;
-  }
-
-
-  void Reflective::make_uncolored() {
-    set_ka(0.0);
-    set_kd(0.0);
-    set_cd(white);
-    set_ks(0.0);
-    set_cs(white);
-    set_cr(white);
   }
 }

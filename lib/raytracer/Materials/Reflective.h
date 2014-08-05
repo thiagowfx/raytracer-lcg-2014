@@ -11,6 +11,10 @@ namespace Raytracer {
    */
   class Reflective: public Phong {
   public:
+    /** Construct a new uncolored, black-ish, Reflective material,
+     * assimiling a pure mirror, with only reflections.
+     */
+    Reflective();
     /**
      * Construct a new Reflective material with the given color
      * (direct illumination + reflective illumination + reflections)
@@ -26,9 +30,6 @@ namespace Raytracer {
     /* Setters. */
     void set_kr(const double);
     void set_cr(const RGBColor&);
-    /** Make this reflective material a pure mirror, black-ish, just
-        with reflections. */
-    void make_uncolored();
 
   private:
     PerfectSpecular* reflective_brdf = new PerfectSpecular();
