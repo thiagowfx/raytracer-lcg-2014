@@ -29,6 +29,7 @@ namespace Raytracer {
 
   void Compound::set_material(Material* material_ptr) {
     const unsigned num_objects = objects.size();
+    this->material_ptr = material_ptr;
     for (unsigned j = 0; j < num_objects; ++j)
       objects[j]->set_material(material_ptr);
   }
@@ -44,7 +45,7 @@ namespace Raytracer {
   void Compound::delete_objects() {
     const unsigned num_objects = objects.size();
     for (unsigned j = 0; j < num_objects; ++j) {
-      delete objects[j];
+      // delete objects[j];
       objects[j] = NULL;
     }
     objects.erase(objects.begin(), objects.end());

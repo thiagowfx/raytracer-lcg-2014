@@ -4,12 +4,14 @@ namespace Raytracer {
   GeometricObject::GeometricObject() {}
 
 
-  GeometricObject::GeometricObject (const GeometricObject& object) :
+  GeometricObject::GeometricObject(const GeometricObject& object) :
     shadows(object.shadows) {
-    if (object.material_ptr)
+    if (object.material_ptr) {
       material_ptr = object.material_ptr->clone();
-    else
+    }
+    else {
       material_ptr = NULL;
+    }
   }
 
 
@@ -21,8 +23,8 @@ namespace Raytracer {
   }
 
 
-  void GeometricObject::set_material(Material* mPtr) {
-    material_ptr = mPtr;
+  void GeometricObject::set_material(Material* material_ptr) {
+    this->material_ptr = material_ptr;
   }
 
 
