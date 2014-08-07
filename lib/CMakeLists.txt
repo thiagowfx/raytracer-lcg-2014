@@ -1,11 +1,14 @@
 ########## Dependencies ##########
-find_package(PNG REQUIRED) # libpng++-dev on Ubuntu, png++ on Arch
+
+# libpng++-dev on Ubuntu, png++ (AUR) on Arch
+find_package(PNG REQUIRED)
 
 find_package(Qt5Widgets REQUIRED)
-set(CMAKE_INCLUDE_CURRENT_DIR ON) # out-of-the-box configs
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(OpenGL) # mesa3d on Intel and nvidia driver on Nvidia graphic cards
+# mesa3d on Intel and nvidia-driver on Nvidia graphic cards
+find_package(OpenGL REQUIRED)
 if (OPENGL_FOUND)
   include_directories(${OPENGL_INCLUDE_DIRS})
 endif()
@@ -110,19 +113,15 @@ add_executable(
   ${VCG_SOURCES}
   )
 
-qt5_use_modules(
-  ${QT_RAYTRACER}
-  Widgets
-  )
-
 target_link_libraries(
   ${QT_RAYTRACER}
   ${PNG_LIBRARY}
   ${OPENGL_LIBRARIES}
+  Qt5::Widgets
   )
 
 ########## DOCUMENTATION ##########
 add_custom_target(doc
   COMMAND doxygen "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile"
-  COMMENT "Generate documentation."
+  COMMENT "Generate the doxygen documentation."
   )
