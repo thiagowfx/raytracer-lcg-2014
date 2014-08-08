@@ -3,6 +3,9 @@
 # libpng++-dev on Ubuntu, png++ (AUR) on Arch
 find_package(PNG REQUIRED)
 
+find_package(Boost REQUIRED COMPONENTS serialization)
+include_directories(${Boost_INCLUDE_DIRS})
+
 find_package(Qt5Widgets REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -108,13 +111,14 @@ add_executable(
   ${QT_RAYTRACER_SOURCES}
   ${QT_UIS}
   ${QT_RCCS}
+  ${VCG_SOURCES}
   $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
   $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
-  ${VCG_SOURCES}
   )
 
 target_link_libraries(
   ${QT_RAYTRACER}
+  ${Boost_LIBRARIES}
   ${PNG_LIBRARY}
   ${OPENGL_LIBRARIES}
   Qt5::Widgets
@@ -145,15 +149,16 @@ if (TEST)
   # Unit Tests
   add_executable(
     runUnitTests
-    $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
     tests/unit_tests.cpp
-    $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
     ${VCG_SOURCES}
+    $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
+    $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
     )
 
   # Standard linking to gtest stuff.
   target_link_libraries(
     runUnitTests
+    ${Boost_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${PNG_LIBRARY}
     ${OPENGL_LIBRARIES}

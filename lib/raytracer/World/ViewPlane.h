@@ -1,6 +1,7 @@
 #ifndef _VIEWPLANE_MINE_
 #define _VIEWPLANE_MINE_
 
+#include "BoostMine.hpp"
 #include "Regular.h"
 
 namespace Raytracer {
@@ -9,9 +10,12 @@ namespace Raytracer {
    */
   class ViewPlane {
   public:
+    /** Construct a new ViewPlane. */
     ViewPlane();
     ~ViewPlane();
     ViewPlane(const ViewPlane&);
+
+    bool operator==(const ViewPlane&) const;
 
     /* Setters. */
     void set_hres(const unsigned);
@@ -19,29 +23,43 @@ namespace Raytracer {
     void set_pixel_size(const double);
     void set_gamma(const double);
     void set_out_of_gamut(const bool);
-    void set_max_depth(const int);
+    void set_max_depth(const unsigned);
     void set_sampler(Sampler*);
 
     /** Horizontal Image Resolution. */
-    int hres = 100;
+    unsigned hres = 100;
 
     /** Vertical Image Resolution. */
-    int vres = 100;
+    unsigned vres = 100;
 
     /** Pixel size. Decreasing means to zoom into the image. */
     double pixel_size = 1.0;
-    
+
     /** Inverse of the gamma correction factor. */
     double inv_gamma = 1.0;
-    
+
     /** If true, out of gamut colors will be displayed as red. */
     bool out_of_gamut = false;
 
     /** For reflective rays, the maximum number of bounces. */
-    int max_depth = 1;
+    unsigned max_depth = 0;
 
     /** Sampler for pixels. */
     Sampler* sampler_ptr = new Regular(1);
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_NVP(hres);
+      ar & BOOST_SERIALIZATION_NVP(vres);
+      ar & BOOST_SERIALIZATION_NVP(pixel_size);
+      ar & BOOST_SERIALIZATION_NVP(inv_gamma);
+      ar & BOOST_SERIALIZATION_NVP(out_of_gamut);
+      ar & BOOST_SERIALIZATION_NVP(max_depth);
+      /* TODO: sampler_ptr */
+    }
+
+    friend ostream& operator<<(ostream&, const ViewPlane&);
   };
 
 
@@ -70,7 +88,7 @@ namespace Raytracer {
   }
 
 
-  inline void ViewPlane::set_max_depth(const int max_depth) {
+  inline void ViewPlane::set_max_depth(const unsigned max_depth) {
     this->max_depth = max_depth;
   }
 

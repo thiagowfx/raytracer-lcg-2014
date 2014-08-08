@@ -11,10 +11,33 @@ namespace Raytracer {
     inv_gamma(vp.inv_gamma),
     out_of_gamut(vp.out_of_gamut),
     max_depth(vp.max_depth) {
-    if (vp.sampler_ptr)
+    if (vp.sampler_ptr) {
       sampler_ptr = vp.sampler_ptr->clone();
-    else
+    }
+    else {
       sampler_ptr = NULL;
+    }
+  }
+
+  ostream& operator<<(ostream& os, const ViewPlane& vp) {
+    os << vp.hres << " ";
+    os << vp.vres << " ";
+    os << vp.pixel_size << " ";
+    os << vp.inv_gamma << " ";
+    os << vp.out_of_gamut << " ";
+    os << vp.max_depth << " ";
+    return os;
+  }
+
+
+  bool ViewPlane::operator==(const ViewPlane& o) const {
+    return
+      hres == o.hres &&
+      vres == o.vres &&
+      pixel_size == o.pixel_size &&
+      inv_gamma == o.inv_gamma &&
+      out_of_gamut == o.out_of_gamut &&
+      max_depth == o.max_depth;
   }
 
 
