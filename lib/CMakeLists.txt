@@ -1,4 +1,4 @@
-########## Dependencies ##########
+########## DEPENDENCIES ##########
 
 # libpng++-dev on Ubuntu, png++ (AUR) on Arch
 find_package(PNG REQUIRED)
@@ -121,7 +121,41 @@ target_link_libraries(
   )
 
 ########## DOCUMENTATION ##########
-add_custom_target(doc
+add_custom_target(docs
   COMMAND doxygen "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile"
   COMMENT "Generate the doxygen documentation."
   )
+
+
+########## TESTS ##########
+
+# Taken from: https://github.com/dmonopoly/gtest-cmake-example/blob/master/CMakeLists.txt
+# Options. Turn on with 'cmake -DTEST=ON ..'.
+
+ # Makes boolean 'test' available.
+option(TEST "Build all tests." OFF)
+
+if (TEST)
+  find_package(GTest REQUIRED)
+  enable_testing()
+
+  # Include the gtest library.
+  include_directories($GTEST_INCLUDE_DIRS)
+
+  # Unit Tests
+  add_executable(runUnitTests unit_tests.cpp)
+
+  # Standard linking to gtest stuff.
+  target_link_libraries(runUnitTests ${GTEST_LIBRARIES})
+
+  # Extra linking for the project.
+  # target_link_libraries(runUnitTests project1_lib)
+
+  # Use this for each test executable.
+  add_test(test runUnitTests)
+
+  add_custom_target(check
+    COMMAND ${CMAKE_CTEST_COMMAND} -V
+    COMMENT "This way you can run 'make check' to execute tests."
+    )
+endif()
