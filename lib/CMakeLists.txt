@@ -132,7 +132,7 @@ add_custom_target(docs
 # Taken from: https://github.com/dmonopoly/gtest-cmake-example/blob/master/CMakeLists.txt
 # Options. Turn on with 'cmake -DTEST=ON ..'.
 
- # Makes boolean 'test' available.
+# Makes boolean 'test' available.
 option(TEST "Build all tests." OFF)
 
 if (TEST)
@@ -143,13 +143,21 @@ if (TEST)
   include_directories($GTEST_INCLUDE_DIRS)
 
   # Unit Tests
-  add_executable(runUnitTests unit_tests.cpp)
+  add_executable(
+    runUnitTests
+    $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
+    tests/unit_tests.cpp
+    $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
+    ${VCG_SOURCES}
+    )
 
   # Standard linking to gtest stuff.
-  target_link_libraries(runUnitTests ${GTEST_LIBRARIES})
-
-  # Extra linking for the project.
-  # target_link_libraries(runUnitTests project1_lib)
+  target_link_libraries(
+    runUnitTests
+    ${GTEST_LIBRARIES}
+    ${PNG_LIBRARY}
+    ${OPENGL_LIBRARIES}
+    )
 
   # Use this for each test executable.
   add_test(test runUnitTests)
