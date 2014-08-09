@@ -10,7 +10,7 @@ namespace Raytracer {
     set_cr(white);
   }
 
-Reflective::Reflective (const RGBColor& color) :
+  Reflective::Reflective (const RGBColor& color) :
     Phong(color){
     set_cd(color);
     set_cs(color);
@@ -37,6 +37,13 @@ Reflective::Reflective (const RGBColor& color) :
       delete reflective_brdf;
       reflective_brdf = NULL;
     }
+  }
+
+
+  bool Reflective::operator==(const Reflective& o) const {
+    return
+      Phong::operator==(o) &&
+      *reflective_brdf == *(o.reflective_brdf);
   }
 
 

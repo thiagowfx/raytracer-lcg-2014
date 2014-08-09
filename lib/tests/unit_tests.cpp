@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "Reflective.h"
 #include "Phong.h"
 #include "Matte.h"
 #include "BBox.h"
@@ -341,6 +342,37 @@ TEST_F(PhongTest, BinarySerialization) {
   save_binary<Phong>(*phong, filename);
   load_binary<Phong>(*phong_test, filename);
   EXPECT_TRUE(*phong == *phong_test);
+}
+
+class ReflectiveTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    reflective = new Reflective(MYRGBCOLOR);
+    reflective->set_kr(MYDOUBLE);
+    reflective_test = new Reflective();
+  }
+
+  virtual void TearDown() {
+    delete reflective;
+    delete reflective_test;
+  }
+
+  Reflective *reflective;
+  Reflective *reflective_test;
+};
+
+TEST_F(ReflectiveTest, XmlSerialization) {
+  const char* filename = "Reflective.xml";
+  save_xml<Reflective>(*reflective, filename);
+  load_xml<Reflective>(*reflective_test, filename);
+  EXPECT_TRUE(*reflective == *reflective_test);
+}
+
+TEST_F(ReflectiveTest, BinarySerialization) {
+  const char* filename = "Reflective.bin";
+  save_binary<Reflective>(*reflective, filename);
+  load_binary<Reflective>(*reflective_test, filename);
+  EXPECT_TRUE(*reflective == *reflective_test);
 }
 
 

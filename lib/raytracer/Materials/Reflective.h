@@ -23,6 +23,7 @@ namespace Raytracer {
     Reflective(const Reflective&);
     virtual Reflective* clone() const;
     ~Reflective();
+    virtual bool operator==(const Reflective&) const;
 
     virtual RGBColor shade(ShadeRec&);
     virtual RGBColor area_light_shade(ShadeRec&);
@@ -30,6 +31,13 @@ namespace Raytracer {
     /* Setters. */
     void set_kr(const double);
     void set_cr(const RGBColor&);
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Phong);
+      ar & BOOST_SERIALIZATION_NVP(reflective_brdf);
+    }
 
   private:
     PerfectSpecular* reflective_brdf = new PerfectSpecular();
