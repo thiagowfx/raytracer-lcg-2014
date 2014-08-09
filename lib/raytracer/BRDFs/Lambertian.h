@@ -13,7 +13,8 @@ namespace Raytracer {
     Lambertian(const Lambertian&);
     virtual Lambertian* clone() const;
     ~Lambertian();
-    
+    virtual bool operator==(const Lambertian&) const;
+
     virtual RGBColor f(const ShadeRec&, const Vector3d& wo, const Vector3d& wi) const;
     /** This generates a direction by sampling the hemisphere with a
      * cosine distribution this is called in path_shade for any material
@@ -30,6 +31,15 @@ namespace Raytracer {
     /* Getters. */
     double get_kd() const;
     RGBColor get_cd() const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(BRDF);
+      ar & BOOST_SERIALIZATION_NVP(kd);
+      ar & BOOST_SERIALIZATION_NVP(cd);
+    }
+
   private:
     /** Diffuse coefficient constant. */
     double kd = kKd;

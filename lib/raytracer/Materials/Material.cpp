@@ -10,6 +10,11 @@ namespace Raytracer {
   Material::Material(const Material& m) {}
 
 
+  bool Material::operator==(const Material&) const {
+    return true;
+  }
+
+
   RGBColor Material::get_Le(ShadeRec &sr) const {
     return black;
   }

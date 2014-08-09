@@ -13,11 +13,19 @@ namespace Raytracer {
   {}
 
 
+  PerfectSpecular* PerfectSpecular::clone() const {
+    return new PerfectSpecular(*this);
+  }
+
+
   PerfectSpecular::~PerfectSpecular() {}
 
 
-  PerfectSpecular* PerfectSpecular::clone() const {
-    return new PerfectSpecular(*this);
+  bool PerfectSpecular::operator==(const PerfectSpecular& o) const {
+    return
+      BRDF::operator==(o) &&
+      kr == o.kr &&
+      cr == o.cr;
   }
 
 

@@ -19,10 +19,11 @@ namespace Raytracer {
     virtual ~Material();
     Material(const Material&);
     virtual Material* clone() const = 0;
+    virtual bool operator==(const Material&) const;
 
     /** Return the main color of this material, necessary for the
-	MultipleObjects tracer. Lights shouldn't be present in this
-	calculation. */
+        MultipleObjects tracer. Lights shouldn't be present in this
+        calculation. */
     virtual RGBColor get_color() const = 0;
     /** How should the color of a point in a geometric object be computed? */
     virtual RGBColor shade(ShadeRec& sr) = 0;
@@ -31,6 +32,10 @@ namespace Raytracer {
     virtual RGBColor area_light_shade(ShadeRec& sr) = 0;
     /** Effective color (radiance * hue) emitted by this material. */
     virtual RGBColor get_Le(ShadeRec& sr) const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {}
   };
 }
 

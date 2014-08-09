@@ -13,6 +13,7 @@ namespace Raytracer {
     ~PerfectSpecular();
     PerfectSpecular(const PerfectSpecular&);
     virtual PerfectSpecular* clone() const;
+    virtual bool operator==(const PerfectSpecular&) const;
 
     /* Setters. */
     void set_kr(const double);
@@ -24,8 +25,17 @@ namespace Raytracer {
      * transparency. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi) const;
     /** This version of sample_f is used with path tracing it returns
-     ndotwi in the pdf. */
+        ndotwi in the pdf. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(BRDF);
+      ar & BOOST_SERIALIZATION_NVP(kr);
+      ar & BOOST_SERIALIZATION_NVP(cr);
+    }
+
   private:
     /** Reflection coefficient constant. */
     double kr = kKr;

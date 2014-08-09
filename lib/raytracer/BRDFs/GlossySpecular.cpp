@@ -20,6 +20,15 @@ namespace Raytracer {
   GlossySpecular::~GlossySpecular() {}
 
 
+  bool GlossySpecular::operator==(const GlossySpecular& o) const {
+    return
+      BRDF::operator==(o) &&
+      ks == o.ks &&
+      exp == o.exp &&
+      cs == o.cs;
+  }
+
+
   RGBColor GlossySpecular::f(const ShadeRec& sr, const Vector3d& wo, const Vector3d& wi) const {
     RGBColor L;
     double ndotwi = sr.normal.dot(wi);

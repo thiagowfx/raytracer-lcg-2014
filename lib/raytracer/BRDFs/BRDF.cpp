@@ -24,6 +24,11 @@ namespace Raytracer {
   }
 
 
+  bool BRDF::operator==(const BRDF&) const {
+    return true;
+  }
+
+
   void BRDF::set_sampler(Sampler* sp, const double exp) {
     sampler_ptr = sp;
     sampler_ptr->map_samples_to_hemisphere(exp);

@@ -21,6 +21,14 @@ namespace Raytracer {
   Lambertian::~Lambertian() {}
 
 
+  bool Lambertian::operator==(const Lambertian& o) const {
+    return
+      BRDF::operator==(o) &&
+      kd == o.kd &&
+      cd == o.cd;
+  }
+
+
   RGBColor Lambertian::sample_f(const ShadeRec& sr, const Vector3d& wo, Vector3d& wi, double& pdf) const {
     Vector3d w = sr.normal;
     Vector3d v = Vector3d(0.0034, 1.0, 0.0071).cross(w);

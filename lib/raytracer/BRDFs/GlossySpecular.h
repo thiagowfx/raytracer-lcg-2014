@@ -2,7 +2,6 @@
 #define _GLOSSYSPECULAR_MINE_
 
 #include "BRDF.h"
-#include "MultiJittered.h"
 
 namespace Raytracer {
   /**
@@ -14,9 +13,10 @@ namespace Raytracer {
     GlossySpecular(const GlossySpecular&);
     ~GlossySpecular();
     virtual GlossySpecular* clone() const;
+    virtual bool operator==(const GlossySpecular&) const;
 
     /** No sampling here: just the Phong formula. This is used for
-	direct illumination only */
+        direct illumination only */
     virtual RGBColor f(const ShadeRec&, const Vector3d& wo, const Vector3d& wi) const;
     /** This is used for indirect illumination. */
     virtual RGBColor sample_f(const ShadeRec&, const Vector3d& wo, Vector3d& wi, double& pdf) const;
@@ -27,28 +27,37 @@ namespace Raytracer {
     void set_cs(const RGBColor&);
     void set_normal(const Vector3d&);
 
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(BRDF);
+      ar & BOOST_SERIALIZATION_NVP(ks);
+      ar & BOOST_SERIALIZATION_NVP(exp);
+      ar & BOOST_SERIALIZATION_NVP(cs);
+    }
+
   private:
     /** Specular (reflective) coefficient constant. */
     double ks = kKs;
-    /** Specular (reflective) color. */
-    RGBColor cs = white;
     /** Specular exponent constant. */
     double exp = kExp;
+    /** Specular (reflective) color. */
+    RGBColor cs = white;
   };
 
 
-  inline void GlossySpecular::set_ks(const double k) {
-    ks = k;
+  inline void GlossySpecular::set_ks(const double ks) {
+    this->ks = ks;
   }
 
 
-  inline void GlossySpecular::set_exp(const double e) {
-    exp = e;
+  inline void GlossySpecular::set_exp(const double exp) {
+    this->exp = exp;
   }
 
 
-  inline void GlossySpecular::set_cs(const RGBColor& c) {
-    cs = c;
+  inline void GlossySpecular::set_cs(const RGBColor& cs) {
+    this->cs = cs;
   }
 }
 

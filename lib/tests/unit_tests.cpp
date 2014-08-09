@@ -2,6 +2,9 @@
 
 /********** INCLUDES *********/
 #include "BBox.h"
+#include "PerfectSpecular.h"
+#include "Lambertian.h"
+#include "GlossySpecular.h"
 #include "Ray.h"
 #include "RGBColor.h"
 #include "ViewPlane.h"
@@ -39,6 +42,105 @@ const unsigned MYUNSIGNED = 1000;
 const int MYINT = -1000;
 const double MYDOUBLE = -0.1;
 const Vector3d MYEIGEN = Vector3d(MYDOUBLE, MYDOUBLE, MYDOUBLE);
+const RGBColor MYRGBCOLOR = RGBColor(0.3, 0.3, 0.3);
+
+
+class PerfectSpecularTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    ps = new PerfectSpecular();
+    ps->set_kr(MYDOUBLE);
+    ps->set_cr(MYRGBCOLOR);
+    ps_test = new PerfectSpecular();
+  }
+
+  virtual void TearDown() {
+    delete ps;
+    delete ps_test;
+  }
+
+  PerfectSpecular *ps;
+  PerfectSpecular *ps_test;
+};
+
+TEST_F(PerfectSpecularTest, XmlSerialization) {
+  const char* filename = "PerfectSpecular.xml";
+  save_xml<PerfectSpecular>(*ps, filename);
+  load_xml<PerfectSpecular>(*ps_test, filename);
+  EXPECT_TRUE(*ps == *ps_test);
+}
+
+TEST_F(PerfectSpecularTest, BinarySerialization) {
+  const char* filename = "PerfectSpecular.bin";
+  save_binary<PerfectSpecular>(*ps, filename);
+  load_binary<PerfectSpecular>(*ps_test, filename);
+  EXPECT_TRUE(*ps == *ps_test);
+}
+
+class LambertianTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    lamb = new Lambertian();
+    lamb->set_kd(MYDOUBLE);
+    lamb->set_cd(MYRGBCOLOR);
+    lamb_test = new Lambertian();
+  }
+
+  virtual void TearDown() {
+    delete lamb;
+    delete lamb_test;
+  }
+
+  Lambertian *lamb;
+  Lambertian *lamb_test;
+};
+
+TEST_F(LambertianTest, XmlSerialization) {
+  const char* filename = "Lambertian.xml";
+  save_xml<Lambertian>(*lamb, filename);
+  load_xml<Lambertian>(*lamb_test, filename);
+  EXPECT_TRUE(*lamb == *lamb_test);
+}
+
+TEST_F(LambertianTest, BinarySerialization) {
+  const char* filename = "Lambertian.bin";
+  save_binary<Lambertian>(*lamb, filename);
+  load_binary<Lambertian>(*lamb_test, filename);
+  EXPECT_TRUE(*lamb == *lamb_test);
+}
+
+class GlossySpecularTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    gs = new GlossySpecular();
+    gs->set_ks(MYDOUBLE);
+    gs->set_exp(MYDOUBLE);
+    gs->set_cs(MYRGBCOLOR);
+    gs_test = new GlossySpecular();
+  }
+
+  virtual void TearDown() {
+    delete gs;
+    delete gs_test;
+  }
+
+  GlossySpecular *gs;
+  GlossySpecular *gs_test;
+};
+
+TEST_F(GlossySpecularTest, XmlSerialization) {
+  const char* filename = "GlossySpecular.xml";
+  save_xml<GlossySpecular>(*gs, filename);
+  load_xml<GlossySpecular>(*gs_test, filename);
+  EXPECT_TRUE(*gs == *gs_test);
+}
+
+TEST_F(GlossySpecularTest, BinarySerialization) {
+  const char* filename = "GlossySpecular.bin";
+  save_binary<GlossySpecular>(*gs, filename);
+  load_binary<GlossySpecular>(*gs_test, filename);
+  EXPECT_TRUE(*gs == *gs_test);
+}
 
 class RayTest : public ::testing::Test {
 protected:
@@ -58,13 +160,19 @@ protected:
   Ray *ray_test;
 };
 
-TEST_F(RayTest, serialization) {
+TEST_F(RayTest, XmlSerialization) {
   const char* filename = "Ray.xml";
   save_xml<Ray>(*ray, filename);
   load_xml<Ray>(*ray_test, filename);
   EXPECT_TRUE(*ray == *ray_test);
 }
 
+TEST_F(RayTest, BinarySerialization) {
+  const char* filename = "Ray.bin";
+  save_binary<Ray>(*ray, filename);
+  load_binary<Ray>(*ray_test, filename);
+  EXPECT_TRUE(*ray == *ray_test);
+}
 
 class RGBColorTest : public ::testing::Test {
 protected:
@@ -85,13 +193,19 @@ protected:
   RGBColor *c_test;
 };
 
-TEST_F(RGBColorTest, serialization) {
+TEST_F(RGBColorTest, XmlSerialization) {
   const char* filename = "RGBColor.xml";
   save_xml<RGBColor>(*c, filename);
   load_xml<RGBColor>(*c_test, filename);
   EXPECT_TRUE(*c == *c_test);
 }
 
+TEST_F(RGBColorTest, BinarySerialization) {
+  const char* filename = "RGBColor.bin";
+  save_binary<RGBColor>(*c, filename);
+  load_binary<RGBColor>(*c_test, filename);
+  EXPECT_TRUE(*c == *c_test);
+}
 
 class BBoxTest : public ::testing::Test {
 protected:
@@ -109,13 +223,19 @@ protected:
   BBox *b_test;
 };
 
-TEST_F(BBoxTest, serialization) {
+TEST_F(BBoxTest, XmlSerialization) {
   const char* filename = "BBox.xml";
   save_xml<BBox>(*b, filename);
   load_xml<BBox>(*b_test, filename);
   EXPECT_TRUE(*b == *b_test);
 }
 
+TEST_F(BBoxTest, BinarySerialization) {
+  const char* filename = "BBox.bin";
+  save_binary<BBox>(*b, filename);
+  load_binary<BBox>(*b_test, filename);
+  EXPECT_TRUE(*b == *b_test);
+}
 
 class ViewPlaneTest : public ::testing::Test {
 protected:
@@ -139,10 +259,17 @@ protected:
   ViewPlane *vp_test;
 };
 
-TEST_F(ViewPlaneTest, serialization) {
+TEST_F(ViewPlaneTest, XmlSerialization) {
   const char* filename = "ViewPlane.xml";
   save_xml<ViewPlane>(*vp, filename);
   load_xml<ViewPlane>(*vp_test, filename);
+  EXPECT_TRUE(*vp == *vp_test);
+}
+
+TEST_F(ViewPlaneTest, BinarySerialization) {
+  const char* filename = "ViewPlane.bin";
+  save_binary<ViewPlane>(*vp, filename);
+  load_binary<ViewPlane>(*vp_test, filename);
   EXPECT_TRUE(*vp == *vp_test);
 }
 
