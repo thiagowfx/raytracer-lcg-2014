@@ -1,6 +1,9 @@
 #include "Phong.h"
 
 namespace Raytracer {
+  Phong::Phong() {}
+
+  
   Phong::Phong(const RGBColor& color):
     Material(){
     set_cd(color);
@@ -46,6 +49,15 @@ namespace Raytracer {
 
   Material* Phong::clone() const {
     return new Phong(*this);
+  }
+
+
+  bool Phong::operator==(const Phong& o) const {
+    return
+      Material::operator==(o) &&
+      *ambient_brdf == *(o.ambient_brdf) &&
+      *diffuse_brdf == *(o.diffuse_brdf) &&
+      *specular_brdf == *(o.specular_brdf);
   }
 
 

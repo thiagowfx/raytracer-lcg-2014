@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "Phong.h"
+#include "Matte.h"
 #include "BBox.h"
 #include "PerfectSpecular.h"
 #include "Lambertian.h"
@@ -272,6 +274,76 @@ TEST_F(ViewPlaneTest, BinarySerialization) {
   load_binary<ViewPlane>(*vp_test, filename);
   EXPECT_TRUE(*vp == *vp_test);
 }
+
+
+class MatteTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    matte = new Matte(MYRGBCOLOR);
+    matte->set_ka(MYDOUBLE);
+    matte->set_kd(MYDOUBLE);
+    matte_test = new Matte();
+  }
+
+  virtual void TearDown() {
+    delete matte;
+    delete matte_test;
+  }
+
+  Matte *matte;
+  Matte *matte_test;
+};
+
+TEST_F(MatteTest, XmlSerialization) {
+  const char* filename = "Matte.xml";
+  save_xml<Matte>(*matte, filename);
+  load_xml<Matte>(*matte_test, filename);
+  EXPECT_TRUE(*matte == *matte_test);
+}
+
+TEST_F(MatteTest, BinarySerialization) {
+  const char* filename = "Matte.bin";
+  save_binary<Matte>(*matte, filename);
+  load_binary<Matte>(*matte_test, filename);
+  EXPECT_TRUE(*matte == *matte_test);
+}
+
+
+class PhongTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    phong = new Phong(MYRGBCOLOR);
+    phong->set_ka(MYDOUBLE);
+    phong->set_kd(MYDOUBLE);
+    phong->set_ks(MYDOUBLE);
+    phong->set_exp(MYDOUBLE);
+    phong_test = new Phong();
+  }
+
+  virtual void TearDown() {
+    delete phong;
+    delete phong_test;
+  }
+
+  Phong *phong;
+  Phong *phong_test;
+};
+
+TEST_F(PhongTest, XmlSerialization) {
+  const char* filename = "Phong.xml";
+  save_xml<Phong>(*phong, filename);
+  load_xml<Phong>(*phong_test, filename);
+  EXPECT_TRUE(*phong == *phong_test);
+}
+
+TEST_F(PhongTest, BinarySerialization) {
+  const char* filename = "Phong.bin";
+  save_binary<Phong>(*phong, filename);
+  load_binary<Phong>(*phong_test, filename);
+  EXPECT_TRUE(*phong == *phong_test);
+}
+
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

@@ -1,6 +1,9 @@
 #include "Matte.h"
 
 namespace Raytracer {
+  Matte::Matte () {}
+
+  
   Matte::Matte (const RGBColor& color) :
     Material(){
     set_cd(color);
@@ -35,6 +38,14 @@ namespace Raytracer {
       delete diffuse_brdf;
       diffuse_brdf = NULL;
     }
+  }
+
+
+  bool Matte::operator==(const Matte& o) const {
+    return
+      Material::operator==(o) &&
+      *ambient_brdf == *(o.ambient_brdf) &&
+      *diffuse_brdf == *(o.diffuse_brdf);
   }
 
 

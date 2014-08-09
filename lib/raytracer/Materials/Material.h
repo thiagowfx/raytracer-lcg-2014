@@ -1,6 +1,7 @@
 #ifndef _MATERIAL_MINE_
 #define _MATERIAL_MINE_
 
+#include "BoostMine.hpp"
 #include "Utilities.h"
 #include "RGBColor.h"
 #include "ShadeRec.h"

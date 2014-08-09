@@ -16,21 +16,32 @@ namespace Raytracer {
     /** Construct a new Phong material with the given color. */
     Phong(const RGBColor&);
     Phong(const Phong&);
+    Phong();
     virtual Material* clone() const;
     virtual ~Phong();
-    
+    virtual bool operator==(const Phong&) const;
+
     virtual RGBColor get_color() const;
     virtual RGBColor shade(ShadeRec&);
     virtual RGBColor area_light_shade(ShadeRec&);
 
     /* Setters. */
-    void set_ka(double);
     void set_cd(const RGBColor&);
-    void set_kd(double);
     void set_cs(const RGBColor&);
+    void set_ka(double);
+    void set_kd(double);
     void set_ks(double);
     void set_exp(double);
-    
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Material);
+      ar & BOOST_SERIALIZATION_NVP(ambient_brdf);
+      ar & BOOST_SERIALIZATION_NVP(diffuse_brdf);
+      ar & BOOST_SERIALIZATION_NVP(specular_brdf);
+    }
+
   private:
     /** Ambient color component. */
     Lambertian *ambient_brdf = new Lambertian();
