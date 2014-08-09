@@ -20,8 +20,11 @@ namespace Raytracer {
     /** Construct a bounding box with the given opposite vertexes in the same plane. */
     BBox(const Vector3d p0, const Vector3d p1);
     BBox(const BBox&);
-    virtual BBox* clone() const;
+    BBox();
     ~BBox();
+    virtual BBox* clone() const;
+    bool operator==(const BBox&) const;
+
     /** Return true if the ray hits the box. */
     bool hit(const Ray&) const;
     /** Return true if the given point is inside the box. */
@@ -30,6 +33,17 @@ namespace Raytracer {
     double x0, y0, z0;
     /** Opposite vertex coordinates. */
     double x1, y1, z1;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_NVP(x0);
+      ar & BOOST_SERIALIZATION_NVP(y0);
+      ar & BOOST_SERIALIZATION_NVP(z0);
+      ar & BOOST_SERIALIZATION_NVP(x1);
+      ar & BOOST_SERIALIZATION_NVP(y1);
+      ar & BOOST_SERIALIZATION_NVP(z1);
+    }
   };
 }
 

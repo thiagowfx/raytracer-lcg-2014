@@ -286,4 +286,5 @@ void MainWindow::on_actionLoad_Settings_triggered() {
   Raytracer::ViewPlane vp;
   load_xml<Raytracer::ViewPlane>(vp, "qtraytracer.xml");
   api->set_view_plane(vp);
+  auto_render_callback();
 }

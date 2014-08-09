@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "BBox.h"
 #include "Ray.h"
 #include "RGBColor.h"
 #include "ViewPlane.h"
@@ -76,6 +77,30 @@ TEST_F(RGBColorTest, serialization) {
   save_xml<RGBColor>(*c, filename);
   load_xml<RGBColor>(*c_test, filename);
   EXPECT_TRUE(*c == *c_test);
+}
+
+
+class BBoxTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    b = new BBox(MYDOUBLE,MYDOUBLE,MYDOUBLE,MYDOUBLE,MYDOUBLE,MYDOUBLE);
+    b_test = new BBox();
+  }
+
+  virtual void TearDown() {
+    delete b;
+    delete b_test;
+  }
+
+  BBox *b;
+  BBox *b_test;
+};
+
+TEST_F(BBoxTest, serialization) {
+  const char* filename = "BBox.xml";
+  save_xml<BBox>(*b, filename);
+  load_xml<BBox>(*b_test, filename);
+  EXPECT_TRUE(*b == *b_test);
 }
 
 

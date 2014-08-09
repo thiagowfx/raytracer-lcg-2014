@@ -33,7 +33,21 @@ namespace Raytracer {
   {}
 
 
+  BBox::BBox() {}
+
+
   BBox::~BBox() {}
+
+
+  bool BBox::operator==(const BBox& b) const {
+    return
+      x0 == b.x0 &&
+      y0 == b.y0 &&
+      z0 == b.z0 &&
+      x1 == b.x1 &&
+      y1 == b.y1 &&
+      z1 == b.z1;
+  }
 
 
   BBox* BBox::clone() const {
