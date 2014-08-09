@@ -1,8 +1,8 @@
 #ifndef _RGBCOLOR_MINE_
 #define _RGBCOLOR_MINE_
 
+#include "BoostMine.hpp"
 #include <algorithm>
-#include <cmath>
 
 namespace Raytracer {
   /**
@@ -10,13 +10,21 @@ namespace Raytracer {
    */
   class RGBColor {
   public:
-    /** Create a black RGBColor object. */
-    RGBColor();
     /** Create a RGBColor with the specified red, green and blue components. */
     RGBColor(float r, float g, float b);
+    RGBColor();
     RGBColor(const RGBColor&);
-    RGBColor& operator=(const RGBColor&);
     ~RGBColor();
+    RGBColor& operator=(const RGBColor&);
+    bool operator==(const RGBColor&) const;
+    bool operator!=(const RGBColor&) const;
+    RGBColor operator+ (const RGBColor&) const;
+    RGBColor& operator+= (const RGBColor&);
+    RGBColor operator* (const float) const;
+    RGBColor& operator*= (const float);
+    RGBColor operator/ (const float) const;
+    RGBColor& operator/= (const float);
+    RGBColor operator* (const RGBColor&) const;
 
     /** Red component, from 0.0 to 1.0. */
     float r = 0.0;
@@ -26,21 +34,6 @@ namespace Raytracer {
 
     /** Blue component, from 0.0 to 1.0. */
     float b = 0.0;
-
-    /** C++ operators overloading. */
-    RGBColor operator+ (const RGBColor&) const;
-    RGBColor& operator+= (const RGBColor&);
-    RGBColor operator* (const float) const;
-    RGBColor& operator*= (const float);
-    RGBColor operator/ (const float) const;
-    RGBColor& operator/= (const float);
-    RGBColor operator* (const RGBColor&) const;
-
-    /** Return true if the colors are equal. */
-    bool operator==(const RGBColor&) const;
-
-    /** Return true if the colors are different. */
-    bool operator!=(const RGBColor&) const;
 
     /** Color components are raised to the specified power. */
     RGBColor powc(float) const;
@@ -53,6 +46,14 @@ namespace Raytracer {
 
     /** Return red if any component is greater than one. */
     RGBColor clamp_to_red() const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_NVP(r);
+      ar & BOOST_SERIALIZATION_NVP(g);
+      ar & BOOST_SERIALIZATION_NVP(b);
+    }
   };
 
 
@@ -100,9 +101,11 @@ namespace Raytracer {
   }
 
 
-  inline bool RGBColor::operator== (const RGBColor& c) const {
-    const float kEpsilon = 1.0e-7;
-    return fabs(r - c.r) < kEpsilon && fabs(g - c.g) < kEpsilon && fabs(b - c.b) < kEpsilon;
+  inline bool RGBColor::operator==(const RGBColor& o) const {
+    return
+        r == o.r &&
+        g == o.g &&
+        b == o.b;
   }
 
 

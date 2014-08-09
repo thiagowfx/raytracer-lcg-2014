@@ -8,5 +8,8 @@
         <file>assets/actions-zoom-in-icon-32x32.png</file>
         <file>assets/actions-zoom-original-icon-32x32.png</file>
         <file>assets/actions-zoom-out-icon-32x32.png</file>
+        <file>assets/applications-development-32x32.png</file>
+        <file>assets/settings_repair_help-32x32.png</file>
+        <file>assets/custom_settings-32x32.png</file>
     </qresource>
 </RCC>

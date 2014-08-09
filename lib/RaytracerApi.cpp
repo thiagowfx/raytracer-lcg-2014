@@ -69,6 +69,14 @@ namespace Raytracer {
     return RGBColor(color.redF(), color.greenF(), color.blueF());
   }
 
+  Raytracer::ViewPlane Api::get_view_plane() {
+    return w->vp;
+  }
+
+  void Api::set_view_plane(Raytracer::ViewPlane vp) {
+    w->vp = vp;
+  }
+
   void Api::set_hres(int hres) {
     w->vp.set_hres(hres);
   }

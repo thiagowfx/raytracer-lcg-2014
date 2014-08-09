@@ -276,3 +276,14 @@ void MainWindow::on_actionZoom_Reset_triggered() {
   auto_render_callback();
   update_zoom_level_label();
 }
+
+void MainWindow::on_actionSave_Settings_triggered() {
+  Raytracer::ViewPlane vp = api->get_view_plane();
+  save_xml<Raytracer::ViewPlane>(vp, "qtraytracer.xml");
+}
+
+void MainWindow::on_actionLoad_Settings_triggered() {
+  Raytracer::ViewPlane vp;
+  load_xml<Raytracer::ViewPlane>(vp, "qtraytracer.xml");
+  api->set_view_plane(vp);
+}

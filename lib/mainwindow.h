@@ -48,6 +48,12 @@ private slots:
   /** Reset zoom of the image to 1.0x. */
   void on_actionZoom_Reset_triggered();
 
+  /** Save current settings. */
+  void on_actionSave_Settings_triggered();
+
+  /** Load specified settings. */
+  void on_actionLoad_Settings_triggered();
+
 private:
   /** QT GUI interface. */
   Ui::MainWindow *ui;

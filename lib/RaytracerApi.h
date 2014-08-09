@@ -34,7 +34,6 @@ using Eigen::Vector3d;
 
 /* Geometric Objects */
 #include "Compound.h"
-#include "Disk.h"
 #include "OpenCylinder.h"
 #include "Plane.h"
 #include "Rectangle.h"
@@ -105,6 +104,10 @@ namespace Raytracer {
 
   public slots:
     /******************* API *******************/
+    Raytracer::ViewPlane get_view_plane();
+
+    void set_view_plane(Raytracer::ViewPlane);
+
     /** ViewPlane: set horizontal resolution */
     void set_hres(int);
 

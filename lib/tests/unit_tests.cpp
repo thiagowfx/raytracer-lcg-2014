@@ -2,6 +2,7 @@
 
 /********** INCLUDES *********/
 #include "Ray.h"
+#include "RGBColor.h"
 #include "ViewPlane.h"
 
 using namespace Raytracer;
@@ -24,20 +25,6 @@ const unsigned MYUNSIGNED = 1000;
 const int MYINT = -1000;
 const double MYDOUBLE = -0.1;
 const Vector3d MYEIGEN = Vector3d(MYDOUBLE, MYDOUBLE, MYDOUBLE);
-
-template<class T>
-void save_xml(const T &t, const char* filename) {
-  std::ofstream ofs(filename);
-  boost::archive::xml_oarchive oa(ofs);
-  oa << BOOST_SERIALIZATION_NVP(t);
-}
-
-template<class T>
-void load_xml(T &t, const char* filename) {
-  std::ifstream ifs(filename);
-  boost::archive::xml_iarchive ia(ifs);
-  ia >> BOOST_SERIALIZATION_NVP(t);
-}
 
 class RayTest : public ::testing::Test {
 protected:
@@ -63,6 +50,34 @@ TEST_F(RayTest, serialization) {
   load_xml<Ray>(*ray_test, filename);
   EXPECT_TRUE(*ray == *ray_test);
 }
+
+
+class RGBColorTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    c = new RGBColor();
+    c->r = MYDOUBLE;
+    c->g = MYDOUBLE;
+    c->b = MYDOUBLE;
+    c_test = new RGBColor();
+  }
+
+  virtual void TearDown() {
+    delete c;
+    delete c_test;
+  }
+
+  RGBColor *c;
+  RGBColor *c_test;
+};
+
+TEST_F(RGBColorTest, serialization) {
+  const char* filename = "RGBColor.xml";
+  save_xml<RGBColor>(*c, filename);
+  load_xml<RGBColor>(*c_test, filename);
+  EXPECT_TRUE(*c == *c_test);
+}
+
 
 class ViewPlaneTest : public ::testing::Test {
 protected:
