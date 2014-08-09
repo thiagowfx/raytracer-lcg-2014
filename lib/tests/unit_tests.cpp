@@ -11,12 +11,25 @@ using namespace std;
 
 // https://stackoverflow.com/questions/12851126/serializing-eigens-matrix-using-boost-serialization
 // https://stackoverflow.com/questions/18382457/eigen-and-boostserialize/23407209#23407209
+// https://stackoverflow.com/questions/12580579/how-to-use-boostserialization-to-save-eigenmatrix
 namespace boost {
-  template<class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
-  inline void serialize(Archive & ar,
-                        Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> & t,
-                        const unsigned int file_version) {
-    ar & boost::serialization::make_array(t.data(), t.size());
+  namespace serialization {
+    template<class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
+    inline void serialize(Archive & ar,
+                          Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> & t,
+                          const unsigned int file_version) {
+      ar & boost::serialization::make_array(t.data(), t.size());
+      /*
+        size_t rows = t.rows(), cols = t.cols();
+        ar & rows;
+        ar & cols;
+        if( rows * cols != t.size() )
+        t.resize( rows, cols );
+
+        for(size_t i=0; i<t.size(); i++)
+        ar & t.data()[i];
+      */
+    }
   }
 }
 

@@ -8,6 +8,10 @@
 #include <boost/archive/xml_iarchive.hpp>
 using boost::serialization::make_nvp;
 
+#include <Eigen/Dense>
+#include <boost/serialization/split_free.hpp>
+#include <boost/serialization/vector.hpp>
+
 template<class T>
 void save_xml(const T &t, const char* filename) {
   std::ofstream ofs(filename);
