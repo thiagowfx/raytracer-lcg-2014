@@ -210,9 +210,9 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   }
 
   else if (event->type() == QEvent::KeyPress) {
-    cout << "DEBUG: key press" << endl;
     shouldRenderImage = true;
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+    cout << "DEBUG: key press" << endl;
 
     switch(keyEvent->key()){
     case Qt::Key_Escape:

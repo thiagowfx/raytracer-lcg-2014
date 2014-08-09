@@ -10,22 +10,22 @@ namespace Raytracer {
     pixel_size(vp.pixel_size),
     inv_gamma(vp.inv_gamma),
     out_of_gamut(vp.out_of_gamut),
-    max_depth(vp.max_depth) {
-    if (vp.sampler_ptr) {
-      sampler_ptr = vp.sampler_ptr->clone();
-    }
-    else {
-      sampler_ptr = NULL;
-    }
-  }
+    max_depth(vp.max_depth) {}
+
 
   ostream& operator<<(ostream& os, const ViewPlane& vp) {
-    os << vp.hres << " ";
-    os << vp.vres << " ";
-    os << vp.pixel_size << " ";
-    os << vp.inv_gamma << " ";
-    os << vp.out_of_gamut << " ";
-    os << vp.max_depth << " ";
+    os << vp.hres;
+    os << " ";
+    os << vp.vres;
+    os << " ";
+    os << vp.pixel_size;
+    os << " ";
+    os << vp.inv_gamma;
+    os << " ";
+    os << vp.out_of_gamut;
+    os << " ";
+    os << vp.max_depth;
+    os << " ";
     return os;
   }
 
@@ -41,10 +41,5 @@ namespace Raytracer {
   }
 
 
-  ViewPlane::~ViewPlane() {
-    if (sampler_ptr) {
-      delete sampler_ptr;
-      sampler_ptr = NULL;
-    }
-  }
+  ViewPlane::~ViewPlane() {}
 }

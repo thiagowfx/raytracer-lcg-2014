@@ -10,12 +10,11 @@ namespace Raytracer {
    */
   class ViewPlane {
   public:
-    /** Construct a new ViewPlane. */
     ViewPlane();
     ~ViewPlane();
     ViewPlane(const ViewPlane&);
-
     bool operator==(const ViewPlane&) const;
+    friend ostream& operator<<(ostream&, const ViewPlane&);
 
     /* Setters. */
     void set_hres(const unsigned);
@@ -24,7 +23,6 @@ namespace Raytracer {
     void set_gamma(const double);
     void set_out_of_gamut(const bool);
     void set_max_depth(const unsigned);
-    void set_sampler(Sampler*);
 
     /** Horizontal Image Resolution. */
     unsigned hres = 100;
@@ -44,9 +42,6 @@ namespace Raytracer {
     /** For reflective rays, the maximum number of bounces. */
     unsigned max_depth = 0;
 
-    /** Sampler for pixels. */
-    Sampler* sampler_ptr = new Regular(1);
-
     friend class boost::serialization::access;
     template<class Archive>
       void serialize(Archive& ar, const unsigned int version) {
@@ -56,10 +51,7 @@ namespace Raytracer {
       ar & BOOST_SERIALIZATION_NVP(inv_gamma);
       ar & BOOST_SERIALIZATION_NVP(out_of_gamut);
       ar & BOOST_SERIALIZATION_NVP(max_depth);
-      /* TODO: sampler_ptr */
     }
-
-    friend ostream& operator<<(ostream&, const ViewPlane&);
   };
 
 
@@ -90,15 +82,6 @@ namespace Raytracer {
 
   inline void ViewPlane::set_max_depth(const unsigned max_depth) {
     this->max_depth = max_depth;
-  }
-
-
-  inline void ViewPlane::set_sampler(Sampler* sp) {
-    if (this->sampler_ptr) {
-      delete this->sampler_ptr;
-      this->sampler_ptr = NULL;
-    }
-    this->sampler_ptr = sp;
   }
 }
 

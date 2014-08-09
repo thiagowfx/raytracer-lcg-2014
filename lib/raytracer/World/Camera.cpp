@@ -73,7 +73,7 @@ namespace Raytracer {
     Ray ray;
     Vector2d sp;               // sample point in [0,1] x [0,1]
     Vector2d pp;               // sample point on a pixel
-    const unsigned number_of_samples = vp.sampler_ptr->get_number_of_samples();
+    const unsigned number_of_samples = w->sampler_ptr->get_number_of_samples();
     vp.pixel_size /= zoom;
     ray.origin = eye_carthesian;
 
@@ -81,7 +81,7 @@ namespace Raytracer {
       for (unsigned c = 0; c < vp.hres; c++) { // across
         RGBColor  L = RGBColor(0.0, 0.0, 0.0);
         for (unsigned j = 0; j < number_of_samples; ++j) {
-          sp = vp.sampler_ptr->sample_unit_square();
+          sp = w->sampler_ptr->sample_unit_square();
           pp(0) = vp.pixel_size * (c - 0.5 * vp.hres + sp(0));
           pp(1) = vp.pixel_size * (r - 0.5 * vp.vres + sp(1));
           ray.direction = get_direction(pp);

@@ -29,6 +29,10 @@ namespace Raytracer {
     void set_background_color(RGBColor);
     void add_light(Light*);
     void add_object(GeometricObject*);
+    void set_sampler(Sampler*);
+
+    /** Sampler for pixels. */
+    Sampler* sampler_ptr = new Regular(1);
 
     /** Camera. */
     Camera* camera_ptr = NULL;
@@ -106,6 +110,15 @@ namespace Raytracer {
 
   inline void World::set_background_color(RGBColor color) {
     background_color = color;
+  }
+
+
+  inline void World::set_sampler(Sampler* sp) {
+    if (this->sampler_ptr) {
+      delete this->sampler_ptr;
+      this->sampler_ptr = NULL;
+    }
+    this->sampler_ptr = sp;
   }
 }
 

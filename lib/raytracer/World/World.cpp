@@ -13,6 +13,10 @@ namespace Raytracer {
       delete ambient_ptr;
       ambient_ptr = NULL;
     }
+    if (sampler_ptr) {
+      delete sampler_ptr;
+      sampler_ptr = NULL;
+    }
     delete_objects();
     delete_lights();
   }
