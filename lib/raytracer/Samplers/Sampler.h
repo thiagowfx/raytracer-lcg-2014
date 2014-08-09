@@ -8,7 +8,6 @@
 #include <vector>
 using Eigen::Vector2d;
 using Eigen::Vector3d;
-using namespace std;
 
 namespace Raytracer {
   /**
@@ -81,19 +80,19 @@ namespace Raytracer {
     int jump = 0;
 
     /** Sample points on a unit square */
-    vector<Vector2d> samples;
+    std::vector<Vector2d> samples;
 
     /** Shuffled samples array indices */
-    vector<int> shuffled_indices;
+    std::vector<int> shuffled_indices;
 
     /** Sample points on a unit disk */
-    vector<Vector2d> disk_samples;
+    std::vector<Vector2d> disk_samples;
 
     /** Sample points on a unit hemisphere */
-    vector<Vector3d> hemisphere_samples;
+    std::vector<Vector3d> hemisphere_samples;
 
     /** Sample points on a unit sphere */
-    vector<Vector3d> sphere_samples;
+    std::vector<Vector3d> sphere_samples;
   };
 }
 

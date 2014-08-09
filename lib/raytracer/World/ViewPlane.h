@@ -2,19 +2,19 @@
 #define _VIEWPLANE_MINE_
 
 #include "BoostMine.hpp"
-#include "Regular.h"
 
 namespace Raytracer {
   /**
-   * @brief Stores information such as image resolution, image details and color adjustments.
+   * @brief Store information such as resolution and details of the
+   * image and color adjustments.
    */
   class ViewPlane {
   public:
     ViewPlane();
-    ~ViewPlane();
     ViewPlane(const ViewPlane&);
+    ~ViewPlane();
     bool operator==(const ViewPlane&) const;
-    friend ostream& operator<<(ostream&, const ViewPlane&);
+    friend std::ostream& operator<<(std::ostream&, const ViewPlane&);
 
     /* Setters. */
     void set_hres(const unsigned);

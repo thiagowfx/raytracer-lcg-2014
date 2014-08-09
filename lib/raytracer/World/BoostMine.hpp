@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>

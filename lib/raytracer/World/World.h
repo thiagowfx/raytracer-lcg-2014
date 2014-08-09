@@ -8,6 +8,7 @@
 #include "ShadeRec.h"
 #include "Tracer.h"
 #include "ViewPlane.h"
+#include "Regular.h"
 #include <cstring> /* for png++ streerror */
 #include <png++/png.hpp>
 #include <vector>
@@ -41,13 +42,13 @@ namespace Raytracer {
     Tracer* tracer_ptr = NULL;
 
     /** Light sources. */
-    vector<Light*> lights;
+    std::vector<Light*> lights;
 
     /** Delete all light sources. */
     void delete_lights();
     
     /** Geometric Objects. */
-    vector<GeometricObject*> objects;
+    std::vector<GeometricObject*> objects;
 
     /** Delete all objects. */
     void delete_objects();

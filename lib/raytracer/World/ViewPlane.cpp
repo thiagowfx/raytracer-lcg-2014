@@ -13,7 +13,7 @@ namespace Raytracer {
     max_depth(vp.max_depth) {}
 
 
-  ostream& operator<<(ostream& os, const ViewPlane& vp) {
+  std::ostream& operator<<(std::ostream& os, const ViewPlane& vp) {
     os << vp.hres;
     os << " ";
     os << vp.vres;
@@ -25,7 +25,6 @@ namespace Raytracer {
     os << vp.out_of_gamut;
     os << " ";
     os << vp.max_depth;
-    os << " ";
     return os;
   }
 

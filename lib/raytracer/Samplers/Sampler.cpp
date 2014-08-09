@@ -67,7 +67,7 @@ namespace Raytracer {
 
   void Sampler::setup_shuffled_indices() {
     shuffled_indices.reserve(number_of_samples * number_of_sets);
-    vector<int> indices;
+    std::vector<int> indices;
     for (unsigned j = 0; j < number_of_samples; j++)
       indices.push_back(j);
     for (unsigned p = 0; p < number_of_sets; p++) {
