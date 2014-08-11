@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "Ambient.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "Emissive.h"
@@ -474,6 +475,40 @@ TEST_F(DirectionalLightTest, BinarySerialization) {
   save_binary<DirectionalLight>(*dl, filename);
   load_binary<DirectionalLight>(*dl_test, filename);
   EXPECT_TRUE(*dl == *dl_test);
+}
+
+
+
+class AmbientTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    ambient = new Ambient();
+    ambient->set_radiance(MYDOUBLE);
+    ambient->set_color(MYRGBCOLOR);
+    ambient_test = new Ambient();
+  }
+
+  virtual void TearDown() {
+    delete ambient;
+    delete ambient_test;
+  }
+
+  Ambient *ambient;
+  Ambient *ambient_test;
+};
+
+TEST_F(AmbientTest, XmlSerialization) {
+  const char* filename = "Ambient.xml";
+  save_xml<Ambient>(*ambient, filename);
+  load_xml<Ambient>(*ambient_test, filename);
+  EXPECT_TRUE(*ambient == *ambient_test);
+}
+
+TEST_F(AmbientTest, BinarySerialization) {
+  const char* filename = "Ambient.bin";
+  save_binary<Ambient>(*ambient, filename);
+  load_binary<Ambient>(*ambient_test, filename);
+  EXPECT_TRUE(*ambient == *ambient_test);
 }
 
 

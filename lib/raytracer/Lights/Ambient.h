@@ -10,10 +10,11 @@ namespace Raytracer {
    */
   class Ambient: public Light {
   public:
-    Ambient();
     Ambient(const Ambient&);
+    Ambient();
     virtual ~Ambient();
     virtual Light* clone() const;
+    virtual bool operator==(const Ambient&) const;
 
     /** Return the name of this class. */
     virtual const char* to_string() const;
@@ -28,6 +29,14 @@ namespace Raytracer {
     /* Getters. */
     double get_radiance() const;
     RGBColor get_color() const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Light);
+      ar & BOOST_SERIALIZATION_NVP(ls);
+      ar & BOOST_SERIALIZATION_NVP(color);
+    }
 
   protected:
     /** Radiance of light. */

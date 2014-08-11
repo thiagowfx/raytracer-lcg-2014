@@ -21,6 +21,14 @@ namespace Raytracer {
   Ambient::~Ambient () {}
 
 
+  bool Ambient::operator==(const Ambient& o) const {
+    return
+      Light::operator==(o) &&
+      ls == o.ls &&
+      color == o.color;
+  }
+
+
   Vector3d Ambient::get_direction(ShadeRec& s) {
     return Vector3d(Vector3d::Zero());
   }
@@ -35,7 +43,7 @@ namespace Raytracer {
     return "Ambient";
   }
 
-  
+
   bool Ambient::in_shadow(const Ray& ray, ShadeRec& sr) const {
     return false;
   }
