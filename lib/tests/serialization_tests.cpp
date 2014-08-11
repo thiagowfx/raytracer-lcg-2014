@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "Camera.h"
 #include "AmbientOccluder.h"
 #include "Ambient.h"
 #include "DirectionalLight.h"
@@ -542,6 +543,41 @@ TEST_F(AmbientOccluderTest, BinarySerialization) {
   save_binary<AmbientOccluder>(*ambient, filename);
   load_binary<AmbientOccluder>(*ambient_test, filename);
   EXPECT_TRUE(*ambient == *ambient_test);
+}
+
+class CameraTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    camera = new Camera();
+    camera->set_eye_carthesian(MYVECTOR3D);
+    // FIXME (na parte de girar a camera?) camera->set_lookat(MYVECTOR3D);
+    camera->set_zoom(MYDOUBLE);
+    camera->set_distance(MYDOUBLE);
+    // FIXME (na parte de girar a camera?) camera->set_up_vector(MYVECTOR3D);
+    camera_test = new Camera();
+  }
+
+  virtual void TearDown() {
+    delete camera;
+    delete camera_test;
+  }
+
+  Camera *camera;
+  Camera *camera_test;
+};
+
+TEST_F(CameraTest, XmlSerialization) {
+  const char* filename = "Camera.xml";
+  save_xml<Camera>(*camera, filename);
+  load_xml<Camera>(*camera_test, filename);
+  EXPECT_TRUE(*camera == *camera_test);
+}
+
+TEST_F(CameraTest, BinarySerialization) {
+  const char* filename = "Camera.bin";
+  save_binary<Camera>(*camera, filename);
+  load_binary<Camera>(*camera_test, filename);
+  EXPECT_TRUE(*camera == *camera_test);
 }
 
 

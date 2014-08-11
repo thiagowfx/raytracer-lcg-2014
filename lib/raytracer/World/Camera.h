@@ -16,14 +16,15 @@ namespace Raytracer {
     Camera(const Camera&);
     ~Camera();
     Camera* clone() const;
+    virtual bool operator==(const Camera&) const;
 
     /* Setters. */
     void set_eye_carthesian(const Vector3d&);
     void set_eye_spherical(const Vector3d&);
     void set_eye_spherical_relatively(const double, const double, const double);
     void set_lookat(const Vector3d&);
-    void set_up_vector(const Vector3d&);
     void set_zoom(double);
+    void set_up_vector(const Vector3d&);
     void set_distance(double);
 
     /* Getters. */
@@ -35,6 +36,20 @@ namespace Raytracer {
 
     /** Render an image from world elements, returns the time it took in milliseconds. */
     unsigned render_scene(const World*, const char* image_file);
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_NVP(eye_carthesian);
+      ar & BOOST_SERIALIZATION_NVP(eye_spherical);
+      ar & BOOST_SERIALIZATION_NVP(lookat);
+      ar & BOOST_SERIALIZATION_NVP(zoom);
+      ar & BOOST_SERIALIZATION_NVP(distance);
+      ar & BOOST_SERIALIZATION_NVP(up);
+      ar & BOOST_SERIALIZATION_NVP(u);
+      ar & BOOST_SERIALIZATION_NVP(v);
+      ar & BOOST_SERIALIZATION_NVP(w);
+    }
 
   private:
     /** Camera position in carthesian coordinates. */
@@ -77,7 +92,7 @@ namespace Raytracer {
     void update_carthesian();
   };
 
-  
+
   inline void Camera::set_eye_carthesian(const Vector3d& eye_carthesian) {
     this->eye_carthesian = eye_carthesian;
     update_spherical();

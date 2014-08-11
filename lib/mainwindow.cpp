@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QObject::connect(ui->gammaLevelDoubleSpinBox, SIGNAL(valueChanged(double)), api, SLOT(set_gamma(double)));
   QObject::connect(ui->gammaLevelDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(auto_render_callback()));
 
-  api->set_out_of_gamut(true);
+  api->set_out_of_gamut(false);
   ui->outOfGamutCheckBox->setChecked(api->get_out_of_gamut());
   QObject::connect(ui->outOfGamutCheckBox, SIGNAL(toggled(bool)), api, SLOT(set_out_of_gamut(bool)));
   QObject::connect(ui->outOfGamutCheckBox, SIGNAL(toggled(bool)), this, SLOT(auto_render_callback()));
@@ -194,16 +194,15 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   /* renderedImage widget. */
   if (object == ui->renderedImage) {
     if (event->type() == QEvent::Wheel) {
-      cout << "DEBUG: mouse wheel on rendered image" <<  endl;
       shouldRenderImage = true;
       QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+      cout << "DEBUG: mouse wheel on rendered image, with a delta of " <<  wheelEvent->delta() << endl;
 
-      const int delta = wheelEvent->delta();
-      if (delta > 0) {
-        api->zoom_increase(1.0 + (double(delta) / ZOOM_FRICTION));
+      if (wheelEvent->delta() > 0) {
+        api->zoom_increase(1.0 + (double(wheelEvent->delta()) / ZOOM_FRICTION));
       }
       else {
-        api->zoom_decrease(1.0 - (double(delta) / ZOOM_FRICTION));
+        api->zoom_decrease(1.0 - (double(wheelEvent->delta()) / ZOOM_FRICTION));
       }
       update_zoom_level_label();
     }

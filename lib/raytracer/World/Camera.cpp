@@ -28,6 +28,20 @@ namespace Raytracer {
   }
 
 
+  bool Camera::operator==(const Camera& o) const {
+    return
+      eye_carthesian == o.eye_carthesian &&
+      eye_spherical == o.eye_spherical &&
+      lookat == o.lookat &&
+      zoom == o.zoom &&
+      distance == o.distance &&
+      up == o.up &&
+      u == o.u &&
+      v == o.v &&
+      w == o.w;
+  }
+
+
   void Camera::set_eye_spherical_relatively(const double dr, const double dphi, const double dtheta) {
     eye_spherical(0) += dr;
     eye_spherical(1) += dphi;
