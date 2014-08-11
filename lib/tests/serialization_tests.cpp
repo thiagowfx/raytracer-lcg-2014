@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "AmbientOccluder.h"
 #include "Ambient.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
@@ -508,6 +509,38 @@ TEST_F(AmbientTest, BinarySerialization) {
   const char* filename = "Ambient.bin";
   save_binary<Ambient>(*ambient, filename);
   load_binary<Ambient>(*ambient_test, filename);
+  EXPECT_TRUE(*ambient == *ambient_test);
+}
+
+
+class AmbientOccluderTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    ambient = new AmbientOccluder();
+    ambient->set_minimum_amount(MYDOUBLE);
+    ambient_test = new AmbientOccluder();
+  }
+
+  virtual void TearDown() {
+    delete ambient;
+    delete ambient_test;
+  }
+
+  AmbientOccluder *ambient;
+  AmbientOccluder *ambient_test;
+};
+
+TEST_F(AmbientOccluderTest, XmlSerialization) {
+  const char* filename = "AmbientOccluder.xml";
+  save_xml<AmbientOccluder>(*ambient, filename);
+  load_xml<AmbientOccluder>(*ambient_test, filename);
+  EXPECT_TRUE(*ambient == *ambient_test);
+}
+
+TEST_F(AmbientOccluderTest, BinarySerialization) {
+  const char* filename = "AmbientOccluder.bin";
+  save_binary<AmbientOccluder>(*ambient, filename);
+  load_binary<AmbientOccluder>(*ambient_test, filename);
   EXPECT_TRUE(*ambient == *ambient_test);
 }
 

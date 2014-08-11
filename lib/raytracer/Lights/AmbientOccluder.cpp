@@ -30,6 +30,17 @@ namespace Raytracer {
   AmbientOccluder::~AmbientOccluder () {}
 
 
+  bool AmbientOccluder::operator==(const AmbientOccluder& o) const {
+    return
+      Ambient::operator==(o) &&
+      minimum_amount == o.minimum_amount &&
+      u == o.u &&
+      v == o.v &&
+      w == o.w;
+    // FIXME *sampler_ptr == *(o.sampler_ptr);
+  }
+
+
   Vector3d AmbientOccluder::get_direction(ShadeRec& sr) {
     Vector3d sp = sampler_ptr->sample_hemisphere();
     return (sp(0) * u) + (sp(1) * v) + (sp(2) * w);

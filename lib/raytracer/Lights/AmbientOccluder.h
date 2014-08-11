@@ -19,6 +19,7 @@ namespace Raytracer {
     AmbientOccluder(const AmbientOccluder&);
     virtual Ambient* clone() const;
     virtual ~AmbientOccluder();
+    virtual bool operator==(const AmbientOccluder&) const;
 
     virtual const char* to_string() const;
     virtual RGBColor L(ShadeRec&);
@@ -28,7 +29,18 @@ namespace Raytracer {
     /* Setters. */
     void set_sampler(Sampler*);
     void set_minimum_amount(const double);
-    
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Ambient);
+      ar & BOOST_SERIALIZATION_NVP(minimum_amount);
+      ar & BOOST_SERIALIZATION_NVP(u);
+      ar & BOOST_SERIALIZATION_NVP(v);
+      ar & BOOST_SERIALIZATION_NVP(w);
+      // FIXME --> sampler_ptr
+    }
+
   private:
     double minimum_amount = 0.30;
     Vector3d u = Vector3d::Zero();
