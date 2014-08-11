@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "DirectionalLight.h"
+#include "PointLight.h"
 #include "Emissive.h"
 #include "Reflective.h"
 #include "Phong.h"
@@ -41,11 +43,11 @@ namespace boost {
 }
 
 /********** CONSTANTS **********/
-const bool MYBOOL = true;
+const bool MYBOOL = true; // FIXME
 const unsigned MYUNSIGNED = 1000;
 const int MYINT = -1000;
 const double MYDOUBLE = -0.1;
-const Vector3d MYEIGEN = Vector3d(MYDOUBLE, MYDOUBLE, MYDOUBLE);
+const Vector3d MYVECTOR3D = Vector3d(MYDOUBLE, MYDOUBLE, MYDOUBLE);
 const RGBColor MYRGBCOLOR = RGBColor(0.3, 0.3, 0.3);
 
 
@@ -150,8 +152,8 @@ class RayTest : public ::testing::Test {
 protected:
   virtual void SetUp() {
     ray = new Ray();
-    ray->origin = MYEIGEN;
-    ray->direction = MYEIGEN;
+    ray->origin = MYVECTOR3D;
+    ray->direction = MYVECTOR3D;
     ray_test = new Ray();
   }
 
@@ -406,6 +408,72 @@ TEST_F(EmissiveTest, BinarySerialization) {
   save_binary<Emissive>(*emissive, filename);
   load_binary<Emissive>(*emissive_test, filename);
   EXPECT_TRUE(*emissive == *emissive_test);
+}
+
+
+class PointLightTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    pl = new PointLight(MYVECTOR3D);
+    pl->set_radiance(MYDOUBLE);
+    pl->set_color(MYRGBCOLOR);
+    pl_test = new PointLight();
+  }
+
+  virtual void TearDown() {
+    delete pl;
+    delete pl_test;
+  }
+
+  PointLight *pl;
+  PointLight *pl_test;
+};
+
+TEST_F(PointLightTest, XmlSerialization) {
+  const char* filename = "PointLight.xml";
+  save_xml<PointLight>(*pl, filename);
+  load_xml<PointLight>(*pl_test, filename);
+  EXPECT_TRUE(*pl == *pl_test);
+}
+
+TEST_F(PointLightTest, BinarySerialization) {
+  const char* filename = "PointLight.bin";
+  save_binary<PointLight>(*pl, filename);
+  load_binary<PointLight>(*pl_test, filename);
+  EXPECT_TRUE(*pl == *pl_test);
+}
+
+
+class DirectionalLightTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    dl = new DirectionalLight(MYVECTOR3D);
+    dl->set_radiance(MYDOUBLE);
+    dl->set_color(MYRGBCOLOR);
+    dl_test = new DirectionalLight();
+  }
+
+  virtual void TearDown() {
+    delete dl;
+    delete dl_test;
+  }
+
+  DirectionalLight *dl;
+  DirectionalLight *dl_test;
+};
+
+TEST_F(DirectionalLightTest, XmlSerialization) {
+  const char* filename = "DirectionalLight.xml";
+  save_xml<DirectionalLight>(*dl, filename);
+  load_xml<DirectionalLight>(*dl_test, filename);
+  EXPECT_TRUE(*dl == *dl_test);
+}
+
+TEST_F(DirectionalLightTest, BinarySerialization) {
+  const char* filename = "DirectionalLight.bin";
+  save_binary<DirectionalLight>(*dl, filename);
+  load_binary<DirectionalLight>(*dl_test, filename);
+  EXPECT_TRUE(*dl == *dl_test);
 }
 
 

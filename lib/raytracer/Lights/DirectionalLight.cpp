@@ -1,7 +1,10 @@
 #include "DirectionalLight.h"
 
 namespace Raytracer {
-  DirectionalLight::DirectionalLight(const Vector3d direction) :
+  DirectionalLight::DirectionalLight() {}
+
+
+  DirectionalLight::DirectionalLight(const Vector3d& direction) :
     Light(),
     direction(direction.normalized())
   {}
@@ -21,6 +24,15 @@ namespace Raytracer {
 
 
   DirectionalLight::~DirectionalLight() {}
+
+
+  bool DirectionalLight::operator==(const DirectionalLight& o) const {
+    return
+      Light::operator==(o) &&
+      ls == o.ls &&
+      color == o.color &&
+      direction == o.direction;
+  }
 
 
   Vector3d DirectionalLight::get_direction(ShadeRec& sr) {

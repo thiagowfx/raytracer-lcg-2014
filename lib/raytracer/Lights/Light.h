@@ -1,6 +1,7 @@
 #ifndef _LIGHT_MINE_
 #define _LIGHT_MINE_
 
+#include "BoostMine.hpp"
 #include "Utilities.h"
 #include "Ray.h"
 #include "RGBColor.h"
@@ -18,6 +19,7 @@ namespace Raytracer {
     Light(const Light&);
     virtual Light* clone() const = 0;
     virtual ~Light();
+    virtual bool operator==(const Light&) const;
 
     /** Get the direction defined by two points: hit point and light point. */
     virtual Vector3d get_direction(ShadeRec&) = 0;
@@ -39,6 +41,13 @@ namespace Raytracer {
        lights. */
     virtual double G(const ShadeRec&) const;
     virtual double pdf(const ShadeRec&) const;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_NVP(shadows);
+    }
+
   protected:
     /** Does this light cast shadows? */
     bool shadows = true;

@@ -1,7 +1,10 @@
 #include "PointLight.h"
 
 namespace Raytracer {
-  PointLight::PointLight (const Vector3d location) :
+  PointLight::PointLight () {}
+
+  
+  PointLight::PointLight (const Vector3d& location) :
     Light(),
     location(location)
   {}
@@ -21,6 +24,15 @@ namespace Raytracer {
 
 
   PointLight::~PointLight () {}
+
+
+  bool PointLight::operator==(const PointLight& o) const {
+    return
+      Light::operator==(o) &&
+      ls == o.ls &&
+      color == o.color &&
+      location == o.location;
+  }
 
 
   Vector3d PointLight::get_direction(ShadeRec& sr) {

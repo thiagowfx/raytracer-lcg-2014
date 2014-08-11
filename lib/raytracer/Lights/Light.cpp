@@ -12,6 +12,11 @@ namespace Raytracer {
   Light::~Light() {}
 
 
+  bool Light::operator==(const Light& o) const {
+    return shadows == o.shadows;
+  }
+
+
   RGBColor Light::L(ShadeRec& s) {
     return black;
   }

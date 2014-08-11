@@ -12,19 +12,31 @@ namespace Raytracer {
   class DirectionalLight: public Light {
   public:
     /** Create a Directional Light with the specified direction. */
-    DirectionalLight(const Vector3d);
+    DirectionalLight(const Vector3d&);
     DirectionalLight(const DirectionalLight&);
-    virtual Light* clone() const;
+    DirectionalLight();
     virtual ~DirectionalLight();
+    virtual Light* clone() const;
+    virtual bool operator==(const DirectionalLight&) const;
 
     virtual Vector3d get_direction(ShadeRec&);
     virtual RGBColor L(ShadeRec&);
     virtual bool in_shadow(const Ray&, ShadeRec&) const;
-    
+
     /* Setters. */
     void set_radiance(const double);
     void set_color(const RGBColor);
-    void set_direction(const Vector3d);
+    void set_direction(const Vector3d&);
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Light);
+      ar & BOOST_SERIALIZATION_NVP(ls);
+      ar & BOOST_SERIALIZATION_NVP(color);
+      ar & BOOST_SERIALIZATION_NVP(direction);
+    }
+
   private:
     /** Radiance of light. */
     double ls = 1.0;
@@ -42,6 +54,11 @@ namespace Raytracer {
 
   inline void DirectionalLight::set_color(const RGBColor color) {
     this->color = color;
+  }
+
+
+  inline void DirectionalLight::set_direction(const Vector3d& direction) {
+    this->direction = direction;
   }
 }
 
