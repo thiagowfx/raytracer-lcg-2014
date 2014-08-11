@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 /********** INCLUDES *********/
+#include "Emissive.h"
 #include "Reflective.h"
 #include "Phong.h"
 #include "Matte.h"
@@ -375,6 +376,37 @@ TEST_F(ReflectiveTest, BinarySerialization) {
   EXPECT_TRUE(*reflective == *reflective_test);
 }
 
+class EmissiveTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {
+    emissive = new Emissive(MYRGBCOLOR);
+    emissive->set_radiance(MYDOUBLE);
+    emissive->set_ce(MYRGBCOLOR);
+    emissive_test = new Emissive();
+  }
+
+  virtual void TearDown() {
+    delete emissive;
+    delete emissive_test;
+  }
+
+  Emissive *emissive;
+  Emissive *emissive_test;
+};
+
+TEST_F(EmissiveTest, XmlSerialization) {
+  const char* filename = "Emissive.xml";
+  save_xml<Emissive>(*emissive, filename);
+  load_xml<Emissive>(*emissive_test, filename);
+  EXPECT_TRUE(*emissive == *emissive_test);
+}
+
+TEST_F(EmissiveTest, BinarySerialization) {
+  const char* filename = "Emissive.bin";
+  save_binary<Emissive>(*emissive, filename);
+  load_binary<Emissive>(*emissive_test, filename);
+  EXPECT_TRUE(*emissive == *emissive_test);
+}
 
 
 int main(int argc, char **argv) {

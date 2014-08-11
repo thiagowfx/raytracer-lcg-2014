@@ -13,14 +13,16 @@ namespace Raytracer {
   class Emissive: public Material {
   public:
     /** Construct a new Emissive material with the given color and radiance. */
-    Emissive(const RGBColor&, double radiance = 1.0);
+    Emissive(const RGBColor&, double radiance = 1.0);    
     Emissive(const Emissive&);
-    virtual Material* clone() const;
+    Emissive();
     ~Emissive();
-    
+    virtual Material* clone() const;
+    virtual bool operator==(const Emissive&) const;
+
     virtual RGBColor get_color() const;
     /** Allow this object to be rendered with tracers other than
-	AreaLighting ones. Same as area_light_shade. */
+        AreaLighting ones. Same as area_light_shade. */
     virtual RGBColor shade(ShadeRec&);
 
     /* Setters. */
@@ -32,11 +34,20 @@ namespace Raytracer {
     /** The effective color (radiance * hue) emitted by this material. */
     virtual RGBColor get_Le(ShadeRec&) const;
     /** Allow this object to be rendered with tracers other than
-	AreaLighting ones. Same as shade. */
+        AreaLighting ones. Same as shade. */
     virtual RGBColor area_light_shade(ShadeRec&);
+
+    friend class boost::serialization::access;
+    template<class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+      ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Material);
+      ar & BOOST_SERIALIZATION_NVP(ls);
+      ar & BOOST_SERIALIZATION_NVP(ce);
+    }
+
   private:
     /** Light radiance (analogy) */
-    double ls = 1.0; 
+    double ls = 1.0;
     /** Light color (analogy). */
     RGBColor ce = white;
   };

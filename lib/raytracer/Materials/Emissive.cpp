@@ -15,6 +15,17 @@ namespace Raytracer {
   {}
 
 
+  Emissive::Emissive() {}
+
+
+  bool Emissive::operator==(const Emissive& o) const {
+    return
+      Material::operator==(o) &&
+      ls == o.ls &&
+      ce == o.ce;
+  }
+
+
   Material* Emissive::clone() const {
     return new Emissive(*this);
   }
