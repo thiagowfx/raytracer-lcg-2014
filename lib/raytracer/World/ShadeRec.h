@@ -15,8 +15,8 @@ namespace Raytracer {
   class ShadeRec {
   public:
     ShadeRec(World& wr);
-    ~ShadeRec();
     ShadeRec(const ShadeRec& sr);
+    ~ShadeRec();
 
     /** Did the ray hit any object? */
     bool hit_an_object = false;

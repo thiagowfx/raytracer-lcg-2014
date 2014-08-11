@@ -12,8 +12,8 @@ namespace Raytracer {
   public:
     /** Create a RGBColor with the specified red, green and blue components. */
     RGBColor(float r, float g, float b);
-    RGBColor();
     RGBColor(const RGBColor&);
+    RGBColor();
     ~RGBColor();
     RGBColor& operator=(const RGBColor&);
     bool operator==(const RGBColor&) const;
