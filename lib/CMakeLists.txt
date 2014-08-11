@@ -148,8 +148,8 @@ if (TEST)
 
   # Unit Tests
   add_executable(
-    runUnitTests
-    tests/unit_tests.cpp
+    serializationTests
+    tests/serialization_tests.cpp
     ${VCG_SOURCES}
     $<TARGET_OBJECTS:RAYTRACER_LIBRARY>
     $<TARGET_OBJECTS:PCS_DETECTION_LIBRARY>
@@ -157,7 +157,7 @@ if (TEST)
 
   # Standard linking to gtest stuff.
   target_link_libraries(
-    runUnitTests
+    serializationTests
     ${Boost_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${PNG_LIBRARY}
@@ -165,7 +165,7 @@ if (TEST)
     )
 
   # Use this for each test executable.
-  add_test(test runUnitTests)
+  add_test(test serializationTests)
 
   add_custom_target(check
     COMMAND ${CMAKE_CTEST_COMMAND} -V
